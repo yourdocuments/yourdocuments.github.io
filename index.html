@@ -1,9 +1,14 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admission Payment Voucher</title>
+
+  <title>Admission Payment Verification</title>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
     * {
@@ -14,9 +19,9 @@
     }
 
     body {
-      background: #f1f5f9;
-      padding: 30px 15px;
-      color: #1e293b;
+      background: #f3f6fa;
+      color: #172033;
+      padding: 25px 12px;
     }
 
     .container {
@@ -24,11 +29,11 @@
       margin: auto;
     }
 
-    .form-card {
-      background: white;
+    .card {
+      background: #fff;
       padding: 30px;
-      border-radius: 14px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
     }
 
     .header {
@@ -38,8 +43,7 @@
 
     .header h1 {
       font-size: 28px;
-      color: #0f172a;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .header p {
@@ -51,7 +55,7 @@
       font-weight: bold;
       margin: 25px 0 15px;
       padding-bottom: 8px;
-      border-bottom: 2px solid #e2e8f0;
+      border-bottom: 2px solid #e5e7eb;
     }
 
     .grid {
@@ -60,19 +64,19 @@
       gap: 16px;
     }
 
-    .form-group {
+    .group {
       margin-bottom: 5px;
     }
 
-    .form-group.full {
+    .full {
       grid-column: 1 / -1;
     }
 
     label {
       display: block;
-      margin-bottom: 7px;
+      font-weight: bold;
       font-size: 14px;
-      font-weight: 600;
+      margin-bottom: 7px;
     }
 
     input,
@@ -93,25 +97,50 @@
     }
 
     textarea {
-      resize: vertical;
       min-height: 80px;
+      resize: vertical;
     }
 
     .submit-btn {
       width: 100%;
-      border: none;
+      border: 0;
       background: #2563eb;
-      color: white;
+      color: #fff;
       padding: 14px;
+      border-radius: 8px;
       font-size: 16px;
       font-weight: bold;
-      border-radius: 8px;
       cursor: pointer;
       margin-top: 20px;
     }
 
     .submit-btn:hover {
       background: #1d4ed8;
+    }
+
+    .submit-btn:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    /* Status */
+
+    #statusBox {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 10px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      text-align: center;
+    }
+
+    .verification-code {
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      margin: 12px 0;
+      color: #b45309;
     }
 
     /* Voucher */
@@ -123,8 +152,6 @@
 
     .voucher {
       background: white;
-      max-width: 800px;
-      margin: auto;
       padding: 35px;
       border: 1px solid #cbd5e1;
     }
@@ -133,28 +160,27 @@
       text-align: center;
       border-bottom: 2px solid #111827;
       padding-bottom: 18px;
-      margin-bottom: 20px;
     }
 
     .voucher-header h2 {
       font-size: 25px;
-      margin-bottom: 5px;
+      margin-bottom: 7px;
     }
 
     .voucher-header p {
       font-size: 14px;
       color: #475569;
+      margin-top: 3px;
     }
 
     .voucher-title {
       text-align: center;
-      margin: 15px 0 25px;
+      margin: 22px 0;
     }
 
     .voucher-title span {
-      display: inline-block;
       border: 2px solid #111827;
-      padding: 7px 25px;
+      padding: 8px 22px;
       font-weight: bold;
       border-radius: 5px;
     }
@@ -162,7 +188,7 @@
     .voucher-info {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 13px 30px;
+      gap: 13px 25px;
       margin-bottom: 25px;
     }
 
@@ -176,74 +202,69 @@
       min-width: 125px;
     }
 
-    .payment-table {
+    table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
     }
 
-    .payment-table th,
-    .payment-table td {
+    th,
+    td {
       border: 1px solid #334155;
-      padding: 12px;
-      text-align: left;
+      padding: 11px;
+      font-size: 14px;
     }
 
-    .payment-table th {
+    th {
       background: #f1f5f9;
     }
 
-    .amount-box {
+    .total {
       text-align: right;
-      margin-top: 20px;
       font-size: 20px;
       font-weight: bold;
+      margin-top: 20px;
     }
 
     .footer {
       display: flex;
       justify-content: space-between;
-      margin-top: 60px;
+      margin-top: 65px;
       font-size: 13px;
     }
 
     .print-btn {
       display: block;
-      margin: 20px auto 0;
+      margin: 20px auto;
+      padding: 13px 30px;
+      border: 0;
       background: #16a34a;
       color: white;
-      border: none;
-      padding: 13px 30px;
       border-radius: 7px;
-      cursor: pointer;
       font-weight: bold;
       font-size: 15px;
+      cursor: pointer;
     }
 
     .new-btn {
       display: block;
       margin: 10px auto;
+      padding: 11px 25px;
+      border: 0;
       background: #475569;
       color: white;
-      border: none;
-      padding: 11px 25px;
       border-radius: 7px;
       cursor: pointer;
     }
 
-    @media (max-width: 650px) {
+    @media(max-width:650px) {
       .grid,
       .voucher-info {
         grid-template-columns: 1fr;
       }
 
-      .form-card,
+      .card,
       .voucher {
         padding: 20px;
-      }
-
-      .footer {
-        margin-top: 40px;
       }
     }
 
@@ -253,7 +274,8 @@
         padding: 0;
       }
 
-      .form-card,
+      .card,
+      #statusBox,
       .print-btn,
       .new-btn {
         display: none !important;
@@ -266,8 +288,6 @@
 
       .voucher {
         border: none;
-        width: 100%;
-        max-width: none;
       }
     }
   </style>
@@ -277,63 +297,67 @@
 
 <div class="container">
 
-  <!-- FORM -->
-  <div class="form-card">
+  <!-- ================= FORM ================= -->
+
+  <div class="card" id="formCard">
 
     <div class="header">
       <h1>Admission Payment</h1>
-      <p>Please enter student payment information</p>
+      <p>Please submit your admission payment information</p>
     </div>
 
     <form id="paymentForm">
 
-      <div class="section-title">Student Information</div>
+      <div class="section-title">
+        Student Information
+      </div>
 
       <div class="grid">
 
-        <div class="form-group">
+        <div class="group">
           <label>Student Name *</label>
           <input type="text" id="studentName" required>
         </div>
 
-        <div class="form-group">
+        <div class="group">
           <label>Application / Student ID *</label>
           <input type="text" id="studentId" required>
         </div>
 
-        <div class="form-group">
-          <label>Father / Guardian Name</label>
-          <input type="text" id="guardianName">
+        <div class="group">
+          <label>Father / Guardian Name *</label>
+          <input type="text" id="guardianName" required>
         </div>
 
-        <div class="form-group">
+        <div class="group">
           <label>Mobile Number *</label>
           <input type="tel" id="mobile" required>
         </div>
 
-        <div class="form-group">
+        <div class="group">
           <label>Class / Course *</label>
           <input type="text" id="course" required>
         </div>
 
-        <div class="form-group">
+        <div class="group">
           <label>Session</label>
-          <input type="text" id="session" placeholder="2026-2027">
+          <input type="text" id="session" value="2026-2027">
         </div>
 
       </div>
 
-
-      <div class="section-title">Payment Information</div>
+      <div class="section-title">
+        Payment Information
+      </div>
 
       <div class="grid">
 
-        <div class="form-group">
+        <div class="group">
           <label>Payment Amount *</label>
-          <input type="number" id="amount" min="0" step="0.01" required>
+          <input type="number" id="amount" min="1" required>
         </div>
 
-        <div class="form-group">
+        <div class="group">
           <label>Payment Method *</label>
           <select id="paymentMethod" required>
             <option value="">Select Method</option>
@@ -345,41 +369,77 @@
           </select>
         </div>
 
-        <div class="form-group">
+        <div class="group">
           <label>Transaction ID</label>
           <input type="text" id="transactionId">
         </div>
 
-        <div class="form-group">
+        <div class="group">
           <label>Payment Date *</label>
           <input type="date" id="paymentDate" required>
         </div>
 
-        <div class="form-group full">
+        <div class="group full">
           <label>Remarks</label>
           <textarea id="remarks"></textarea>
         </div>
 
       </div>
 
-      <button type="submit" class="submit-btn">
-        Generate Payment Voucher
+      <button class="submit-btn" id="submitBtn" type="submit">
+        Submit Payment
       </button>
 
     </form>
+  </div>
+
+
+  <!-- ================= PENDING STATUS ================= -->
+
+  <div id="statusBox">
+
+    <h2>Payment Submitted Successfully</h2>
+
+    <p style="margin-top:10px;">
+      Your payment is currently waiting for verification.
+    </p>
+
+    <p style="margin-top:12px;">
+      Your Verification Code:
+    </p>
+
+    <div class="verification-code" id="verificationCode">
+      ---
+    </div>
+
+    <p>
+      Please keep this code for your record.
+    </p>
+
+    <p style="margin-top:10px;font-size:13px;color:#64748b;">
+      Voucher printing will be available after payment confirmation.
+    </p>
 
   </div>
 
 
-  <!-- VOUCHER -->
+  <!-- ================= VOUCHER ================= -->
+
   <div id="voucherSection">
 
     <div class="voucher">
 
       <div class="voucher-header">
+
         <h2>YOUR INSTITUTION NAME</h2>
+
         <p>Your Institution Address</p>
-        <p>Mobile: 01XXXXXXXXX | Email: info@example.com</p>
+
+        <p>
+          Mobile: 01XXXXXXXXX |
+          Email: iamsnkbd@prothonmail.com
+        </p>
+
       </div>
 
       <div class="voucher-title">
@@ -391,6 +451,11 @@
         <div class="info-row">
           <strong>Voucher No:</strong>
           <span id="vVoucherNo"></span>
+        </div>
+
+        <div class="info-row">
+          <strong>Verification:</strong>
+          <span id="vVerification"></span>
         </div>
 
         <div class="info-row">
@@ -431,7 +496,7 @@
       </div>
 
 
-      <table class="payment-table">
+      <table>
 
         <thead>
           <tr>
@@ -443,20 +508,23 @@
         </thead>
 
         <tbody>
+
           <tr>
             <td>Admission Fee</td>
             <td id="vPaymentMethod"></td>
             <td id="vTransactionId"></td>
             <td id="vAmount"></td>
           </tr>
+
         </tbody>
 
       </table>
 
 
-      <div class="amount-box">
+      <div class="total">
         Total Paid: ৳ <span id="vTotal"></span>
       </div>
+
 
       <p style="margin-top:20px;">
         <strong>Remarks:</strong>
@@ -465,15 +533,17 @@
 
 
       <div class="footer">
+
         <div>
-          __________________________<br>
-          Student / Guardian Signature
+          _______________________<br>
+          Student / Guardian
         </div>
 
         <div>
-          __________________________<br>
+          _______________________<br>
           Authorized Signature
         </div>
+
       </div>
 
     </div>
@@ -483,10 +553,6 @@
       🖨 Print / Save as PDF
     </button>
 
-    <button class="new-btn" onclick="newPayment()">
-      Create New Voucher
-    </button>
-
   </div>
 
 </div>
@@ -494,132 +560,297 @@
 
 <script>
 
-  // Set today's date automatically
+  /* ==========================================
+     EMAILJS CONFIGURATION
+     ========================================== */
+
+  const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+  const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+  const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+
+  emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY
+  });
+
+
+  /* Today's date */
+
   document.getElementById("paymentDate").value =
     new Date().toISOString().split("T")[0];
 
 
-  document.getElementById("paymentForm").addEventListener("submit", function(e) {
+  /* ==========================================
+     CREATE UNIQUE VERIFICATION CODE
+     ========================================== */
 
-    e.preventDefault();
+  function createVerificationCode() {
 
-    const studentName =
-      document.getElementById("studentName").value;
+    const chars =
+      "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
-    const studentId =
-      document.getElementById("studentId").value;
+    let code = "ADM-";
 
-    const guardian =
-      document.getElementById("guardianName").value;
+    for (let i = 0; i < 6; i++) {
+      code += chars.charAt(
+        Math.floor(Math.random() * chars.length)
+      );
+    }
 
-    const mobile =
-      document.getElementById("mobile").value;
-
-    const course =
-      document.getElementById("course").value;
-
-    const session =
-      document.getElementById("session").value;
-
-    const amount =
-      document.getElementById("amount").value;
-
-    const paymentMethod =
-      document.getElementById("paymentMethod").value;
-
-    const transactionId =
-      document.getElementById("transactionId").value;
-
-    const paymentDate =
-      document.getElementById("paymentDate").value;
-
-    const remarks =
-      document.getElementById("remarks").value;
+    return code;
+  }
 
 
-    // Generate voucher number
-    const voucherNo =
-      "ADM-" +
-      new Date().getFullYear() +
-      "-" +
-      Math.floor(100000 + Math.random() * 900000);
+  /* ==========================================
+     FORM SUBMIT
+     ========================================== */
+
+  document.getElementById("paymentForm")
+    .addEventListener("submit", async function(e) {
+
+      e.preventDefault();
+
+      const submitBtn =
+        document.getElementById("submitBtn");
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
 
 
-    // Put data into voucher
+      /* Get form data */
 
-    document.getElementById("vVoucherNo").textContent =
-      voucherNo;
+      const studentName =
+        document.getElementById("studentName").value;
 
-    document.getElementById("vDate").textContent =
-      paymentDate;
+      const studentId =
+        document.getElementById("studentId").value;
 
-    document.getElementById("vStudentName").textContent =
-      studentName;
+      const guardianName =
+        document.getElementById("guardianName").value;
 
-    document.getElementById("vStudentId").textContent =
-      studentId;
+      const mobile =
+        document.getElementById("mobile").value;
 
-    document.getElementById("vGuardian").textContent =
-      guardian || "-";
+      const course =
+        document.getElementById("course").value;
 
-    document.getElementById("vMobile").textContent =
-      mobile;
+      const session =
+        document.getElementById("session").value;
 
-    document.getElementById("vCourse").textContent =
-      course;
+      const amount =
+        document.getElementById("amount").value;
 
-    document.getElementById("vSession").textContent =
-      session || "-";
+      const paymentMethod =
+        document.getElementById("paymentMethod").value;
 
-    document.getElementById("vPaymentMethod").textContent =
-      paymentMethod;
+      const transactionId =
+        document.getElementById("transactionId").value || "-";
 
-    document.getElementById("vTransactionId").textContent =
-      transactionId || "-";
+      const paymentDate =
+        document.getElementById("paymentDate").value;
 
-    document.getElementById("vAmount").textContent =
-      "৳ " + Number(amount).toLocaleString();
-
-    document.getElementById("vTotal").textContent =
-      Number(amount).toLocaleString();
-
-    document.getElementById("vRemarks").textContent =
-      remarks || "-";
+      const remarks =
+        document.getElementById("remarks").value || "-";
 
 
-    // Hide form
-    document.querySelector(".form-card").style.display = "none";
+      /* Create verification code */
 
-    // Show voucher
-    document.getElementById("voucherSection").style.display = "block";
-
-    // Scroll to voucher
-    document.getElementById("voucherSection")
-      .scrollIntoView({ behavior: "smooth" });
-
-  });
+      const verificationCode =
+        createVerificationCode();
 
 
-  function newPayment() {
+      /* Send email */
 
-    document.getElementById("paymentForm").reset();
+      const templateParams = {
 
-    document.getElementById("paymentDate").value =
-      new Date().toISOString().split("T")[0];
+        to_email:
+          "iamsnkbd@prothonmail.com",
 
-    document.querySelector(".form-card").style.display =
-      "block";
+        verification_code:
+          verificationCode,
 
-    document.getElementById("voucherSection").style.display =
-      "none";
+        student_name:
+          studentName,
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
+        student_id:
+          studentId,
+
+        guardian_name:
+          guardianName,
+
+        mobile:
+          mobile,
+
+        course:
+          course,
+
+        session:
+          session,
+
+        amount:
+          amount,
+
+        payment_method:
+          paymentMethod,
+
+        transaction_id:
+          transactionId,
+
+        payment_date:
+          paymentDate,
+
+        remarks:
+          remarks
+      };
+
+
+      try {
+
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          templateParams
+        );
+
+
+        /* Show pending status */
+
+        document.getElementById(
+          "formCard"
+        ).style.display = "none";
+
+
+        document.getElementById(
+          "statusBox"
+        ).style.display = "block";
+
+
+        document.getElementById(
+          "verificationCode"
+        ).textContent =
+          verificationCode;
+
+
+        /*
+          IMPORTANT:
+          Voucher is NOT shown here.
+          Payment must be verified first.
+        */
+
+
+      } catch(error) {
+
+        console.error(error);
+
+        alert(
+          "Submission failed. Please try again."
+        );
+
+        submitBtn.disabled = false;
+        submitBtn.textContent =
+          "Submit Payment";
+
+      }
+
     });
+
+
+  /* ==========================================
+     SHOW VOUCHER AFTER ADMIN CONFIRMATION
+     ==========================================
+
+     This function is intentionally separated.
+
+     Later we can connect this to your
+     confirmation system.
+
+  ========================================== */
+
+  function showConfirmedVoucher(data) {
+
+    document.getElementById(
+      "vVoucherNo"
+    ).textContent =
+      data.voucherNo;
+
+    document.getElementById(
+      "vVerification"
+    ).textContent =
+      data.verificationCode;
+
+    document.getElementById(
+      "vDate"
+    ).textContent =
+      data.paymentDate;
+
+    document.getElementById(
+      "vStudentName"
+    ).textContent =
+      data.studentName;
+
+    document.getElementById(
+      "vStudentId"
+    ).textContent =
+      data.studentId;
+
+    document.getElementById(
+      "vGuardian"
+    ).textContent =
+      data.guardianName;
+
+    document.getElementById(
+      "vMobile"
+    ).textContent =
+      data.mobile;
+
+    document.getElementById(
+      "vCourse"
+    ).textContent =
+      data.course;
+
+    document.getElementById(
+      "vSession"
+    ).textContent =
+      data.session;
+
+    document.getElementById(
+      "vPaymentMethod"
+    ).textContent =
+      data.paymentMethod;
+
+    document.getElementById(
+      "vTransactionId"
+    ).textContent =
+      data.transactionId;
+
+    document.getElementById(
+      "vAmount"
+    ).textContent =
+      "৳ " +
+      Number(data.amount).toLocaleString();
+
+    document.getElementById(
+      "vTotal"
+    ).textContent =
+      Number(data.amount).toLocaleString();
+
+    document.getElementById(
+      "vRemarks"
+    ).textContent =
+      data.remarks;
+
+
+    document.getElementById(
+      "statusBox"
+    ).style.display = "none";
+
+    document.getElementById(
+      "voucherSection"
+    ).style.display = "block";
+
   }
 
 </script>
 
 </body>
 </html>
+```
