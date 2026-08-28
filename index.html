@@ -7,74 +7,44 @@
 
 <title>SNK IT - Admission Payment</title>
 
-<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
     font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    background:#f4f7fb;
+    background:#f3f6fb;
     color:#172033;
 }
 
-/* ================= HEADER ================= */
-
+/* HEADER */
 .header{
     background:linear-gradient(135deg,#075bdc,#2636d9,#7c22ce);
     color:white;
-    padding:35px 15px 45px;
     text-align:center;
-    position:relative;
-    overflow:hidden;
-}
-
-.header:before,
-.header:after{
-    content:"";
-    position:absolute;
-    border-radius:50%;
-    background:rgba(255,255,255,.08);
-}
-
-.header:before{
-    width:300px;
-    height:300px;
-    left:-100px;
-    top:-160px;
-}
-
-.header:after{
-    width:350px;
-    height:350px;
-    right:-150px;
-    bottom:-220px;
+    padding:30px 15px 45px;
 }
 
 .logo{
-    position:relative;
-    z-index:2;
     display:inline-flex;
     align-items:center;
-    justify-content:center;
     gap:12px;
 }
 
 .logo-icon{
-    width:65px;
-    height:65px;
+    width:60px;
+    height:60px;
     border:3px solid white;
-    border-radius:18px;
+    border-radius:16px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:30px;
-    background:rgba(255,255,255,.12);
+    font-size:28px;
 }
 
 .logo-text{
@@ -82,87 +52,78 @@ body{
 }
 
 .logo-text h1{
-    font-size:42px;
-    line-height:1;
-    letter-spacing:2px;
+    font-size:38px;
 }
 
 .logo-text p{
-    margin-top:6px;
-    font-size:13px;
+    font-size:11px;
     letter-spacing:2px;
 }
 
 .header-title{
-    position:relative;
-    z-index:2;
-    margin-top:25px;
+    margin-top:20px;
 }
 
 .header-title h2{
-    font-size:27px;
+    font-size:26px;
 }
 
 .header-title p{
-    margin-top:8px;
+    margin-top:7px;
     opacity:.9;
 }
 
-/* ================= CONTAINER ================= */
-
+/* CONTAINER */
 .container{
     width:94%;
     max-width:1100px;
-    margin:-25px auto 40px;
-    position:relative;
-    z-index:5;
+    margin:-22px auto 40px;
 }
 
-/* ================= MAIN GRID ================= */
-
+/* GRID */
 .main-grid{
     display:grid;
     grid-template-columns:2fr 1fr;
-    gap:25px;
+    gap:24px;
 }
 
-/* ================= CARD ================= */
-
-.card{
+/* CARD */
+.card,
+.side-card,
+.status-card{
     background:white;
     border-radius:16px;
-    padding:28px;
-    box-shadow:0 8px 35px rgba(15,23,42,.08);
+    padding:27px;
+    box-shadow:0 8px 30px rgba(15,23,42,.08);
 }
 
 .section-title{
+    color:#1458c7;
     font-size:19px;
     font-weight:bold;
+    border-bottom:2px solid #edf1f6;
     padding-bottom:12px;
     margin-bottom:18px;
-    border-bottom:2px solid #eef2f7;
-    color:#1258c9;
 }
 
 .section-title.payment{
-    color:#138a48;
-    margin-top:30px;
+    color:#148446;
+    margin-top:28px;
 }
 
-/* ================= FORM ================= */
-
+/* FORM */
 .grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:16px;
 }
 
-.form-group{
-    margin-bottom:2px;
-}
-
 .full{
     grid-column:1/-1;
+}
+
+.form-group{
+    position:relative;
 }
 
 label{
@@ -173,40 +134,73 @@ label{
 }
 
 .required{
-    color:#e11d48;
+    color:#dc2626;
 }
 
 input,
 select,
 textarea{
     width:100%;
-    padding:13px 14px;
-    border:1px solid #d5dce8;
+    padding:13px;
+    border:1px solid #d4dce8;
     border-radius:8px;
     outline:none;
-    background:#fff;
     font-size:15px;
-    transition:.2s;
+    background:white;
 }
 
 input:focus,
 select:focus,
 textarea:focus{
     border-color:#2563eb;
-    box-shadow:0 0 0 3px rgba(37,99,235,.08);
 }
 
-textarea{
-    min-height:85px;
-    resize:vertical;
+input.error,
+select.error,
+textarea.error{
+    border:2px solid #dc2626;
+    background:#fff7f7;
 }
 
-/* ================= SUBMIT ================= */
+input.success,
+select.success,
+textarea.success{
+    border-color:#16a34a;
+}
+
+.field-error{
+    display:none;
+    color:#dc2626;
+    font-size:12px;
+    margin-top:5px;
+    line-height:1.4;
+}
+
+.field-error.show{
+    display:block;
+}
+
+/* SUBMIT ERROR */
+.submit-error{
+    display:none;
+    margin-top:16px;
+    padding:13px;
+    border-radius:8px;
+    background:#fff1f2;
+    border:1px solid #fecdd3;
+    color:#be123c;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.submit-error.show{
+    display:block;
+}
 
 .submit-btn{
     width:100%;
-    border:none;
-    margin-top:22px;
+    border:0;
+    margin-top:20px;
     padding:15px;
     border-radius:9px;
     color:white;
@@ -214,12 +208,6 @@ textarea{
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
-    transition:.2s;
-}
-
-.submit-btn:hover{
-    transform:translateY(-1px);
-    box-shadow:0 7px 20px rgba(37,99,235,.25);
 }
 
 .submit-btn:disabled{
@@ -227,39 +215,29 @@ textarea{
     cursor:not-allowed;
 }
 
-/* ================= SIDE ================= */
-
-.side-card{
-    background:white;
-    border-radius:16px;
-    padding:24px;
-    box-shadow:0 8px 35px rgba(15,23,42,.08);
-    height:max-content;
-}
-
+/* SIDE */
 .side-title{
     color:#1554bd;
     font-size:20px;
     font-weight:bold;
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
 .step{
     display:flex;
     gap:12px;
     margin-bottom:18px;
-    align-items:flex-start;
 }
 
 .step-number{
     min-width:32px;
     height:32px;
-    border-radius:50%;
     background:#2563eb;
     color:white;
+    border-radius:50%;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     font-weight:bold;
 }
 
@@ -270,154 +248,133 @@ textarea{
 }
 
 .important{
-    margin-top:22px;
-    padding:17px;
     background:#fff8e8;
     border:1px solid #fedf9a;
-    border-radius:10px;
+    border-radius:9px;
+    padding:15px;
+    margin-top:20px;
 }
 
 .important h3{
-    color:#b66b00;
-    margin-bottom:8px;
+    color:#a86100;
+    margin-bottom:7px;
 }
 
 .important p{
     font-size:13px;
-    line-height:1.6;
+    line-height:1.5;
 }
 
-/* ================= STATUS ================= */
-
+/* STATUS */
 #statusBox{
     display:none;
     margin-top:25px;
 }
 
 .status-card{
-    background:white;
-    border-radius:16px;
-    padding:30px;
     text-align:center;
-    box-shadow:0 8px 35px rgba(15,23,42,.08);
 }
 
 .success-icon{
     width:65px;
     height:65px;
-    border-radius:50%;
     background:#16a34a;
     color:white;
+    border-radius:50%;
+    margin:0 auto 15px;
     display:flex;
     justify-content:center;
     align-items:center;
-    margin:0 auto 15px;
-    font-size:34px;
-    font-weight:bold;
+    font-size:32px;
 }
 
 .status-card h2{
     color:#15803d;
-    margin-bottom:8px;
 }
 
 .status-text{
     color:#64748b;
-    line-height:1.6;
+    margin-top:8px;
 }
 
 .code-box{
     max-width:420px;
-    margin:23px auto;
+    margin:22px auto;
     padding:20px;
     border:2px dashed #3b82f6;
     background:#eff6ff;
     border-radius:12px;
 }
 
-.code-box p{
-    color:#64748b;
-    margin-bottom:8px;
-}
-
 .code{
     display:block;
     color:#1d4ed8;
     font-size:27px;
-    font-weight:bold;
     letter-spacing:3px;
-    margin-bottom:15px;
+    margin:8px 0 15px;
 }
 
 .copy-btn{
-    border:0;
     background:#2563eb;
     color:white;
-    padding:9px 20px;
+    border:0;
     border-radius:7px;
+    padding:9px 18px;
     cursor:pointer;
 }
 
 .pending{
     max-width:600px;
     margin:0 auto 18px;
-    padding:17px;
+    padding:16px;
     background:#fff7ed;
     border:1px solid #fed7aa;
-    border-radius:10px;
+    border-radius:9px;
 }
 
 .pending h3{
     color:#c2410c;
-    margin-bottom:7px;
+    margin-bottom:6px;
 }
 
 .pending p{
     color:#7c2d12;
-    line-height:1.6;
     font-size:14px;
+    line-height:1.5;
 }
 
 .support{
     max-width:600px;
     margin:auto;
-    padding:16px;
     background:#f0fdf4;
     border:1px solid #bbf7d0;
-    border-radius:10px;
-}
-
-.support p{
-    font-size:14px;
+    border-radius:9px;
+    padding:15px;
 }
 
 .support strong{
     display:block;
-    margin-top:7px;
     color:#15803d;
     font-size:18px;
+    margin-top:6px;
 }
 
-/* ================= NAVIGATION BUTTONS ================= */
-
+/* NAVIGATION */
 .navigation-buttons{
     display:flex;
     justify-content:center;
-    align-items:center;
     gap:12px;
-    margin-top:20px;
+    margin-top:22px;
     flex-wrap:wrap;
 }
 
 .back-btn,
 .new-payment-btn{
-    border:none;
+    border:0;
     padding:12px 25px;
     border-radius:8px;
-    font-size:15px;
     font-weight:bold;
     cursor:pointer;
-    transition:.2s;
 }
 
 .back-btn{
@@ -425,38 +382,25 @@ textarea{
     color:white;
 }
 
-.back-btn:hover{
-    background:#475569;
-}
-
 .new-payment-btn{
     background:#2563eb;
     color:white;
 }
 
-.new-payment-btn:hover{
-    background:#1d4ed8;
-}
-
-/* ================= LOCKED VOUCHER ================= */
-
+/* LOCK */
 .locked{
-    margin-top:25px;
-    background:#fff;
+    margin-top:22px;
     border:1px solid #e2e8f0;
-    border-radius:16px;
-    padding:25px;
-    text-align:center;
+    border-radius:12px;
+    padding:22px;
 }
 
 .lock-icon{
-    font-size:40px;
-    margin-bottom:10px;
+    font-size:38px;
 }
 
 .locked h3{
-    color:#334155;
-    margin-bottom:7px;
+    margin:8px 0;
 }
 
 .locked p{
@@ -464,179 +408,28 @@ textarea{
     font-size:14px;
 }
 
-/* ================= VOUCHER ================= */
-
-#voucherSection{
-    display:none;
-    margin-top:25px;
-}
-
-.voucher{
-    background:white;
-    padding:35px;
-    border:1px solid #dbe2ea;
-}
-
-.voucher-header{
-    text-align:center;
-    border-bottom:2px solid #111827;
-    padding-bottom:18px;
-}
-
-.voucher-header h2{
-    font-size:27px;
-}
-
-.voucher-header p{
-    color:#64748b;
-    margin-top:5px;
-    font-size:14px;
-}
-
-.voucher-title{
-    text-align:center;
-    margin:23px 0;
-}
-
-.voucher-title span{
-    display:inline-block;
-    border:2px solid #111827;
-    padding:8px 25px;
-    border-radius:5px;
-    font-weight:bold;
-}
-
-.voucher-info{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-    margin-bottom:25px;
-}
-
-.info-row{
-    display:flex;
-    gap:8px;
-    font-size:14px;
-}
-
-.info-row strong{
-    min-width:125px;
-}
-
-.voucher table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-.voucher th,
-.voucher td{
-    border:1px solid #334155;
-    padding:11px;
-    text-align:left;
-    font-size:14px;
-}
-
-.voucher th{
-    background:#f1f5f9;
-}
-
-.total{
-    text-align:right;
-    margin-top:20px;
-    font-size:20px;
-    font-weight:bold;
-}
-
-.signature{
-    display:flex;
-    justify-content:space-between;
-    margin-top:65px;
-    font-size:13px;
-}
-
-.print-btn{
-    display:block;
-    margin:20px auto;
-    padding:13px 30px;
-    border:0;
-    border-radius:8px;
-    background:#16a34a;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* ================= FOOTER ================= */
-
+/* FOOTER */
 .footer{
     background:#071a35;
     color:white;
-    padding:30px 15px;
     text-align:center;
-}
-
-.footer h3{
-    font-size:22px;
+    padding:28px 15px;
 }
 
 .footer p{
-    margin-top:7px;
     color:#b9c6d8;
-    font-size:14px;
+    font-size:13px;
+    margin-top:6px;
 }
 
-/* ================= RESPONSIVE ================= */
-
+/* RESPONSIVE */
 @media(max-width:850px){
-
     .main-grid{
         grid-template-columns:1fr;
-    }
-
-    .side-card{
-        order:2;
     }
 }
 
 @media(max-width:600px){
-
-    body{
-        padding:0;
-    }
-
-    .header{
-        padding:25px 12px 45px;
-    }
-
-    .logo-icon{
-        width:50px;
-        height:50px;
-        font-size:23px;
-    }
-
-    .logo-text h1{
-        font-size:31px;
-    }
-
-    .logo-text p{
-        font-size:10px;
-    }
-
-    .header-title h2{
-        font-size:22px;
-    }
-
-    .container{
-        width:94%;
-        margin:-20px auto 30px;
-    }
-
-    .card,
-    .side-card,
-    .status-card{
-        padding:20px 16px;
-    }
-
     .grid{
         grid-template-columns:1fr;
     }
@@ -645,25 +438,18 @@ textarea{
         grid-column:auto;
     }
 
-    .voucher{
-        padding:20px 14px;
+    .card,
+    .side-card,
+    .status-card{
+        padding:20px 16px;
     }
 
-    .voucher-info{
-        grid-template-columns:1fr;
+    .logo-text h1{
+        font-size:30px;
     }
 
-    .info-row{
-        flex-direction:column;
-        gap:3px;
-    }
-
-    .signature{
-        margin-top:45px;
-    }
-
-    .code{
-        font-size:22px;
+    .header-title h2{
+        font-size:21px;
     }
 
     .navigation-buttons{
@@ -673,93 +459,39 @@ textarea{
     .back-btn,
     .new-payment-btn{
         width:100%;
-        max-width:350px;
     }
 }
-
-/* ================= PRINT ================= */
-
-@media print{
-
-    body{
-        background:white;
-    }
-
-    .header,
-    .footer,
-    .card,
-    .side-card,
-    #statusBox,
-    .print-btn,
-    .navigation-buttons{
-        display:none !important;
-    }
-
-    #voucherSection{
-        display:block !important;
-        margin:0;
-    }
-
-    .voucher{
-        border:none;
-    }
-}
-
 </style>
 </head>
 
-
 <body>
-
-
-<!-- ================= HEADER ================= -->
 
 <header class="header">
 
     <div class="logo">
 
-        <div class="logo-icon">
-            💻
-        </div>
+        <div class="logo-icon">💻</div>
 
         <div class="logo-text">
-
             <h1>SNK IT</h1>
-
-            <p>
-                LEARN • BUILD • GROW
-            </p>
-
+            <p>LEARN • BUILD • GROW</p>
         </div>
 
     </div>
 
-
     <div class="header-title">
-
-        <h2>
-            🎓 Admission Payment Portal
-        </h2>
-
-        <p>
-            Secure • Simple • Verified
-        </p>
-
+        <h2>🎓 Admission Payment Portal</h2>
+        <p>Secure • Simple • Verified</p>
     </div>
 
 </header>
 
 
-
 <div class="container">
-
-
-<!-- ================= FORM + SIDE ================= -->
 
 <div class="main-grid">
 
-
-<!-- ================= PAYMENT FORM ================= -->
+<!-- FORM -->
 
 <div class="card" id="formCard">
 
@@ -767,26 +499,23 @@ textarea{
         👨‍🎓 Student Information
     </div>
 
-
-    <form id="paymentForm">
-
+    <form id="paymentForm" novalidate>
 
         <div class="grid">
-
 
             <div class="form-group">
 
                 <label>
-                    Student Name
-                    <span class="required">*</span>
+                    Student Name <span class="required">*</span>
                 </label>
 
                 <input
                     type="text"
                     id="studentName"
                     placeholder="Enter student name"
-                    required
                 >
+
+                <div class="field-error" id="studentNameError"></div>
 
             </div>
 
@@ -802,8 +531,9 @@ textarea{
                     type="text"
                     id="studentId"
                     placeholder="e.g. SNK2026001"
-                    required
                 >
+
+                <div class="field-error" id="studentIdError"></div>
 
             </div>
 
@@ -819,8 +549,9 @@ textarea{
                     type="text"
                     id="guardianName"
                     placeholder="Enter guardian name"
-                    required
                 >
+
+                <div class="field-error" id="guardianNameError"></div>
 
             </div>
 
@@ -836,8 +567,9 @@ textarea{
                     type="tel"
                     id="mobile"
                     placeholder="017XXXXXXXX"
-                    required
                 >
+
+                <div class="field-error" id="mobileError"></div>
 
             </div>
 
@@ -852,18 +584,17 @@ textarea{
                 <input
                     type="text"
                     id="course"
-                    placeholder="Enter class / course"
-                    required
+                    placeholder="Enter course"
                 >
+
+                <div class="field-error" id="courseError"></div>
 
             </div>
 
 
             <div class="form-group">
 
-                <label>
-                    Session
-                </label>
+                <label>Session</label>
 
                 <input
                     type="text"
@@ -873,9 +604,7 @@ textarea{
 
             </div>
 
-
         </div>
-
 
 
         <div class="section-title payment">
@@ -883,9 +612,7 @@ textarea{
         </div>
 
 
-
         <div class="grid">
-
 
             <div class="form-group">
 
@@ -899,8 +626,9 @@ textarea{
                     id="amount"
                     placeholder="e.g. 5000"
                     min="1"
-                    required
                 >
+
+                <div class="field-error" id="amountError"></div>
 
             </div>
 
@@ -912,36 +640,21 @@ textarea{
                     <span class="required">*</span>
                 </label>
 
-                <select
-                    id="paymentMethod"
-                    required
-                >
+                <select id="paymentMethod">
 
                     <option value="">
                         Select payment method
                     </option>
 
-                    <option value="bKash">
-                        bKash
-                    </option>
-
-                    <option value="Nagad">
-                        Nagad
-                    </option>
-
-                    <option value="Bank">
-                        Bank
-                    </option>
-
-                    <option value="Cash">
-                        Cash
-                    </option>
-
-                    <option value="Card">
-                        Card
-                    </option>
+                    <option value="bKash">bKash</option>
+                    <option value="Nagad">Nagad</option>
+                    <option value="Bank">Bank</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Card">Card</option>
 
                 </select>
+
+                <div class="field-error" id="paymentMethodError"></div>
 
             </div>
 
@@ -950,6 +663,7 @@ textarea{
 
                 <label>
                     Transaction ID
+                    <span class="required">*</span>
                 </label>
 
                 <input
@@ -957,6 +671,8 @@ textarea{
                     id="transactionId"
                     placeholder="Enter transaction ID"
                 >
+
+                <div class="field-error" id="transactionIdError"></div>
 
             </div>
 
@@ -971,17 +687,16 @@ textarea{
                 <input
                     type="date"
                     id="paymentDate"
-                    required
                 >
+
+                <div class="field-error" id="paymentDateError"></div>
 
             </div>
 
 
             <div class="form-group full">
 
-                <label>
-                    Remarks
-                </label>
+                <label>Remarks</label>
 
                 <textarea
                     id="remarks"
@@ -990,9 +705,15 @@ textarea{
 
             </div>
 
-
         </div>
 
+
+        <!-- GENERAL ERROR -->
+
+        <div
+            class="submit-error"
+            id="submitError"
+        ></div>
 
 
         <button
@@ -1003,14 +724,12 @@ textarea{
             📤 Submit Payment
         </button>
 
-
     </form>
 
 </div>
 
 
-
-<!-- ================= SIDE INFORMATION ================= -->
+<!-- SIDE -->
 
 <div class="side-card">
 
@@ -1018,78 +737,34 @@ textarea{
         🛡 How It Works?
     </div>
 
-
     <div class="step">
-
-        <div class="step-number">
-            1
-        </div>
-
-        <p>
-            Fill up the admission payment form.
-        </p>
-
+        <div class="step-number">1</div>
+        <p>Fill up the admission payment form.</p>
     </div>
 
-
     <div class="step">
-
-        <div class="step-number">
-            2
-        </div>
-
-        <p>
-            Submit your payment information.
-        </p>
-
+        <div class="step-number">2</div>
+        <p>Submit your payment information.</p>
     </div>
 
-
     <div class="step">
-
-        <div class="step-number">
-            3
-        </div>
-
-        <p>
-            You will receive a unique verification code.
-        </p>
-
+        <div class="step-number">3</div>
+        <p>You will receive a unique verification code.</p>
     </div>
 
-
     <div class="step">
-
-        <div class="step-number">
-            4
-        </div>
-
-        <p>
-            <strong>Support SNK Team</strong>
-            will check the payment.
-        </p>
-
+        <div class="step-number">4</div>
+        <p><strong>Support SNK Team</strong> will check the payment.</p>
     </div>
 
-
     <div class="step">
-
-        <div class="step-number">
-            5
-        </div>
-
-        <p>
-            After confirmation, the voucher will be available.
-        </p>
-
+        <div class="step-number">5</div>
+        <p>After confirmation, the voucher will be available.</p>
     </div>
-
 
     <div class="important">
 
-        <h3>
-            ⚠ Important
-        </h3>
+        <h3>⚠ Important</h3>
 
         <p>
             Voucher printing is available only after
@@ -1100,413 +775,144 @@ textarea{
 
 </div>
 
-
 </div>
 
 
-
-<!-- ================= SUBMISSION STATUS ================= -->
+<!-- STATUS -->
 
 <div id="statusBox">
 
-    <div class="status-card">
+<div class="status-card">
+
+    <div class="success-icon">✓</div>
+
+    <h2>
+        Payment Submitted Successfully
+    </h2>
+
+    <p class="status-text">
+        Your payment information has been submitted
+        for verification.
+    </p>
 
 
-        <div class="success-icon">
-            ✓
-        </div>
+    <div class="code-box">
+
+        <p>Your Verification Code</p>
+
+        <strong
+            class="code"
+            id="verificationCode"
+        >
+            ADM-XXXXXX
+        </strong>
+
+        <button
+            type="button"
+            class="copy-btn"
+            onclick="copyCode()"
+        >
+            📋 Copy Code
+        </button>
+
+    </div>
 
 
-        <h2>
-            Payment Submitted Successfully
-        </h2>
+    <div class="pending">
 
+        <h3>⏳ Waiting for Verification</h3>
 
-        <p class="status-text">
-            Your payment information has been submitted
-            for verification.
+        <p>
+            Your payment will be checked manually by
+            Support SNK Team. After confirmation,
+            your admission voucher will be available
+            for printing.
         </p>
 
+    </div>
 
 
-        <div class="code-box">
+    <div class="support">
 
-            <p>
-                Your Verification Code
-            </p>
+        <p>
+            Your information has been submitted to
+        </p>
 
-            <strong
-                class="code"
-                id="verificationCode"
-            >
-                ADM-XXXXXX
-            </strong>
+        <strong>
+            Support SNK Team
+        </strong>
 
-
-            <button
-                type="button"
-                class="copy-btn"
-                onclick="copyCode()"
-            >
-                📋 Copy Code
-            </button>
-
-        </div>
+    </div>
 
 
+    <div class="locked">
 
-        <div class="pending">
+        <div class="lock-icon">🔒</div>
 
-            <h3>
-                ⏳ Waiting for Verification
-            </h3>
+        <h3>Voucher Locked</h3>
 
-            <p>
-                Your payment will be checked manually by
-                Support SNK Team. After confirmation,
-                your admission voucher will be available
-                for printing.
-            </p>
+        <p>
+            Please wait for payment confirmation.
+        </p>
 
-        </div>
+    </div>
 
 
+    <!-- BACK / NEW PAYMENT -->
 
-        <div class="support">
+    <div class="navigation-buttons">
 
-            <p>
-                Your information has been submitted to
-            </p>
+        <button
+            type="button"
+            class="back-btn"
+            onclick="goBackToForm()"
+        >
+            ← Back
+        </button>
 
-            <strong>
-                Support SNK Team
-            </strong>
-
-        </div>
-
-
-
-        <!-- LOCKED -->
-
-        <div class="locked">
-
-            <div class="lock-icon">
-                🔒
-            </div>
-
-            <h3>
-                Voucher Locked
-            </h3>
-
-            <p>
-                Please wait for payment confirmation.
-            </p>
-
-        </div>
-
-
-
-        <!-- BACK + NEW PAYMENT -->
-
-        <div class="navigation-buttons">
-
-            <button
-                type="button"
-                class="back-btn"
-                onclick="goBackToForm()"
-            >
-                ← Back
-            </button>
-
-
-            <button
-                type="button"
-                class="new-payment-btn"
-                onclick="newPayment()"
-            >
-                ＋ New Payment
-            </button>
-
-        </div>
-
+        <button
+            type="button"
+            class="new-payment-btn"
+            onclick="newPayment()"
+        >
+            ＋ New Payment
+        </button>
 
     </div>
 
 </div>
 
-
-
-<!-- ================= VOUCHER ================= -->
-
-<div id="voucherSection">
-
-    <div class="voucher">
-
-
-        <div class="voucher-header">
-
-            <h2>
-                SNK IT
-            </h2>
-
-            <p>
-                Admission & Training Center
-            </p>
-
-            <p>
-                Support SNK Team
-            </p>
-
-        </div>
-
-
-
-        <div class="voucher-title">
-
-            <span>
-                ADMISSION PAYMENT VOUCHER
-            </span>
-
-        </div>
-
-
-
-        <div class="voucher-info">
-
-
-            <div class="info-row">
-
-                <strong>
-                    Voucher No:
-                </strong>
-
-                <span id="vVoucherNo"></span>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <strong>
-                    Verification:
-                </strong>
-
-                <span id="vVerification"></span>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <strong>
-                    Date:
-                </strong>
-
-                <span id="vDate"></span>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <strong>
-                    Student Name:
-                </strong>
-
-                <span id="vStudentName"></span>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <strong>
-                    Student ID:
-                </strong>
-
-                <span id="vStudentId"></span>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <strong>
-                    Guardian:
-                </strong>
-
-                <span id="vGuardian"></span>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <strong>
-                    Mobile:
-                </strong>
-
-                <span id="vMobile"></span>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <strong>
-                    Course:
-                </strong>
-
-                <span id="vCourse"></span>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <strong>
-                    Session:
-                </strong>
-
-                <span id="vSession"></span>
-
-            </div>
-
-
-        </div>
-
-
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Description
-                    </th>
-
-                    <th>
-                        Payment Method
-                    </th>
-
-                    <th>
-                        Transaction ID
-                    </th>
-
-                    <th>
-                        Amount
-                    </th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                <tr>
-
-                    <td>
-                        Admission Fee
-                    </td>
-
-                    <td id="vPaymentMethod"></td>
-
-                    <td id="vTransactionId"></td>
-
-                    <td id="vAmount"></td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-
-
-        <div class="total">
-
-            Total Paid: ৳
-            <span id="vTotal"></span>
-
-        </div>
-
-
-
-        <p style="margin-top:20px;">
-
-            <strong>
-                Remarks:
-            </strong>
-
-            <span id="vRemarks"></span>
-
-        </p>
-
-
-
-        <div class="signature">
-
-            <div>
-                _______________________<br>
-                Student / Guardian
-            </div>
-
-
-            <div>
-                _______________________<br>
-                Authorized Signature
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-
-    <button
-        class="print-btn"
-        onclick="window.print()"
-    >
-        🖨 Print / Save as PDF
-    </button>
-
+</div>
 
 </div>
 
-
-</div>
-
-
-
-<!-- ================= FOOTER ================= -->
 
 <footer class="footer">
 
-    <h3>
-        SNK IT
-    </h3>
+    <h3>SNK IT</h3>
 
-    <p>
-        Learn • Build • Grow
-    </p>
+    <p>Learn • Build • Grow</p>
 
-    <p>
-        Support SNK Team
-    </p>
+    <p>Support SNK Team</p>
 
 </footer>
-
 
 
 <script>
 
 /* =====================================================
-   EMAILJS SETTINGS
+   EMAILJS CONFIGURATION
    ===================================================== */
+
+/*
+   এখানে EmailJS-এর তথ্য বসাবেন।
+
+   Example:
+
+   const EMAILJS_PUBLIC_KEY = "abc123...";
+   const EMAILJS_SERVICE_ID = "service_xxxxxx";
+   const EMAILJS_TEMPLATE_ID = "template_xxxxxx";
+*/
 
 const EMAILJS_PUBLIC_KEY =
 "YOUR_PUBLIC_KEY";
@@ -1518,45 +924,337 @@ const EMAILJS_TEMPLATE_ID =
 "YOUR_TEMPLATE_ID";
 
 
-/* Admin email - not shown to user */
+/*
+   এই email-এ submission যাবে।
+   Student-এর সামনে এটি দেখানো হবে না।
+*/
 
 const ADMIN_EMAIL =
 "iamsnkbd@protonmail.com";
 
 
-/* EmailJS Initialize */
+/* =====================================================
+   INITIALIZE EMAILJS
+   ===================================================== */
 
-emailjs.init({
-    publicKey: EMAILJS_PUBLIC_KEY
-});
+if(
+    EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY"
+){
 
+    emailjs.init({
+        publicKey: EMAILJS_PUBLIC_KEY
+    });
+
+}
 
 
 /* =====================================================
-   TODAY'S DATE
+   TODAY
    ===================================================== */
 
 document.getElementById("paymentDate").value =
 new Date().toISOString().split("T")[0];
 
 
+/* =====================================================
+   HELPERS
+   ===================================================== */
+
+function get(id){
+    return document.getElementById(id);
+}
+
+
+function showFieldError(id,message){
+
+    const input = get(id);
+    const error = get(id + "Error");
+
+    if(input){
+        input.classList.add("error");
+        input.classList.remove("success");
+    }
+
+    if(error){
+        error.textContent = message;
+        error.classList.add("show");
+    }
+}
+
+
+function clearFieldError(id){
+
+    const input = get(id);
+    const error = get(id + "Error");
+
+    if(input){
+        input.classList.remove("error");
+    }
+
+    if(error){
+        error.textContent = "";
+        error.classList.remove("show");
+    }
+}
+
+
+function markSuccess(id){
+
+    const input = get(id);
+
+    if(input){
+        input.classList.remove("error");
+        input.classList.add("success");
+    }
+}
+
+
+function clearAllErrors(){
+
+    const ids = [
+        "studentName",
+        "studentId",
+        "guardianName",
+        "mobile",
+        "course",
+        "amount",
+        "paymentMethod",
+        "transactionId",
+        "paymentDate"
+    ];
+
+    ids.forEach(function(id){
+        clearFieldError(id);
+    });
+
+    get("submitError").classList.remove("show");
+    get("submitError").textContent = "";
+}
+
 
 /* =====================================================
-   CREATE VERIFICATION CODE
+   VALIDATION
+   ===================================================== */
+
+function validateForm(){
+
+    clearAllErrors();
+
+    let valid = true;
+
+    const studentName =
+        get("studentName").value.trim();
+
+    const studentId =
+        get("studentId").value.trim();
+
+    const guardianName =
+        get("guardianName").value.trim();
+
+    const mobile =
+        get("mobile").value.trim();
+
+    const course =
+        get("course").value.trim();
+
+    const amount =
+        get("amount").value.trim();
+
+    const paymentMethod =
+        get("paymentMethod").value;
+
+    const transactionId =
+        get("transactionId").value.trim();
+
+    const paymentDate =
+        get("paymentDate").value;
+
+
+    if(!studentName){
+
+        showFieldError(
+            "studentName",
+            "Student Name is required."
+        );
+
+        valid = false;
+
+    }else{
+        markSuccess("studentName");
+    }
+
+
+    if(!studentId){
+
+        showFieldError(
+            "studentId",
+            "Application / Student ID is required."
+        );
+
+        valid = false;
+
+    }else{
+        markSuccess("studentId");
+    }
+
+
+    if(!guardianName){
+
+        showFieldError(
+            "guardianName",
+            "Father / Guardian Name is required."
+        );
+
+        valid = false;
+
+    }else{
+        markSuccess("guardianName");
+    }
+
+
+    if(!mobile){
+
+        showFieldError(
+            "mobile",
+            "Mobile number is required."
+        );
+
+        valid = false;
+
+    }
+    else if(
+        !/^01[3-9]\d{8}$/.test(mobile)
+    ){
+
+        showFieldError(
+            "mobile",
+            "Enter a valid Bangladesh mobile number."
+        );
+
+        valid = false;
+
+    }
+    else{
+
+        markSuccess("mobile");
+
+    }
+
+
+    if(!course){
+
+        showFieldError(
+            "course",
+            "Class / Course is required."
+        );
+
+        valid = false;
+
+    }else{
+        markSuccess("course");
+    }
+
+
+    if(!amount){
+
+        showFieldError(
+            "amount",
+            "Payment amount is required."
+        );
+
+        valid = false;
+
+    }
+    else if(
+        Number(amount) <= 0
+    ){
+
+        showFieldError(
+            "amount",
+            "Payment amount must be greater than 0."
+        );
+
+        valid = false;
+
+    }
+    else{
+
+        markSuccess("amount");
+
+    }
+
+
+    if(!paymentMethod){
+
+        showFieldError(
+            "paymentMethod",
+            "Please select a payment method."
+        );
+
+        valid = false;
+
+    }else{
+        markSuccess("paymentMethod");
+    }
+
+
+    if(!transactionId){
+
+        showFieldError(
+            "transactionId",
+            "Transaction ID is required."
+        );
+
+        valid = false;
+
+    }else{
+        markSuccess("transactionId");
+    }
+
+
+    if(!paymentDate){
+
+        showFieldError(
+            "paymentDate",
+            "Payment date is required."
+        );
+
+        valid = false;
+
+    }else{
+        markSuccess("paymentDate");
+    }
+
+
+    if(!valid){
+
+        get("submitError").innerHTML =
+            "⚠ Please correct the highlighted fields above.";
+
+        get("submitError").classList.add("show");
+
+    }
+
+    return valid;
+}
+
+
+/* =====================================================
+   VERIFICATION CODE
    ===================================================== */
 
 function createVerificationCode(){
 
-    const characters =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
     let code = "ADM-";
 
     for(let i = 0; i < 6; i++){
 
-        code += characters.charAt(
+        code += chars.charAt(
             Math.floor(
-                Math.random() * characters.length
+                Math.random() * chars.length
             )
         );
 
@@ -1566,231 +1264,235 @@ function createVerificationCode(){
 }
 
 
-
 /* =====================================================
    FORM SUBMIT
    ===================================================== */
 
-document.getElementById("paymentForm")
-.addEventListener("submit", async function(event){
+get("paymentForm").addEventListener(
+    "submit",
+    async function(event){
 
-    event.preventDefault();
-
-
-    const button =
-    document.getElementById("submitBtn");
+        event.preventDefault();
 
 
-    button.disabled = true;
+        /* First validate */
 
-    button.textContent =
-    "Submitting...";
-
-
-    /* Get form values */
-
-    const studentName =
-    document.getElementById("studentName").value;
-
-    const studentId =
-    document.getElementById("studentId").value;
-
-    const guardianName =
-    document.getElementById("guardianName").value;
-
-    const mobile =
-    document.getElementById("mobile").value;
-
-    const course =
-    document.getElementById("course").value;
-
-    const session =
-    document.getElementById("session").value;
-
-    const amount =
-    document.getElementById("amount").value;
-
-    const paymentMethod =
-    document.getElementById("paymentMethod").value;
-
-    const transactionId =
-    document.getElementById("transactionId").value || "-";
-
-    const paymentDate =
-    document.getElementById("paymentDate").value;
-
-    const remarks =
-    document.getElementById("remarks").value || "-";
+        if(!validateForm()){
+            return;
+        }
 
 
-    /* Create unique verification code */
+        /* Check EmailJS configuration */
 
-    const verificationCode =
-    createVerificationCode();
+        if(
+            EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY" ||
+            EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID" ||
+            EMAILJS_TEMPLATE_ID === "YOUR_TEMPLATE_ID"
+        ){
 
+            get("submitError").innerHTML =
+                "⚠ Email service is not configured yet. " +
+                "Please add your EmailJS Public Key, Service ID and Template ID in the HTML code.";
 
+            get("submitError").classList.add("show");
 
-    /* =================================================
-       EMAILJS TEMPLATE DATA
-       ================================================= */
-
-    const templateParams = {
-
-        to_email:
-        ADMIN_EMAIL,
-
-        support_name:
-        "Support SNK Team",
-
-        verification_code:
-        verificationCode,
-
-        student_name:
-        studentName,
-
-        student_id:
-        studentId,
-
-        guardian_name:
-        guardianName,
-
-        mobile:
-        mobile,
-
-        course:
-        course,
-
-        session:
-        session,
-
-        amount:
-        amount,
-
-        payment_method:
-        paymentMethod,
-
-        transaction_id:
-        transactionId,
-
-        payment_date:
-        paymentDate,
-
-        remarks:
-        remarks
-
-    };
+            return;
+        }
 
 
+        const button =
+            get("submitBtn");
 
-    try{
-
-        /* Send email */
-
-        await emailjs.send(
-            EMAILJS_SERVICE_ID,
-            EMAILJS_TEMPLATE_ID,
-            templateParams
-        );
-
-
-        /* Hide form */
-
-        document.getElementById("formCard")
-        .style.display = "none";
-
-
-        /* Show status */
-
-        document.getElementById("statusBox")
-        .style.display = "block";
-
-
-        /* Show verification code */
-
-        document.getElementById(
-            "verificationCode"
-        ).textContent =
-        verificationCode;
-
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-        /*
-          No "Payment Failed" message.
-          The user can simply try again.
-        */
-
-        button.disabled = false;
+        button.disabled = true;
 
         button.textContent =
-        "📤 Submit Payment";
+            "⏳ Sending...";
 
-        alert(
-            "Please check your information and try again."
-        );
+
+        const verificationCode =
+            createVerificationCode();
+
+
+        /* Get values */
+
+        const data = {
+
+            to_email:
+                ADMIN_EMAIL,
+
+            support_name:
+                "Support SNK Team",
+
+            verification_code:
+                verificationCode,
+
+            student_name:
+                get("studentName").value.trim(),
+
+            student_id:
+                get("studentId").value.trim(),
+
+            guardian_name:
+                get("guardianName").value.trim(),
+
+            mobile:
+                get("mobile").value.trim(),
+
+            course:
+                get("course").value.trim(),
+
+            session:
+                get("session").value.trim(),
+
+            amount:
+                get("amount").value.trim(),
+
+            payment_method:
+                get("paymentMethod").value,
+
+            transaction_id:
+                get("transactionId").value.trim(),
+
+            payment_date:
+                get("paymentDate").value,
+
+            remarks:
+                get("remarks").value.trim() || "-"
+
+        };
+
+
+        try{
+
+            await emailjs.send(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_ID,
+                data
+            );
+
+
+            /* SUCCESS */
+
+            get("formCard").style.display =
+                "none";
+
+            get("statusBox").style.display =
+                "block";
+
+            get("verificationCode").textContent =
+                verificationCode;
+
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+
+        }
+        catch(error){
+
+            console.error(
+                "EmailJS Error:",
+                error
+            );
+
+
+            let message =
+                "Email could not be sent.";
+
+
+            /*
+               Show useful EmailJS error
+            */
+
+            if(error){
+
+                if(error.text){
+
+                    message +=
+                        " " + error.text;
+
+                }
+                else if(error.message){
+
+                    message +=
+                        " " + error.message;
+
+                }
+                else if(error.status){
+
+                    message +=
+                        " Error code: " +
+                        error.status;
+
+                }
+
+            }
+
+
+            get("submitError").innerHTML =
+                "❌ " + message;
+
+
+            get("submitError").classList.add("show");
+
+
+            button.disabled = false;
+
+            button.textContent =
+                "📤 Submit Payment";
+
+        }
 
     }
-
-});
-
+);
 
 
 /* =====================================================
-   COPY VERIFICATION CODE
+   COPY CODE
    ===================================================== */
 
 function copyCode(){
 
     const code =
-    document.getElementById(
-        "verificationCode"
-    ).textContent;
-
+        get("verificationCode").textContent;
 
     navigator.clipboard.writeText(code)
-    .then(function(){
+        .then(function(){
 
-        alert(
-            "Verification Code copied!"
-        );
+            alert(
+                "Verification Code copied!"
+            );
 
-    });
+        })
+        .catch(function(){
 
+            alert(
+                "Could not copy the code."
+            );
+
+        });
 }
 
 
-
 /* =====================================================
-   BACK BUTTON
+   BACK
    ===================================================== */
 
 function goBackToForm(){
 
-    document.getElementById("statusBox")
-    .style.display = "none";
+    get("statusBox").style.display =
+        "none";
 
-
-    document.getElementById("formCard")
-    .style.display = "block";
-
+    get("formCard").style.display =
+        "block";
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
-
 }
-
 
 
 /* =====================================================
@@ -1799,165 +1501,33 @@ function goBackToForm(){
 
 function newPayment(){
 
-    /* Reset form */
+    get("paymentForm").reset();
 
-    document.getElementById(
-        "paymentForm"
-    ).reset();
+    clearAllErrors();
 
+    get("paymentDate").value =
+        new Date().toISOString().split("T")[0];
 
-    /* Today's date */
+    get("formCard").style.display =
+        "block";
 
-    document.getElementById(
-        "paymentDate"
-    ).value =
-    new Date().toISOString().split("T")[0];
+    get("statusBox").style.display =
+        "none";
 
-
-    /* Show form */
-
-    document.getElementById(
-        "formCard"
-    ).style.display = "block";
-
-
-    /* Hide status */
-
-    document.getElementById(
-        "statusBox"
-    ).style.display = "none";
-
-
-    /* Hide voucher */
-
-    document.getElementById(
-        "voucherSection"
-    ).style.display = "none";
-
-
-    /* Reset submit button */
 
     const button =
-    document.getElementById("submitBtn");
-
+        get("submitBtn");
 
     button.disabled = false;
 
     button.textContent =
-    "📤 Submit Payment";
+        "📤 Submit Payment";
 
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
-
-}
-
-
-
-/* =====================================================
-   SHOW CONFIRMED VOUCHER
-   ===================================================== */
-
-function showConfirmedVoucher(data){
-
-    document.getElementById(
-        "vVoucherNo"
-    ).textContent =
-    data.voucherNo;
-
-
-    document.getElementById(
-        "vVerification"
-    ).textContent =
-    data.verificationCode;
-
-
-    document.getElementById(
-        "vDate"
-    ).textContent =
-    data.paymentDate;
-
-
-    document.getElementById(
-        "vStudentName"
-    ).textContent =
-    data.studentName;
-
-
-    document.getElementById(
-        "vStudentId"
-    ).textContent =
-    data.studentId;
-
-
-    document.getElementById(
-        "vGuardian"
-    ).textContent =
-    data.guardianName;
-
-
-    document.getElementById(
-        "vMobile"
-    ).textContent =
-    data.mobile;
-
-
-    document.getElementById(
-        "vCourse"
-    ).textContent =
-    data.course;
-
-
-    document.getElementById(
-        "vSession"
-    ).textContent =
-    data.session;
-
-
-    document.getElementById(
-        "vPaymentMethod"
-    ).textContent =
-    data.paymentMethod;
-
-
-    document.getElementById(
-        "vTransactionId"
-    ).textContent =
-    data.transactionId;
-
-
-    document.getElementById(
-        "vAmount"
-    ).textContent =
-    "৳ " +
-    Number(data.amount).toLocaleString();
-
-
-    document.getElementById(
-        "vTotal"
-    ).textContent =
-    Number(data.amount).toLocaleString();
-
-
-    document.getElementById(
-        "vRemarks"
-    ).textContent =
-    data.remarks;
-
-
-    document.getElementById(
-        "statusBox"
-    ).style.display =
-    "none";
-
-
-    document.getElementById(
-        "voucherSection"
-    ).style.display =
-    "block";
-
 }
 
 </script>
