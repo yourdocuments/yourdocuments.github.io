@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo — SNK IT Institute Admission Form</title>
+<title>Demo v2 — SNK IT Institute Admission Form</title>
 </head>
 <body style="margin:0;">
 
 <!-- ============================================================
-     SNK IT INSTITUTE — ADMISSION & PAYMENT SECTION (DEMO)
+     SNK IT INSTITUTE — ADMISSION & PAYMENT SECTION (v2, RESPONSIVE)
      এই পুরো ব্লকটা আপনার index.html এর </body> ট্যাগের ঠিক আগে
      paste করে দিন।
      ============================================================ -->
@@ -28,24 +28,21 @@
       font-family: 'Segoe UI', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
       background:var(--snk-paper);
       color:var(--snk-ink);
-      padding:56px 18px;
+      padding:clamp(28px,7vw,56px) clamp(14px,4vw,18px);
       border-top:1px solid var(--snk-line);
       border-bottom:1px solid var(--snk-line);
     }
     #snk-admission.snk-admit *{box-sizing:border-box;}
     #snk-admission .snk-wrap{max-width:760px;margin:0 auto;}
 
-    /* ---- Brand header (logo + name) ---- */
-    #snk-admission .snk-brand{
-      display:flex; align-items:center; gap:12px; margin-bottom:22px;
-    }
+    /* ---- Brand header ---- */
+    #snk-admission .snk-brand{display:flex; align-items:center; gap:12px; margin-bottom:22px;}
     #snk-admission .snk-brand-mark{
       width:44px; height:44px; border-radius:10px;
       background:linear-gradient(135deg, var(--snk-green), var(--snk-green-dark));
       color:#fff; display:flex; align-items:center; justify-content:center;
       font-weight:900; font-size:16px; letter-spacing:.02em; flex-shrink:0;
     }
-    /* এখানে img বসিয়ে real logo দিতে পারবেন, নিচে instruction আছে */
     #snk-admission .snk-brand-name{font-weight:800; font-size:18px; line-height:1.2;}
     #snk-admission .snk-brand-tag{font-size:12px; color:var(--snk-gold); font-weight:700; letter-spacing:.04em;}
 
@@ -53,40 +50,58 @@
       font-size:12px; letter-spacing:.14em; text-transform:uppercase;
       color:var(--snk-green-dark); font-weight:700; margin-bottom:8px;
     }
-    #snk-admission h2{
-      font-size:clamp(24px,4vw,34px); margin:0 0 6px; font-weight:800; line-height:1.2;
-    }
-    #snk-admission .snk-sub{color:#57604f; margin:0 0 30px; font-size:15px;}
+    #snk-admission h2{font-size:clamp(22px,5vw,34px); margin:0 0 6px; font-weight:800; line-height:1.25;}
+    #snk-admission .snk-sub{color:#57604f; margin:0 0 26px; font-size:clamp(13.5px,3.6vw,15px); line-height:1.6;}
+
     #snk-admission .snk-card{
       background:var(--snk-card); border:1px solid var(--snk-line);
-      border-radius:var(--snk-radius); padding:28px; box-shadow:0 1px 3px rgba(20,37,31,.06);
+      border-radius:var(--snk-radius); padding:clamp(18px,5vw,28px);
+      box-shadow:0 2px 10px rgba(20,37,31,.07);
+      transition:box-shadow .25s ease;
     }
-    #snk-admission label{
-      display:block; font-size:13px; font-weight:700; margin:18px 0 6px; color:var(--snk-ink);
-    }
+
+    #snk-admission label{display:block; font-size:13px; font-weight:700; margin:18px 0 6px; color:var(--snk-ink);}
     #snk-admission label:first-of-type{margin-top:0;}
     #snk-admission input[type=text],
     #snk-admission input[type=tel],
     #snk-admission input[type=email],
     #snk-admission select{
-      width:100%; padding:11px 12px; border:1.5px solid var(--snk-line);
+      width:100%; padding:12px 13px; border:1.5px solid var(--snk-line);
       border-radius:9px; font-size:15px; background:#fff; color:var(--snk-ink);
-      font-family:inherit;
+      font-family:inherit; transition:border-color .15s ease, box-shadow .15s ease;
     }
+    #snk-admission input:hover, #snk-admission select:hover{border-color:#c9c1a4;}
     #snk-admission input:focus, #snk-admission select:focus{
-      outline:2px solid var(--snk-green); outline-offset:1px; border-color:var(--snk-green);
+      outline:none; border-color:var(--snk-green);
+      box-shadow:0 0 0 3px rgba(31,111,77,.15);
     }
     #snk-admission optgroup{font-weight:700;}
-    #snk-admission .snk-badge{
-      display:inline-block; font-size:11px; font-weight:800; letter-spacing:.03em;
-      padding:3px 9px; border-radius:100px; margin-left:8px; vertical-align:1px;
-    }
-    #snk-admission .snk-badge.free{background:#e7f0f9; color:var(--snk-free);}
-    #snk-admission .snk-badge.paid{background:#fbeee0; color:var(--snk-gold);}
-    #snk-admission .snk-fee-box{
-      margin-top:20px; border-radius:11px; padding:18px; display:none;
-    }
+
+    #snk-admission .snk-fee-box{margin-top:20px; border-radius:11px; padding:16px 18px; display:none;
+      animation:snkFadeIn .25s ease;}
     #snk-admission .snk-fee-box.show{display:block;}
     #snk-admission .snk-fee-box.free-box{background:#eef6f1; border:1px solid #cfe6d8;}
     #snk-admission .snk-fee-box.paid-box{background:#fbf8ef; border:1px solid #ecdfb9;}
-    #snk-admission
+    #snk-admission .snk-fee-row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px; flex-wrap:wrap; gap:6px;}
+    #snk-admission .snk-fee-row .amt{font-size:clamp(19px,5vw,22px); font-weight:800; color:var(--snk-green-dark);}
+    #snk-admission .snk-fee-row .amt.strike{
+      text-decoration:line-through; color:#9a9a8f; font-size:15px; margin-right:6px; font-weight:600;
+    }
+    #snk-admission .snk-pay-steps{margin-top:14px; padding-top:14px; border-top:1px dashed #cbb98a; font-size:14px; line-height:1.75;}
+    #snk-admission .snk-pay-steps b{color:var(--snk-green-dark);}
+    #snk-admission .snk-num{
+      display:inline-block; background:#fff; border:1.5px solid var(--snk-gold);
+      padding:2px 10px; border-radius:7px; font-weight:800; letter-spacing:.03em; font-size:15px;
+    }
+
+    #snk-admission .snk-promo-row{display:flex; gap:8px; margin-top:16px;}
+    #snk-admission .snk-promo-row input{flex:1; min-width:0;}
+    #snk-admission .snk-promo-row button{
+      border:1.5px solid var(--snk-green); background:#fff; color:var(--snk-green-dark);
+      font-weight:700; padding:0 16px; border-radius:9px; cursor:pointer; font-size:14px;
+      transition:background .15s ease, color .15s ease; white-space:nowrap;
+    }
+    #snk-admission .snk-promo-row button:hover{background:var(--snk-green); color:#fff;}
+    #snk-admission .snk-promo-msg{font-size:13px; margin-top:6px; min-height:16px; font-weight:600;}
+    #snk-admission .snk-promo-msg.ok{color:var(--snk-green-dark);}
+    #snk-admission .snk-promo-msg.err{color:var(--snk-red);}
