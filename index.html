@@ -11,7 +11,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -388,11 +387,55 @@ textarea{
     border-radius:10px;
 }
 
+.support p{
+    font-size:14px;
+}
+
 .support strong{
     display:block;
     margin-top:7px;
     color:#15803d;
     font-size:18px;
+}
+
+/* ================= NAVIGATION BUTTONS ================= */
+
+.navigation-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+.back-btn,
+.new-payment-btn{
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.back-btn{
+    background:#64748b;
+    color:white;
+}
+
+.back-btn:hover{
+    background:#475569;
+}
+
+.new-payment-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.new-payment-btn:hover{
+    background:#1d4ed8;
 }
 
 /* ================= LOCKED VOUCHER ================= */
@@ -553,7 +596,6 @@ textarea{
     .side-card{
         order:2;
     }
-
 }
 
 @media(max-width:600px){
@@ -624,7 +666,18 @@ textarea{
         font-size:22px;
     }
 
+    .navigation-buttons{
+        flex-direction:column;
+    }
+
+    .back-btn,
+    .new-payment-btn{
+        width:100%;
+        max-width:350px;
+    }
 }
+
+/* ================= PRINT ================= */
 
 @media print{
 
@@ -637,7 +690,8 @@ textarea{
     .card,
     .side-card,
     #statusBox,
-    .print-btn{
+    .print-btn,
+    .navigation-buttons{
         display:none !important;
     }
 
@@ -669,15 +723,28 @@ textarea{
         </div>
 
         <div class="logo-text">
+
             <h1>SNK IT</h1>
-            <p>LEARN • BUILD • GROW</p>
+
+            <p>
+                LEARN • BUILD • GROW
+            </p>
+
         </div>
 
     </div>
 
+
     <div class="header-title">
-        <h2>🎓 Admission Payment Portal</h2>
-        <p>Secure • Simple • Verified</p>
+
+        <h2>
+            🎓 Admission Payment Portal
+        </h2>
+
+        <p>
+            Secure • Simple • Verified
+        </p>
+
     </div>
 
 </header>
@@ -687,12 +754,12 @@ textarea{
 <div class="container">
 
 
-<!-- ================= MAIN ================= -->
+<!-- ================= FORM + SIDE ================= -->
 
 <div class="main-grid">
 
 
-<!-- ================= FORM ================= -->
+<!-- ================= PAYMENT FORM ================= -->
 
 <div class="card" id="formCard">
 
@@ -700,89 +767,115 @@ textarea{
         👨‍🎓 Student Information
     </div>
 
+
     <form id="paymentForm">
+
 
         <div class="grid">
 
+
             <div class="form-group">
+
                 <label>
-                    Student Name <span class="required">*</span>
+                    Student Name
+                    <span class="required">*</span>
                 </label>
+
                 <input
                     type="text"
                     id="studentName"
                     placeholder="Enter student name"
                     required
                 >
+
             </div>
 
 
             <div class="form-group">
+
                 <label>
                     Application / Student ID
                     <span class="required">*</span>
                 </label>
+
                 <input
                     type="text"
                     id="studentId"
                     placeholder="e.g. SNK2026001"
                     required
                 >
+
             </div>
 
 
             <div class="form-group">
+
                 <label>
                     Father / Guardian Name
                     <span class="required">*</span>
                 </label>
+
                 <input
                     type="text"
                     id="guardianName"
                     placeholder="Enter guardian name"
                     required
                 >
+
             </div>
 
 
             <div class="form-group">
+
                 <label>
                     Mobile Number
                     <span class="required">*</span>
                 </label>
+
                 <input
                     type="tel"
                     id="mobile"
                     placeholder="017XXXXXXXX"
                     required
                 >
+
             </div>
 
 
             <div class="form-group">
+
                 <label>
                     Class / Course
                     <span class="required">*</span>
                 </label>
+
                 <input
                     type="text"
                     id="course"
                     placeholder="Enter class / course"
                     required
                 >
+
             </div>
 
 
             <div class="form-group">
-                <label>Session</label>
+
+                <label>
+                    Session
+                </label>
+
                 <input
                     type="text"
                     id="session"
                     value="2026-2027"
                 >
+
             </div>
 
+
         </div>
+
 
 
         <div class="section-title payment">
@@ -790,10 +883,12 @@ textarea{
         </div>
 
 
+
         <div class="grid">
 
 
             <div class="form-group">
+
                 <label>
                     Payment Amount
                     <span class="required">*</span>
@@ -806,16 +901,21 @@ textarea{
                     min="1"
                     required
                 >
+
             </div>
 
 
             <div class="form-group">
+
                 <label>
                     Payment Method
                     <span class="required">*</span>
                 </label>
 
-                <select id="paymentMethod" required>
+                <select
+                    id="paymentMethod"
+                    required
+                >
 
                     <option value="">
                         Select payment method
@@ -890,7 +990,9 @@ textarea{
 
             </div>
 
+
         </div>
+
 
 
         <button
@@ -900,6 +1002,7 @@ textarea{
         >
             📤 Submit Payment
         </button>
+
 
     </form>
 
@@ -918,7 +1021,9 @@ textarea{
 
     <div class="step">
 
-        <div class="step-number">1</div>
+        <div class="step-number">
+            1
+        </div>
 
         <p>
             Fill up the admission payment form.
@@ -929,7 +1034,9 @@ textarea{
 
     <div class="step">
 
-        <div class="step-number">2</div>
+        <div class="step-number">
+            2
+        </div>
 
         <p>
             Submit your payment information.
@@ -940,7 +1047,9 @@ textarea{
 
     <div class="step">
 
-        <div class="step-number">3</div>
+        <div class="step-number">
+            3
+        </div>
 
         <p>
             You will receive a unique verification code.
@@ -951,10 +1060,13 @@ textarea{
 
     <div class="step">
 
-        <div class="step-number">4</div>
+        <div class="step-number">
+            4
+        </div>
 
         <p>
-            <strong>Support SNK Team</strong> will check the payment.
+            <strong>Support SNK Team</strong>
+            will check the payment.
         </p>
 
     </div>
@@ -962,7 +1074,9 @@ textarea{
 
     <div class="step">
 
-        <div class="step-number">5</div>
+        <div class="step-number">
+            5
+        </div>
 
         <p>
             After confirmation, the voucher will be available.
@@ -973,7 +1087,9 @@ textarea{
 
     <div class="important">
 
-        <h3>⚠ Important</h3>
+        <h3>
+            ⚠ Important
+        </h3>
 
         <p>
             Voucher printing is available only after
@@ -989,24 +1105,28 @@ textarea{
 
 
 
-<!-- ================= STATUS ================= -->
+<!-- ================= SUBMISSION STATUS ================= -->
 
 <div id="statusBox">
 
     <div class="status-card">
 
+
         <div class="success-icon">
             ✓
         </div>
+
 
         <h2>
             Payment Submitted Successfully
         </h2>
 
+
         <p class="status-text">
             Your payment information has been submitted
             for verification.
         </p>
+
 
 
         <div class="code-box">
@@ -1022,6 +1142,7 @@ textarea{
                 ADM-XXXXXX
             </strong>
 
+
             <button
                 type="button"
                 class="copy-btn"
@@ -1031,6 +1152,7 @@ textarea{
             </button>
 
         </div>
+
 
 
         <div class="pending">
@@ -1049,10 +1171,11 @@ textarea{
         </div>
 
 
+
         <div class="support">
 
             <p>
-                Payment information submitted to
+                Your information has been submitted to
             </p>
 
             <strong>
@@ -1062,7 +1185,8 @@ textarea{
         </div>
 
 
-        <!-- LOCKED VOUCHER -->
+
+        <!-- LOCKED -->
 
         <div class="locked">
 
@@ -1080,6 +1204,32 @@ textarea{
 
         </div>
 
+
+
+        <!-- BACK + NEW PAYMENT -->
+
+        <div class="navigation-buttons">
+
+            <button
+                type="button"
+                class="back-btn"
+                onclick="goBackToForm()"
+            >
+                ← Back
+            </button>
+
+
+            <button
+                type="button"
+                class="new-payment-btn"
+                onclick="newPayment()"
+            >
+                ＋ New Payment
+            </button>
+
+        </div>
+
+
     </div>
 
 </div>
@@ -1091,6 +1241,7 @@ textarea{
 <div id="voucherSection">
 
     <div class="voucher">
+
 
         <div class="voucher-header">
 
@@ -1109,6 +1260,7 @@ textarea{
         </div>
 
 
+
         <div class="voucher-title">
 
             <span>
@@ -1118,54 +1270,111 @@ textarea{
         </div>
 
 
+
         <div class="voucher-info">
 
+
             <div class="info-row">
-                <strong>Voucher No:</strong>
+
+                <strong>
+                    Voucher No:
+                </strong>
+
                 <span id="vVoucherNo"></span>
+
             </div>
 
+
             <div class="info-row">
-                <strong>Verification:</strong>
+
+                <strong>
+                    Verification:
+                </strong>
+
                 <span id="vVerification"></span>
+
             </div>
 
+
             <div class="info-row">
-                <strong>Date:</strong>
+
+                <strong>
+                    Date:
+                </strong>
+
                 <span id="vDate"></span>
+
             </div>
 
+
             <div class="info-row">
-                <strong>Student Name:</strong>
+
+                <strong>
+                    Student Name:
+                </strong>
+
                 <span id="vStudentName"></span>
+
             </div>
 
+
             <div class="info-row">
-                <strong>Student ID:</strong>
+
+                <strong>
+                    Student ID:
+                </strong>
+
                 <span id="vStudentId"></span>
+
             </div>
 
+
             <div class="info-row">
-                <strong>Guardian:</strong>
+
+                <strong>
+                    Guardian:
+                </strong>
+
                 <span id="vGuardian"></span>
+
             </div>
 
+
             <div class="info-row">
-                <strong>Mobile:</strong>
+
+                <strong>
+                    Mobile:
+                </strong>
+
                 <span id="vMobile"></span>
+
             </div>
 
+
             <div class="info-row">
-                <strong>Course:</strong>
+
+                <strong>
+                    Course:
+                </strong>
+
                 <span id="vCourse"></span>
+
             </div>
 
+
             <div class="info-row">
-                <strong>Session:</strong>
+
+                <strong>
+                    Session:
+                </strong>
+
                 <span id="vSession"></span>
+
             </div>
+
 
         </div>
+
 
 
         <table>
@@ -1216,6 +1425,7 @@ textarea{
         </table>
 
 
+
         <div class="total">
 
             Total Paid: ৳
@@ -1224,13 +1434,17 @@ textarea{
         </div>
 
 
+
         <p style="margin-top:20px;">
 
-            <strong>Remarks:</strong>
+            <strong>
+                Remarks:
+            </strong>
 
             <span id="vRemarks"></span>
 
         </p>
+
 
 
         <div class="signature">
@@ -1240,6 +1454,7 @@ textarea{
                 Student / Guardian
             </div>
 
+
             <div>
                 _______________________<br>
                 Authorized Signature
@@ -1247,7 +1462,9 @@ textarea{
 
         </div>
 
+
     </div>
+
 
 
     <button
@@ -1256,6 +1473,7 @@ textarea{
     >
         🖨 Print / Save as PDF
     </button>
+
 
 </div>
 
@@ -1286,9 +1504,9 @@ textarea{
 
 <script>
 
-/* =========================================
-   EMAILJS CONFIGURATION
-   ========================================= */
+/* =====================================================
+   EMAILJS SETTINGS
+   ===================================================== */
 
 const EMAILJS_PUBLIC_KEY =
 "YOUR_PUBLIC_KEY";
@@ -1300,32 +1518,32 @@ const EMAILJS_TEMPLATE_ID =
 "YOUR_TEMPLATE_ID";
 
 
-/*
-   Admin email.
-   This is NOT displayed to the student.
-*/
+/* Admin email - not shown to user */
 
 const ADMIN_EMAIL =
 "iamsnkbd@protonmail.com";
 
 
-/* Initialize EmailJS */
+/* EmailJS Initialize */
 
 emailjs.init({
     publicKey: EMAILJS_PUBLIC_KEY
 });
 
 
-/* Today's date */
+
+/* =====================================================
+   TODAY'S DATE
+   ===================================================== */
 
 document.getElementById("paymentDate").value =
 new Date().toISOString().split("T")[0];
 
 
 
-/* =========================================
-   VERIFICATION CODE
-   ========================================= */
+/* =====================================================
+   CREATE VERIFICATION CODE
+   ===================================================== */
 
 function createVerificationCode(){
 
@@ -1345,14 +1563,13 @@ function createVerificationCode(){
     }
 
     return code;
-
 }
 
 
 
-/* =========================================
+/* =====================================================
    FORM SUBMIT
-   ========================================= */
+   ===================================================== */
 
 document.getElementById("paymentForm")
 .addEventListener("submit", async function(event){
@@ -1370,7 +1587,7 @@ document.getElementById("paymentForm")
     "Submitting...";
 
 
-    /* Form data */
+    /* Get form values */
 
     const studentName =
     document.getElementById("studentName").value;
@@ -1406,30 +1623,16 @@ document.getElementById("paymentForm")
     document.getElementById("remarks").value || "-";
 
 
-    /* Generate code */
+    /* Create unique verification code */
 
     const verificationCode =
     createVerificationCode();
 
 
-    /*
-       EmailJS template variables.
 
-       In your EmailJS template use:
-
-       {{verification_code}}
-       {{student_name}}
-       {{student_id}}
-       {{guardian_name}}
-       {{mobile}}
-       {{course}}
-       {{session}}
-       {{amount}}
-       {{payment_method}}
-       {{transaction_id}}
-       {{payment_date}}
-       {{remarks}}
-    */
+    /* =================================================
+       EMAILJS TEMPLATE DATA
+       ================================================= */
 
     const templateParams = {
 
@@ -1478,11 +1681,10 @@ document.getElementById("paymentForm")
     };
 
 
+
     try{
 
-        /*
-           Send email to admin
-        */
+        /* Send email */
 
         await emailjs.send(
             EMAILJS_SERVICE_ID,
@@ -1491,21 +1693,19 @@ document.getElementById("paymentForm")
         );
 
 
-        /*
-           Hide form
-        */
+        /* Hide form */
 
         document.getElementById("formCard")
         .style.display = "none";
 
 
-        /*
-           Show status
-        */
+        /* Show status */
 
         document.getElementById("statusBox")
         .style.display = "block";
 
+
+        /* Show verification code */
 
         document.getElementById(
             "verificationCode"
@@ -1514,8 +1714,8 @@ document.getElementById("paymentForm")
 
 
         window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+            top:0,
+            behavior:"smooth"
         });
 
 
@@ -1526,8 +1726,8 @@ document.getElementById("paymentForm")
         console.log(error);
 
         /*
-           No "Payment Failed" message.
-           Just allow the user to try again.
+          No "Payment Failed" message.
+          The user can simply try again.
         */
 
         button.disabled = false;
@@ -1545,9 +1745,9 @@ document.getElementById("paymentForm")
 
 
 
-/* =========================================
+/* =====================================================
    COPY VERIFICATION CODE
-   ========================================= */
+   ===================================================== */
 
 function copyCode(){
 
@@ -1570,14 +1770,95 @@ function copyCode(){
 
 
 
-/* =========================================
-   VOUCHER FUNCTION
-   =========================================
+/* =====================================================
+   BACK BUTTON
+   ===================================================== */
 
-   This function will be used after
-   payment confirmation.
+function goBackToForm(){
 
-*/
+    document.getElementById("statusBox")
+    .style.display = "none";
+
+
+    document.getElementById("formCard")
+    .style.display = "block";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+
+/* =====================================================
+   NEW PAYMENT
+   ===================================================== */
+
+function newPayment(){
+
+    /* Reset form */
+
+    document.getElementById(
+        "paymentForm"
+    ).reset();
+
+
+    /* Today's date */
+
+    document.getElementById(
+        "paymentDate"
+    ).value =
+    new Date().toISOString().split("T")[0];
+
+
+    /* Show form */
+
+    document.getElementById(
+        "formCard"
+    ).style.display = "block";
+
+
+    /* Hide status */
+
+    document.getElementById(
+        "statusBox"
+    ).style.display = "none";
+
+
+    /* Hide voucher */
+
+    document.getElementById(
+        "voucherSection"
+    ).style.display = "none";
+
+
+    /* Reset submit button */
+
+    const button =
+    document.getElementById("submitBtn");
+
+
+    button.disabled = false;
+
+    button.textContent =
+    "📤 Submit Payment";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+
+/* =====================================================
+   SHOW CONFIRMED VOUCHER
+   ===================================================== */
 
 function showConfirmedVoucher(data){
 
