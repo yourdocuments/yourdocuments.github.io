@@ -105,3 +105,430 @@
     #snk-admission .snk-promo-msg{font-size:13px; margin-top:6px; min-height:16px; font-weight:600;}
     #snk-admission .snk-promo-msg.ok{color:var(--snk-green-dark);}
     #snk-admission .snk-promo-msg.err{color:var(--snk-red);}
+
+    #snk-admission .snk-submit{
+      width:100%; margin-top:26px; background:var(--snk-green); color:#fff; border:none;
+      padding:15px; font-size:16px; font-weight:800; border-radius:10px; cursor:pointer;
+      letter-spacing:.01em; transition:background .15s ease, transform .1s ease;
+      display:flex; align-items:center; justify-content:center; gap:8px;
+    }
+    #snk-admission .snk-submit:hover{background:var(--snk-green-dark);}
+    #snk-admission .snk-submit:active{transform:scale(.99);}
+    #snk-admission .snk-submit:disabled{opacity:.7; cursor:not-allowed;}
+
+    #snk-admission .snk-spinner{
+      width:16px; height:16px; border:2.5px solid rgba(255,255,255,.4);
+      border-top-color:#fff; border-radius:50%; display:none;
+      animation:snkSpin .7s linear infinite;
+    }
+    #snk-admission .snk-submit.loading .snk-spinner{display:inline-block;}
+
+    #snk-admission .snk-note{font-size:12.5px; color:#7a8073; margin-top:14px; line-height:1.6;}
+    #snk-admission .snk-honeypot{position:absolute; left:-9999px; opacity:0;}
+    #snk-admission .snk-hide{display:none !important;}
+    #snk-admission .snk-error-banner{
+      display:none; background:#fbeceb; border:1px solid #eec6c2; color:var(--snk-red);
+      padding:12px 14px; border-radius:9px; font-size:13.5px; margin-bottom:16px; font-weight:600;
+    }
+    #snk-admission .snk-error-banner.show{display:block;}
+
+    /* ---- Success screen ---- */
+    #snk-admission .snk-success{display:none;}
+    #snk-admission .snk-success.show{display:block; animation:snkFadeIn .35s ease;}
+    #snk-admission .snk-success-icon{
+      width:56px; height:56px; border-radius:50%; background:#eef6f1; color:var(--snk-green-dark);
+      display:flex; align-items:center; justify-content:center; font-size:28px; margin:0 auto 14px;
+    }
+    #snk-admission .snk-success h3{text-align:center; font-size:clamp(19px,5vw,23px); margin:0 0 8px; font-weight:800;}
+    #snk-admission .snk-success .snk-success-sub{text-align:center; color:#57604f; font-size:14px; margin:0 0 22px; line-height:1.6;}
+    #snk-admission .snk-receipt{
+      background:#fbf9f2; border:1px dashed #cbb98a; border-radius:11px; padding:18px 20px; margin-bottom:20px;
+    }
+    #snk-admission .snk-receipt-row{
+      display:flex; justify-content:space-between; gap:12px; padding:7px 0;
+      border-bottom:1px solid #ece5d0; font-size:14px; flex-wrap:wrap;
+    }
+    #snk-admission .snk-receipt-row:last-child{border-bottom:none;}
+    #snk-admission .snk-receipt-row span:first-child{color:#7a8073; font-weight:600;}
+    #snk-admission .snk-receipt-row span:last-child{font-weight:700; text-align:right;}
+    #snk-admission .snk-status-pill{
+      display:inline-block; font-size:12px; font-weight:800; padding:4px 12px; border-radius:100px;
+      background:#fff4e0; color:var(--snk-gold); border:1px solid #f0d9a8;
+    }
+    #snk-admission .snk-verify-note{
+      background:#eef6f1; border:1px solid #cfe6d8; border-radius:10px; padding:14px 16px;
+      font-size:13.5px; line-height:1.7; color:#2c4d3c; margin-bottom:20px;
+    }
+    #snk-admission .snk-verify-note b{color:var(--snk-green-dark);}
+    #snk-admission .snk-btn-row{display:flex; gap:10px; flex-wrap:wrap;}
+    #snk-admission .snk-btn-row button{
+      flex:1; min-width:140px; padding:13px; border-radius:10px; font-size:14.5px; font-weight:800;
+      cursor:pointer; border:1.5px solid var(--snk-line); background:#fff; color:var(--snk-ink);
+      display:flex; align-items:center; justify-content:center; gap:8px; transition:all .15s ease;
+    }
+    #snk-admission .snk-btn-row button:hover{border-color:var(--snk-green); color:var(--snk-green-dark);}
+    #snk-admission .snk-btn-again{
+      margin-top:14px; width:100%; background:none; border:none; color:#7a8073;
+      font-size:13px; text-decoration:underline; cursor:pointer; padding:6px;
+    }
+
+    @keyframes snkFadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+    @keyframes snkSpin{to{transform:rotate(360deg);}}
+
+    /* ---- Mobile tweaks ---- */
+    @media (max-width:480px){
+      #snk-admission .snk-promo-row{flex-direction:column;}
+      #snk-admission .snk-promo-row button{padding:12px; width:100%;}
+      #snk-admission .snk-receipt-row{flex-direction:column; gap:2px;}
+      #snk-admission .snk-receipt-row span:last-child{text-align:left;}
+    }
+
+    /* ---- Print styles (receipt only) ---- */
+    @media print{
+      body *{visibility:hidden;}
+      #snk-admission .snk-print-area, #snk-admission .snk-print-area *{visibility:visible;}
+      #snk-admission .snk-print-area{position:absolute; left:0; top:0; width:100%;}
+    }
+  </style>
+
+  <div class="snk-wrap">
+
+    <div class="snk-brand">
+      <!-- আপনার আসল logo থাকলে নিচের div টা মুছে <img src="assets/logo.png" ...> বসান -->
+      <div class="snk-brand-mark">SNK</div>
+      <div>
+        <div class="snk-brand-name">SNK IT Institute</div>
+        <div class="snk-brand-tag">LEARN TO LEAD</div>
+      </div>
+    </div>
+
+    <!-- ============ FORM VIEW ============ -->
+    <div id="snkFormView">
+      <div class="snk-eyebrow">Admission</div>
+      <h2>ভর্তি ফর্ম (Admission Form)</h2>
+      <p class="snk-sub">নিচে আপনার তথ্য দিয়ে কোর্স select করুন। Paid course হলে bKash/Nagad এ payment করে Transaction ID দিন।</p>
+
+      <div class="snk-card">
+        <div class="snk-error-banner" id="snkErrorBanner">কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করুন অথবা সরাসরি ফোনে যোগাযোগ করুন।</div>
+
+        <form id="snkAdmitForm">
+          <input type="text" name="_honey" class="snk-honeypot" tabindex="-1" autocomplete="off">
+
+          <label for="snkName">পুরো নাম *</label>
+          <input type="text" id="snkName" name="Student Name" required placeholder="আপনার নাম লিখুন">
+
+          <label for="snkPhone">ফোন নম্বর *</label>
+          <input type="tel" id="snkPhone" name="Phone" required placeholder="01XXXXXXXXX">
+
+          <label for="snkEmail">ইমেইল (ঐচ্ছিক)</label>
+          <input type="email" id="snkEmail" name="Email" placeholder="you@example.com">
+
+          <label for="snkCourse">কোর্স নির্বাচন করুন *</label>
+          <select id="snkCourse" name="Course" required>
+            <option value="" disabled selected>-- একটি কোর্স বেছে নিন --</option>
+            <optgroup label="🟢 Free Courses">
+              <option value="Professional Graphic Design" data-type="free">Professional Graphic Design</option>
+              <option value="Professional Web Design" data-type="free">Professional Web Design</option>
+              <option value="Design Thinking Mindset" data-type="free">Design Thinking Mindset</option>
+              <option value="Content Creation with AI" data-type="free">Content Creation with AI</option>
+            </optgroup>
+            <optgroup label="🟡 Paid Courses">
+              <option value="AI Driven UI/UX Career Program" data-type="paid" data-fee="7490">AI Driven UI/UX Career Program — ৳7,490</option>
+              <option value="AI Powered UI/UX Context Engineering" data-type="paid" data-fee="11500">AI Powered UI/UX Context Engineering — ৳11,500</option>
+              <option value="AI Driven Cyber Security and Ethical Hacking" data-type="paid" data-fee="9500">AI Driven Cyber Security and Ethical Hacking — ৳9,500</option>
+              <option value="AI Driven Motion Graphic" data-type="paid" data-fee="8500">AI Driven Motion Graphic — ৳8,500</option>
+              <option value="AI Powered 100 Days Kidz Spoken" data-type="paid" data-fee="6500">AI Powered 100 Days Kidz Spoken — ৳6,500</option>
+              <option value="AI Driven Graphic Design" data-type="paid" data-fee="4500">AI Driven Graphic Design — ৳4,500</option>
+            </optgroup>
+          </select>
+
+          <div class="snk-fee-box free-box" id="snkFreeBox">
+            <div class="snk-fee-row"><span>এই কোর্সটি সম্পূর্ণ ফ্রি 🎉</span></div>
+            <div style="font-size:13.5px;color:#3c4a3f;margin-top:6px;">কোনো payment লাগবে না। শুধু নিচে "ভর্তি সম্পন্ন করুন" বাটনে ক্লিক করুন — আমরা কল/ইমেইলে যোগাযোগ করব।</div>
+          </div>
+
+          <div class="snk-fee-box paid-box" id="snkPaidBox">
+            <div class="snk-fee-row">
+              <span>মোট ফি</span>
+              <span>
+                <span class="amt strike snk-hide" id="snkOldFee"></span>
+                <span class="amt" id="snkFinalFee">৳0</span>
+              </span>
+            </div>
+
+            <div class="snk-promo-row">
+              <input type="text" id="snkPromoInput" placeholder="Promo code থাকলে দিন (যেমন SNK20)">
+              <button type="button" id="snkPromoBtn">Apply</button>
+            </div>
+            <div class="snk-promo-msg" id="snkPromoMsg"></div>
+
+            <div class="snk-pay-steps">
+              <b>Payment করবেন যেভাবে:</b><br>
+              ১) bKash/Nagad এ <span class="snk-num">01705633700</span> নম্বরে "Send Money" করুন (উপরের ফাইনাল amount)<br>
+              ২) Payment হয়ে গেলে নিচে Transaction ID (TrxID) বসান
+            </div>
+
+            <label for="snkTrx">Transaction ID (TrxID) *</label>
+            <input type="text" id="snkTrx" name="Transaction ID" placeholder="যেমন: 9F3K7L2M1P">
+          </div>
+
+          <button type="submit" class="snk-submit" id="snkSubmitBtn">
+            <span class="snk-spinner"></span>
+            <span id="snkSubmitLabel">ভর্তি সম্পন্ন করুন</span>
+          </button>
+
+          <p class="snk-note">
+            Submit করলে তথ্য সরাসরি ইনস্টিটিউটের ইমেইলে চলে যাবে। কোনো card/bank তথ্য এখানে নেওয়া হয় না — শুধু bKash/Nagad TrxID দিয়ে verify করা হয়।
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============ SUCCESS VIEW ============ -->
+    <div id="snkSuccessView" class="snk-success">
+      <div class="snk-card snk-print-area">
+        <div class="snk-success-icon">✓</div>
+        <h3>আপনার আবেদন সফলভাবে জমা হয়েছে!</h3>
+        <p class="snk-success-sub">নিচের তথ্যগুলো আপনার রেকর্ডের জন্য — চাইলে print/download করে রাখুন।</p>
+
+        <div class="snk-receipt" id="snkReceipt">
+          <!-- JS দিয়ে fill হবে -->
+        </div>
+
+        <div class="snk-verify-note" id="snkVerifyNote">
+          <b>পরবর্তী ধাপ:</b> আপনার payment ইনস্টিটিউট থেকে ম্যানুয়ালি verify করা হবে (সাধারণত কয়েক ঘণ্টার মধ্যে)।
+          <b>Verify হয়ে গেলে</b> আপনাকে ফোন/ইমেইলে জানানো হবে, এবং তখন আপনি আপনার সম্পূর্ণ Admission Confirmation ডকুমেন্ট
+          print বা download করতে পারবেন।
+        </div>
+
+        <div class="snk-btn-row">
+          <button type="button" id="snkPrintBtn">🖨️ Print করুন</button>
+          <button type="button" id="snkDownloadBtn">⬇️ Download করুন</button>
+        </div>
+
+        <button type="button" class="snk-btn-again" id="snkAgainBtn">নতুন আরেকটা আবেদন জমা দিতে চাই</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function(){
+      var root = document.getElementById('snk-admission');
+      var courseSel = root.querySelector('#snkCourse');
+      var freeBox = root.querySelector('#snkFreeBox');
+      var paidBox = root.querySelector('#snkPaidBox');
+      var finalFeeEl = root.querySelector('#snkFinalFee');
+      var oldFeeEl = root.querySelector('#snkOldFee');
+      var trxInput = root.querySelector('#snkTrx');
+      var promoInput = root.querySelector('#snkPromoInput');
+      var promoBtn = root.querySelector('#snkPromoBtn');
+      var promoMsg = root.querySelector('#snkPromoMsg');
+      var form = root.querySelector('#snkAdmitForm');
+      var submitBtn = root.querySelector('#snkSubmitBtn');
+      var submitLabel = root.querySelector('#snkSubmitLabel');
+      var errorBanner = root.querySelector('#snkErrorBanner');
+      var formView = root.querySelector('#snkFormView');
+      var successView = root.querySelector('#snkSuccessView');
+      var receiptBox = root.querySelector('#snkReceipt');
+      var printBtn = root.querySelector('#snkPrintBtn');
+      var downloadBtn = root.querySelector('#snkDownloadBtn');
+      var againBtn = root.querySelector('#snkAgainBtn');
+
+      // ==== এখানে বদলাতে পারবেন ====
+      var TARGET_EMAIL = "iamsnkbd@protonmail.com";
+      var VALID_PROMO = "SNK20";
+      var DISCOUNT_PCT = 20;
+      // ==============================
+
+      var baseFee = 0;
+      var promoApplied = false;
+      var lastSubmission = null;
+
+      function updateFeeDisplay(){
+        if(promoApplied){
+          var discounted = Math.round(baseFee * (1 - DISCOUNT_PCT/100));
+          oldFeeEl.textContent = '৳' + baseFee.toLocaleString('en-US');
+          oldFeeEl.classList.remove('snk-hide');
+          finalFeeEl.textContent = '৳' + discounted.toLocaleString('en-US');
+        } else {
+          oldFeeEl.classList.add('snk-hide');
+          finalFeeEl.textContent = '৳' + baseFee.toLocaleString('en-US');
+        }
+      }
+
+      courseSel.addEventListener('change', function(){
+        var opt = courseSel.options[courseSel.selectedIndex];
+        var type = opt.getAttribute('data-type');
+        promoApplied = false;
+        promoInput.value = '';
+        promoMsg.textContent = '';
+
+        if(type === 'free'){
+          freeBox.classList.add('show');
+          paidBox.classList.remove('show');
+          trxInput.removeAttribute('required');
+        } else if(type === 'paid'){
+          baseFee = parseInt(opt.getAttribute('data-fee'), 10) || 0;
+          updateFeeDisplay();
+          paidBox.classList.add('show');
+          freeBox.classList.remove('show');
+          trxInput.setAttribute('required', 'required');
+        } else {
+          freeBox.classList.remove('show');
+          paidBox.classList.remove('show');
+        }
+      });
+
+      promoBtn.addEventListener('click', function(){
+        var code = promoInput.value.trim().toUpperCase();
+        if(!code){
+          promoMsg.textContent = 'একটা promo code লিখুন।';
+          promoMsg.className = 'snk-promo-msg err';
+          return;
+        }
+        if(code === VALID_PROMO){
+          promoApplied = true;
+          updateFeeDisplay();
+          promoMsg.textContent = '✓ Promo code apply হয়েছে — ' + DISCOUNT_PCT + '% ছাড় পেয়েছেন!';
+          promoMsg.className = 'snk-promo-msg ok';
+        } else {
+          promoApplied = false;
+          updateFeeDisplay();
+          promoMsg.textContent = '✗ এই promo code সঠিক না।';
+          promoMsg.className = 'snk-promo-msg err';
+        }
+      });
+
+      function buildReceiptData(){
+        var opt = courseSel.options[courseSel.selectedIndex];
+        var type = opt.getAttribute('data-type');
+        var isPaid = type === 'paid';
+        var finalFee = isPaid ? (promoApplied ? Math.round(baseFee * (1 - DISCOUNT_PCT/100)) : baseFee) : 0;
+        return {
+          name: root.querySelector('#snkName').value,
+          phone: root.querySelector('#snkPhone').value,
+          email: root.querySelector('#snkEmail').value,
+          course: courseSel.value,
+          isPaid: isPaid,
+          fee: finalFee,
+          trx: isPaid ? trxInput.value : '',
+          promo: promoApplied ? VALID_PROMO : '',
+          date: new Date().toLocaleDateString('bn-BD', {year:'numeric', month:'long', day:'numeric'})
+        };
+      }
+
+      function renderReceipt(data){
+        var rows = '';
+        rows += receiptRow('নাম', data.name);
+        rows += receiptRow('ফোন', data.phone);
+        if(data.email) rows += receiptRow('ইমেইল', data.email);
+        rows += receiptRow('কোর্স', data.course);
+        rows += receiptRow('তারিখ', data.date);
+        if(data.isPaid){
+          rows += receiptRow('ফি (BDT)', '৳' + data.fee.toLocaleString('en-US'));
+          if(data.promo) rows += receiptRow('Promo Code', data.promo);
+          rows += receiptRow('Transaction ID', data.trx);
+          rows += receiptRow('Status', '<span class="snk-status-pill">Verification Pending</span>', true);
+        } else {
+          rows += receiptRow('Status', '<span class="snk-status-pill" style="background:#e7f0f9;color:var(--snk-free);border-color:#cfe0f2;">Free — Confirmed</span>', true);
+        }
+        receiptBox.innerHTML = rows;
+
+        var noteEl = root.querySelector('#snkVerifyNote');
+        if(!data.isPaid){
+          noteEl.innerHTML = '<b>পরবর্তী ধাপ:</b> আমাদের টিম শীঘ্রই আপনার সাথে কল/ইমেইলে যোগাযোগ করবে ক্লাস শুরুর তথ্য জানাতে।';
+        }
+      }
+
+      function receiptRow(label, value, isHtml){
+        return '<div class="snk-receipt-row"><span>' + label + '</span><span>' + (isHtml ? value : escapeHtml(value)) + '</span></div>';
+      }
+      function escapeHtml(s){
+        var d = document.createElement('div');
+        d.textContent = s || '';
+        return d.innerHTML;
+      }
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        errorBanner.classList.remove('show');
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+        submitLabel.textContent = 'জমা হচ্ছে...';
+
+        var fd = new FormData(form);
+        fd.append('_subject', 'নতুন Admission Form - SNK IT Institute');
+        fd.append('_captcha', 'false');
+
+        fetch('https://formsubmit.co/ajax/' + TARGET_EMAIL, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: fd
+        })
+        .then(function(res){ return res.json(); })
+        .then(function(){
+          var data = buildReceiptData();
+          lastSubmission = data;
+          renderReceipt(data);
+          formView.style.display = 'none';
+          successView.classList.add('show');
+          window.scrollTo({top: root.offsetTop - 20, behavior: 'smooth'});
+        })
+        .catch(function(){
+          errorBanner.classList.add('show');
+        })
+        .finally(function(){
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+          submitLabel.textContent = 'ভর্তি সম্পন্ন করুন';
+        });
+      });
+
+      printBtn.addEventListener('click', function(){
+        window.print();
+      });
+
+      downloadBtn.addEventListener('click', function(){
+        if(!lastSubmission) return;
+        var d = lastSubmission;
+        var html = '<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8">' +
+          '<title>SNK IT Institute - Admission Receipt</title></head>' +
+          '<body style="font-family:sans-serif;max-width:480px;margin:40px auto;color:#14251f;">' +
+          '<h2 style="margin-bottom:4px;">SNK IT Institute</h2>' +
+          '<p style="color:#7a8073;margin-top:0;">Admission Receipt (Provisional)</p>' +
+          '<hr>' +
+          '<p><b>নাম:</b> ' + escapeHtml(d.name) + '</p>' +
+          '<p><b>ফোন:</b> ' + escapeHtml(d.phone) + '</p>' +
+          (d.email ? '<p><b>ইমেইল:</b> ' + escapeHtml(d.email) + '</p>' : '') +
+          '<p><b>কোর্স:</b> ' + escapeHtml(d.course) + '</p>' +
+          '<p><b>তারিখ:</b> ' + escapeHtml(d.date) + '</p>' +
+          (d.isPaid ? '<p><b>ফি:</b> ৳' + d.fee.toLocaleString('en-US') + '</p><p><b>Transaction ID:</b> ' + escapeHtml(d.trx) + '</p><p><b>Status:</b> Verification Pending</p>' : '<p><b>Status:</b> Free — Confirmed</p>') +
+          '<hr>' +
+          '<p style="font-size:13px;color:#7a8073;">Payment verify হওয়ার পর সম্পূর্ণ admission confirmation ইমেইলে পাঠানো হবে।</p>' +
+          '</body></html>';
+        var blob = new Blob([html], {type: 'text/html'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'SNK-Admission-Receipt.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+
+      againBtn.addEventListener('click', function(){
+        form.reset();
+        freeBox.classList.remove('show');
+        paidBox.classList.remove('show');
+        promoApplied = false;
+        successView.classList.remove('show');
+        formView.style.display = '';
+      });
+    })();
+  </script>
+</section>
+
+</body>
+</html>
