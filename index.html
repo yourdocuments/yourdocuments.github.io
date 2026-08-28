@@ -259,7 +259,7 @@
             </div>
 
             <div class="snk-promo-row">
-              <input type="text" id="snkPromoInput" placeholder="Promo code থাকলে দিন (যেমন SNK20)">
+              <input type="text" id="snkPromoInput" placeholder="Promo code থাকলে দিন">
               <button type="button" id="snkPromoBtn">Apply</button>
             </div>
             <div class="snk-promo-msg" id="snkPromoMsg"></div>
@@ -341,17 +341,22 @@
       var downloadBtn = root.querySelector('#snkDownloadBtn');
       var againBtn = root.querySelector('#snkAgainBtn');
 
+      // ==== এখানে promo code গুলো বদলাতে/যোগ করতে পারবেন ====
       var TARGET_EMAIL = "iamsnkbd@protonmail.com";
-      var VALID_PROMO = "SNK20";
-      var DISCOUNT_PCT = 20;
+      var PROMO_CODES = {
+        "SNK20": 20,
+        "EID10": 10
+      };
+      // =========================================================
 
       var baseFee = 0;
-      var promoApplied = false;
+      var appliedPct = 0;
+      var appliedCode = '';
       var lastSubmission = null;
 
       function updateFeeDisplay(){
-        if(promoApplied){
-          var discounted = Math.round(baseFee * (1 - DISCOUNT_PCT/100));
+        if(appliedPct > 0){
+          var discounted = Math.round(baseFee * (1 - appliedPct/100));
           oldFeeEl.textContent = '৳' + baseFee.toLocaleString('en-US');
           oldFeeEl.classList.remove('snk-hide');
           finalFeeEl.textContent = '৳' + discounted.toLocaleString('en-US');
@@ -364,7 +369,8 @@
       courseSel.addEventListener('change', function(){
         var opt = courseSel.options[courseSel.selectedIndex];
         var type = opt.getAttribute('data-type');
-        promoApplied = false;
+        appliedPct = 0;
+        appliedCode = '';
         promoInput.value = '';
         promoMsg.textContent = '';
 
@@ -391,13 +397,15 @@
           promoMsg.className = 'snk-promo-msg err';
           return;
         }
-        if(code === VALID_PROMO){
-          promoApplied = true;
+        if(PROMO_CODES.hasOwnProperty(code)){
+          appliedPct = PROMO_CODES[code];
+          appliedCode = code;
           updateFeeDisplay();
-          promoMsg.textContent = '✓ Promo code apply হয়েছে — ' + DISCOUNT_PCT + '% ছাড় পেয়েছেন!';
+          promoMsg.textContent = '✓ Promo code apply হয়েছে — ' + appliedPct + '% ছাড় পেয়েছেন!';
           promoMsg.className = 'snk-promo-msg ok';
         } else {
-          promoApplied = false;
+          appliedPct = 0;
+          appliedCode = '';
           updateFeeDisplay();
           promoMsg.textContent = '✗ এই promo code সঠিক না।';
           promoMsg.className = 'snk-promo-msg err';
@@ -408,7 +416,7 @@
         var opt = courseSel.options[courseSel.selectedIndex];
         var type = opt.getAttribute('data-type');
         var isPaid = type === 'paid';
-        var finalFee = isPaid ? (promoApplied ? Math.round(baseFee * (1 - DISCOUNT_PCT/100)) : baseFee) : 0;
+        var finalFee = isPaid ? (appliedPct > 0 ? Math.round(baseFee * (1 - appliedPct/100)) : baseFee) : 0;
         return {
           name: root.querySelector('#snkName').value,
           phone: root.querySelector('#snkPhone').value,
@@ -417,7 +425,7 @@
           isPaid: isPaid,
           fee: finalFee,
           trx: isPaid ? trxInput.value : '',
-          promo: promoApplied ? VALID_PROMO : '',
+          promo: appliedCode,
           date: new Date().toLocaleDateString('bn-BD', {year:'numeric', month:'long', day:'numeric'})
         };
       }
@@ -526,7 +534,8 @@
         form.reset();
         freeBox.classList.remove('show');
         paidBox.classList.remove('show');
-        promoApplied = false;
+        appliedPct = 0;
+        appliedCode = '';
         successView.classList.remove('show');
         formView.style.display = '';
       });
