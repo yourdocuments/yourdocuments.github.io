@@ -1,5 +1,14 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — SNK IT Institute Admission Form</title>
+</head>
+<body style="margin:0;">
+
 <!-- ============================================================
-     SNK IT INSTITUTE — ADMISSION & PAYMENT SECTION
+     SNK IT INSTITUTE — ADMISSION & PAYMENT SECTION (DEMO)
      এই পুরো ব্লকটা আপনার index.html এর </body> ট্যাগের ঠিক আগে
      paste করে দিন।
      ============================================================ -->
@@ -25,6 +34,21 @@
     }
     #snk-admission.snk-admit *{box-sizing:border-box;}
     #snk-admission .snk-wrap{max-width:760px;margin:0 auto;}
+
+    /* ---- Brand header (logo + name) ---- */
+    #snk-admission .snk-brand{
+      display:flex; align-items:center; gap:12px; margin-bottom:22px;
+    }
+    #snk-admission .snk-brand-mark{
+      width:44px; height:44px; border-radius:10px;
+      background:linear-gradient(135deg, var(--snk-green), var(--snk-green-dark));
+      color:#fff; display:flex; align-items:center; justify-content:center;
+      font-weight:900; font-size:16px; letter-spacing:.02em; flex-shrink:0;
+    }
+    /* এখানে img বসিয়ে real logo দিতে পারবেন, নিচে instruction আছে */
+    #snk-admission .snk-brand-name{font-weight:800; font-size:18px; line-height:1.2;}
+    #snk-admission .snk-brand-tag{font-size:12px; color:var(--snk-gold); font-weight:700; letter-spacing:.04em;}
+
     #snk-admission .snk-eyebrow{
       font-size:12px; letter-spacing:.14em; text-transform:uppercase;
       color:var(--snk-green-dark); font-weight:700; margin-bottom:8px;
@@ -65,207 +89,4 @@
     #snk-admission .snk-fee-box.show{display:block;}
     #snk-admission .snk-fee-box.free-box{background:#eef6f1; border:1px solid #cfe6d8;}
     #snk-admission .snk-fee-box.paid-box{background:#fbf8ef; border:1px solid #ecdfb9;}
-    #snk-admission .snk-fee-row{
-      display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px;
-    }
-    #snk-admission .snk-fee-row .amt{font-size:22px; font-weight:800; color:var(--snk-green-dark);}
-    #snk-admission .snk-fee-row .amt.strike{
-      text-decoration:line-through; color:#9a9a8f; font-size:16px; margin-right:8px; font-weight:600;
-    }
-    #snk-admission .snk-pay-steps{
-      margin-top:14px; padding-top:14px; border-top:1px dashed #cbb98a; font-size:14px; line-height:1.7;
-    }
-    #snk-admission .snk-pay-steps b{color:var(--snk-green-dark);}
-    #snk-admission .snk-num{
-      display:inline-block; background:#fff; border:1.5px solid var(--snk-gold);
-      padding:2px 10px; border-radius:7px; font-weight:800; letter-spacing:.03em; font-size:15px;
-    }
-    #snk-admission .snk-promo-row{display:flex; gap:8px; margin-top:16px;}
-    #snk-admission .snk-promo-row input{flex:1;}
-    #snk-admission .snk-promo-row button{
-      border:1.5px solid var(--snk-green); background:#fff; color:var(--snk-green-dark);
-      font-weight:700; padding:0 16px; border-radius:9px; cursor:pointer; font-size:14px;
-    }
-    #snk-admission .snk-promo-row button:hover{background:var(--snk-green); color:#fff;}
-    #snk-admission .snk-promo-msg{font-size:13px; margin-top:6px; min-height:16px; font-weight:600;}
-    #snk-admission .snk-promo-msg.ok{color:var(--snk-green-dark);}
-    #snk-admission .snk-promo-msg.err{color:var(--snk-red);}
-    #snk-admission .snk-submit{
-      width:100%; margin-top:26px; background:var(--snk-green); color:#fff; border:none;
-      padding:14px; font-size:16px; font-weight:800; border-radius:10px; cursor:pointer;
-      letter-spacing:.01em;
-    }
-    #snk-admission .snk-submit:hover{background:var(--snk-green-dark);}
-    #snk-admission .snk-note{
-      font-size:12.5px; color:#7a8073; margin-top:14px; line-height:1.6;
-    }
-    #snk-admission .snk-honeypot{position:absolute; left:-9999px; opacity:0;}
-    #snk-admission .snk-hide{display:none !important;}
-  </style>
-
-  <div class="snk-wrap">
-    <div class="snk-eyebrow">SNK IT Institute</div>
-    <h2>ভর্তি ফর্ম (Admission Form)</h2>
-    <p class="snk-sub">নিচে আপনার তথ্য দিয়ে কোর্স select করুন। Paid course হলে bKash/Nagad এ payment করে Transaction ID দিন।</p>
-
-    <div class="snk-card">
-      <form action="https://formsubmit.co/iamsnkbd@protonmail.com" method="POST" id="snkAdmitForm">
-
-        <input type="text" name="_honey" class="snk-honeypot" tabindex="-1" autocomplete="off">
-        <input type="hidden" name="_subject" value="নতুন Admission Form - SNK IT Institute">
-        <input type="hidden" name="_captcha" value="true">
-        <input type="hidden" name="_template" value="table">
-
-        <label for="snkName">পুরো নাম *</label>
-        <input type="text" id="snkName" name="Student Name" required placeholder="আপনার নাম লিখুন">
-
-        <label for="snkPhone">ফোন নম্বর *</label>
-        <input type="tel" id="snkPhone" name="Phone" required placeholder="01XXXXXXXXX">
-
-        <label for="snkEmail">ইমেইল (ঐচ্ছিক)</label>
-        <input type="email" id="snkEmail" name="Email" placeholder="you@example.com">
-
-        <label for="snkCourse">কোর্স নির্বাচন করুন *</label>
-        <select id="snkCourse" name="Course" required>
-          <option value="" disabled selected>-- একটি কোর্স বেছে নিন --</option>
-          <optgroup label="🟢 Free Courses">
-            <option value="Professional Graphic Design" data-type="free">Professional Graphic Design</option>
-            <option value="Professional Web Design" data-type="free">Professional Web Design</option>
-            <option value="Design Thinking Mindset" data-type="free">Design Thinking Mindset</option>
-            <option value="Content Creation with AI" data-type="free">Content Creation with AI</option>
-          </optgroup>
-          <optgroup label="🟡 Paid Courses">
-            <option value="AI Driven UI/UX Career Program" data-type="paid" data-fee="7490">AI Driven UI/UX Career Program — ৳7,490</option>
-            <option value="AI Powered UI/UX Context Engineering" data-type="paid" data-fee="11500">AI Powered UI/UX Context Engineering — ৳11,500</option>
-            <option value="AI Driven Cyber Security and Ethical Hacking" data-type="paid" data-fee="9500">AI Driven Cyber Security and Ethical Hacking — ৳9,500</option>
-            <option value="AI Driven Motion Graphic" data-type="paid" data-fee="8500">AI Driven Motion Graphic — ৳8,500</option>
-            <option value="AI Powered 100 Days Kidz Spoken" data-type="paid" data-fee="6500">AI Powered 100 Days Kidz Spoken — ৳6,500</option>
-            <option value="AI Driven Graphic Design" data-type="paid" data-fee="4500">AI Driven Graphic Design — ৳4,500</option>
-          </optgroup>
-        </select>
-
-        <div class="snk-fee-box free-box" id="snkFreeBox">
-          <div class="snk-fee-row"><span>এই কোর্সটি সম্পূর্ণ ফ্রি 🎉</span></div>
-          <div style="font-size:13.5px;color:#3c4a3f;margin-top:6px;">কোনো payment লাগবে না। শুধু নিচে "ভর্তি সম্পন্ন করুন" বাটনে ক্লিক করুন — আমরা কল/ইমেইলে যোগাযোগ করব।</div>
-        </div>
-
-        <div class="snk-fee-box paid-box" id="snkPaidBox">
-          <div class="snk-fee-row">
-            <span>মোট ফি</span>
-            <span>
-              <span class="amt strike snk-hide" id="snkOldFee"></span>
-              <span class="amt" id="snkFinalFee">৳0</span>
-            </span>
-          </div>
-
-          <div class="snk-promo-row">
-            <input type="text" id="snkPromoInput" placeholder="Promo code থাকলে দিন (যেমন SNK20)">
-            <button type="button" id="snkPromoBtn">Apply</button>
-          </div>
-          <div class="snk-promo-msg" id="snkPromoMsg"></div>
-          <input type="hidden" name="Promo Code Used" id="snkPromoHidden" value="">
-          <input type="hidden" name="Final Fee (BDT)" id="snkFinalFeeHidden" value="">
-
-          <div class="snk-pay-steps">
-            <b>Payment করবেন যেভাবে:</b><br>
-            ১) bKash/Nagad এ <span class="snk-num">01705633700</span> নম্বরে "Send Money" করুন (উপরের ফাইনাল amount)<br>
-            ২) Payment হয়ে গেলে নিচে Transaction ID (TrxID) বসান
-          </div>
-
-          <label for="snkTrx">Transaction ID (TrxID) *</label>
-          <input type="text" id="snkTrx" name="Transaction ID" placeholder="যেমন: 9F3K7L2M1P">
-        </div>
-
-        <button type="submit" class="snk-submit" id="snkSubmitBtn">ভর্তি সম্পন্ন করুন</button>
-
-        <p class="snk-note">
-          Submit করলে তথ্য সরাসরি ইনস্টিটিউটের ইমেইলে চলে যাবে। কোনো card/bank তথ্য এখানে নেওয়া হয় না — শুধু bKash/Nagad TrxID দিয়ে verify করা হয়।
-        </p>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    (function(){
-      var root = document.getElementById('snk-admission');
-      var courseSel = root.querySelector('#snkCourse');
-      var freeBox = root.querySelector('#snkFreeBox');
-      var paidBox = root.querySelector('#snkPaidBox');
-      var finalFeeEl = root.querySelector('#snkFinalFee');
-      var oldFeeEl = root.querySelector('#snkOldFee');
-      var trxInput = root.querySelector('#snkTrx');
-      var promoInput = root.querySelector('#snkPromoInput');
-      var promoBtn = root.querySelector('#snkPromoBtn');
-      var promoMsg = root.querySelector('#snkPromoMsg');
-      var promoHidden = root.querySelector('#snkPromoHidden');
-      var finalFeeHidden = root.querySelector('#snkFinalFeeHidden');
-      var form = root.querySelector('#snkAdmitForm');
-
-      var VALID_PROMO = "SNK20";
-      var DISCOUNT_PCT = 20;
-
-      var baseFee = 0;
-      var promoApplied = false;
-
-      function updateFeeDisplay(){
-        if(promoApplied){
-          var discounted = Math.round(baseFee * (1 - DISCOUNT_PCT/100));
-          oldFeeEl.textContent = '৳' + baseFee.toLocaleString('en-US');
-          oldFeeEl.classList.remove('snk-hide');
-          finalFeeEl.textContent = '৳' + discounted.toLocaleString('en-US');
-          finalFeeHidden.value = discounted;
-        } else {
-          oldFeeEl.classList.add('snk-hide');
-          finalFeeEl.textContent = '৳' + baseFee.toLocaleString('en-US');
-          finalFeeHidden.value = baseFee;
-        }
-      }
-
-      courseSel.addEventListener('change', function(){
-        var opt = courseSel.options[courseSel.selectedIndex];
-        var type = opt.getAttribute('data-type');
-        promoApplied = false;
-        promoInput.value = '';
-        promoMsg.textContent = '';
-        promoHidden.value = '';
-
-        if(type === 'free'){
-          freeBox.classList.add('show');
-          paidBox.classList.remove('show');
-          trxInput.removeAttribute('required');
-        } else if(type === 'paid'){
-          baseFee = parseInt(opt.getAttribute('data-fee'), 10) || 0;
-          updateFeeDisplay();
-          paidBox.classList.add('show');
-          freeBox.classList.remove('show');
-          trxInput.setAttribute('required', 'required');
-        } else {
-          freeBox.classList.remove('show');
-          paidBox.classList.remove('show');
-        }
-      });
-
-      promoBtn.addEventListener('click', function(){
-        var code = promoInput.value.trim().toUpperCase();
-        if(!code){
-          promoMsg.textContent = 'একটা promo code লিখুন।';
-          promoMsg.className = 'snk-promo-msg err';
-          return;
-        }
-        if(code === VALID_PROMO){
-          promoApplied = true;
-          promoHidden.value = code;
-          updateFeeDisplay();
-          promoMsg.textContent = '✓ Promo code apply হয়েছে — ' + DISCOUNT_PCT + '% ছাড় পেয়েছেন!';
-          promoMsg.className = 'snk-promo-msg ok';
-        } else {
-          promoApplied = false;
-          promoHidden.value = '';
-          updateFeeDisplay();
-          promoMsg.textContent = '✗ এই promo code সঠিক না।';
-          promoMsg.className = 'snk-promo-msg err';
-        }
-      });
-    })();
-  </script>
-</section>
+    #snk-admission
