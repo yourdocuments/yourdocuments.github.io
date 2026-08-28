@@ -1,195 +1,1686 @@
 ```html
-<!-- ================= PAYMENT STATUS ================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="payment-status">
+<title>SNK IT - Admission Payment</title>
 
-  <div class="status-icon">
-    ✓
-  </div>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-  <h2>Payment Submitted Successfully</h2>
+<style>
 
-  <p class="status-text">
-    আপনার payment information সফলভাবে submit হয়েছে।
-  </p>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
 
-  <div class="verification-box">
+body{
+    background:#f4f7fb;
+    color:#172033;
+}
 
-    <p>Your Verification Code</p>
+/* ================= HEADER ================= */
 
-    <strong id="verificationCode">
-      ADM-XXXXXX
-    </strong>
+.header{
+    background:linear-gradient(135deg,#075bdc,#2636d9,#7c22ce);
+    color:white;
+    padding:35px 15px 45px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
 
-    <button type="button" onclick="copyCode()">
-      Copy Code
-    </button>
+.header:before,
+.header:after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+}
 
-  </div>
+.header:before{
+    width:300px;
+    height:300px;
+    left:-100px;
+    top:-160px;
+}
 
-  <div class="pending-message">
+.header:after{
+    width:350px;
+    height:350px;
+    right:-150px;
+    bottom:-220px;
+}
 
-    <h3>⏳ Waiting for Verification</h3>
+.logo{
+    position:relative;
+    z-index:2;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+}
 
-    <p>
-      আপনার payment আমাদের team manually check করবে।
-      Payment confirm হওয়ার পর voucher print করা যাবে।
-    </p>
+.logo-icon{
+    width:65px;
+    height:65px;
+    border:3px solid white;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    background:rgba(255,255,255,.12);
+}
 
-  </div>
+.logo-text{
+    text-align:left;
+}
 
-  <div class="info-message">
+.logo-text h1{
+    font-size:42px;
+    line-height:1;
+    letter-spacing:2px;
+}
 
-    <p>
-      📧 Payment information sent to:
-    </p>
+.logo-text p{
+    margin-top:6px;
+    font-size:13px;
+    letter-spacing:2px;
+}
 
-    <strong>
-      iamsnkbd@prothonmail.com
-    </strong>
+.header-title{
+    position:relative;
+    z-index:2;
+    margin-top:25px;
+}
 
-  </div>
+.header-title h2{
+    font-size:27px;
+}
+
+.header-title p{
+    margin-top:8px;
+    opacity:.9;
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+    width:94%;
+    max-width:1100px;
+    margin:-25px auto 40px;
+    position:relative;
+    z-index:5;
+}
+
+/* ================= MAIN GRID ================= */
+
+.main-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+/* ================= CARD ================= */
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:28px;
+    box-shadow:0 8px 35px rgba(15,23,42,.08);
+}
+
+.section-title{
+    font-size:19px;
+    font-weight:bold;
+    padding-bottom:12px;
+    margin-bottom:18px;
+    border-bottom:2px solid #eef2f7;
+    color:#1258c9;
+}
+
+.section-title.payment{
+    color:#138a48;
+    margin-top:30px;
+}
+
+/* ================= FORM ================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.form-group{
+    margin-bottom:2px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+label{
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.required{
+    color:#e11d48;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid #d5dce8;
+    border-radius:8px;
+    outline:none;
+    background:#fff;
+    font-size:15px;
+    transition:.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+textarea{
+    min-height:85px;
+    resize:vertical;
+}
+
+/* ================= SUBMIT ================= */
+
+.submit-btn{
+    width:100%;
+    border:none;
+    margin-top:22px;
+    padding:15px;
+    border-radius:9px;
+    color:white;
+    background:linear-gradient(90deg,#0789ed,#4138e8,#8b1fe8);
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.submit-btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 7px 20px rgba(37,99,235,.25);
+}
+
+.submit-btn:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+}
+
+/* ================= SIDE ================= */
+
+.side-card{
+    background:white;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 8px 35px rgba(15,23,42,.08);
+    height:max-content;
+}
+
+.side-title{
+    color:#1554bd;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.step{
+    display:flex;
+    gap:12px;
+    margin-bottom:18px;
+    align-items:flex-start;
+}
+
+.step-number{
+    min-width:32px;
+    height:32px;
+    border-radius:50%;
+    background:#2563eb;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+.step p{
+    font-size:14px;
+    line-height:1.5;
+    padding-top:5px;
+}
+
+.important{
+    margin-top:22px;
+    padding:17px;
+    background:#fff8e8;
+    border:1px solid #fedf9a;
+    border-radius:10px;
+}
+
+.important h3{
+    color:#b66b00;
+    margin-bottom:8px;
+}
+
+.important p{
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* ================= STATUS ================= */
+
+#statusBox{
+    display:none;
+    margin-top:25px;
+}
+
+.status-card{
+    background:white;
+    border-radius:16px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 35px rgba(15,23,42,.08);
+}
+
+.success-icon{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:#16a34a;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 15px;
+    font-size:34px;
+    font-weight:bold;
+}
+
+.status-card h2{
+    color:#15803d;
+    margin-bottom:8px;
+}
+
+.status-text{
+    color:#64748b;
+    line-height:1.6;
+}
+
+.code-box{
+    max-width:420px;
+    margin:23px auto;
+    padding:20px;
+    border:2px dashed #3b82f6;
+    background:#eff6ff;
+    border-radius:12px;
+}
+
+.code-box p{
+    color:#64748b;
+    margin-bottom:8px;
+}
+
+.code{
+    display:block;
+    color:#1d4ed8;
+    font-size:27px;
+    font-weight:bold;
+    letter-spacing:3px;
+    margin-bottom:15px;
+}
+
+.copy-btn{
+    border:0;
+    background:#2563eb;
+    color:white;
+    padding:9px 20px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.pending{
+    max-width:600px;
+    margin:0 auto 18px;
+    padding:17px;
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    border-radius:10px;
+}
+
+.pending h3{
+    color:#c2410c;
+    margin-bottom:7px;
+}
+
+.pending p{
+    color:#7c2d12;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.support{
+    max-width:600px;
+    margin:auto;
+    padding:16px;
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+    border-radius:10px;
+}
+
+.support strong{
+    display:block;
+    margin-top:7px;
+    color:#15803d;
+    font-size:18px;
+}
+
+/* ================= LOCKED VOUCHER ================= */
+
+.locked{
+    margin-top:25px;
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    padding:25px;
+    text-align:center;
+}
+
+.lock-icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.locked h3{
+    color:#334155;
+    margin-bottom:7px;
+}
+
+.locked p{
+    color:#64748b;
+    font-size:14px;
+}
+
+/* ================= VOUCHER ================= */
+
+#voucherSection{
+    display:none;
+    margin-top:25px;
+}
+
+.voucher{
+    background:white;
+    padding:35px;
+    border:1px solid #dbe2ea;
+}
+
+.voucher-header{
+    text-align:center;
+    border-bottom:2px solid #111827;
+    padding-bottom:18px;
+}
+
+.voucher-header h2{
+    font-size:27px;
+}
+
+.voucher-header p{
+    color:#64748b;
+    margin-top:5px;
+    font-size:14px;
+}
+
+.voucher-title{
+    text-align:center;
+    margin:23px 0;
+}
+
+.voucher-title span{
+    display:inline-block;
+    border:2px solid #111827;
+    padding:8px 25px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.voucher-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:25px;
+}
+
+.info-row{
+    display:flex;
+    gap:8px;
+    font-size:14px;
+}
+
+.info-row strong{
+    min-width:125px;
+}
+
+.voucher table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.voucher th,
+.voucher td{
+    border:1px solid #334155;
+    padding:11px;
+    text-align:left;
+    font-size:14px;
+}
+
+.voucher th{
+    background:#f1f5f9;
+}
+
+.total{
+    text-align:right;
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.signature{
+    display:flex;
+    justify-content:space-between;
+    margin-top:65px;
+    font-size:13px;
+}
+
+.print-btn{
+    display:block;
+    margin:20px auto;
+    padding:13px 30px;
+    border:0;
+    border-radius:8px;
+    background:#16a34a;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    background:#071a35;
+    color:white;
+    padding:30px 15px;
+    text-align:center;
+}
+
+.footer h3{
+    font-size:22px;
+}
+
+.footer p{
+    margin-top:7px;
+    color:#b9c6d8;
+    font-size:14px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:850px){
+
+    .main-grid{
+        grid-template-columns:1fr;
+    }
+
+    .side-card{
+        order:2;
+    }
+
+}
+
+@media(max-width:600px){
+
+    body{
+        padding:0;
+    }
+
+    .header{
+        padding:25px 12px 45px;
+    }
+
+    .logo-icon{
+        width:50px;
+        height:50px;
+        font-size:23px;
+    }
+
+    .logo-text h1{
+        font-size:31px;
+    }
+
+    .logo-text p{
+        font-size:10px;
+    }
+
+    .header-title h2{
+        font-size:22px;
+    }
+
+    .container{
+        width:94%;
+        margin:-20px auto 30px;
+    }
+
+    .card,
+    .side-card,
+    .status-card{
+        padding:20px 16px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .voucher{
+        padding:20px 14px;
+    }
+
+    .voucher-info{
+        grid-template-columns:1fr;
+    }
+
+    .info-row{
+        flex-direction:column;
+        gap:3px;
+    }
+
+    .signature{
+        margin-top:45px;
+    }
+
+    .code{
+        font-size:22px;
+    }
+
+}
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    .header,
+    .footer,
+    .card,
+    .side-card,
+    #statusBox,
+    .print-btn{
+        display:none !important;
+    }
+
+    #voucherSection{
+        display:block !important;
+        margin:0;
+    }
+
+    .voucher{
+        border:none;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            💻
+        </div>
+
+        <div class="logo-text">
+            <h1>SNK IT</h1>
+            <p>LEARN • BUILD • GROW</p>
+        </div>
+
+    </div>
+
+    <div class="header-title">
+        <h2>🎓 Admission Payment Portal</h2>
+        <p>Secure • Simple • Verified</p>
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main-grid">
+
+
+<!-- ================= FORM ================= -->
+
+<div class="card" id="formCard">
+
+    <div class="section-title">
+        👨‍🎓 Student Information
+    </div>
+
+    <form id="paymentForm">
+
+        <div class="grid">
+
+            <div class="form-group">
+                <label>
+                    Student Name <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Enter student name"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    Application / Student ID
+                    <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="studentId"
+                    placeholder="e.g. SNK2026001"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    Father / Guardian Name
+                    <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="guardianName"
+                    placeholder="Enter guardian name"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    Mobile Number
+                    <span class="required">*</span>
+                </label>
+                <input
+                    type="tel"
+                    id="mobile"
+                    placeholder="017XXXXXXXX"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    Class / Course
+                    <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="course"
+                    placeholder="Enter class / course"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Session</label>
+                <input
+                    type="text"
+                    id="session"
+                    value="2026-2027"
+                >
+            </div>
+
+        </div>
+
+
+        <div class="section-title payment">
+            💳 Payment Information
+        </div>
+
+
+        <div class="grid">
+
+
+            <div class="form-group">
+                <label>
+                    Payment Amount
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="amount"
+                    placeholder="e.g. 5000"
+                    min="1"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>
+                    Payment Method
+                    <span class="required">*</span>
+                </label>
+
+                <select id="paymentMethod" required>
+
+                    <option value="">
+                        Select payment method
+                    </option>
+
+                    <option value="bKash">
+                        bKash
+                    </option>
+
+                    <option value="Nagad">
+                        Nagad
+                    </option>
+
+                    <option value="Bank">
+                        Bank
+                    </option>
+
+                    <option value="Cash">
+                        Cash
+                    </option>
+
+                    <option value="Card">
+                        Card
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Transaction ID
+                </label>
+
+                <input
+                    type="text"
+                    id="transactionId"
+                    placeholder="Enter transaction ID"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Payment Date
+                    <span class="required">*</span>
+                </label>
+
+                <input
+                    type="date"
+                    id="paymentDate"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>
+                    Remarks
+                </label>
+
+                <textarea
+                    id="remarks"
+                    placeholder="Any additional information..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="submit-btn"
+            id="submitBtn"
+        >
+            📤 Submit Payment
+        </button>
+
+    </form>
 
 </div>
 
 
-<style>
 
-.payment-status {
-  max-width: 650px;
-  margin: 30px auto;
-  padding: 35px 25px;
-  background: #ffffff;
-  border-radius: 18px;
-  text-align: center;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-}
+<!-- ================= SIDE INFORMATION ================= -->
 
-.status-icon {
-  width: 65px;
-  height: 65px;
-  margin: 0 auto 15px;
-  border-radius: 50%;
-  background: #16a34a;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 35px;
-  font-weight: bold;
-}
+<div class="side-card">
 
-.payment-status h2 {
-  margin-bottom: 8px;
-  color: #166534;
-}
-
-.status-text {
-  color: #64748b;
-  margin-bottom: 25px;
-}
-
-.verification-box {
-  background: #eff6ff;
-  border: 2px dashed #3b82f6;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.verification-box p {
-  margin-bottom: 8px;
-  color: #475569;
-}
-
-.verification-box strong {
-  display: block;
-  font-size: 28px;
-  letter-spacing: 3px;
-  color: #1d4ed8;
-  margin-bottom: 15px;
-}
-
-.verification-box button {
-  border: none;
-  background: #2563eb;
-  color: white;
-  padding: 9px 20px;
-  border-radius: 7px;
-  cursor: pointer;
-}
-
-.pending-message {
-  background: #fff7ed;
-  border: 1px solid #fed7aa;
-  border-radius: 10px;
-  padding: 18px;
-  margin-bottom: 18px;
-}
-
-.pending-message h3 {
-  color: #c2410c;
-  margin-bottom: 7px;
-}
-
-.pending-message p {
-  color: #7c2d12;
-  line-height: 1.6;
-}
-
-.info-message {
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  border-radius: 10px;
-  padding: 15px;
-  color: #166534;
-}
-
-.info-message strong {
-  display: block;
-  margin-top: 6px;
-  word-break: break-all;
-}
+    <div class="side-title">
+        🛡 How It Works?
+    </div>
 
 
-/* Mobile Responsive */
+    <div class="step">
 
-@media (max-width: 600px) {
+        <div class="step-number">1</div>
 
-  .payment-status {
-    margin: 20px 10px;
-    padding: 25px 15px;
-  }
+        <p>
+            Fill up the admission payment form.
+        </p>
 
-  .payment-status h2 {
-    font-size: 22px;
-  }
-
-  .verification-box strong {
-    font-size: 22px;
-    letter-spacing: 2px;
-  }
-
-}
+    </div>
 
 
-/* Copy button */
+    <div class="step">
 
-</style>
+        <div class="step-number">2</div>
+
+        <p>
+            Submit your payment information.
+        </p>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-number">3</div>
+
+        <p>
+            You will receive a unique verification code.
+        </p>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-number">4</div>
+
+        <p>
+            <strong>Support SNK Team</strong> will check the payment.
+        </p>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-number">5</div>
+
+        <p>
+            After confirmation, the voucher will be available.
+        </p>
+
+    </div>
+
+
+    <div class="important">
+
+        <h3>⚠ Important</h3>
+
+        <p>
+            Voucher printing is available only after
+            payment verification.
+        </p>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- ================= STATUS ================= -->
+
+<div id="statusBox">
+
+    <div class="status-card">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>
+            Payment Submitted Successfully
+        </h2>
+
+        <p class="status-text">
+            Your payment information has been submitted
+            for verification.
+        </p>
+
+
+        <div class="code-box">
+
+            <p>
+                Your Verification Code
+            </p>
+
+            <strong
+                class="code"
+                id="verificationCode"
+            >
+                ADM-XXXXXX
+            </strong>
+
+            <button
+                type="button"
+                class="copy-btn"
+                onclick="copyCode()"
+            >
+                📋 Copy Code
+            </button>
+
+        </div>
+
+
+        <div class="pending">
+
+            <h3>
+                ⏳ Waiting for Verification
+            </h3>
+
+            <p>
+                Your payment will be checked manually by
+                Support SNK Team. After confirmation,
+                your admission voucher will be available
+                for printing.
+            </p>
+
+        </div>
+
+
+        <div class="support">
+
+            <p>
+                Payment information submitted to
+            </p>
+
+            <strong>
+                Support SNK Team
+            </strong>
+
+        </div>
+
+
+        <!-- LOCKED VOUCHER -->
+
+        <div class="locked">
+
+            <div class="lock-icon">
+                🔒
+            </div>
+
+            <h3>
+                Voucher Locked
+            </h3>
+
+            <p>
+                Please wait for payment confirmation.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= VOUCHER ================= -->
+
+<div id="voucherSection">
+
+    <div class="voucher">
+
+        <div class="voucher-header">
+
+            <h2>
+                SNK IT
+            </h2>
+
+            <p>
+                Admission & Training Center
+            </p>
+
+            <p>
+                Support SNK Team
+            </p>
+
+        </div>
+
+
+        <div class="voucher-title">
+
+            <span>
+                ADMISSION PAYMENT VOUCHER
+            </span>
+
+        </div>
+
+
+        <div class="voucher-info">
+
+            <div class="info-row">
+                <strong>Voucher No:</strong>
+                <span id="vVoucherNo"></span>
+            </div>
+
+            <div class="info-row">
+                <strong>Verification:</strong>
+                <span id="vVerification"></span>
+            </div>
+
+            <div class="info-row">
+                <strong>Date:</strong>
+                <span id="vDate"></span>
+            </div>
+
+            <div class="info-row">
+                <strong>Student Name:</strong>
+                <span id="vStudentName"></span>
+            </div>
+
+            <div class="info-row">
+                <strong>Student ID:</strong>
+                <span id="vStudentId"></span>
+            </div>
+
+            <div class="info-row">
+                <strong>Guardian:</strong>
+                <span id="vGuardian"></span>
+            </div>
+
+            <div class="info-row">
+                <strong>Mobile:</strong>
+                <span id="vMobile"></span>
+            </div>
+
+            <div class="info-row">
+                <strong>Course:</strong>
+                <span id="vCourse"></span>
+            </div>
+
+            <div class="info-row">
+                <strong>Session:</strong>
+                <span id="vSession"></span>
+            </div>
+
+        </div>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Description
+                    </th>
+
+                    <th>
+                        Payment Method
+                    </th>
+
+                    <th>
+                        Transaction ID
+                    </th>
+
+                    <th>
+                        Amount
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        Admission Fee
+                    </td>
+
+                    <td id="vPaymentMethod"></td>
+
+                    <td id="vTransactionId"></td>
+
+                    <td id="vAmount"></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+        <div class="total">
+
+            Total Paid: ৳
+            <span id="vTotal"></span>
+
+        </div>
+
+
+        <p style="margin-top:20px;">
+
+            <strong>Remarks:</strong>
+
+            <span id="vRemarks"></span>
+
+        </p>
+
+
+        <div class="signature">
+
+            <div>
+                _______________________<br>
+                Student / Guardian
+            </div>
+
+            <div>
+                _______________________<br>
+                Authorized Signature
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="print-btn"
+        onclick="window.print()"
+    >
+        🖨 Print / Save as PDF
+    </button>
+
+</div>
+
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <h3>
+        SNK IT
+    </h3>
+
+    <p>
+        Learn • Build • Grow
+    </p>
+
+    <p>
+        Support SNK Team
+    </p>
+
+</footer>
+
 
 
 <script>
 
-function copyCode() {
+/* =========================================
+   EMAILJS CONFIGURATION
+   ========================================= */
 
-  const code =
-    document.getElementById("verificationCode").innerText;
+const EMAILJS_PUBLIC_KEY =
+"YOUR_PUBLIC_KEY";
 
-  navigator.clipboard.writeText(code);
+const EMAILJS_SERVICE_ID =
+"YOUR_SERVICE_ID";
 
-  alert("Verification Code copied!");
+const EMAILJS_TEMPLATE_ID =
+"YOUR_TEMPLATE_ID";
+
+
+/*
+   Admin email.
+   This is NOT displayed to the student.
+*/
+
+const ADMIN_EMAIL =
+"iamsnkbd@protonmail.com";
+
+
+/* Initialize EmailJS */
+
+emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY
+});
+
+
+/* Today's date */
+
+document.getElementById("paymentDate").value =
+new Date().toISOString().split("T")[0];
+
+
+
+/* =========================================
+   VERIFICATION CODE
+   ========================================= */
+
+function createVerificationCode(){
+
+    const characters =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let code = "ADM-";
+
+    for(let i = 0; i < 6; i++){
+
+        code += characters.charAt(
+            Math.floor(
+                Math.random() * characters.length
+            )
+        );
+
+    }
+
+    return code;
+
+}
+
+
+
+/* =========================================
+   FORM SUBMIT
+   ========================================= */
+
+document.getElementById("paymentForm")
+.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+
+    const button =
+    document.getElementById("submitBtn");
+
+
+    button.disabled = true;
+
+    button.textContent =
+    "Submitting...";
+
+
+    /* Form data */
+
+    const studentName =
+    document.getElementById("studentName").value;
+
+    const studentId =
+    document.getElementById("studentId").value;
+
+    const guardianName =
+    document.getElementById("guardianName").value;
+
+    const mobile =
+    document.getElementById("mobile").value;
+
+    const course =
+    document.getElementById("course").value;
+
+    const session =
+    document.getElementById("session").value;
+
+    const amount =
+    document.getElementById("amount").value;
+
+    const paymentMethod =
+    document.getElementById("paymentMethod").value;
+
+    const transactionId =
+    document.getElementById("transactionId").value || "-";
+
+    const paymentDate =
+    document.getElementById("paymentDate").value;
+
+    const remarks =
+    document.getElementById("remarks").value || "-";
+
+
+    /* Generate code */
+
+    const verificationCode =
+    createVerificationCode();
+
+
+    /*
+       EmailJS template variables.
+
+       In your EmailJS template use:
+
+       {{verification_code}}
+       {{student_name}}
+       {{student_id}}
+       {{guardian_name}}
+       {{mobile}}
+       {{course}}
+       {{session}}
+       {{amount}}
+       {{payment_method}}
+       {{transaction_id}}
+       {{payment_date}}
+       {{remarks}}
+    */
+
+    const templateParams = {
+
+        to_email:
+        ADMIN_EMAIL,
+
+        support_name:
+        "Support SNK Team",
+
+        verification_code:
+        verificationCode,
+
+        student_name:
+        studentName,
+
+        student_id:
+        studentId,
+
+        guardian_name:
+        guardianName,
+
+        mobile:
+        mobile,
+
+        course:
+        course,
+
+        session:
+        session,
+
+        amount:
+        amount,
+
+        payment_method:
+        paymentMethod,
+
+        transaction_id:
+        transactionId,
+
+        payment_date:
+        paymentDate,
+
+        remarks:
+        remarks
+
+    };
+
+
+    try{
+
+        /*
+           Send email to admin
+        */
+
+        await emailjs.send(
+            EMAILJS_SERVICE_ID,
+            EMAILJS_TEMPLATE_ID,
+            templateParams
+        );
+
+
+        /*
+           Hide form
+        */
+
+        document.getElementById("formCard")
+        .style.display = "none";
+
+
+        /*
+           Show status
+        */
+
+        document.getElementById("statusBox")
+        .style.display = "block";
+
+
+        document.getElementById(
+            "verificationCode"
+        ).textContent =
+        verificationCode;
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        /*
+           No "Payment Failed" message.
+           Just allow the user to try again.
+        */
+
+        button.disabled = false;
+
+        button.textContent =
+        "📤 Submit Payment";
+
+        alert(
+            "Please check your information and try again."
+        );
+
+    }
+
+});
+
+
+
+/* =========================================
+   COPY VERIFICATION CODE
+   ========================================= */
+
+function copyCode(){
+
+    const code =
+    document.getElementById(
+        "verificationCode"
+    ).textContent;
+
+
+    navigator.clipboard.writeText(code)
+    .then(function(){
+
+        alert(
+            "Verification Code copied!"
+        );
+
+    });
+
+}
+
+
+
+/* =========================================
+   VOUCHER FUNCTION
+   =========================================
+
+   This function will be used after
+   payment confirmation.
+
+*/
+
+function showConfirmedVoucher(data){
+
+    document.getElementById(
+        "vVoucherNo"
+    ).textContent =
+    data.voucherNo;
+
+
+    document.getElementById(
+        "vVerification"
+    ).textContent =
+    data.verificationCode;
+
+
+    document.getElementById(
+        "vDate"
+    ).textContent =
+    data.paymentDate;
+
+
+    document.getElementById(
+        "vStudentName"
+    ).textContent =
+    data.studentName;
+
+
+    document.getElementById(
+        "vStudentId"
+    ).textContent =
+    data.studentId;
+
+
+    document.getElementById(
+        "vGuardian"
+    ).textContent =
+    data.guardianName;
+
+
+    document.getElementById(
+        "vMobile"
+    ).textContent =
+    data.mobile;
+
+
+    document.getElementById(
+        "vCourse"
+    ).textContent =
+    data.course;
+
+
+    document.getElementById(
+        "vSession"
+    ).textContent =
+    data.session;
+
+
+    document.getElementById(
+        "vPaymentMethod"
+    ).textContent =
+    data.paymentMethod;
+
+
+    document.getElementById(
+        "vTransactionId"
+    ).textContent =
+    data.transactionId;
+
+
+    document.getElementById(
+        "vAmount"
+    ).textContent =
+    "৳ " +
+    Number(data.amount).toLocaleString();
+
+
+    document.getElementById(
+        "vTotal"
+    ).textContent =
+    Number(data.amount).toLocaleString();
+
+
+    document.getElementById(
+        "vRemarks"
+    ).textContent =
+    data.remarks;
+
+
+    document.getElementById(
+        "statusBox"
+    ).style.display =
+    "none";
+
+
+    document.getElementById(
+        "voucherSection"
+    ).style.display =
+    "block";
 
 }
 
 </script>
+
+</body>
+</html>
 ```
