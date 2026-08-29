@@ -8,7 +8,7 @@
 <body style="margin:0;">
 
 <!-- ============================================================
-     SNK IT INSTITUTE — ADMISSION & PAYMENT SECTION (BRANDED)
+     SNK IT INSTITUTE — ADMISSION & PAYMENT SECTION (FINAL)
      এই পুরো ব্লকটা আপনার index.html এর </body> ট্যাগের ঠিক আগে
      paste করে দিন।
      ============================================================ -->
@@ -122,6 +122,13 @@
     #snk-admission .snk-submit.loading .snk-spinner{display:inline-block;}
 
     #snk-admission .snk-note{font-size:12.5px; color:#7a8073; margin-top:14px; line-height:1.6;}
+    #snk-admission .snk-whatsapp{
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      margin-top:14px; padding:12px; border-radius:10px; border:1.5px solid #25D366;
+      color:#128C7E; font-weight:800; text-decoration:none; font-size:14px;
+      background:#eafaf1; transition:background .15s ease;
+    }
+    #snk-admission .snk-whatsapp:hover{background:#d7f3e3;}
     #snk-admission .snk-honeypot{position:absolute; left:-9999px; opacity:0;}
     #snk-admission .snk-hide{display:none !important;}
     #snk-admission .snk-error-banner{
@@ -215,6 +222,7 @@
 
         <form id="snkAdmitForm">
           <input type="text" name="_honey" class="snk-honeypot" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="_autoresponse" value="ধন্যবাদ! আপনার ভর্তির আবেদন আমরা পেয়েছি। Payment verify হয়ে গেলে আমরা ফোন/ইমেইলে যোগাযোগ করব। - SNK IT Institute">
 
           <label for="snkName">পুরো নাম *</label>
           <input type="text" id="snkName" name="Student Name" required placeholder="আপনার নাম লিখুন">
@@ -278,6 +286,10 @@
             <span class="snk-spinner"></span>
             <span id="snkSubmitLabel">ভর্তি সম্পন্ন করুন</span>
           </button>
+
+          <a href="https://wa.me/8801705633700?text=আসসালামু%20আলাইকুম%2C%20আমি%20ভর্তি%20সংক্রান্ত%20তথ্য%20জানতে%20চাই।" target="_blank" rel="noopener" class="snk-whatsapp">
+            💬 WhatsApp এ প্রশ্ন করুন
+          </a>
 
           <p class="snk-note">
             Submit করলে তথ্য সরাসরি ইনস্টিটিউটের ইমেইলে চলে যাবে। কোনো card/bank তথ্য এখানে নেওয়া হয় না — শুধু bKash/Nagad TrxID দিয়ে verify করা হয়।
