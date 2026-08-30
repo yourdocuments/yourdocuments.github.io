@@ -487,27 +487,17 @@
         var studentPhone = root.querySelector('#snkPhone').value.trim();
         var studentCourse = courseSel.value;
 
-        var confirmSubject = encodeURIComponent('আপনার ভর্তি নিশ্চিত করা হয়েছে - SNK IT Institute');
-        var confirmBody = encodeURIComponent(
-          'আসসালামু আলাইকুম ' + studentName + ',\n\n' +
-          'আপনার "' + studentCourse + '" কোর্সে ভর্তি ও payment ভেরিফাই করা হয়েছে। আপনাকে স্বাগতম!\n\n' +
-          'ধন্যবাদ,\nSNK IT Institute'
-        );
-        var cancelSubject = encodeURIComponent('আপনার আবেদন সম্পর্কে - SNK IT Institute');
-        var cancelBody = encodeURIComponent(
-          'আসসালামু আলাইকুম ' + studentName + ',\n\n' +
-          'দুঃখিত, আপনার "' + studentCourse + '" কোর্সের আবেদনটি বাতিল করা হয়েছে। বিস্তারিত জানতে যোগাযোগ করুন।\n\n' +
-          'ধন্যবাদ,\nSNK IT Institute'
-        );
+        var confirmSubject = encodeURIComponent('আপনার ভর্তি নিশ্চিত হয়েছে - SNK IT Institute');
+        var cancelSubject = encodeURIComponent('আপনার আবেদন বাতিল হয়েছে - SNK IT Institute');
 
         var confirmLink, cancelLink;
         if(studentEmail){
-          confirmLink = 'mailto:' + studentEmail + '?subject=' + confirmSubject + '&body=' + confirmBody;
-          cancelLink = 'mailto:' + studentEmail + '?subject=' + cancelSubject + '&body=' + cancelBody;
+          confirmLink = 'mailto:' + studentEmail + '?subject=' + confirmSubject;
+          cancelLink = 'mailto:' + studentEmail + '?subject=' + cancelSubject;
         } else {
           var waPhone = studentPhone.replace(/^0/, '880').replace(/\D/g, '');
-          confirmLink = 'https://wa.me/' + waPhone + '?text=' + confirmBody;
-          cancelLink = 'https://wa.me/' + waPhone + '?text=' + cancelBody;
+          confirmLink = 'https://wa.me/' + waPhone;
+          cancelLink = 'https://wa.me/' + waPhone;
         }
         fd.append('Confirm Admission (click link)', confirmLink);
         fd.append('Cancel Admission (click link)', cancelLink);
