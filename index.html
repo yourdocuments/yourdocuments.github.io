@@ -7,11 +7,6 @@
 </head>
 <body style="margin:0;">
 
-<!-- ============================================================
-     SNK IT INSTITUTE — ADMISSION & PAYMENT SECTION (FINAL)
-     এই পুরো ব্লকটা আপনার index.html এর </body> ট্যাগের ঠিক আগে
-     paste করে দিন।
-     ============================================================ -->
 <section id="snk-admission" class="snk-admit">
   <style>
     #snk-admission.snk-admit{
@@ -37,8 +32,8 @@
 
     #snk-admission .snk-brand{display:flex; align-items:center; gap:12px; margin-bottom:22px;}
     #snk-admission .snk-logo-img{
-      width:48px; height:48px; border-radius:50%; object-fit:cover; flex-shrink:0;
-      box-shadow:0 1px 4px rgba(0,0,0,.18);
+      width:52px; height:52px; border-radius:10px; object-fit:contain; flex-shrink:0;
+      background:#0a0a0a; box-shadow:0 1px 4px rgba(0,0,0,.18);
     }
     #snk-admission .snk-brand-name{font-weight:800; font-size:18px; line-height:1.2; color:var(--snk-black);}
     #snk-admission .snk-brand-tag{font-size:12px; color:var(--snk-green-dark); font-weight:700; letter-spacing:.04em;}
@@ -484,6 +479,38 @@
         var fd = new FormData(form);
         fd.append('_subject', 'নতুন Admission Form - SNK IT Institute');
         fd.append('_captcha', 'false');
+
+        // ==== Confirm / Cancel quick-reply links (email admin এ দেখাবে) ====
+        var studentName = root.querySelector('#snkName').value.trim();
+        var studentEmail = root.querySelector('#snkEmail').value.trim();
+        var studentPhone = root.querySelector('#snkPhone').value.trim();
+        var studentCourse = courseSel.value;
+
+        var confirmSubject = encodeURIComponent('আপনার ভর্তি নিশ্চিত করা হয়েছে - SNK IT Institute');
+        var confirmBody = encodeURIComponent(
+          'আসসালামু আলাইকুম ' + studentName + ',\n\n' +
+          'আপনার "' + studentCourse + '" কোর্সে ভর্তি ও payment ভেরিফাই করা হয়েছে। আপনাকে স্বাগতম!\n\n' +
+          'ধন্যবাদ,\nSNK IT Institute'
+        );
+        var cancelSubject = encodeURIComponent('আপনার আবেদন সম্পর্কে - SNK IT Institute');
+        var cancelBody = encodeURIComponent(
+          'আসসালামু আলাইকুম ' + studentName + ',\n\n' +
+          'দুঃখিত, আপনার "' + studentCourse + '" কোর্সের আবেদনটি বাতিল করা হয়েছে। বিস্তারিত জানতে যোগাযোগ করুন।\n\n' +
+          'ধন্যবাদ,\nSNK IT Institute'
+        );
+
+        var confirmLink, cancelLink;
+        if(studentEmail){
+          confirmLink = 'mailto:' + studentEmail + '?subject=' + confirmSubject + '&body=' + confirmBody;
+          cancelLink = 'mailto:' + studentEmail + '?subject=' + cancelSubject + '&body=' + cancelBody;
+        } else {
+          var waPhone = studentPhone.replace(/^0/, '880').replace(/\D/g, '');
+          confirmLink = 'https://wa.me/' + waPhone + '?text=' + confirmBody;
+          cancelLink = 'https://wa.me/' + waPhone + '?text=' + cancelBody;
+        }
+        fd.append('✅ Confirm (click - email na thakle WhatsApp)', confirmLink);
+        fd.append('❌ Cancel (click - email na thakle WhatsApp)', cancelLink);
+        // =====================================================================
 
         fetch('https://formsubmit.co/ajax/' + TARGET_EMAIL, {
           method: 'POST',
