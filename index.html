@@ -1,608 +1,3539 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SNK IT Institute — Admission Form</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#ff6b00"
+    >
+
+    <meta
+        name="description"
+        content="Shopping Mela - Modern AI Shopping Platform"
+    >
+
+    <title>Shopping Mela | Smart Shopping</title>
+
+    <style>
+
+        /* =========================================
+           1. RESET
+        ========================================= */
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:
+                Arial,
+                "Noto Sans Bengali",
+                sans-serif;
+
+            background:#f5f6f8;
+            color:#1f2937;
+
+            padding-bottom:80px;
+        }
+
+        button,
+        input{
+            font:inherit;
+        }
+
+        button{
+            cursor:pointer;
+        }
+
+
+        /* =========================================
+           2. ROOT VARIABLES
+        ========================================= */
+
+        :root{
+
+            --primary:#ff6b00;
+            --primary-dark:#e85c00;
+
+            --dark:#111827;
+
+            --text:#1f2937;
+            --muted:#6b7280;
+
+            --bg:#f5f6f8;
+            --white:#ffffff;
+
+            --border:#e5e7eb;
+
+            --success:#16a34a;
+            --danger:#dc2626;
+
+            --shadow:
+                0 8px 25px rgba(0,0,0,.08);
+
+        }
+
+
+        /* =========================================
+           3. HEADER
+        ========================================= */
+
+        .header{
+
+            position:sticky;
+
+            top:0;
+
+            z-index:1000;
+
+            background:
+                var(--white);
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .topbar{
+
+            max-width:1200px;
+
+            margin:auto;
+
+            padding:14px 20px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:15px;
+
+        }
+
+
+        .logo{
+
+            font-size:24px;
+
+            font-weight:900;
+
+            color:
+                var(--primary);
+
+            white-space:nowrap;
+
+        }
+
+
+        .logo span{
+
+            color:
+                var(--dark);
+
+        }
+
+
+        /* =========================================
+           4. SEARCH
+        ========================================= */
+
+        .search-box{
+
+            flex:1;
+
+            position:relative;
+
+        }
+
+
+        .search-box input{
+
+            width:100%;
+
+            border:
+                1px solid var(--border);
+
+            background:#f9fafb;
+
+            padding:
+                13px 50px 13px 18px;
+
+            border-radius:30px;
+
+            outline:none;
+
+        }
+
+
+        .search-box input:focus{
+
+            border-color:
+                var(--primary);
+
+            background:
+                var(--white);
+
+        }
+
+
+        .search-btn{
+
+            position:absolute;
+
+            right:7px;
+
+            top:6px;
+
+            width:38px;
+
+            height:38px;
+
+            border:none;
+
+            border-radius:50%;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+        }
+
+
+        /* =========================================
+           5. HEADER ACTIONS
+        ========================================= */
+
+        .header-actions{
+
+            display:flex;
+
+            gap:8px;
+
+        }
+
+
+        .icon-btn{
+
+            border:
+                1px solid var(--border);
+
+            background:
+                var(--white);
+
+            width:42px;
+
+            height:42px;
+
+            border-radius:50%;
+
+            position:relative;
+
+        }
+
+
+        .badge{
+
+            position:absolute;
+
+            top:-4px;
+
+            right:-3px;
+
+            background:
+                var(--danger);
+
+            color:white;
+
+            width:19px;
+
+            height:19px;
+
+            border-radius:50%;
+
+            font-size:11px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+        }
+
+
+        /* =========================================
+           6. OFFLINE BAR
+        ========================================= */
+
+        .offline{
+
+            display:none;
+
+            background:#fff3cd;
+
+            color:#856404;
+
+            text-align:center;
+
+            padding:8px;
+
+            font-size:13px;
+
+        }
+
+
+        .offline.show{
+
+            display:block;
+
+        }
+
+
+        /* =========================================
+           7. MAIN CONTAINER
+        ========================================= */
+
+        .container{
+
+            max-width:1200px;
+
+            margin:auto;
+
+            padding:20px;
+
+        }
+
+
+        /* =========================================
+           8. HERO
+        ========================================= */
+
+        .hero{
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff6b00,
+                    #ff9d42
+                );
+
+            color:white;
+
+            border-radius:22px;
+
+            padding:40px;
+
+            min-height:260px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            overflow:hidden;
+
+            box-shadow:
+                var(--shadow);
+
+        }
+
+
+        .hero-content{
+
+            max-width:600px;
+
+        }
+
+
+        .hero h1{
+
+            font-size:42px;
+
+            margin-bottom:12px;
+
+        }
+
+
+        .hero p{
+
+            font-size:17px;
+
+            opacity:.95;
+
+            margin-bottom:20px;
+
+            line-height:1.6;
+
+        }
+
+
+        .hero-btn{
+
+            border:none;
+
+            background:white;
+
+            color:
+                var(--primary);
+
+            padding:
+                13px 22px;
+
+            border-radius:10px;
+
+            font-weight:700;
+
+        }
+
+
+        .hero-icon{
+
+            font-size:120px;
+
+            opacity:.25;
+
+        }
+
+
+        /* =========================================
+           9. SECTION
+        ========================================= */
+
+        .section{
+
+            margin-top:30px;
+
+        }
+
+
+        .section-head{
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            margin-bottom:15px;
+
+        }
+
+
+        .section-head h2{
+
+            font-size:24px;
+
+        }
+
+
+        .view-all{
+
+            color:
+                var(--primary);
+
+            font-weight:700;
+
+            background:none;
+
+            border:none;
+
+        }
+
+
+        /* =========================================
+           10. CATEGORIES
+        ========================================= */
+
+        .categories{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(8,1fr);
+
+            gap:12px;
+
+        }
+
+
+        .category{
+
+            background:white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:15px;
+
+            padding:15px 8px;
+
+            text-align:center;
+
+            transition:.2s;
+
+        }
+
+
+        .category:hover{
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                var(--shadow);
+
+        }
+
+
+        .category-icon{
+
+            font-size:30px;
+
+            margin-bottom:8px;
+
+        }
+
+
+        .category-name{
+
+            font-size:13px;
+
+            font-weight:700;
+
+        }
+
+
+        /* =========================================
+           11. PRODUCTS
+        ========================================= */
+
+        .products{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(5,1fr);
+
+            gap:16px;
+
+        }
+
+
+        .product{
+
+            background:white;
+
+            border-radius:16px;
+
+            overflow:hidden;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,.05);
+
+            position:relative;
+
+        }
+
+
+        .product-img{
+
+            height:180px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f3f4f6,
+                    #e5e7eb
+                );
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            font-size:70px;
+
+        }
+
+
+        .product-body{
+
+            padding:14px;
+
+        }
+
+
+        .product-title{
+
+            font-size:15px;
+
+            font-weight:700;
+
+            line-height:1.4;
+
+            min-height:42px;
+
+        }
+
+
+        .rating{
+
+            margin:8px 0;
+
+            color:#f59e0b;
+
+            font-size:13px;
+
+        }
+
+
+        .price{
+
+            font-size:19px;
+
+            font-weight:900;
+
+            color:
+                var(--primary);
+
+        }
+
+
+        .old-price{
+
+            color:#9ca3af;
+
+            text-decoration:
+                line-through;
+
+            font-size:12px;
+
+            margin-left:5px;
+
+        }
+
+
+        .product-actions{
+
+            display:flex;
+
+            gap:7px;
+
+            margin-top:12px;
+
+        }
+
+
+        .add-cart{
+
+            flex:1;
+
+            border:none;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            padding:9px;
+
+            border-radius:8px;
+
+            font-weight:700;
+
+        }
+
+
+        .wish{
+
+            width:40px;
+
+            border:
+                1px solid var(--border);
+
+            background:white;
+
+            border-radius:8px;
+
+        }
+
+
+        .discount{
+
+            position:absolute;
+
+            top:10px;
+
+            left:10px;
+
+            background:
+                var(--danger);
+
+            color:white;
+
+            padding:
+                5px 8px;
+
+            border-radius:7px;
+
+            font-size:11px;
+
+            font-weight:700;
+
+        }
+
+
+        /* =========================================
+           12. AI CARD
+        ========================================= */
+
+        .ai-card{
+
+            background:
+                var(--dark);
+
+            color:white;
+
+            border-radius:20px;
+
+            padding:25px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:20px;
+
+        }
+
+
+        .ai-card h2{
+
+            margin-bottom:8px;
+
+        }
+
+
+        .ai-card p{
+
+            color:#d1d5db;
+
+            line-height:1.5;
+
+        }
+
+
+        .ai-btn{
+
+            border:none;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            padding:
+                13px 20px;
+
+            border-radius:10px;
+
+            font-weight:700;
+
+            white-space:nowrap;
+
+        }
+
+
+        /* =========================================
+           13. BOTTOM NAV
+        ========================================= */
+
+        .bottom-nav{
+
+            position:fixed;
+
+            bottom:0;
+
+            left:0;
+
+            right:0;
+
+            height:65px;
+
+            background:white;
+
+            border-top:
+                1px solid var(--border);
+
+            display:none;
+
+            z-index:2000;
+
+            justify-content:
+                space-around;
+
+            align-items:center;
+
+        }
+
+
+        .nav-item{
+
+            background:none;
+
+            border:none;
+
+            color:#6b7280;
+
+            font-size:11px;
+
+            text-align:center;
+
+        }
+
+
+        .nav-item.active{
+
+            color:
+                var(--primary);
+
+            font-weight:700;
+
+        }
+
+
+        .nav-icon{
+
+            display:block;
+
+            font-size:21px;
+
+            margin-bottom:2px;
+
+        }
+
+
+        /* =========================================
+           14. MODAL
+        ========================================= */
+
+        .modal{
+
+            display:none;
+
+            position:fixed;
+
+            inset:0;
+
+            background:
+                rgba(0,0,0,.55);
+
+            z-index:3000;
+
+            align-items:flex-end;
+
+            justify-content:center;
+
+        }
+
+
+        .modal.show{
+
+            display:flex;
+
+        }
+
+
+        .modal-box{
+
+            background:white;
+
+            width:
+                min(600px,100%);
+
+            max-height:90vh;
+
+            overflow:auto;
+
+            border-radius:
+                22px 22px 0 0;
+
+            padding:25px;
+
+            animation:
+                slideUp .25s ease;
+
+        }
+
+
+        @keyframes slideUp{
+
+            from{
+                transform:
+                    translateY(100%);
+            }
+
+            to{
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        .modal-head{
+
+            display:flex;
+
+            justify-content:
+                space-between;
+
+            align-items:center;
+
+            margin-bottom:20px;
+
+        }
+
+
+        .close{
+
+            border:none;
+
+            background:#f3f4f6;
+
+            width:36px;
+
+            height:36px;
+
+            border-radius:50%;
+
+        }
+
+
+        /* =========================================
+           15. CART
+        ========================================= */
+
+        .cart-item{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:12px;
+
+            padding:12px 0;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .cart-img{
+
+            width:55px;
+
+            height:55px;
+
+            background:#f3f4f6;
+
+            border-radius:10px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            font-size:28px;
+
+        }
+
+
+        .cart-info{
+
+            flex:1;
+
+        }
+
+
+        .cart-total{
+
+            margin-top:18px;
+
+            padding-top:15px;
+
+            border-top:
+                2px solid var(--dark);
+
+            display:flex;
+
+            justify-content:
+                space-between;
+
+            font-weight:900;
+
+            font-size:20px;
+
+        }
+
+
+        .checkout-btn{
+
+            width:100%;
+
+            margin-top:15px;
+
+            padding:14px;
+
+            border:none;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            border-radius:10px;
+
+            font-weight:800;
+
+        }
+
+
+        /* =========================================
+           16. AI CHAT
+        ========================================= */
+
+        .chat{
+
+            position:fixed;
+
+            right:20px;
+
+            bottom:85px;
+
+            z-index:1800;
+
+        }
+
+
+        .chat-button{
+
+            width:60px;
+
+            height:60px;
+
+            border:none;
+
+            border-radius:50%;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            font-size:26px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,.25);
+
+        }
+
+
+        .chat-box{
+
+            display:none;
+
+            position:absolute;
+
+            right:0;
+
+            bottom:72px;
+
+            width:330px;
+
+            height:460px;
+
+            background:white;
+
+            border-radius:18px;
+
+            box-shadow:
+                0 15px 50px rgba(0,0,0,.2);
+
+            overflow:hidden;
+
+        }
+
+
+        .chat-box.show{
+
+            display:flex;
+
+            flex-direction:column;
+
+        }
+
+
+        .chat-head{
+
+            background:
+                var(--dark);
+
+            color:white;
+
+            padding:15px;
+
+            display:flex;
+
+            justify-content:
+                space-between;
+
+        }
+
+
+        .chat-messages{
+
+            flex:1;
+
+            padding:15px;
+
+            overflow:auto;
+
+            background:#f8fafc;
+
+        }
+
+
+        .message{
+
+            max-width:85%;
+
+            padding:10px 12px;
+
+            border-radius:12px;
+
+            margin-bottom:10px;
+
+            font-size:14px;
+
+            line-height:1.5;
+
+        }
+
+
+        .bot{
+
+            background:white;
+
+        }
+
+
+        .user{
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            margin-left:auto;
+
+        }
+
+
+        .chat-input{
+
+            display:flex;
+
+            border-top:
+                1px solid var(--border);
+
+        }
+
+
+        .chat-input input{
+
+            flex:1;
+
+            border:none;
+
+            outline:none;
+
+            padding:12px;
+
+        }
+
+
+        .chat-input button{
+
+            width:50px;
+
+            border:none;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+        }
+
+
+        /* =========================================
+           17. EMPTY STATE
+        ========================================= */
+
+        .empty{
+
+            text-align:center;
+
+            padding:40px;
+
+            color:
+                var(--muted);
+
+        }
+
+
+        /* =========================================
+           18. TOAST
+        ========================================= */
+
+        .toast{
+
+            position:fixed;
+
+            left:50%;
+
+            bottom:90px;
+
+            transform:
+                translateX(-50%)
+                translateY(20px);
+
+            background:
+                var(--dark);
+
+            color:white;
+
+            padding:
+                12px 18px;
+
+            border-radius:10px;
+
+            opacity:0;
+
+            pointer-events:none;
+
+            transition:.3s;
+
+            z-index:5000;
+
+        }
+
+
+        .toast.show{
+
+            opacity:1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+
+        }
+
+
+        /* =========================================
+           19. TABLET
+        ========================================= */
+
+        @media(max-width:900px){
+
+            .categories{
+
+                grid-template-columns:
+                    repeat(4,1fr);
+
+            }
+
+
+            .products{
+
+                grid-template-columns:
+                    repeat(3,1fr);
+
+            }
+
+
+            .hero h1{
+
+                font-size:32px;
+
+            }
+
+        }
+
+
+        /* =========================================
+           20. MOBILE
+        ========================================= */
+
+        @media(max-width:600px){
+
+            body{
+
+                padding-bottom:75px;
+
+            }
+
+
+            .topbar{
+
+                padding:10px;
+
+                gap:8px;
+
+            }
+
+
+            .logo{
+
+                font-size:19px;
+
+            }
+
+
+            .header-actions
+            .icon-btn:nth-child(1){
+
+                display:none;
+
+            }
+
+
+            .container{
+
+                padding:12px;
+
+            }
+
+
+            .hero{
+
+                padding:25px 20px;
+
+                min-height:220px;
+
+            }
+
+
+            .hero h1{
+
+                font-size:28px;
+
+            }
+
+
+            .hero p{
+
+                font-size:14px;
+
+            }
+
+
+            .hero-icon{
+
+                font-size:70px;
+
+            }
+
+
+            .categories{
+
+                grid-template-columns:
+                    repeat(4,1fr);
+
+                gap:8px;
+
+            }
+
+
+            .category{
+
+                padding:10px 4px;
+
+            }
+
+
+            .category-icon{
+
+                font-size:25px;
+
+            }
+
+
+            .category-name{
+
+                font-size:11px;
+
+            }
+
+
+            .products{
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+                gap:10px;
+
+            }
+
+
+            .product-img{
+
+                height:145px;
+
+                font-size:55px;
+
+            }
+
+
+            .product-body{
+
+                padding:10px;
+
+            }
+
+
+            .product-title{
+
+                font-size:13px;
+
+            }
+
+
+            .price{
+
+                font-size:17px;
+
+            }
+
+
+            .ai-card{
+
+                display:block;
+
+            }
+
+
+            .ai-btn{
+
+                margin-top:15px;
+
+                width:100%;
+
+            }
+
+
+            .bottom-nav{
+
+                display:flex;
+
+            }
+
+
+            .chat{
+
+                bottom:85px;
+
+                right:12px;
+
+            }
+
+
+            .chat-box{
+
+                width:
+                    calc(100vw - 24px);
+
+                right:-5px;
+
+            }
+
+        }
+
+    </style>
 </head>
-<body style="margin:0;">
 
-<section id="snk-admission" class="snk-admit">
-  <style>
-    #snk-admission.snk-admit{
-      --snk-ink:#14251f;
-      --snk-paper:#f6f8f3;
-      --snk-card:#ffffff;
-      --snk-line:#dbe6d3;
-      --snk-green:#63a416;
-      --snk-green-dark:#406a0e;
-      --snk-green-tint:#eef6e6;
-      --snk-black:#111111;
-      --snk-red:#a4342a;
-      --snk-radius:14px;
-      font-family: 'Segoe UI', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
-      background:var(--snk-paper);
-      color:var(--snk-ink);
-      padding:clamp(28px,7vw,56px) clamp(14px,4vw,18px);
-      border-top:1px solid var(--snk-line);
-      border-bottom:1px solid var(--snk-line);
-    }
-    #snk-admission.snk-admit *{box-sizing:border-box;}
-    #snk-admission .snk-wrap{max-width:760px;margin:0 auto;}
 
-    #snk-admission .snk-brand{display:flex; align-items:center; gap:12px; margin-bottom:22px;}
-    #snk-admission .snk-logo-img{
-      width:52px; height:52px; border-radius:10px; object-fit:contain; flex-shrink:0;
-      background:#0a0a0a; box-shadow:0 1px 4px rgba(0,0,0,.18);
-    }
-    #snk-admission .snk-brand-name{font-weight:800; font-size:18px; line-height:1.2; color:var(--snk-black);}
-    #snk-admission .snk-brand-tag{font-size:12px; color:var(--snk-green-dark); font-weight:700; letter-spacing:.04em;}
+<body>
 
-    #snk-admission .snk-eyebrow{
-      font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-      color:var(--snk-green-dark); font-weight:700; margin-bottom:8px;
-    }
-    #snk-admission h2{font-size:clamp(22px,5vw,34px); margin:0 0 6px; font-weight:800; line-height:1.25; color:var(--snk-black);}
-    #snk-admission .snk-sub{color:#57604f; margin:0 0 26px; font-size:clamp(13.5px,3.6vw,15px); line-height:1.6;}
 
-    #snk-admission .snk-card{
-      background:var(--snk-card); border:1px solid var(--snk-line);
-      border-radius:var(--snk-radius); padding:clamp(18px,5vw,28px);
-      box-shadow:0 2px 10px rgba(20,37,31,.07);
-      transition:box-shadow .25s ease;
-    }
+<!-- =========================================
+     HEADER
+========================================= -->
 
-    #snk-admission label{display:block; font-size:13px; font-weight:700; margin:18px 0 6px; color:var(--snk-ink);}
-    #snk-admission label:first-of-type{margin-top:0;}
-    #snk-admission input[type=text],
-    #snk-admission input[type=tel],
-    #snk-admission input[type=email],
-    #snk-admission select{
-      width:100%; padding:12px 13px; border:1.5px solid var(--snk-line);
-      border-radius:9px; font-size:15px; background:#fff; color:var(--snk-ink);
-      font-family:inherit; transition:border-color .15s ease, box-shadow .15s ease;
-    }
-    #snk-admission input:hover, #snk-admission select:hover{border-color:#b9cca9;}
-    #snk-admission input:focus, #snk-admission select:focus{
-      outline:none; border-color:var(--snk-green);
-      box-shadow:0 0 0 3px rgba(99,164,22,.18);
-    }
-    #snk-admission optgroup{font-weight:700;}
+<header class="header">
 
-    #snk-admission .snk-fee-box{margin-top:20px; border-radius:11px; padding:16px 18px; display:none;
-      animation:snkFadeIn .25s ease;}
-    #snk-admission .snk-fee-box.show{display:block;}
-    #snk-admission .snk-fee-box.free-box{background:var(--snk-green-tint); border:1px solid #cfe6b8;}
-    #snk-admission .snk-fee-box.paid-box{background:#f4f4f2; border:1px solid #dedede;}
-    #snk-admission .snk-fee-row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px; flex-wrap:wrap; gap:6px;}
-    #snk-admission .snk-fee-row .amt{font-size:clamp(19px,5vw,22px); font-weight:800; color:var(--snk-green-dark);}
-    #snk-admission .snk-fee-row .amt.strike{
-      text-decoration:line-through; color:#9a9a8f; font-size:15px; margin-right:6px; font-weight:600;
-    }
-    #snk-admission .snk-pay-steps{margin-top:14px; padding-top:14px; border-top:1px dashed #bdbdbd; font-size:14px; line-height:1.75;}
-    #snk-admission .snk-pay-steps b{color:var(--snk-black);}
-    #snk-admission .snk-num{
-      display:inline-block; background:#fff; border:1.5px solid var(--snk-black);
-      padding:2px 10px; border-radius:7px; font-weight:800; letter-spacing:.03em; font-size:15px;
-      color:var(--snk-black);
-    }
+    <div class="topbar">
 
-    #snk-admission .snk-promo-row{display:flex; gap:8px; margin-top:16px;}
-    #snk-admission .snk-promo-row input{flex:1; min-width:0;}
-    #snk-admission .snk-promo-row button{
-      border:1.5px solid var(--snk-green); background:#fff; color:var(--snk-green-dark);
-      font-weight:700; padding:0 16px; border-radius:9px; cursor:pointer; font-size:14px;
-      transition:background .15s ease, color .15s ease; white-space:nowrap;
-    }
-    #snk-admission .snk-promo-row button:hover{background:var(--snk-green); color:#fff;}
-    #snk-admission .snk-promo-msg{font-size:13px; margin-top:6px; min-height:16px; font-weight:600;}
-    #snk-admission .snk-promo-msg.ok{color:var(--snk-green-dark);}
-    #snk-admission .snk-promo-msg.err{color:var(--snk-red);}
-
-    #snk-admission .snk-submit{
-      width:100%; margin-top:26px; background:var(--snk-green); color:#fff; border:none;
-      padding:15px; font-size:16px; font-weight:800; border-radius:10px; cursor:pointer;
-      letter-spacing:.01em; transition:background .15s ease, transform .1s ease;
-      display:flex; align-items:center; justify-content:center; gap:8px;
-    }
-    #snk-admission .snk-submit:hover{background:var(--snk-green-dark);}
-    #snk-admission .snk-submit:active{transform:scale(.99);}
-    #snk-admission .snk-submit:disabled{opacity:.7; cursor:not-allowed;}
-
-    #snk-admission .snk-spinner{
-      width:16px; height:16px; border:2.5px solid rgba(255,255,255,.4);
-      border-top-color:#fff; border-radius:50%; display:none;
-      animation:snkSpin .7s linear infinite;
-    }
-    #snk-admission .snk-submit.loading .snk-spinner{display:inline-block;}
-
-    #snk-admission .snk-note{font-size:12.5px; color:#7a8073; margin-top:14px; line-height:1.6;}
-    #snk-admission .snk-whatsapp{
-      display:flex; align-items:center; justify-content:center; gap:8px;
-      margin-top:14px; padding:12px; border-radius:10px; border:1.5px solid #25D366;
-      color:#128C7E; font-weight:800; text-decoration:none; font-size:14px;
-      background:#eafaf1; transition:background .15s ease;
-    }
-    #snk-admission .snk-whatsapp:hover{background:#d7f3e3;}
-    #snk-admission .snk-honeypot{position:absolute; left:-9999px; opacity:0;}
-    #snk-admission .snk-hide{display:none !important;}
-    #snk-admission .snk-error-banner{
-      display:none; background:#fbeceb; border:1px solid #eec6c2; color:var(--snk-red);
-      padding:12px 14px; border-radius:9px; font-size:13.5px; margin-bottom:16px; font-weight:600;
-    }
-    #snk-admission .snk-error-banner.show{display:block;}
-
-    #snk-admission .snk-success{display:none;}
-    #snk-admission .snk-success.show{display:block; animation:snkFadeIn .35s ease;}
-    #snk-admission .snk-success-card{padding:0; overflow:hidden;}
-    #snk-admission .snk-receipt-banner{
-      width:100%; display:block; height:auto;
-    }
-    #snk-admission .snk-success-body{padding:clamp(18px,5vw,28px);}
-    #snk-admission .snk-success-icon{
-      width:52px; height:52px; border-radius:50%; background:var(--snk-green-tint); color:var(--snk-green-dark);
-      display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 14px;
-    }
-    #snk-admission .snk-success h3{text-align:center; font-size:clamp(19px,5vw,23px); margin:0 0 8px; font-weight:800; color:var(--snk-black);}
-    #snk-admission .snk-success .snk-success-sub{text-align:center; color:#57604f; font-size:14px; margin:0 0 22px; line-height:1.6;}
-    #snk-admission .snk-receipt{
-      background:#fafaf8; border:1px dashed #c7c7c0; border-radius:11px; padding:18px 20px; margin-bottom:20px;
-    }
-    #snk-admission .snk-receipt-row{
-      display:flex; justify-content:space-between; gap:12px; padding:7px 0;
-      border-bottom:1px solid #ece5d0; font-size:14px; flex-wrap:wrap;
-    }
-    #snk-admission .snk-receipt-row:last-child{border-bottom:none;}
-    #snk-admission .snk-receipt-row span:first-child{color:#7a8073; font-weight:600;}
-    #snk-admission .snk-receipt-row span:last-child{font-weight:700; text-align:right;}
-    #snk-admission .snk-status-pill{
-      display:inline-block; font-size:12px; font-weight:800; padding:4px 12px; border-radius:100px;
-      background:#f0f0ee; color:var(--snk-black); border:1px solid #dcdcd6;
-    }
-    #snk-admission .snk-status-pill.confirmed{
-      background:var(--snk-green-tint); color:var(--snk-green-dark); border-color:#cfe6b8;
-    }
-    #snk-admission .snk-verify-note{
-      background:var(--snk-green-tint); border:1px solid #cfe6b8; border-radius:10px; padding:14px 16px;
-      font-size:13.5px; line-height:1.7; color:#2c4d16; margin-bottom:20px;
-    }
-    #snk-admission .snk-verify-note b{color:var(--snk-green-dark);}
-    #snk-admission .snk-btn-row{display:flex; gap:10px; flex-wrap:wrap;}
-    #snk-admission .snk-btn-row button{
-      flex:1; min-width:140px; padding:13px; border-radius:10px; font-size:14.5px; font-weight:800;
-      cursor:pointer; border:1.5px solid var(--snk-line); background:#fff; color:var(--snk-ink);
-      display:flex; align-items:center; justify-content:center; gap:8px; transition:all .15s ease;
-    }
-    #snk-admission .snk-btn-row button:hover{border-color:var(--snk-green); color:var(--snk-green-dark);}
-    #snk-admission .snk-btn-again{
-      margin-top:14px; width:100%; background:none; border:none; color:#7a8073;
-      font-size:13px; text-decoration:underline; cursor:pointer; padding:6px;
-    }
-
-    @keyframes snkFadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
-    @keyframes snkSpin{to{transform:rotate(360deg);}}
-
-    @media (max-width:480px){
-      #snk-admission .snk-promo-row{flex-direction:column;}
-      #snk-admission .snk-promo-row button{padding:12px; width:100%;}
-      #snk-admission .snk-receipt-row{flex-direction:column; gap:2px;}
-      #snk-admission .snk-receipt-row span:last-child{text-align:left;}
-    }
-
-    @media print{
-      body *{visibility:hidden;}
-      #snk-admission .snk-print-area, #snk-admission .snk-print-area *{visibility:visible;}
-      #snk-admission .snk-print-area{position:absolute; left:0; top:0; width:100%;}
-    }
-  </style>
-
-  <div class="snk-wrap">
-
-    <div class="snk-brand">
-      <img src="https://raw.githubusercontent.com/yourdocuments/products/main/logo(1).svg" alt="SNK IT Institute" class="snk-logo-img">
-      <div>
-        <div class="snk-brand-name">SNK IT Institute</div>
-        <div class="snk-brand-tag">Learn To Lead</div>
-      </div>
-    </div>
-
-    <!-- ============ FORM VIEW ============ -->
-    <div id="snkFormView">
-      <div class="snk-eyebrow">Admission</div>
-      <h2>ভর্তি ফর্ম (Admission Form)</h2>
-      <p class="snk-sub">নিচে আপনার তথ্য দিয়ে কোর্স select করুন। Paid course হলে bKash/Nagad এ payment করে Transaction ID দিন।</p>
-
-      <div class="snk-card">
-        <div class="snk-error-banner" id="snkErrorBanner">কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করুন অথবা সরাসরি ফোনে যোগাযোগ করুন।</div>
-
-        <form id="snkAdmitForm">
-          <input type="text" name="_honey" class="snk-honeypot" tabindex="-1" autocomplete="off">
-          <input type="hidden" name="_autoresponse" value="ধন্যবাদ! আপনার ভর্তির আবেদন আমরা পেয়েছি। Payment verify হয়ে গেলে আমরা ফোন/ইমেইলে যোগাযোগ করব। - SNK IT Institute">
-
-          <label for="snkName">পুরো নাম *</label>
-          <input type="text" id="snkName" name="Student Name" required placeholder="আপনার নাম লিখুন">
-
-          <label for="snkPhone">ফোন নম্বর *</label>
-          <input type="tel" id="snkPhone" name="Phone" required placeholder="01XXXXXXXXX">
-
-          <label for="snkEmail">ইমেইল (ঐচ্ছিক)</label>
-          <input type="email" id="snkEmail" name="Email" placeholder="you@example.com">
-
-          <label for="snkHasComputer">আপনার কি কম্পিউটার/ল্যাপটপ আছে? *</label>
-          <select id="snkHasComputer" name="Has Computer/Laptop" required>
-            <option value="" disabled selected>-- একটি বেছে নিন --</option>
-            <option value="হ্যাঁ">হ্যাঁ</option>
-            <option value="না">না</option>
-          </select>
-
-          <label for="snkDistrict">জেলা (District) *</label>
-          <select id="snkDistrict" name="District" required>
-            <option value="" disabled selected>-- জেলা বেছে নিন --</option>
-            <option>Bagerhat</option><option>Bandarban</option><option>Barguna</option><option>Barishal</option>
-            <option>Bhola</option><option>Bogura</option><option>Brahmanbaria</option><option>Chandpur</option>
-            <option>Chattogram</option><option>Chuadanga</option><option>Cox's Bazar</option><option>Cumilla</option>
-            <option>Dhaka</option><option>Dinajpur</option><option>Faridpur</option><option>Feni</option>
-            <option>Gaibandha</option><option>Gazipur</option><option>Gopalganj</option><option>Habiganj</option>
-            <option>Jamalpur</option><option>Jashore</option><option>Jhalokati</option><option>Jhenaidah</option>
-            <option>Joypurhat</option><option>Khagrachhari</option><option>Khulna</option><option>Kishoreganj</option>
-            <option>Kurigram</option><option>Kushtia</option><option>Lakshmipur</option><option>Lalmonirhat</option>
-            <option>Madaripur</option><option>Magura</option><option>Manikganj</option><option>Meherpur</option>
-            <option>Moulvibazar</option><option>Munshiganj</option><option>Mymensingh</option><option>Naogaon</option>
-            <option>Narail</option><option>Narayanganj</option><option>Narsingdi</option><option>Natore</option>
-            <option>Chapainawabganj</option><option>Netrokona</option><option>Nilphamari</option><option>Noakhali</option>
-            <option>Pabna</option><option>Panchagarh</option><option>Patuakhali</option><option>Pirojpur</option>
-            <option>Rajbari</option><option>Rajshahi</option><option>Rangamati</option><option>Rangpur</option>
-            <option>Satkhira</option><option>Shariatpur</option><option>Sherpur</option><option>Sirajganj</option>
-            <option>Sunamganj</option><option>Sylhet</option><option>Tangail</option><option>Thakurgaon</option>
-          </select>
-
-          <label for="snkThana">থানা/উপজেলা *</label>
-          <input type="text" id="snkThana" name="Thana/Upazila" required placeholder="যেমন: সদর, বিয়ানীবাজার">
-
-          <label for="snkCourse">কোর্স নির্বাচন করুন *</label>
-          <select id="snkCourse" name="Course" required>
-            <option value="" disabled selected>-- একটি কোর্স বেছে নিন --</option>
-            <optgroup label="🟢 Free Courses">
-              <option value="Professional Graphic Design" data-type="free">Professional Graphic Design</option>
-              <option value="Professional Web Design" data-type="free">Professional Web Design</option>
-              <option value="Design Thinking Mindset" data-type="free">Design Thinking Mindset</option>
-              <option value="Content Creation with AI" data-type="free">Content Creation with AI</option>
-            </optgroup>
-            <optgroup label="⚫ Paid Courses">
-              <option value="AI Driven UI/UX Career Program" data-type="paid" data-fee="7490">AI Driven UI/UX Career Program — ৳7,490</option>
-              <option value="AI Powered UI/UX Context Engineering" data-type="paid" data-fee="11500">AI Powered UI/UX Context Engineering — ৳11,500</option>
-              <option value="AI Driven Cyber Security and Ethical Hacking" data-type="paid" data-fee="9500">AI Driven Cyber Security and Ethical Hacking — ৳9,500</option>
-              <option value="AI Driven Motion Graphic" data-type="paid" data-fee="8500">AI Driven Motion Graphic — ৳8,500</option>
-              <option value="AI Powered 100 Days Kidz Spoken" data-type="paid" data-fee="6500">AI Powered 100 Days Kidz Spoken — ৳6,500</option>
-              <option value="AI Driven Graphic Design" data-type="paid" data-fee="4500">AI Driven Graphic Design — ৳4,500</option>
-            </optgroup>
-          </select>
-
-          <div class="snk-fee-box free-box" id="snkFreeBox">
-            <div class="snk-fee-row"><span>এই কোর্সটি সম্পূর্ণ ফ্রি 🎉</span></div>
-            <div style="font-size:13.5px;color:#3c4a3f;margin-top:6px;">কোনো payment লাগবে না। শুধু নিচে "ভর্তি সম্পন্ন করুন" বাটনে ক্লিক করুন — আমরা কল/ইমেইলে যোগাযোগ করব।</div>
-          </div>
-
-          <div class="snk-fee-box paid-box" id="snkPaidBox">
-            <div class="snk-fee-row">
-              <span>মোট ফি</span>
-              <span>
-                <span class="amt strike snk-hide" id="snkOldFee"></span>
-                <span class="amt" id="snkFinalFee">৳0</span>
-              </span>
-            </div>
-
-            <div class="snk-promo-row">
-              <input type="text" id="snkPromoInput" placeholder="Promo code থাকলে দিন">
-              <button type="button" id="snkPromoBtn">Apply</button>
-            </div>
-            <div class="snk-promo-msg" id="snkPromoMsg"></div>
-
-            <div class="snk-pay-steps">
-              <b>Payment করবেন যেভাবে:</b><br>
-              ১) bKash/Nagad এ <span class="snk-num">01705633700</span> নম্বরে "Send Money" করুন (উপরের ফাইনাল amount)<br>
-              ২) Payment হয়ে গেলে নিচে Transaction ID (TrxID) বসান
-            </div>
-
-            <label for="snkTrx">Transaction ID (TrxID) *</label>
-            <input type="text" id="snkTrx" name="Transaction ID" placeholder="যেমন: 9F3K7L2M1P">
-          </div>
-
-          <button type="submit" class="snk-submit" id="snkSubmitBtn">
-            <span class="snk-spinner"></span>
-            <span id="snkSubmitLabel">ভর্তি সম্পন্ন করুন</span>
-          </button>
-
-          <a href="https://wa.me/8801705633700?text=আসসালামু%20আলাইকুম%2C%20আমি%20ভর্তি%20সংক্রান্ত%20তথ্য%20জানতে%20চাই।" target="_blank" rel="noopener" class="snk-whatsapp">
-            💬 WhatsApp এ প্রশ্ন করুন
-          </a>
-
-          <p class="snk-note">
-            Submit করলে তথ্য সরাসরি ইনস্টিটিউটের ইমেইলে চলে যাবে। কোনো card/bank তথ্য এখানে নেওয়া হয় না — শুধু bKash/Nagad TrxID দিয়ে verify করা হয়।
-          </p>
-        </form>
-      </div>
-    </div>
-
-    <!-- ============ SUCCESS VIEW ============ -->
-    <div id="snkSuccessView" class="snk-success">
-      <div class="snk-card snk-success-card snk-print-area">
-        <img src="https://raw.githubusercontent.com/yourdocuments/products/main/bannermoney%20(1).svg" alt="SNK IT Institute — Money Receipt" class="snk-receipt-banner">
-
-        <div class="snk-success-body">
-          <div class="snk-success-icon">✓</div>
-          <h3>আপনার আবেদন সফলভাবে জমা হয়েছে!</h3>
-          <p class="snk-success-sub">নিচের তথ্যগুলো আপনার রেকর্ডের জন্য — চাইলে print/download করে রাখুন।</p>
-
-          <div class="snk-receipt" id="snkReceipt">
-            <!-- JS দিয়ে fill হবে -->
-          </div>
-
-          <div class="snk-verify-note" id="snkVerifyNote">
-            <b>পরবর্তী ধাপ:</b> আপনার payment ইনস্টিটিউট থেকে ম্যানুয়ালি verify করা হবে (সাধারণত কয়েক ঘণ্টার মধ্যে)।
-            <b>Verify হয়ে গেলে</b> আপনাকে ফোন/ইমেইলে জানানো হবে, এবং তখন আপনি আপনার সম্পূর্ণ Admission Confirmation ডকুমেন্ট
-            print বা download করতে পারবেন।
-          </div>
-
-          <div class="snk-btn-row">
-            <button type="button" id="snkPrintBtn">🖨️ Print করুন</button>
-            <button type="button" id="snkDownloadBtn">⬇️ Download করুন</button>
-          </div>
-
-          <button type="button" class="snk-btn-again" id="snkAgainBtn">নতুন আরেকটা আবেদন জমা দিতে চাই</button>
+        <div class="logo">
+            Shopping <span>Mela</span>
         </div>
-      </div>
+
+
+        <div class="search-box">
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="পণ্য খুঁজুন..."
+                autocomplete="off"
+            >
+
+            <button
+                class="search-btn"
+                onclick="searchProducts()"
+                aria-label="Search"
+            >
+                🔎
+            </button>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <button
+                class="icon-btn"
+                onclick="startVoiceSearch()"
+                title="Voice Search"
+            >
+                🎙️
+            </button>
+
+
+            <button
+                class="icon-btn"
+                onclick="openWishlist()"
+                title="Wishlist"
+            >
+                ❤️
+
+                <span
+                    class="badge"
+                    id="wishBadge"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+            <button
+                class="icon-btn"
+                onclick="openCart()"
+                title="Cart"
+            >
+                🛒
+
+                <span
+                    class="badge"
+                    id="cartBadge"
+                >
+                    0
+                </span>
+
+            </button>
+
+        </div>
+
     </div>
 
-  </div>
 
-  <script>
-    (function(){
-      var root = document.getElementById('snk-admission');
-      var courseSel = root.querySelector('#snkCourse');
-      var freeBox = root.querySelector('#snkFreeBox');
-      var paidBox = root.querySelector('#snkPaidBox');
-      var finalFeeEl = root.querySelector('#snkFinalFee');
-      var oldFeeEl = root.querySelector('#snkOldFee');
-      var trxInput = root.querySelector('#snkTrx');
-      var promoInput = root.querySelector('#snkPromoInput');
-      var promoBtn = root.querySelector('#snkPromoBtn');
-      var promoMsg = root.querySelector('#snkPromoMsg');
-      var form = root.querySelector('#snkAdmitForm');
-      var submitBtn = root.querySelector('#snkSubmitBtn');
-      var submitLabel = root.querySelector('#snkSubmitLabel');
-      var errorBanner = root.querySelector('#snkErrorBanner');
-      var formView = root.querySelector('#snkFormView');
-      var successView = root.querySelector('#snkSuccessView');
-      var receiptBox = root.querySelector('#snkReceipt');
-      var printBtn = root.querySelector('#snkPrintBtn');
-      var downloadBtn = root.querySelector('#snkDownloadBtn');
-      var againBtn = root.querySelector('#snkAgainBtn');
+    <div
+        class="offline"
+        id="offlineBar"
+    >
+        🟠 আপনি Offline আছেন —
+        কিছু feature সাময়িকভাবে unavailable।
+    </div>
 
-      // ==== এখানে promo code গুলো বদলাতে/যোগ করতে পারবেন ====
-      var TARGET_EMAIL = "iamsnkbd@protonmail.com";
-      var PROMO_CODES = {
-        "SNK20": 20,
-        "EID10": 10
-      };
-      // =========================================================
+</header>
 
-      var baseFee = 0;
-      var appliedPct = 0;
-      var appliedCode = '';
-      var lastSubmission = null;
 
-      function updateFeeDisplay(){
-        if(appliedPct > 0){
-          var discounted = Math.round(baseFee * (1 - appliedPct/100));
-          oldFeeEl.textContent = '৳' + baseFee.toLocaleString('en-US');
-          oldFeeEl.classList.remove('snk-hide');
-          finalFeeEl.textContent = '৳' + discounted.toLocaleString('en-US');
-        } else {
-          oldFeeEl.classList.add('snk-hide');
-          finalFeeEl.textContent = '৳' + baseFee.toLocaleString('en-US');
-        }
-      }
 
-      courseSel.addEventListener('change', function(){
-        var opt = courseSel.options[courseSel.selectedIndex];
-        var type = opt.getAttribute('data-type');
-        appliedPct = 0;
-        appliedCode = '';
-        promoInput.value = '';
-        promoMsg.textContent = '';
+<!-- =========================================
+     MAIN
+========================================= -->
 
-        if(type === 'free'){
-          freeBox.classList.add('show');
-          paidBox.classList.remove('show');
-          trxInput.removeAttribute('required');
-        } else if(type === 'paid'){
-          baseFee = parseInt(opt.getAttribute('data-fee'), 10) || 0;
-          updateFeeDisplay();
-          paidBox.classList.add('show');
-          freeBox.classList.remove('show');
-          trxInput.setAttribute('required', 'required');
-        } else {
-          freeBox.classList.remove('show');
-          paidBox.classList.remove('show');
-        }
-      });
+<main class="container">
 
-      promoBtn.addEventListener('click', function(){
-        var code = promoInput.value.trim().toUpperCase();
-        if(!code){
-          promoMsg.textContent = 'একটা promo code লিখুন।';
-          promoMsg.className = 'snk-promo-msg err';
-          return;
-        }
-        if(PROMO_CODES.hasOwnProperty(code)){
-          appliedPct = PROMO_CODES[code];
-          appliedCode = code;
-          updateFeeDisplay();
-          promoMsg.textContent = '✓ Promo code apply হয়েছে — ' + appliedPct + '% ছাড় পেয়েছেন!';
-          promoMsg.className = 'snk-promo-msg ok';
-        } else {
-          appliedPct = 0;
-          appliedCode = '';
-          updateFeeDisplay();
-          promoMsg.textContent = '✗ এই promo code সঠিক না।';
-          promoMsg.className = 'snk-promo-msg err';
-        }
-      });
 
-      function buildReceiptData(){
-        var opt = courseSel.options[courseSel.selectedIndex];
-        var type = opt.getAttribute('data-type');
-        var isPaid = type === 'paid';
-        var finalFee = isPaid ? (appliedPct > 0 ? Math.round(baseFee * (1 - appliedPct/100)) : baseFee) : 0;
-        return {
-          name: root.querySelector('#snkName').value,
-          phone: root.querySelector('#snkPhone').value,
-          email: root.querySelector('#snkEmail').value,
-          course: courseSel.value,
-          isPaid: isPaid,
-          fee: finalFee,
-          trx: isPaid ? trxInput.value : '',
-          promo: appliedCode,
-          date: new Date().toLocaleDateString('bn-BD', {year:'numeric', month:'long', day:'numeric'})
-        };
-      }
+    <!-- HERO -->
 
-      function renderReceipt(data){
-        var rows = '';
-        rows += receiptRow('নাম', data.name);
-        rows += receiptRow('ফোন', data.phone);
-        if(data.email) rows += receiptRow('ইমেইল', data.email);
-        rows += receiptRow('কোর্স', data.course);
-        rows += receiptRow('তারিখ', data.date);
-        if(data.isPaid){
-          rows += receiptRow('ফি (BDT)', '৳' + data.fee.toLocaleString('en-US'));
-          if(data.promo) rows += receiptRow('Promo Code', data.promo);
-          rows += receiptRow('Transaction ID', data.trx);
-          rows += receiptRow('Status', '<span class="snk-status-pill">Verification Pending</span>', true);
-        } else {
-          rows += receiptRow('Status', '<span class="snk-status-pill confirmed">Free — Confirmed</span>', true);
-        }
-        receiptBox.innerHTML = rows;
+    <section class="hero">
 
-        var noteEl = root.querySelector('#snkVerifyNote');
-        if(!data.isPaid){
-          noteEl.innerHTML = '<b>পরবর্তী ধাপ:</b> আমাদের টিম শীঘ্রই আপনার সাথে কল/ইমেইলে যোগাযোগ করবে ক্লাস শুরুর তথ্য জানাতে।';
-        }
-      }
+        <div class="hero-content">
 
-      function receiptRow(label, value, isHtml){
-        return '<div class="snk-receipt-row"><span>' + label + '</span><span>' + (isHtml ? value : escapeHtml(value)) + '</span></div>';
-      }
-      function escapeHtml(s){
-        var d = document.createElement('div');
-        d.textContent = s || '';
-        return d.innerHTML;
-      }
+            <h1>
+                আপনার Smart Shopping শুরু করুন 🛍️
+            </h1>
 
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        errorBanner.classList.remove('show');
-        submitBtn.disabled = true;
-        submitBtn.classList.add('loading');
-        submitLabel.textContent = 'জমা হচ্ছে...';
+            <p>
+                AI Search, Voice Search,
+                Personalized Recommendation
+                এবং সহজ Shopping Experience।
+            </p>
 
-        var fd = new FormData(form);
-        fd.append('_subject', 'নতুন Admission Form - SNK IT Institute');
-        fd.append('_captcha', 'false');
-        fd.append('_template', 'table');
+            <button
+                class="hero-btn"
+                onclick="scrollToProducts()"
+            >
+                এখনই Shopping করুন →
+            </button>
 
-        // ==== Confirm / Cancel quick-reply links (email admin এ দেখাবে) ====
-        var studentName = root.querySelector('#snkName').value.trim();
-        var studentEmail = root.querySelector('#snkEmail').value.trim();
-        var studentPhone = root.querySelector('#snkPhone').value.trim();
-        var studentCourse = courseSel.value;
+        </div>
 
-        var confirmSubject = encodeURIComponent('আপনার ভর্তি নিশ্চিত হয়েছে - SNK IT Institute');
-        var cancelSubject = encodeURIComponent('আপনার আবেদন বাতিল হয়েছে - SNK IT Institute');
 
-        var confirmLink, cancelLink;
-        if(studentEmail){
-          confirmLink = 'mailto:' + studentEmail + '?subject=' + confirmSubject;
-          cancelLink = 'mailto:' + studentEmail + '?subject=' + cancelSubject;
-        } else {
-          var waPhone = studentPhone.replace(/^0/, '880').replace(/\D/g, '');
-          confirmLink = 'https://wa.me/' + waPhone;
-          cancelLink = 'https://wa.me/' + waPhone;
-        }
-        fd.append('Confirm Admission Link', confirmLink);
-        fd.append('Cancel Admission Link', cancelLink);
-        // =====================================================================
+        <div class="hero-icon">
+            🛒
+        </div>
 
-        fetch('https://formsubmit.co/ajax/' + TARGET_EMAIL, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: fd
-        })
-        .then(function(res){ return res.json(); })
-        .then(function(){
-          var data = buildReceiptData();
-          lastSubmission = data;
-          renderReceipt(data);
-          formView.style.display = 'none';
-          successView.classList.add('show');
-          window.scrollTo({top: root.offsetTop - 20, behavior: 'smooth'});
-        })
-        .catch(function(){
-          errorBanner.classList.add('show');
-        })
-        .finally(function(){
-          submitBtn.disabled = false;
-          submitBtn.classList.remove('loading');
-          submitLabel.textContent = 'ভর্তি সম্পন্ন করুন';
+    </section>
+
+
+
+    <!-- CATEGORIES -->
+
+    <section class="section">
+
+        <div class="section-head">
+
+            <h2>
+                ক্যাটাগরি
+            </h2>
+
+            <button
+                class="view-all"
+                onclick="showToast('সব ক্যাটাগরি শীঘ্রই আসছে')"
+            >
+                সব দেখুন →
+            </button>
+
+        </div>
+
+
+        <div class="categories">
+
+
+            <div
+                class="category"
+                onclick="filterCategory('fashion')"
+            >
+
+                <div class="category-icon">
+                    👕
+                </div>
+
+                <div class="category-name">
+                    Fashion
+                </div>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('electronics')"
+            >
+
+                <div class="category-icon">
+                    📱
+                </div>
+
+                <div class="category-name">
+                    Electronics
+                </div>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('beauty')"
+            >
+
+                <div class="category-icon">
+                    💄
+                </div>
+
+                <div class="category-name">
+                    Beauty
+                </div>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('home')"
+            >
+
+                <div class="category-icon">
+                    🏠
+                </div>
+
+                <div class="category-name">
+                    Home
+                </div>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('shoes')"
+            >
+
+                <div class="category-icon">
+                    👟
+                </div>
+
+                <div class="category-name">
+                    Shoes
+                </div>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('bags')"
+            >
+
+                <div class="category-icon">
+                    👜
+                </div>
+
+                <div class="category-name">
+                    Bags
+                </div>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('kids')"
+            >
+
+                <div class="category-icon">
+                    🧸
+                </div>
+
+                <div class="category-name">
+                    Kids
+                </div>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('gift')"
+            >
+
+                <div class="category-icon">
+                    🎁
+                </div>
+
+                <div class="category-name">
+                    Gift
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- AI -->
+
+    <section class="section">
+
+        <div class="ai-card">
+
+            <div>
+
+                <h2>
+                    🤖 AI Shopping Assistant
+                </h2>
+
+                <p>
+                    আপনার budget, পছন্দ ও প্রয়োজন
+                    লিখে product খুঁজে নিন।
+                </p>
+
+            </div>
+
+
+            <button
+                class="ai-btn"
+                onclick="toggleChat()"
+            >
+                AI-এর সাথে কথা বলুন
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- PRODUCTS -->
+
+    <section
+        class="section"
+        id="productSection"
+    >
+
+        <div class="section-head">
+
+            <h2 id="productHeading">
+                ✨ Recommended For You
+            </h2>
+
+            <button
+                class="view-all"
+                onclick="resetProducts()"
+            >
+                Reset
+            </button>
+
+        </div>
+
+
+        <div
+            class="products"
+            id="products"
+        ></div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================
+     BOTTOM NAVIGATION
+========================================= -->
+
+<nav class="bottom-nav">
+
+    <button
+        class="nav-item active"
+        onclick="goHome()"
+    >
+
+        <span class="nav-icon">
+            🏠
+        </span>
+
+        Home
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="focusSearch()"
+    >
+
+        <span class="nav-icon">
+            🔎
+        </span>
+
+        Search
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="openCart()"
+    >
+
+        <span class="nav-icon">
+            🛒
+        </span>
+
+        Cart
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="openWishlist()"
+    >
+
+        <span class="nav-icon">
+            ❤️
+        </span>
+
+        Wishlist
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="showAccount()"
+    >
+
+        <span class="nav-icon">
+            👤
+        </span>
+
+        Account
+
+    </button>
+
+</nav>
+
+
+
+<!-- =========================================
+     CART MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="cartModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>
+                🛒 My Cart
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal('cartModal')"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div id="cartItems"></div>
+
+
+        <div class="cart-total">
+
+            <span>
+                Total
+            </span>
+
+            <span id="cartTotal">
+                ৳0
+            </span>
+
+        </div>
+
+
+        <button
+            class="checkout-btn"
+            onclick="checkout()"
+        >
+            Checkout →
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     WISHLIST MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="wishModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>
+                ❤️ Wishlist
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal('wishModal')"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div id="wishItems"></div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     ACCOUNT MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="accountModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>
+                👤 My Account
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal('accountModal')"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div class="empty">
+
+            <div style="font-size:55px">
+                👤
+            </div>
+
+            <h3>
+                Shopping Mela Account
+            </h3>
+
+            <p style="margin-top:10px">
+                Orders, Rewards, Addresses,
+                Payments এবং Settings এখানে থাকবে।
+            </p>
+
+
+            <button
+                class="checkout-btn"
+                onclick="showToast('Login system পরে backend-এর সাথে connect করা হবে')"
+            >
+                Login / Register
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     AI CHAT
+========================================= -->
+
+<div class="chat">
+
+    <div
+        class="chat-box"
+        id="chatBox"
+    >
+
+        <div class="chat-head">
+
+            <strong>
+                🤖 Shopping AI
+            </strong>
+
+            <button
+                style="
+                    background:none;
+                    border:none;
+                    color:white;
+                "
+                onclick="toggleChat()"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div
+            class="chat-messages"
+            id="chatMessages"
+        >
+
+            <div class="message bot">
+
+                👋 আসসালামু আলাইকুম!
+                আমি Shopping Mela AI।
+
+                <br><br>
+
+                আপনার budget বা প্রয়োজন লিখুন।
+
+                <br><br>
+
+                যেমন:
+                <br>
+
+                "২০০০ টাকার মধ্যে
+                একটা ভালো ব্যাগ চাই"
+
+            </div>
+
+        </div>
+
+
+        <div class="chat-input">
+
+            <input
+                id="chatInput"
+                placeholder="আপনার প্রশ্ন লিখুন..."
+                onkeydown="handleChatKey(event)"
+            >
+
+            <button
+                onclick="sendChat()"
+            >
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="chat-button"
+        onclick="toggleChat()"
+        aria-label="AI Assistant"
+    >
+        🤖
+    </button>
+
+</div>
+
+
+
+<!-- =========================================
+     TOAST
+========================================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+
+<script>
+
+/* =========================================
+   1. PRODUCT DATABASE
+========================================= */
+
+const products = [
+
+    {
+        id:1,
+        title:"Premium Black Casual Shirt",
+        category:"fashion",
+        price:1290,
+        oldPrice:1690,
+        rating:4.7,
+        icon:"👕",
+        discount:"24%"
+    },
+
+    {
+        id:2,
+        title:"Smart Watch Series X",
+        category:"electronics",
+        price:2499,
+        oldPrice:3299,
+        rating:4.6,
+        icon:"⌚",
+        discount:"24%"
+    },
+
+    {
+        id:3,
+        title:"Ladies Premium Handbag",
+        category:"bags",
+        price:1490,
+        oldPrice:1990,
+        rating:4.8,
+        icon:"👜",
+        discount:"25%"
+    },
+
+    {
+        id:4,
+        title:"Wireless Bluetooth Earbuds",
+        category:"electronics",
+        price:1890,
+        oldPrice:2390,
+        rating:4.5,
+        icon:"🎧",
+        discount:"21%"
+    },
+
+    {
+        id:5,
+        title:"Elegant Three Piece",
+        category:"fashion",
+        price:2190,
+        oldPrice:2890,
+        rating:4.8,
+        icon:"👗",
+        discount:"24%"
+    },
+
+    {
+        id:6,
+        title:"Running Sports Shoes",
+        category:"shoes",
+        price:2390,
+        oldPrice:2990,
+        rating:4.7,
+        icon:"👟",
+        discount:"20%"
+    },
+
+    {
+        id:7,
+        title:"Premium Beauty Care Set",
+        category:"beauty",
+        price:990,
+        oldPrice:1290,
+        rating:4.4,
+        icon:"💄",
+        discount:"23%"
+    },
+
+    {
+        id:8,
+        title:"Modern Home Decor Lamp",
+        category:"home",
+        price:1590,
+        oldPrice:1990,
+        rating:4.6,
+        icon:"💡",
+        discount:"20%"
+    },
+
+    {
+        id:9,
+        title:"Kids Educational Toy",
+        category:"kids",
+        price:790,
+        oldPrice:990,
+        rating:4.5,
+        icon:"🧸",
+        discount:"20%"
+    },
+
+    {
+        id:10,
+        title:"Special Gift Box",
+        category:"gift",
+        price:1190,
+        oldPrice:1490,
+        rating:4.9,
+        icon:"🎁",
+        discount:"20%"
+    }
+
+];
+
+
+/* =========================================
+   2. APPLICATION STATE
+========================================= */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("sm_cart") || "[]"
+    );
+
+
+let wishlist =
+    JSON.parse(
+        localStorage.getItem("sm_wishlist") || "[]"
+    );
+
+
+let currentProducts =
+    [...products];
+
+
+/* =========================================
+   3. SAVE STATE
+========================================= */
+
+function saveState(){
+
+    localStorage.setItem(
+        "sm_cart",
+        JSON.stringify(cart)
+    );
+
+    localStorage.setItem(
+        "sm_wishlist",
+        JSON.stringify(wishlist)
+    );
+
+    updateBadges();
+
+}
+
+
+/* =========================================
+   4. RENDER PRODUCTS
+========================================= */
+
+function renderProducts(
+    list = currentProducts
+){
+
+    const container =
+        document.getElementById("products");
+
+
+    if(!list.length){
+
+        container.innerHTML = `
+
+            <div
+                class="empty"
+                style="grid-column:1/-1"
+            >
+
+                <div
+                    style="font-size:50px"
+                >
+                    🔎
+                </div>
+
+                <h3>
+                    কোনো product পাওয়া যায়নি
+                </h3>
+
+                <p>
+                    অন্য কিছু search করে দেখুন।
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+
+        list.map(product => {
+
+            const wished =
+                wishlist.includes(product.id);
+
+
+            return `
+
+                <div class="product">
+
+                    <div class="discount">
+                        -${product.discount}
+                    </div>
+
+
+                    <div class="product-img">
+                        ${product.icon}
+                    </div>
+
+
+                    <div class="product-body">
+
+                        <div class="product-title">
+                            ${product.title}
+                        </div>
+
+
+                        <div class="rating">
+                            ⭐ ${product.rating}
+                        </div>
+
+
+                        <div>
+
+                            <span class="price">
+                                ৳${product.price.toLocaleString()}
+                            </span>
+
+                            <span class="old-price">
+                                ৳${product.oldPrice.toLocaleString()}
+                            </span>
+
+                        </div>
+
+
+                        <div class="product-actions">
+
+                            <button
+                                class="add-cart"
+                                onclick="addToCart(${product.id})"
+                            >
+                                🛒 Add
+                            </button>
+
+
+                            <button
+                                class="wish"
+                                onclick="toggleWishlist(${product.id})"
+                            >
+                                ${wished ? "❤️" : "♡"}
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================
+   5. CART
+========================================= */
+
+function addToCart(id){
+
+    const product =
+        products.find(
+            p => p.id === id
+        );
+
+
+    if(!product){
+
+        return;
+
+    }
+
+
+    cart.push(product);
+
+    saveState();
+
+
+    showToast(
+        "🛒 Cart-এ product যোগ হয়েছে"
+    );
+
+}
+
+
+function removeCart(index){
+
+    cart.splice(index,1);
+
+    saveState();
+
+    renderCart();
+
+}
+
+
+function renderCart(){
+
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
+
+
+    if(!cart.length){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div
+                    style="font-size:55px"
+                >
+                    🛒
+                </div>
+
+                <h3>
+                    Cart খালি
+                </h3>
+
+                <p>
+                    Shopping শুরু করুন।
+                </p>
+
+            </div>
+
+        `;
+
+
+        document.getElementById(
+            "cartTotal"
+        ).textContent = "৳0";
+
+
+        return;
+
+    }
+
+
+    let total = 0;
+
+
+    container.innerHTML =
+
+        cart.map(
+            (item,index) => {
+
+                total += item.price;
+
+
+                return `
+
+                    <div class="cart-item">
+
+                        <div class="cart-img">
+                            ${item.icon}
+                        </div>
+
+
+                        <div class="cart-info">
+
+                            <strong>
+                                ${item.title}
+                            </strong>
+
+                            <div
+                                style="
+                                    color:var(--primary);
+                                    font-weight:700;
+                                "
+                            >
+                                ৳${item.price.toLocaleString()}
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            onclick="removeCart(${index})"
+                            style="
+                                border:none;
+                                background:#fee2e2;
+                                color:#dc2626;
+                                padding:7px 10px;
+                                border-radius:7px;
+                            "
+                        >
+                            Remove
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+
+    document.getElementById(
+        "cartTotal"
+    ).textContent =
+        "৳" + total.toLocaleString();
+
+}
+
+
+function openCart(){
+
+    renderCart();
+
+    document
+        .getElementById("cartModal")
+        .classList.add("show");
+
+}
+
+
+function checkout(){
+
+    if(!cart.length){
+
+        showToast(
+            "আগে Cart-এ product যোগ করুন"
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        "Checkout demo — backend/payment পরে connect করা হবে"
+    );
+
+}
+
+
+/* =========================================
+   6. WISHLIST
+========================================= */
+
+function toggleWishlist(id){
+
+    if(
+        wishlist.includes(id)
+    ){
+
+        wishlist =
+            wishlist.filter(
+                x => x !== id
+            );
+
+
+        showToast(
+            "Wishlist থেকে সরানো হয়েছে"
+        );
+
+    }else{
+
+        wishlist.push(id);
+
+
+        showToast(
+            "❤️ Wishlist-এ যোগ হয়েছে"
+        );
+
+    }
+
+
+    saveState();
+
+    renderProducts();
+
+}
+
+
+function openWishlist(){
+
+    const container =
+        document.getElementById(
+            "wishItems"
+        );
+
+
+    const items =
+        products.filter(
+            p => wishlist.includes(p.id)
+        );
+
+
+    if(!items.length){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div
+                    style="font-size:55px"
+                >
+                    ❤️
+                </div>
+
+                <h3>
+                    Wishlist খালি
+                </h3>
+
+            </div>
+
+        `;
+
+    }else{
+
+        container.innerHTML =
+
+            items.map(
+                item => `
+
+                    <div class="cart-item">
+
+                        <div class="cart-img">
+                            ${item.icon}
+                        </div>
+
+
+                        <div class="cart-info">
+
+                            <strong>
+                                ${item.title}
+                            </strong>
+
+                            <div
+                                style="
+                                    color:var(--primary);
+                                    font-weight:700;
+                                "
+                            >
+                                ৳${item.price.toLocaleString()}
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="add-cart"
+                            onclick="addToCart(${item.id})"
+                        >
+                            Add
+                        </button>
+
+                    </div>
+
+                `
+            ).join("");
+
+    }
+
+
+    document
+        .getElementById("wishModal")
+        .classList.add("show");
+
+}
+
+
+/* =========================================
+   7. SEARCH
+========================================= */
+
+function searchProducts(){
+
+    const query =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    if(!query){
+
+        resetProducts();
+
+        return;
+
+    }
+
+
+    const banglaMap = {
+
+        "জামা":"shirt",
+        "শার্ট":"shirt",
+        "ব্যাগ":"bag",
+        "জুতা":"shoes",
+        "ঘড়ি":"watch",
+        "ঘড়ি":"watch",
+        "ফোন":"phone",
+        "উপহার":"gift",
+        "বাচ্চা":"kids"
+
+    };
+
+
+    let normalized = query;
+
+
+    Object.keys(banglaMap)
+        .forEach(key => {
+
+            normalized =
+                normalized.replace(
+                    new RegExp(
+                        key,
+                        "gi"
+                    ),
+                    banglaMap[key]
+                );
+
         });
-      });
 
-      printBtn.addEventListener('click', function(){
-        window.print();
-      });
 
-      downloadBtn.addEventListener('click', function(){
-        if(!lastSubmission) return;
-        var d = lastSubmission;
-        var html = '<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8">' +
-          '<title>SNK IT Institute - Admission Receipt</title></head>' +
-          '<body style="font-family:sans-serif;max-width:480px;margin:40px auto;color:#14251f;">' +
-          '<h2 style="margin-bottom:4px;">SNK IT Institute</h2>' +
-          '<p style="color:#7a8073;margin-top:0;">Admission Receipt (Provisional)</p>' +
-          '<hr>' +
-          '<p><b>নাম:</b> ' + escapeHtml(d.name) + '</p>' +
-          '<p><b>ফোন:</b> ' + escapeHtml(d.phone) + '</p>' +
-          (d.email ? '<p><b>ইমেইল:</b> ' + escapeHtml(d.email) + '</p>' : '') +
-          '<p><b>কোর্স:</b> ' + escapeHtml(d.course) + '</p>' +
-          '<p><b>তারিখ:</b> ' + escapeHtml(d.date) + '</p>' +
-          (d.isPaid ? '<p><b>ফি:</b> ৳' + d.fee.toLocaleString('en-US') + '</p><p><b>Transaction ID:</b> ' + escapeHtml(d.trx) + '</p><p><b>Status:</b> Verification Pending</p>' : '<p><b>Status:</b> Free — Confirmed</p>') +
-          '<hr>' +
-          '<p style="font-size:13px;color:#7a8073;">Payment verify হওয়ার পর সম্পূর্ণ admission confirmation ইমেইলে পাঠানো হবে।</p>' +
-          '</body></html>';
-        var blob = new Blob([html], {type: 'text/html'});
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'SNK-Admission-Receipt.html';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      });
+    const words =
+        normalized.split(/\s+/);
 
-      againBtn.addEventListener('click', function(){
-        form.reset();
-        freeBox.classList.remove('show');
-        paidBox.classList.remove('show');
-        appliedPct = 0;
-        appliedCode = '';
-        successView.classList.remove('show');
-        formView.style.display = '';
-      });
-    })();
-  </script>
-</section>
+
+    const results =
+        products.filter(
+            product => {
+
+                const text =
+                    (
+                        product.title +
+                        " " +
+                        product.category
+                    ).toLowerCase();
+
+
+                return words.some(
+                    word =>
+                        text.includes(word)
+                );
+
+            }
+        );
+
+
+    currentProducts =
+        results;
+
+
+    document.getElementById(
+        "productHeading"
+    ).textContent =
+        `🔎 Search Results (${results.length})`;
+
+
+    renderProducts(results);
+
+
+    scrollToProducts();
+
+}
+
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                searchProducts();
+
+            }
+
+        }
+    );
+
+
+/* =========================================
+   8. CATEGORY FILTER
+========================================= */
+
+function filterCategory(category){
+
+    const results =
+        products.filter(
+            p =>
+                p.category === category
+        );
+
+
+    currentProducts =
+        results;
+
+
+    document.getElementById(
+        "productHeading"
+    ).textContent =
+        "📂 " +
+        category.toUpperCase();
+
+
+    renderProducts(results);
+
+
+    scrollToProducts();
+
+}
+
+
+/* =========================================
+   9. RESET PRODUCTS
+========================================= */
+
+function resetProducts(){
+
+    currentProducts =
+        [...products];
+
+
+    document.getElementById(
+        "searchInput"
+    ).value = "";
+
+
+    document.getElementById(
+        "productHeading"
+    ).textContent =
+        "✨ Recommended For You";
+
+
+    renderProducts();
+
+}
+
+
+/* =========================================
+   10. VOICE SEARCH
+========================================= */
+
+function startVoiceSearch(){
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+
+    if(!SpeechRecognition){
+
+        showToast(
+            "এই browser-এ Voice Search support নেই"
+        );
+
+        return;
+
+    }
+
+
+    const recognition =
+        new SpeechRecognition();
+
+
+    recognition.lang =
+        "bn-BD";
+
+
+    recognition.interimResults =
+        false;
+
+
+    recognition.onstart =
+        function(){
+
+            showToast(
+                "🎙️ বলুন, কী খুঁজছেন?"
+            );
+
+        };
+
+
+    recognition.onresult =
+        function(event){
+
+            const text =
+                event.results[0][0]
+                    .transcript;
+
+
+            document.getElementById(
+                "searchInput"
+            ).value =
+                text;
+
+
+            searchProducts();
+
+        };
+
+
+    recognition.onerror =
+        function(){
+
+            showToast(
+                "Voice Search ব্যবহার করা যায়নি"
+            );
+
+        };
+
+
+    recognition.start();
+
+}
+
+
+/* =========================================
+   11. AI CHAT
+========================================= */
+
+function toggleChat(){
+
+    document
+        .getElementById("chatBox")
+        .classList.toggle("show");
+
+}
+
+
+function handleChatKey(event){
+
+    if(event.key === "Enter"){
+
+        sendChat();
+
+    }
+
+}
+
+
+function sendChat(){
+
+    const input =
+        document.getElementById(
+            "chatInput"
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    if(!text){
+
+        return;
+
+    }
+
+
+    addChatMessage(
+        text,
+        "user"
+    );
+
+
+    input.value = "";
+
+
+    setTimeout(
+        function(){
+
+            const response =
+                aiDemoResponse(text);
+
+
+            addChatMessage(
+                response,
+                "bot"
+            );
+
+        },
+        500
+    );
+
+}
+
+
+function addChatMessage(
+    text,
+    type
+){
+
+    const messages =
+        document.getElementById(
+            "chatMessages"
+        );
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "message " + type;
+
+
+    div.innerHTML =
+        text;
+
+
+    messages.appendChild(div);
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+function aiDemoResponse(text){
+
+    const lower =
+        text.toLowerCase();
+
+
+    if(
+        lower.includes("ব্যাগ") ||
+        lower.includes("bag")
+    ){
+
+        return `
+            👜 আপনার জন্য কয়েকটি
+            bag option আছে।
+
+            <br><br>
+
+            Budget বললে আমি
+            matching option দেখাতে পারি।
+
+            <br><br>
+
+            যেমন:
+            <b>২০০০ টাকার মধ্যে</b>
+        `;
+
+    }
+
+
+    if(
+        lower.includes("ঘড়ি") ||
+        lower.includes("ঘড়ি") ||
+        lower.includes("watch")
+    ){
+
+        return `
+            ⌚ Smart Watch-এর
+            কয়েকটি option আছে।
+
+            <br><br>
+
+            Budget অনুযায়ী
+            filter করা যাবে।
+        `;
+
+    }
+
+
+    if(
+        lower.includes("জুতা") ||
+        lower.includes("shoes")
+    ){
+
+        return `
+            👟 Shoes-এর জন্য
+            Running, Casual এবং
+            Sports options আছে।
+        `;
+
+    }
+
+
+    if(
+        lower.includes("order") ||
+        lower.includes("অর্ডার")
+    ){
+
+        return `
+            📦 Order tracking demo
+            এখানে আছে।
+
+            <br><br>
+
+            Production version-এ
+            authenticated order data
+            থেকে status দেখানো হবে।
+        `;
+
+    }
+
+
+    if(
+        lower.includes("২০০০") ||
+        lower.includes("2000")
+    ){
+
+        return `
+            💰 ৳2,000 budget বুঝেছি।
+
+            <br><br>
+
+            Budget অনুযায়ী
+            relevant products
+            সাজানো যাবে।
+        `;
+
+    }
+
+
+    return `
+        🤖 বুঝেছি।
+
+        <br><br>
+
+        Product-এর <b>নাম</b>,
+        <b>budget</b> অথবা
+        <b>category</b> লিখুন।
+
+        <br><br>
+
+        যেমন:
+        <br>
+        "১৫০০ টাকার মধ্যে
+        একটা ব্যাগ চাই"
+    `;
+
+}
+
+
+/* =========================================
+   12. ACCOUNT
+========================================= */
+
+function showAccount(){
+
+    document
+        .getElementById("accountModal")
+        .classList.add("show");
+
+}
+
+
+/* =========================================
+   13. MODAL
+========================================= */
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+document
+    .querySelectorAll(".modal")
+    .forEach(
+        modal => {
+
+            modal.addEventListener(
+                "click",
+                function(event){
+
+                    if(
+                        event.target === modal
+                    ){
+
+                        modal.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================
+   14. TOAST
+========================================= */
+
+let toastTimer;
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+/* =========================================
+   15. BADGES
+========================================= */
+
+function updateBadges(){
+
+    document.getElementById(
+        "cartBadge"
+    ).textContent =
+        cart.length;
+
+
+    document.getElementById(
+        "wishBadge"
+    ).textContent =
+        wishlist.length;
+
+}
+
+
+/* =========================================
+   16. NETWORK STATUS
+========================================= */
+
+function updateNetworkStatus(){
+
+    const bar =
+        document.getElementById(
+            "offlineBar"
+        );
+
+
+    if(navigator.onLine){
+
+        bar.classList.remove(
+            "show"
+        );
+
+    }else{
+
+        bar.classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+window.addEventListener(
+    "online",
+    function(){
+
+        updateNetworkStatus();
+
+        showToast(
+            "🟢 Internet connection restored"
+        );
+
+    }
+);
+
+
+window.addEventListener(
+    "offline",
+    function(){
+
+        updateNetworkStatus();
+
+        showToast(
+            "🟠 You are offline"
+        );
+
+    }
+);
+
+
+/* =========================================
+   17. NAVIGATION
+========================================= */
+
+function scrollToProducts(){
+
+    document
+        .getElementById(
+            "productSection"
+        )
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+function focusSearch(){
+
+    document
+        .getElementById(
+            "searchInput"
+        )
+        .focus();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+function goHome(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================
+   18. DEEP LINK DEMO
+========================================= */
+
+function handleDeepLink(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const productId =
+        Number(
+            params.get("product")
+        );
+
+
+    if(!productId){
+
+        return;
+
+    }
+
+
+    const product =
+        products.find(
+            p => p.id === productId
+        );
+
+
+    if(!product){
+
+        return;
+
+    }
+
+
+    currentProducts =
+        [product];
+
+
+    document.getElementById(
+        "productHeading"
+    ).textContent =
+        "🔗 Product";
+
+
+    renderProducts(
+        [product]
+    );
+
+
+    setTimeout(
+        scrollToProducts,
+        300
+    );
+
+}
+
+
+/* =========================================
+   19. INITIALIZE APP
+========================================= */
+
+renderProducts();
+
+updateBadges();
+
+updateNetworkStatus();
+
+handleDeepLink();
+
+</script>
 
 </body>
 </html>
+```
