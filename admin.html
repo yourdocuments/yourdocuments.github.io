@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Admin Login — MyStore</title>
+
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background: #f7f7f7;
+
+      color: #111;
+
+      min-height: 100vh;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 20px;
+
+    }
+
+
+    /* =========================
+       LOGIN CONTAINER
+    ========================= */
+
+    .login-container {
+
+      width: 100%;
+
+      max-width: 420px;
+
+    }
+
+
+    /* =========================
+       BRAND
+    ========================= */
+
+    .brand {
+
+      text-align: center;
+
+      margin-bottom: 25px;
+
+    }
+
+
+    .brand-logo {
+
+      width: 70px;
+
+      height: 70px;
+
+      background: #111;
+
+      color: white;
+
+      border-radius: 18px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      margin: 0 auto 15px;
+
+      font-size: 20px;
+
+      font-weight: 900;
+
+    }
+
+
+    .brand h1 {
+
+      font-size: 27px;
+
+      margin-bottom: 7px;
+
+    }
+
+
+    .brand p {
+
+      color: #777;
+
+      font-size: 14px;
+
+    }
+
+
+    /* =========================
+       LOGIN CARD
+    ========================= */
+
+    .login-card {
+
+      background: white;
+
+      border: 1px solid #e8e8e8;
+
+      border-radius: 22px;
+
+      padding: 30px;
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.08);
+
+    }
+
+
+    .login-card h2 {
+
+      font-size: 21px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .login-card .subtitle {
+
+      color: #777;
+
+      font-size: 14px;
+
+      margin-bottom: 25px;
+
+      line-height: 1.6;
+
+    }
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-group {
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .form-group label {
+
+      display: block;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .password-wrapper {
+
+      position: relative;
+
+    }
+
+
+    .password-wrapper input {
+
+      width: 100%;
+
+      padding: 14px 48px 14px 14px;
+
+      border: 1px solid #ddd;
+
+      border-radius: 10px;
+
+      outline: none;
+
+      font-size: 15px;
+
+      transition: .2s;
+
+    }
+
+
+    .password-wrapper input:focus {
+
+      border-color: #111;
+
+      box-shadow:
+        0 0 0 3px rgba(0,0,0,.05);
+
+    }
+
+
+    /* =========================
+       SHOW PASSWORD
+    ========================= */
+
+    .show-password {
+
+      position: absolute;
+
+      right: 12px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: none;
+
+      background: transparent;
+
+      cursor: pointer;
+
+      font-size: 18px;
+
+    }
+
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
+    .login-submit {
+
+      width: 100%;
+
+      padding: 14px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background: #111;
+
+      color: white;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: .2s;
+
+    }
+
+
+    .login-submit:hover {
+
+      background: #222;
+
+      transform: translateY(-1px);
+
+    }
+
+
+    /* =========================
+       ERROR
+    ========================= */
+
+    .error-message {
+
+      display: none;
+
+      background: #fff1f1;
+
+      border: 1px solid #ffd4d4;
+
+      color: #d00000;
+
+      padding: 12px;
+
+      border-radius: 9px;
+
+      font-size: 13px;
+
+      margin-bottom: 15px;
+
+      text-align: center;
+
+    }
+
+
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
+    .back-link {
+
+      display: block;
+
+      text-align: center;
+
+      margin-top: 20px;
+
+      color: #777;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+    }
+
+
+    .back-link:hover {
+
+      color: #111;
+
+    }
+
+
+    /* =========================
+       SECURITY
+    ========================= */
+
+    .security {
+
+      margin-top: 20px;
+
+      text-align: center;
+
+      color: #999;
+
+      font-size: 12px;
+
+      line-height: 1.6;
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 500px) {
+
+      body {
+
+        padding: 15px;
+
+      }
+
+
+      .login-card {
+
+        padding: 24px 20px;
+
+      }
+
+
+      .brand h1 {
+
+        font-size: 24px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="login-container">
+
+
+    <!-- BRAND -->
+
+    <div class="brand">
+
+      <div class="brand-logo">
+        SNK
+      </div>
+
+      <h1>
+        Admin Access
+      </h1>
+
+      <p>
+        MyStore Management System
+      </p>
+
+    </div>
+
+
+    <!-- LOGIN CARD -->
+
+    <div class="login-card">
+
+      <h2>
+        Welcome back 👋
+      </h2>
+
+      <p class="subtitle">
+
+        Enter your administrator password
+        to continue to the dashboard.
+
+      </p>
+
+
+      <!-- ERROR -->
+
+      <div
+        class="error-message"
+        id="errorMessage"
+      >
+        ❌ Incorrect password.
+      </div>
+
+
+      <!-- FORM -->
+
+      <form id="loginForm">
+
+
+        <div class="form-group">
+
+          <label for="password">
+            Admin Password
+          </label>
+
+
+          <div class="password-wrapper">
+
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+
+            <button
+              type="button"
+              class="show-password"
+              id="showPassword"
+              title="Show Password"
+            >
+              👁️
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="login-submit"
+        >
+          Login to Dashboard →
+        </button>
+
+
+      </form>
+
+
+      <!-- BACK -->
+
+      <a
+        href="developer.html"
+        class="back-link"
+      >
+        ← Back to Developer Connect
+      </a>
+
+
+    </div>
+
+
+    <div class="security">
+
+      🔒 Protected Admin Area<br>
+
+      Authorized access only.
+
+    </div>
+
+
+  </div>
+
+
+
+  <script>
+
+    /* =========================
+       PASSWORD SHOW / HIDE
+    ========================= */
+
+    const passwordInput =
+      document.getElementById("password");
+
+    const showPassword =
+      document.getElementById("showPassword");
+
+
+    showPassword.addEventListener(
+      "click",
+      function () {
+
+        if (
+          passwordInput.type === "password"
+        ) {
+
+          passwordInput.type = "text";
+
+          showPassword.textContent = "🙈";
+
+        } else {
+
+          passwordInput.type = "password";
+
+          showPassword.textContent = "👁️";
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const errorMessage =
+      document.getElementById("errorMessage");
+
+
+    loginForm.addEventListener(
+      "submit",
+      function (event) {
+
+        event.preventDefault();
+
+
+        const password =
+          passwordInput.value;
+
+
+        /*
+          TEMPORARY PASSWORD
+
+          This is only for testing
+          the website flow.
+
+          We will replace this with
+          REAL Firebase Authentication
+          in STEP 1.4.
+        */
+
+        const adminPassword =
+          "123456";
+
+
+        if (
+          password === adminPassword
+        ) {
+
+          errorMessage.style.display =
+            "none";
+
+
+          /*
+            Temporary login session
+          */
+
+          sessionStorage.setItem(
+            "adminLoggedIn",
+            "true"
+          );
+
+
+          window.location.href =
+            "dashboard.html";
+
+
+        } else {
+
+          errorMessage.style.display =
+            "block";
+
+          passwordInput.value = "";
+
+          passwordInput.focus();
+
+        }
+
+      }
+    );
+
+  </script>
+
+
+</body>
+
+</html>
+```
