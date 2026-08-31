@@ -547,13 +547,6 @@
     }
 
 
-    .refresh-btn:hover {
-
-      background: #f5f5f5;
-
-    }
-
-
     /* =========================
        POST ITEM
     ========================= */
@@ -855,13 +848,6 @@
       }
 
 
-      .section-header {
-
-        gap: 10px;
-
-      }
-
-
       .post-item {
 
         align-items: flex-start;
@@ -922,7 +908,9 @@
 <body>
 
 
-  <!-- SIDEBAR -->
+  <!-- =========================
+       SIDEBAR
+  ========================= -->
 
   <aside class="sidebar">
 
@@ -1034,7 +1022,9 @@
 
 
 
-  <!-- MAIN -->
+  <!-- =========================
+       MAIN
+  ========================= -->
 
   <main class="main">
 
@@ -1193,7 +1183,7 @@
 
 
 
-    <!-- SECTION -->
+    <!-- POSTS HEADER -->
 
     <div class="section-header">
 
@@ -1603,15 +1593,13 @@
             `;
 
 
+            /* =========================
+               EDIT BUTTON
+            ========================= */
+
             const editButton =
               item.querySelector(
                 ".edit-btn"
-              );
-
-
-            const deleteButton =
-              item.querySelector(
-                ".delete-btn"
               );
 
 
@@ -1619,12 +1607,24 @@
               "click",
               function() {
 
-                alert(
-                  "Edit system আমরা পরের Step-এ তৈরি করব।"
-                );
+                window.location.href =
+                  "edit-post.html?id=" +
+                  encodeURIComponent(
+                    postId
+                  );
 
               }
             );
+
+
+            /* =========================
+               DELETE BUTTON
+            ========================= */
+
+            const deleteButton =
+              item.querySelector(
+                ".delete-btn"
+              );
 
 
             deleteButton.addEventListener(
@@ -1708,11 +1708,13 @@
 
 
         await deleteDoc(
+
           doc(
             db,
             "posts",
             postId
           )
+
         );
 
 
