@@ -1,0 +1,1331 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Dashboard — CakeBuddy</title>
+
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background: #f6f7f9;
+
+      color: #111;
+
+    }
+
+
+    /* =========================
+       LAYOUT
+    ========================= */
+
+    .dashboard {
+
+      display: flex;
+
+      min-height: 100vh;
+
+    }
+
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
+    .sidebar {
+
+      width: 250px;
+
+      background: #111;
+
+      color: white;
+
+      padding: 25px 15px;
+
+      position: fixed;
+
+      left: 0;
+
+      top: 0;
+
+      bottom: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+    }
+
+
+    .brand {
+
+      padding: 5px 12px 30px;
+
+      border-bottom:
+        1px solid #333;
+
+    }
+
+
+    .brand-logo {
+
+      width: 45px;
+
+      height: 45px;
+
+      border-radius: 12px;
+
+      background: white;
+
+      color: #111;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-weight: 900;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    .brand h2 {
+
+      font-size: 19px;
+
+    }
+
+
+    .brand p {
+
+      color: #888;
+
+      font-size: 12px;
+
+      margin-top: 4px;
+
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .nav {
+
+      margin-top: 25px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 6px;
+
+    }
+
+
+    .nav a {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 13px 14px;
+
+      border-radius: 9px;
+
+      text-decoration: none;
+
+      color: #aaa;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      transition: .2s;
+
+    }
+
+
+    .nav a:hover,
+    .nav a.active {
+
+      background: #222;
+
+      color: white;
+
+    }
+
+
+    .nav-icon {
+
+      width: 25px;
+
+      text-align: center;
+
+      font-size: 17px;
+
+    }
+
+
+    /* =========================
+       SIDEBAR BOTTOM
+    ========================= */
+
+    .sidebar-bottom {
+
+      margin-top: auto;
+
+    }
+
+
+    .store-link {
+
+      display: block;
+
+      text-decoration: none;
+
+      color: #aaa;
+
+      padding: 13px;
+
+      font-size: 13px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .logout-btn {
+
+      width: 100%;
+
+      padding: 12px;
+
+      border: 1px solid #333;
+
+      border-radius: 9px;
+
+      background: transparent;
+
+      color: #aaa;
+
+      cursor: pointer;
+
+      font-weight: 600;
+
+    }
+
+
+    .logout-btn:hover {
+
+      color: white;
+
+      border-color: #555;
+
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main {
+
+      margin-left: 250px;
+
+      width: calc(100% - 250px);
+
+      padding: 30px;
+
+    }
+
+
+    /* =========================
+       TOP BAR
+    ========================= */
+
+    .topbar {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 30px;
+
+    }
+
+
+    .topbar h1 {
+
+      font-size: 28px;
+
+    }
+
+
+    .topbar p {
+
+      color: #777;
+
+      font-size: 13px;
+
+      margin-top: 5px;
+
+    }
+
+
+    .admin-badge {
+
+      background: white;
+
+      border: 1px solid #eee;
+
+      padding: 10px 15px;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+    }
+
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 18px;
+
+      margin-bottom: 30px;
+
+    }
+
+
+    .stat {
+
+      background: white;
+
+      border: 1px solid #eee;
+
+      border-radius: 15px;
+
+      padding: 22px;
+
+    }
+
+
+    .stat-top {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+    }
+
+
+    .stat-icon {
+
+      width: 40px;
+
+      height: 40px;
+
+      border-radius: 10px;
+
+      background: #f1f1f1;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 18px;
+
+    }
+
+
+    .stat h3 {
+
+      font-size: 27px;
+
+      margin-top: 17px;
+
+    }
+
+
+    .stat p {
+
+      color: #777;
+
+      font-size: 13px;
+
+      margin-top: 4px;
+
+    }
+
+
+    /* =========================
+       QUICK ACTION
+    ========================= */
+
+    .section-title {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    .section-title h2 {
+
+      font-size: 20px;
+
+    }
+
+
+    .add-btn {
+
+      text-decoration: none;
+
+      background: #111;
+
+      color: white;
+
+      padding: 11px 16px;
+
+      border-radius: 9px;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+    }
+
+
+    /* =========================
+       ACTION CARDS
+    ========================= */
+
+    .actions {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 18px;
+
+      margin-bottom: 30px;
+
+    }
+
+
+    .action {
+
+      background: white;
+
+      border: 1px solid #eee;
+
+      border-radius: 15px;
+
+      padding: 23px;
+
+      text-decoration: none;
+
+      color: #111;
+
+      transition: .2s;
+
+    }
+
+
+    .action:hover {
+
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.06);
+
+    }
+
+
+    .action-icon {
+
+      font-size: 30px;
+
+      margin-bottom: 14px;
+
+    }
+
+
+    .action h3 {
+
+      font-size: 16px;
+
+      margin-bottom: 6px;
+
+    }
+
+
+    .action p {
+
+      color: #777;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+    }
+
+
+    /* =========================
+       RECENT POSTS
+    ========================= */
+
+    .recent {
+
+      background: white;
+
+      border: 1px solid #eee;
+
+      border-radius: 15px;
+
+      overflow: hidden;
+
+    }
+
+
+    .recent-header {
+
+      padding: 20px;
+
+      border-bottom:
+        1px solid #eee;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+    }
+
+
+    .recent-header h2 {
+
+      font-size: 18px;
+
+    }
+
+
+    .view-link {
+
+      color: #16a34a;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+    }
+
+
+    .empty {
+
+      padding: 60px 20px;
+
+      text-align: center;
+
+      color: #888;
+
+    }
+
+
+    .empty-icon {
+
+      font-size: 40px;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    .empty h3 {
+
+      color: #333;
+
+      margin-bottom: 6px;
+
+    }
+
+
+    .empty p {
+
+      font-size: 13px;
+
+    }
+
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    .mobile-header {
+
+      display: none;
+
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1000px) {
+
+      .stats {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+      }
+
+      .actions {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .sidebar {
+
+        display: none;
+
+      }
+
+
+      .main {
+
+        margin-left: 0;
+
+        width: 100%;
+
+        padding: 20px 15px;
+
+      }
+
+
+      .mobile-header {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        background: #111;
+
+        color: white;
+
+        padding: 15px;
+
+        margin: -20px -15px 25px;
+
+      }
+
+
+      .mobile-header h2 {
+
+        font-size: 18px;
+
+      }
+
+
+      .mobile-header button {
+
+        border: none;
+
+        background: #222;
+
+        color: white;
+
+        padding: 8px 12px;
+
+        border-radius: 7px;
+
+        cursor: pointer;
+
+      }
+
+
+      .topbar {
+
+        align-items: flex-start;
+
+      }
+
+
+      .topbar h1 {
+
+        font-size: 24px;
+
+      }
+
+
+      .admin-badge {
+
+        display: none;
+
+      }
+
+
+      .stats {
+
+        grid-template-columns:
+          1fr 1fr;
+
+        gap: 12px;
+
+      }
+
+
+      .stat {
+
+        padding: 17px;
+
+      }
+
+
+      .stat h3 {
+
+        font-size: 23px;
+
+      }
+
+
+      .actions {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+
+
+    @media (max-width: 420px) {
+
+      .stats {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="dashboard">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar">
+
+
+      <div class="brand">
+
+        <div class="brand-logo">
+          SNK
+        </div>
+
+        <h2>
+          CakeBuddy
+        </h2>
+
+        <p>
+          Admin Dashboard
+        </p>
+
+      </div>
+
+
+      <nav class="nav">
+
+        <a
+          href="dashboard.html"
+          class="active"
+        >
+
+          <span class="nav-icon">
+            📊
+          </span>
+
+          Dashboard
+
+        </a>
+
+
+        <a href="#">
+
+          <span class="nav-icon">
+            📝
+          </span>
+
+          Posts
+
+        </a>
+
+
+        <a href="#">
+
+          <span class="nav-icon">
+            📦
+          </span>
+
+          Products
+
+        </a>
+
+
+        <a href="#">
+
+          <span class="nav-icon">
+            🗂️
+          </span>
+
+          Categories
+
+        </a>
+
+
+        <a href="#">
+
+          <span class="nav-icon">
+            ⚙️
+          </span>
+
+          Settings
+
+        </a>
+
+      </nav>
+
+
+      <div class="sidebar-bottom">
+
+        <a
+          href="index.html"
+          class="store-link"
+        >
+          ← View Store
+        </a>
+
+
+        <button
+          class="logout-btn"
+          id="logoutButton"
+        >
+          🚪 Logout
+        </button>
+
+      </div>
+
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+
+      <!-- MOBILE HEADER -->
+
+      <div class="mobile-header">
+
+        <h2>
+          CakeBuddy Admin
+        </h2>
+
+        <button
+          onclick="logout()"
+        >
+          Logout
+        </button>
+
+      </div>
+
+
+      <!-- TOPBAR -->
+
+      <div class="topbar">
+
+        <div>
+
+          <h1>
+            Dashboard
+          </h1>
+
+          <p>
+            Welcome back! Here's what's happening
+            with your store.
+          </p>
+
+        </div>
+
+
+        <div
+          class="admin-badge"
+          id="adminEmail"
+        >
+          Admin
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           STATS
+      ========================= -->
+
+      <div class="stats">
+
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <span>
+              Total Posts
+            </span>
+
+            <div class="stat-icon">
+              📝
+            </div>
+
+          </div>
+
+          <h3 id="postCount">
+            0
+          </h3>
+
+          <p>
+            Published posts
+          </p>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <span>
+              Products
+            </span>
+
+            <div class="stat-icon">
+              📦
+            </div>
+
+          </div>
+
+          <h3 id="productCount">
+            0
+          </h3>
+
+          <p>
+            Store products
+          </p>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <span>
+              Categories
+            </span>
+
+            <div class="stat-icon">
+              🗂️
+            </div>
+
+          </div>
+
+          <h3>
+            4
+          </h3>
+
+          <p>
+            Active categories
+          </p>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <span>
+              Status
+            </span>
+
+            <div class="stat-icon">
+              🟢
+            </div>
+
+          </div>
+
+          <h3>
+            Live
+          </h3>
+
+          <p>
+            Website status
+          </p>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- =========================
+           QUICK ACTIONS
+      ========================= -->
+
+      <div class="section-title">
+
+        <h2>
+          Quick Actions
+        </h2>
+
+        <a
+          href="#"
+          class="add-btn"
+        >
+          + Add New
+        </a>
+
+      </div>
+
+
+      <div class="actions">
+
+
+        <a
+          href="#"
+          class="action"
+        >
+
+          <div class="action-icon">
+            📝
+          </div>
+
+          <h3>
+            Create New Post
+          </h3>
+
+          <p>
+            Add a new post, announcement
+            or content to your website.
+          </p>
+
+        </a>
+
+
+        <a
+          href="#"
+          class="action"
+        >
+
+          <div class="action-icon">
+            📦
+          </div>
+
+          <h3>
+            Add Product
+          </h3>
+
+          <p>
+            Add products with image,
+            price and description.
+          </p>
+
+        </a>
+
+
+        <a
+          href="#"
+          class="action"
+        >
+
+          <div class="action-icon">
+            🗂️
+          </div>
+
+          <h3>
+            Manage Categories
+          </h3>
+
+          <p>
+            Create and manage your
+            store categories.
+          </p>
+
+        </a>
+
+
+      </div>
+
+
+      <!-- =========================
+           RECENT
+      ========================= -->
+
+      <div class="recent">
+
+
+        <div class="recent-header">
+
+          <h2>
+            Recent Posts
+          </h2>
+
+          <a
+            href="#"
+            class="view-link"
+          >
+            View All →
+          </a>
+
+        </div>
+
+
+        <div class="empty">
+
+          <div class="empty-icon">
+            📋
+          </div>
+
+          <h3>
+            No posts yet
+          </h3>
+
+          <p>
+            Your latest posts will appear here.
+          </p>
+
+        </div>
+
+
+      </div>
+
+
+    </main>
+
+
+  </div>
+
+
+
+  <!-- =========================
+       FIREBASE AUTH
+  ========================= -->
+
+  <script type="module">
+
+
+    import {
+      initializeApp
+    } from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    /* =========================
+       FIREBASE CONFIG
+    ========================= */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyDlqm0Du94pfQ_LwUJTTi8LjhzK90dN0TQ",
+
+      authDomain:
+        "cakebuddymb.firebaseapp.com",
+
+      projectId:
+        "cakebuddymb",
+
+      storageBucket:
+        "cakebuddymb.firebasestorage.app",
+
+      messagingSenderId:
+        "31596118058",
+
+      appId:
+        "1:31596118058:web:ecfe00171d91ee15c64353",
+
+      measurementId:
+        "G-D0ZV3FN1LQ"
+
+    };
+
+
+    /* =========================
+       INITIALIZE
+    ========================= */
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const auth =
+      getAuth(app);
+
+
+    /* =========================
+       AUTH CHECK
+    ========================= */
+
+    onAuthStateChanged(
+      auth,
+      function (user) {
+
+        if (!user) {
+
+          window.location.href =
+            "admin.html";
+
+          return;
+
+        }
+
+
+        document.getElementById(
+          "adminEmail"
+        ).textContent =
+          user.email;
+
+
+      }
+    );
+
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    async function logout() {
+
+      try {
+
+        await signOut(auth);
+
+        window.location.href =
+          "admin.html";
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          "Logout failed. Please try again."
+        );
+
+      }
+
+    }
+
+
+    window.logout =
+      logout;
+
+
+    document
+      .getElementById("logoutButton")
+      .addEventListener(
+        "click",
+        logout
+      );
+
+
+  </script>
+
+
+</body>
+
+</html>
+```
