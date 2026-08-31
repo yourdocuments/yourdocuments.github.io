@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Add New Post — CakeBuddy</title>
+
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f7f9;
+      color: #111;
+    }
+
+
+    /* HEADER */
+
+    .header {
+      background: #111;
+      color: white;
+      padding: 18px 20px;
+    }
+
+
+    .header-inner {
+      max-width: 1000px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+
+    .back {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+
+    .back:hover {
+      color: white;
+    }
+
+
+    /* MAIN */
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+
+    .page-title {
+      margin-bottom: 25px;
+    }
+
+
+    .page-title h1 {
+      font-size: 30px;
+      margin-bottom: 7px;
+    }
+
+
+    .page-title p {
+      color: #777;
+      font-size: 14px;
+    }
+
+
+    /* CARD */
+
+    .card {
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 18px;
+      padding: 30px;
+
+      box-shadow:
+        0 12px 35px rgba(0,0,0,.05);
+    }
+
+
+    /* FORM */
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+
+    .required {
+      color: red;
+    }
+
+
+    input,
+    select,
+    textarea {
+
+      width: 100%;
+
+      padding: 14px;
+
+      border: 1px solid #ddd;
+
+      border-radius: 10px;
+
+      outline: none;
+
+      font-family: inherit;
+
+      font-size: 14px;
+
+      background: white;
+    }
+
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+
+      border-color: #111;
+
+      box-shadow:
+        0 0 0 3px rgba(0,0,0,.04);
+    }
+
+
+    textarea {
+
+      min-height: 220px;
+
+      resize: vertical;
+
+      line-height: 1.6;
+    }
+
+
+    .help {
+
+      color: #999;
+
+      font-size: 12px;
+
+      margin-top: 6px;
+    }
+
+
+    /* IMAGE PREVIEW */
+
+    .preview {
+
+      display: none;
+
+      margin-top: 12px;
+
+      border-radius: 12px;
+
+      overflow: hidden;
+
+      background: #f1f1f1;
+    }
+
+
+    .preview img {
+
+      width: 100%;
+
+      height: 250px;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+
+    /* BUTTONS */
+
+    .buttons {
+
+      display: flex;
+
+      gap: 12px;
+
+      margin-top: 10px;
+    }
+
+
+    .publish {
+
+      border: none;
+
+      background: #111;
+
+      color: white;
+
+      padding: 14px 22px;
+
+      border-radius: 10px;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    .publish:hover {
+      background: #222;
+    }
+
+
+    .publish:disabled {
+
+      opacity: .6;
+
+      cursor: not-allowed;
+    }
+
+
+    .cancel {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-decoration: none;
+
+      color: #555;
+
+      border: 1px solid #ddd;
+
+      padding: 13px 20px;
+
+      border-radius: 10px;
+
+      font-size: 14px;
+    }
+
+
+    /* MESSAGE */
+
+    .message {
+
+      display: none;
+
+      padding: 13px;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+
+      margin-bottom: 20px;
+    }
+
+
+    .success {
+
+      background: #effff4;
+
+      color: #16803c;
+
+      border: 1px solid #c8f2d4;
+    }
+
+
+    .error {
+
+      background: #fff1f1;
+
+      color: #c00000;
+
+      border: 1px solid #ffd4d4;
+    }
+
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      .container {
+        padding: 25px 15px;
+      }
+
+
+      .card {
+        padding: 20px;
+      }
+
+
+      .page-title h1 {
+        font-size: 25px;
+      }
+
+
+      .buttons {
+        flex-direction: column;
+      }
+
+
+      .publish,
+      .cancel {
+        width: 100%;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <div class="header-inner">
+
+      <div class="logo">
+        CakeBuddy Admin
+      </div>
+
+
+      <a
+        href="dashboard.html"
+        class="back"
+      >
+        ← Dashboard
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- MAIN -->
+
+  <main class="container">
+
+
+    <div class="page-title">
+
+      <h1>
+        Create New Post
+      </h1>
+
+      <p>
+        আপনার website-এর জন্য নতুন post তৈরি করুন।
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+
+      <!-- MESSAGE -->
+
+      <div
+        id="successMessage"
+        class="message success"
+      >
+      </div>
+
+
+      <div
+        id="errorMessage"
+        class="message error"
+      >
+      </div>
+
+
+      <!-- FORM -->
+
+      <form id="postForm">
+
+
+        <!-- TITLE -->
+
+        <div class="form-group">
+
+          <label for="title">
+
+            Post Title
+
+            <span class="required">
+              *
+            </span>
+
+          </label>
+
+
+          <input
+            type="text"
+            id="title"
+            placeholder="যেমন: আজকের বিশেষ অফার"
+            required
+          >
+
+        </div>
+
+
+        <!-- CATEGORY -->
+
+        <div class="form-group">
+
+          <label for="category">
+            Category
+          </label>
+
+
+          <select id="category">
+
+            <option value="General">
+              General
+            </option>
+
+            <option value="News">
+              News
+            </option>
+
+            <option value="Offer">
+              Offer
+            </option>
+
+            <option value="Product">
+              Product
+            </option>
+
+            <option value="Announcement">
+              Announcement
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- IMAGE -->
+
+        <div class="form-group">
+
+          <label for="image">
+            Image URL
+          </label>
+
+
+          <input
+            type="url"
+            id="image"
+            placeholder="https://example.com/image.jpg"
+          >
+
+
+          <div class="help">
+            আপাতত image-এর direct URL ব্যবহার করছি।
+          </div>
+
+
+          <div
+            class="preview"
+            id="imagePreview"
+          >
+
+            <img
+              id="previewImage"
+              src=""
+              alt="Image Preview"
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="form-group">
+
+          <label for="description">
+
+            Description
+
+            <span class="required">
+              *
+            </span>
+
+          </label>
+
+
+          <textarea
+            id="description"
+            placeholder="আপনার post-এর বিস্তারিত লিখুন..."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+
+          <button
+            type="submit"
+            class="publish"
+            id="publishButton"
+          >
+
+            🚀 Publish Post
+
+          </button>
+
+
+          <a
+            href="dashboard.html"
+            class="cancel"
+          >
+
+            Cancel
+
+          </a>
+
+
+        </div>
+
+
+      </form>
+
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- =========================
+       FIREBASE
+  ========================= -->
+
+  <script type="module">
+
+
+    import {
+      initializeApp
+    }
+    from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+    import {
+      getAuth,
+      onAuthStateChanged
+    }
+    from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      serverTimestamp
+    }
+    from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+    /* FIREBASE CONFIG */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyDlqm0Du94pfQ_LwUJTTi8LjhzK90dN0TQ",
+
+      authDomain:
+        "cakebuddymb.firebaseapp.com",
+
+      projectId:
+        "cakebuddymb",
+
+      storageBucket:
+        "cakebuddymb.firebasestorage.app",
+
+      messagingSenderId:
+        "31596118058",
+
+      appId:
+        "1:31596118058:web:ecfe00171d91ee15c64353",
+
+      measurementId:
+        "G-D0ZV3FN1LQ"
+
+    };
+
+
+    /* INITIALIZE FIREBASE */
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const auth =
+      getAuth(app);
+
+
+    const db =
+      getFirestore(app);
+
+
+    /* ELEMENTS */
+
+    const postForm =
+      document.getElementById("postForm");
+
+
+    const titleInput =
+      document.getElementById("title");
+
+
+    const categoryInput =
+      document.getElementById("category");
+
+
+    const imageInput =
+      document.getElementById("image");
+
+
+    const descriptionInput =
+      document.getElementById("description");
+
+
+    const publishButton =
+      document.getElementById("publishButton");
+
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+
+    const errorMessage =
+      document.getElementById("errorMessage");
+
+
+    const imagePreview =
+      document.getElementById("imagePreview");
+
+
+    const previewImage =
+      document.getElementById("previewImage");
+
+
+    /* =========================
+       LOGIN CHECK
+    ========================= */
+
+    onAuthStateChanged(
+      auth,
+      function(user) {
+
+        if (!user) {
+
+          window.location.href =
+            "admin.html";
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       IMAGE PREVIEW
+    ========================= */
+
+    imageInput.addEventListener(
+      "input",
+      function() {
+
+        const url =
+          imageInput.value.trim();
+
+
+        if (url) {
+
+          previewImage.src = url;
+
+          imagePreview.style.display =
+            "block";
+
+        } else {
+
+          imagePreview.style.display =
+            "none";
+
+        }
+
+      }
+    );
+
+
+    previewImage.addEventListener(
+      "error",
+      function() {
+
+        imagePreview.style.display =
+          "none";
+
+      }
+    );
+
+
+    /* =========================
+       PUBLISH POST
+    ========================= */
+
+    postForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        hideMessages();
+
+
+        const user =
+          auth.currentUser;
+
+
+        if (!user) {
+
+          showError(
+            "আপনি login করা নেই।"
+          );
+
+          setTimeout(
+            function() {
+
+              window.location.href =
+                "admin.html";
+
+            },
+            1200
+          );
+
+          return;
+
+        }
+
+
+        const title =
+          titleInput.value.trim();
+
+
+        const category =
+          categoryInput.value;
+
+
+        const image =
+          imageInput.value.trim();
+
+
+        const description =
+          descriptionInput.value.trim();
+
+
+        if (!title) {
+
+          showError(
+            "Post Title লিখুন।"
+          );
+
+          return;
+
+        }
+
+
+        if (!description) {
+
+          showError(
+            "Description লিখুন।"
+          );
+
+          return;
+
+        }
+
+
+        publishButton.disabled =
+          true;
+
+
+        publishButton.textContent =
+          "Publishing...";
+
+
+        try {
+
+
+          await addDoc(
+
+            collection(
+              db,
+              "posts"
+            ),
+
+            {
+
+              title:
+                title,
+
+              category:
+                category,
+
+              image:
+                image,
+
+              description:
+                description,
+
+              author:
+                user.email,
+
+              status:
+                "published",
+
+              createdAt:
+                serverTimestamp()
+
+            }
+
+          );
+
+
+          showSuccess(
+            "🎉 Post successfully published!"
+          );
+
+
+          postForm.reset();
+
+
+          imagePreview.style.display =
+            "none";
+
+
+          publishButton.disabled =
+            false;
+
+
+          publishButton.textContent =
+            "🚀 Publish Post";
+
+
+          setTimeout(
+            function() {
+
+              window.location.href =
+                "dashboard.html";
+
+            },
+            1200
+          );
+
+
+        } catch (error) {
+
+
+          console.error(
+            "Firebase Error:",
+            error
+          );
+
+
+          showError(
+            "Post save হয়নি। Firestore Database ও Rules check করুন।"
+          );
+
+
+          publishButton.disabled =
+            false;
+
+
+          publishButton.textContent =
+            "🚀 Publish Post";
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       SUCCESS MESSAGE
+    ========================= */
+
+    function showSuccess(message) {
+
+      successMessage.textContent =
+        message;
+
+      successMessage.style.display =
+        "block";
+
+    }
+
+
+    /* =========================
+       ERROR MESSAGE
+    ========================= */
+
+    function showError(message) {
+
+      errorMessage.textContent =
+        "❌ " + message;
+
+      errorMessage.style.display =
+        "block";
+
+    }
+
+
+    /* =========================
+       HIDE MESSAGES
+    ========================= */
+
+    function hideMessages() {
+
+      successMessage.style.display =
+        "none";
+
+      errorMessage.style.display =
+        "none";
+
+    }
+
+
+  </script>
+
+
+</body>
+
+</html>
+```
