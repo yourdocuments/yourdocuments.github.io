@@ -23,18 +23,16 @@
 
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       background: #f6f7f9;
+
       color: #111;
-    }
 
-
-    /* =========================
-       DASHBOARD
-    ========================= */
-
-    .dashboard {
-      min-height: 100vh;
     }
 
 
@@ -63,6 +61,7 @@
       flex-direction: column;
 
       z-index: 1000;
+
     }
 
 
@@ -70,7 +69,9 @@
 
       padding: 5px 12px 25px;
 
-      border-bottom: 1px solid #333;
+      border-bottom:
+        1px solid #333;
+
     }
 
 
@@ -80,6 +81,7 @@
       height: 46px;
 
       background: white;
+
       color: #111;
 
       border-radius: 12px;
@@ -87,18 +89,20 @@
       display: flex;
 
       align-items: center;
-      justify-content: center;
 
-      font-size: 18px;
+      justify-content: center;
 
       font-weight: 900;
 
       margin-bottom: 12px;
+
     }
 
 
     .brand h2 {
+
       font-size: 19px;
+
     }
 
 
@@ -109,6 +113,7 @@
       font-size: 12px;
 
       margin-top: 5px;
+
     }
 
 
@@ -125,6 +130,7 @@
       flex-direction: column;
 
       gap: 5px;
+
     }
 
 
@@ -149,6 +155,7 @@
       font-weight: 600;
 
       transition: .2s;
+
     }
 
 
@@ -158,6 +165,7 @@
       background: #222;
 
       color: white;
+
     }
 
 
@@ -168,6 +176,7 @@
       text-align: center;
 
       font-size: 17px;
+
     }
 
 
@@ -178,6 +187,7 @@
     .sidebar-bottom {
 
       margin-top: auto;
+
     }
 
 
@@ -194,11 +204,14 @@
       font-size: 13px;
 
       margin-bottom: 8px;
+
     }
 
 
     .store-link:hover {
+
       color: white;
+
     }
 
 
@@ -219,6 +232,7 @@
       cursor: pointer;
 
       font-weight: 600;
+
     }
 
 
@@ -227,6 +241,7 @@
       color: white;
 
       border-color: #555;
+
     }
 
 
@@ -241,6 +256,7 @@
       min-height: 100vh;
 
       padding: 30px;
+
     }
 
 
@@ -263,12 +279,14 @@
       align-items: center;
 
       justify-content: space-between;
+
     }
 
 
     .mobile-header h2 {
 
       font-size: 18px;
+
     }
 
 
@@ -285,6 +303,7 @@
       border-radius: 7px;
 
       cursor: pointer;
+
     }
 
 
@@ -301,12 +320,14 @@
       align-items: center;
 
       margin-bottom: 30px;
+
     }
 
 
     .topbar h1 {
 
       font-size: 30px;
+
     }
 
 
@@ -317,6 +338,7 @@
       font-size: 13px;
 
       margin-top: 6px;
+
     }
 
 
@@ -333,6 +355,7 @@
       font-size: 13px;
 
       font-weight: 600;
+
     }
 
 
@@ -350,6 +373,7 @@
       gap: 18px;
 
       margin-bottom: 35px;
+
     }
 
 
@@ -362,6 +386,7 @@
       border-radius: 15px;
 
       padding: 22px;
+
     }
 
 
@@ -378,6 +403,7 @@
       font-size: 13px;
 
       font-weight: 600;
+
     }
 
 
@@ -393,9 +419,11 @@
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
       font-size: 18px;
+
     }
 
 
@@ -404,6 +432,7 @@
       font-size: 28px;
 
       margin-top: 16px;
+
     }
 
 
@@ -414,11 +443,12 @@
       font-size: 12px;
 
       margin-top: 5px;
+
     }
 
 
     /* =========================
-       SECTION HEADER
+       SECTION
     ========================= */
 
     .section-header {
@@ -430,12 +460,14 @@
       align-items: center;
 
       margin-bottom: 16px;
+
     }
 
 
     .section-header h2 {
 
       font-size: 20px;
+
     }
 
 
@@ -455,90 +487,11 @@
 
       font-weight: 700;
 
-      transition: .2s;
-    }
-
-
-    .add-btn:hover {
-
-      background: #222;
-
-      transform: translateY(-1px);
     }
 
 
     /* =========================
-       QUICK ACTIONS
-    ========================= */
-
-    .actions {
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 18px;
-
-      margin-bottom: 35px;
-    }
-
-
-    .action {
-
-      background: white;
-
-      border: 1px solid #eee;
-
-      border-radius: 15px;
-
-      padding: 23px;
-
-      text-decoration: none;
-
-      color: #111;
-
-      transition: .2s;
-    }
-
-
-    .action:hover {
-
-      transform: translateY(-3px);
-
-      box-shadow:
-        0 12px 30px rgba(0,0,0,.06);
-    }
-
-
-    .action-icon {
-
-      font-size: 30px;
-
-      margin-bottom: 13px;
-    }
-
-
-    .action h3 {
-
-      font-size: 16px;
-
-      margin-bottom: 6px;
-    }
-
-
-    .action p {
-
-      color: #777;
-
-      font-size: 13px;
-
-      line-height: 1.5;
-    }
-
-
-    /* =========================
-       RECENT POSTS
+       POSTS
     ========================= */
 
     .recent {
@@ -550,6 +503,7 @@
       border-radius: 15px;
 
       overflow: hidden;
+
     }
 
 
@@ -557,41 +511,215 @@
 
       padding: 20px;
 
-      border-bottom: 1px solid #eee;
+      border-bottom:
+        1px solid #eee;
 
       display: flex;
 
       align-items: center;
 
       justify-content: space-between;
+
     }
 
 
     .recent-header h2 {
 
       font-size: 18px;
+
     }
 
 
-    .view-link {
+    .refresh-btn {
 
-      color: #16a34a;
+      border: 1px solid #ddd;
 
-      text-decoration: none;
+      background: white;
 
-      font-size: 13px;
+      padding: 8px 12px;
+
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      font-size: 12px;
+
+    }
+
+
+    .refresh-btn:hover {
+
+      background: #f5f5f5;
+
+    }
+
+
+    /* =========================
+       POST ITEM
+    ========================= */
+
+    .post-item {
+
+      display: flex;
+
+      gap: 16px;
+
+      padding: 18px 20px;
+
+      border-bottom:
+        1px solid #eee;
+
+      align-items: center;
+
+    }
+
+
+    .post-item:last-child {
+
+      border-bottom: none;
+
+    }
+
+
+    .post-image {
+
+      width: 75px;
+
+      height: 65px;
+
+      border-radius: 9px;
+
+      background: #eee;
+
+      object-fit: cover;
+
+      flex-shrink: 0;
+
+    }
+
+
+    .post-info {
+
+      flex: 1;
+
+      min-width: 0;
+
+    }
+
+
+    .post-title {
+
+      font-size: 15px;
 
       font-weight: 700;
+
+      margin-bottom: 6px;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
     }
 
+
+    .post-meta {
+
+      display: flex;
+
+      gap: 8px;
+
+      align-items: center;
+
+      flex-wrap: wrap;
+
+    }
+
+
+    .category {
+
+      background: #f1f1f1;
+
+      color: #555;
+
+      padding: 4px 8px;
+
+      border-radius: 5px;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+    }
+
+
+    .date {
+
+      color: #999;
+
+      font-size: 11px;
+
+    }
+
+
+    .post-actions {
+
+      display: flex;
+
+      gap: 7px;
+
+    }
+
+
+    .edit-btn,
+    .delete-btn {
+
+      border: none;
+
+      padding: 8px 11px;
+
+      border-radius: 7px;
+
+      cursor: pointer;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+    }
+
+
+    .edit-btn {
+
+      background: #f1f1f1;
+
+      color: #111;
+
+    }
+
+
+    .delete-btn {
+
+      background: #fff0f0;
+
+      color: #d00000;
+
+    }
+
+
+    /* =========================
+       EMPTY
+    ========================= */
 
     .empty {
 
-      padding: 55px 20px;
+      padding: 60px 20px;
 
       text-align: center;
 
       color: #888;
+
     }
 
 
@@ -600,6 +728,7 @@
       font-size: 42px;
 
       margin-bottom: 12px;
+
     }
 
 
@@ -610,12 +739,31 @@
       margin-bottom: 7px;
 
       font-size: 16px;
+
     }
 
 
     .empty p {
 
       font-size: 13px;
+
+    }
+
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading {
+
+      padding: 50px;
+
+      text-align: center;
+
+      color: #888;
+
+      font-size: 13px;
+
     }
 
 
@@ -629,13 +777,7 @@
 
         grid-template-columns:
           repeat(2, 1fr);
-      }
 
-
-      .actions {
-
-        grid-template-columns:
-          repeat(2, 1fr);
       }
 
     }
@@ -646,6 +788,7 @@
       .sidebar {
 
         display: none;
+
       }
 
 
@@ -654,6 +797,7 @@
         margin-left: 0;
 
         padding: 20px 15px;
+
       }
 
 
@@ -662,24 +806,28 @@
         display: flex;
 
         margin: -20px -15px 25px;
+
       }
 
 
       .topbar {
 
         align-items: flex-start;
+
       }
 
 
       .topbar h1 {
 
         font-size: 25px;
+
       }
 
 
       .admin-badge {
 
         display: none;
+
       }
 
 
@@ -689,58 +837,79 @@
           1fr 1fr;
 
         gap: 12px;
+
       }
 
 
       .stat {
 
         padding: 17px;
+
       }
 
 
       .stat h3 {
 
         font-size: 23px;
-      }
 
-
-      .actions {
-
-        grid-template-columns: 1fr;
-
-        gap: 12px;
-      }
-
-    }
-
-
-    @media (max-width: 420px) {
-
-      .stats {
-
-        grid-template-columns: 1fr;
       }
 
 
       .section-header {
 
+        gap: 10px;
+
+      }
+
+
+      .post-item {
+
         align-items: flex-start;
 
-        gap: 10px;
       }
 
 
-      .section-header h2 {
+      .post-actions {
 
-        font-size: 18px;
+        flex-direction: column;
+
+      }
+
+    }
+
+
+    @media (max-width: 450px) {
+
+      .stats {
+
+        grid-template-columns: 1fr;
+
       }
 
 
-      .add-btn {
+      .post-image {
 
-        padding: 9px 12px;
+        width: 60px;
 
-        font-size: 12px;
+        height: 55px;
+
+      }
+
+
+      .post-title {
+
+        font-size: 13px;
+
+      }
+
+
+      .edit-btn,
+      .delete-btn {
+
+        padding: 7px 8px;
+
+        font-size: 10px;
+
       }
 
     }
@@ -753,433 +922,339 @@
 <body>
 
 
-  <div class="dashboard">
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
 
 
-    <!-- =========================
-         SIDEBAR
-    ========================= -->
+    <div class="brand">
 
-    <aside class="sidebar">
+      <div class="brand-logo">
+        SNK
+      </div>
+
+      <h2>
+        CakeBuddy
+      </h2>
+
+      <p>
+        Admin Dashboard
+      </p>
+
+    </div>
 
 
-      <div class="brand">
+    <nav class="nav">
 
-        <div class="brand-logo">
-          SNK
-        </div>
 
-        <h2>
-          CakeBuddy
-        </h2>
+      <a
+        href="dashboard.html"
+        class="active"
+      >
+
+        <span class="nav-icon">
+          📊
+        </span>
+
+        Dashboard
+
+      </a>
+
+
+      <a href="add-post.html">
+
+        <span class="nav-icon">
+          📝
+        </span>
+
+        Posts
+
+      </a>
+
+
+      <a href="#">
+
+        <span class="nav-icon">
+          📦
+        </span>
+
+        Products
+
+      </a>
+
+
+      <a href="#">
+
+        <span class="nav-icon">
+          🗂️
+        </span>
+
+        Categories
+
+      </a>
+
+
+      <a href="#">
+
+        <span class="nav-icon">
+          ⚙️
+        </span>
+
+        Settings
+
+      </a>
+
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+
+      <a
+        href="index.html"
+        class="store-link"
+      >
+        ← View Store
+      </a>
+
+
+      <button
+        id="logoutButton"
+        class="logout-btn"
+      >
+        🚪 Logout
+      </button>
+
+
+    </div>
+
+
+  </aside>
+
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+
+    <!-- MOBILE HEADER -->
+
+    <div class="mobile-header">
+
+      <h2>
+        CakeBuddy Admin
+      </h2>
+
+      <button id="mobileLogout">
+        Logout
+      </button>
+
+    </div>
+
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+
+      <div>
+
+        <h1>
+          Dashboard
+        </h1>
 
         <p>
-          Admin Dashboard
+          Welcome back! Manage your website from here.
         </p>
 
       </div>
 
 
-      <nav class="nav">
+      <div
+        class="admin-badge"
+        id="adminEmail"
+      >
+        Loading...
+      </div>
 
 
-        <a
-          href="dashboard.html"
-          class="active"
-        >
+    </div>
 
-          <span class="nav-icon">
-            📊
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+
+      <div class="stat">
+
+        <div class="stat-top">
+
+          <span>
+            Total Posts
           </span>
 
-          Dashboard
-
-        </a>
-
-
-        <a href="add-post.html">
-
-          <span class="nav-icon">
+          <div class="stat-icon">
             📝
+          </div>
+
+        </div>
+
+        <h3 id="postCount">
+          0
+        </h3>
+
+        <p>
+          Published posts
+        </p>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-top">
+
+          <span>
+            Products
           </span>
 
-          Posts
-
-        </a>
-
-
-        <a href="#">
-
-          <span class="nav-icon">
+          <div class="stat-icon">
             📦
+          </div>
+
+        </div>
+
+        <h3>
+          0
+        </h3>
+
+        <p>
+          Store products
+        </p>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-top">
+
+          <span>
+            Categories
           </span>
 
-          Products
-
-        </a>
-
-
-        <a href="#">
-
-          <span class="nav-icon">
+          <div class="stat-icon">
             🗂️
+          </div>
+
+        </div>
+
+        <h3>
+          0
+        </h3>
+
+        <p>
+          Active categories
+        </p>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-top">
+
+          <span>
+            Website
           </span>
 
-          Categories
+          <div class="stat-icon">
+            🟢
+          </div>
 
-        </a>
+        </div>
 
+        <h3>
+          Live
+        </h3>
 
-        <a href="#">
+        <p>
+          Current status
+        </p>
 
-          <span class="nav-icon">
-            ⚙️
-          </span>
-
-          Settings
-
-        </a>
-
-
-      </nav>
+      </div>
 
 
-      <div class="sidebar-bottom">
+    </div>
 
 
-        <a
-          href="index.html"
-          class="store-link"
-        >
-          ← View Store
-        </a>
+
+    <!-- SECTION -->
+
+    <div class="section-header">
+
+
+      <h2>
+        Posts
+      </h2>
+
+
+      <a
+        href="add-post.html"
+        class="add-btn"
+      >
+        + Add New
+      </a>
+
+
+    </div>
+
+
+
+    <!-- POSTS -->
+
+    <div class="recent">
+
+
+      <div class="recent-header">
+
+        <h2>
+          Recent Posts
+        </h2>
 
 
         <button
-          id="logoutButton"
-          class="logout-btn"
+          id="refreshButton"
+          class="refresh-btn"
         >
-          🚪 Logout
-        </button>
-
-
-      </div>
-
-
-    </aside>
-
-
-    <!-- =========================
-         MAIN
-    ========================= -->
-
-    <main class="main">
-
-
-      <!-- MOBILE HEADER -->
-
-      <div class="mobile-header">
-
-        <h2>
-          CakeBuddy Admin
-        </h2>
-
-        <button id="mobileLogout">
-          Logout
+          🔄 Refresh
         </button>
 
       </div>
 
 
-      <!-- TOPBAR -->
+      <div id="postsContainer">
 
-      <div class="topbar">
-
-
-        <div>
-
-          <h1>
-            Dashboard
-          </h1>
-
-          <p>
-            Welcome back! Manage your website
-            from here.
-          </p>
-
+        <div class="loading">
+          Loading posts...
         </div>
-
-
-        <div
-          class="admin-badge"
-          id="adminEmail"
-        >
-          Loading...
-        </div>
-
 
       </div>
 
 
-      <!-- =========================
-           STATS
-      ========================= -->
+    </div>
 
-      <div class="stats">
 
-
-        <div class="stat">
-
-          <div class="stat-top">
-
-            <span>
-              Total Posts
-            </span>
-
-            <div class="stat-icon">
-              📝
-            </div>
-
-          </div>
-
-          <h3 id="postCount">
-            0
-          </h3>
-
-          <p>
-            Published posts
-          </p>
-
-        </div>
-
-
-        <div class="stat">
-
-          <div class="stat-top">
-
-            <span>
-              Products
-            </span>
-
-            <div class="stat-icon">
-              📦
-            </div>
-
-          </div>
-
-          <h3 id="productCount">
-            0
-          </h3>
-
-          <p>
-            Store products
-          </p>
-
-        </div>
-
-
-        <div class="stat">
-
-          <div class="stat-top">
-
-            <span>
-              Categories
-            </span>
-
-            <div class="stat-icon">
-              🗂️
-            </div>
-
-          </div>
-
-          <h3>
-            0
-          </h3>
-
-          <p>
-            Active categories
-          </p>
-
-        </div>
-
-
-        <div class="stat">
-
-          <div class="stat-top">
-
-            <span>
-              Website
-            </span>
-
-            <div class="stat-icon">
-              🟢
-            </div>
-
-          </div>
-
-          <h3>
-            Live
-          </h3>
-
-          <p>
-            Current status
-          </p>
-
-        </div>
-
-
-      </div>
-
-
-      <!-- =========================
-           QUICK ACTIONS
-      ========================= -->
-
-      <div class="section-header">
-
-        <h2>
-          Quick Actions
-        </h2>
-
-
-        <a
-          href="add-post.html"
-          class="add-btn"
-        >
-          + Add New
-        </a>
-
-      </div>
-
-
-      <div class="actions">
-
-
-        <!-- CREATE POST -->
-
-        <a
-          href="add-post.html"
-          class="action"
-        >
-
-          <div class="action-icon">
-            📝
-          </div>
-
-          <h3>
-            Create New Post
-          </h3>
-
-          <p>
-            Add a new post, announcement
-            or content to your website.
-          </p>
-
-        </a>
-
-
-        <!-- ADD PRODUCT -->
-
-        <a
-          href="#"
-          class="action"
-        >
-
-          <div class="action-icon">
-            📦
-          </div>
-
-          <h3>
-            Add Product
-          </h3>
-
-          <p>
-            Add products with image,
-            price and description.
-          </p>
-
-        </a>
-
-
-        <!-- CATEGORY -->
-
-        <a
-          href="#"
-          class="action"
-        >
-
-          <div class="action-icon">
-            🗂️
-          </div>
-
-          <h3>
-            Manage Categories
-          </h3>
-
-          <p>
-            Create and manage your
-            website categories.
-          </p>
-
-        </a>
-
-
-      </div>
-
-
-      <!-- =========================
-           RECENT POSTS
-      ========================= -->
-
-      <div class="recent">
-
-
-        <div class="recent-header">
-
-          <h2>
-            Recent Posts
-          </h2>
-
-
-          <a
-            href="#"
-            class="view-link"
-          >
-            View All →
-          </a>
-
-        </div>
-
-
-        <div class="empty">
-
-          <div class="empty-icon">
-            📋
-          </div>
-
-          <h3>
-            No posts yet
-          </h3>
-
-          <p>
-            Your published posts will appear here.
-          </p>
-
-        </div>
-
-
-      </div>
-
-
-    </main>
-
-
-  </div>
+  </main>
 
 
 
   <!-- =========================
-       FIREBASE AUTH
+       FIREBASE
   ========================= -->
 
   <script type="module">
@@ -1187,7 +1262,8 @@
 
     import {
       initializeApp
-    } from
+    }
+    from
     "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
@@ -1195,8 +1271,22 @@
       getAuth,
       onAuthStateChanged,
       signOut
-    } from
+    }
+    from
     "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      deleteDoc,
+      doc,
+      query,
+      orderBy
+    }
+    from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
     /* =========================
@@ -1241,6 +1331,50 @@
       getAuth(app);
 
 
+    const db =
+      getFirestore(app);
+
+
+    /* =========================
+       ELEMENTS
+    ========================= */
+
+    const postsContainer =
+      document.getElementById(
+        "postsContainer"
+      );
+
+
+    const postCount =
+      document.getElementById(
+        "postCount"
+      );
+
+
+    const adminEmail =
+      document.getElementById(
+        "adminEmail"
+      );
+
+
+    const refreshButton =
+      document.getElementById(
+        "refreshButton"
+      );
+
+
+    const logoutButton =
+      document.getElementById(
+        "logoutButton"
+      );
+
+
+    const mobileLogout =
+      document.getElementById(
+        "mobileLogout"
+      );
+
+
     /* =========================
        AUTH CHECK
     ========================= */
@@ -1259,12 +1393,361 @@
         }
 
 
-        document.getElementById(
-          "adminEmail"
-        ).textContent =
+        adminEmail.textContent =
           user.email;
 
+
+        loadPosts();
+
       }
+    );
+
+
+    /* =========================
+       LOAD POSTS
+    ========================= */
+
+    async function loadPosts() {
+
+      postsContainer.innerHTML = `
+
+        <div class="loading">
+          Loading posts...
+        </div>
+
+      `;
+
+
+      try {
+
+
+        const postsQuery =
+          query(
+
+            collection(
+              db,
+              "posts"
+            ),
+
+            orderBy(
+              "createdAt",
+              "desc"
+            )
+
+          );
+
+
+        const snapshot =
+          await getDocs(
+            postsQuery
+          );
+
+
+        postCount.textContent =
+          snapshot.size;
+
+
+        if (snapshot.empty) {
+
+          postsContainer.innerHTML = `
+
+            <div class="empty">
+
+              <div class="empty-icon">
+                📋
+              </div>
+
+              <h3>
+                No posts yet
+              </h3>
+
+              <p>
+                Click "+ Add New" to create your first post.
+              </p>
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        postsContainer.innerHTML = "";
+
+
+        snapshot.forEach(
+          function(documentSnapshot) {
+
+
+            const post =
+              documentSnapshot.data();
+
+
+            const postId =
+              documentSnapshot.id;
+
+
+            const item =
+              document.createElement(
+                "div"
+              );
+
+
+            item.className =
+              "post-item";
+
+
+            const image =
+              post.image
+              ||
+              "https://via.placeholder.com/150?text=Post";
+
+
+            const title =
+              post.title
+              ||
+              "Untitled Post";
+
+
+            const category =
+              post.category
+              ||
+              "General";
+
+
+            let dateText =
+              "Recently";
+
+
+            if (
+              post.createdAt
+            ) {
+
+              try {
+
+                dateText =
+                  post.createdAt
+                    .toDate()
+                    .toLocaleDateString(
+                      "en-GB",
+                      {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric"
+                      }
+                    );
+
+              } catch (error) {
+
+                dateText =
+                  "Recently";
+
+              }
+
+            }
+
+
+            item.innerHTML = `
+
+              <img
+                class="post-image"
+                src="${escapeHtml(image)}"
+                alt="Post"
+                onerror="this.src='https://via.placeholder.com/150?text=Post'"
+              >
+
+
+              <div class="post-info">
+
+                <div class="post-title">
+                  ${escapeHtml(title)}
+                </div>
+
+
+                <div class="post-meta">
+
+                  <span class="category">
+                    ${escapeHtml(category)}
+                  </span>
+
+                  <span class="date">
+                    ${dateText}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="post-actions">
+
+                <button
+                  class="edit-btn"
+                  data-id="${postId}"
+                >
+                  ✏️ Edit
+                </button>
+
+
+                <button
+                  class="delete-btn"
+                  data-id="${postId}"
+                >
+                  🗑️ Delete
+                </button>
+
+              </div>
+
+            `;
+
+
+            const editButton =
+              item.querySelector(
+                ".edit-btn"
+              );
+
+
+            const deleteButton =
+              item.querySelector(
+                ".delete-btn"
+              );
+
+
+            editButton.addEventListener(
+              "click",
+              function() {
+
+                alert(
+                  "Edit system আমরা পরের Step-এ তৈরি করব।"
+                );
+
+              }
+            );
+
+
+            deleteButton.addEventListener(
+              "click",
+              function() {
+
+                deletePost(
+                  postId,
+                  title
+                );
+
+              }
+            );
+
+
+            postsContainer.appendChild(
+              item
+            );
+
+          }
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Load Posts Error:",
+          error
+        );
+
+
+        postsContainer.innerHTML = `
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              ⚠️
+            </div>
+
+            <h3>
+              Posts load করা যায়নি
+            </h3>
+
+            <p>
+              Firestore Rules অথবা Database check করুন।
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =========================
+       DELETE POST
+    ========================= */
+
+    async function deletePost(
+      postId,
+      postTitle
+    ) {
+
+
+      const confirmed =
+        confirm(
+          `"${postTitle}" post টি কি Delete করতে চান?`
+        );
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
+      try {
+
+
+        await deleteDoc(
+          doc(
+            db,
+            "posts",
+            postId
+          )
+        );
+
+
+        alert(
+          "✅ Post successfully deleted!"
+        );
+
+
+        loadPosts();
+
+
+      } catch (error) {
+
+        console.error(
+          "Delete Error:",
+          error
+        );
+
+
+        alert(
+          "❌ Post delete করা যায়নি। Firestore Rules check করুন।"
+        );
+
+      }
+
+    }
+
+
+    /* =========================
+       REFRESH
+    ========================= */
+
+    refreshButton.addEventListener(
+      "click",
+      loadPosts
     );
 
 
@@ -1286,7 +1769,7 @@
         console.error(error);
 
         alert(
-          "Logout failed. Please try again."
+          "Logout failed."
         );
 
       }
@@ -1294,20 +1777,39 @@
     }
 
 
-    document
-      .getElementById("logoutButton")
-      .addEventListener(
-        "click",
-        logout
-      );
+    logoutButton.addEventListener(
+      "click",
+      logout
+    );
 
 
-    document
-      .getElementById("mobileLogout")
-      .addEventListener(
-        "click",
-        logout
-      );
+    mobileLogout.addEventListener(
+      "click",
+      logout
+    );
+
+
+    /* =========================
+       SECURITY HELPER
+    ========================= */
+
+    function escapeHtml(
+      value
+    ) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.textContent =
+        String(value);
+
+
+      return div.innerHTML;
+
+    }
 
 
   </script>
