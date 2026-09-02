@@ -7,6 +7,13 @@
 </head>
 <body style="margin:0;">
 
+<!-- ============================================================
+     SNK IT INSTITUTE — ADMISSION & PAYMENT SECTION (BRANDED)
+     এই পুরো ব্লকটা আপনার index.html এর </body> ট্যাগের ঠিক আগে
+     paste করে দিন। এবং assets/snk-logo.png ও
+     assets/receipt-banner.png ফাইল দুটো আপনার repo তে
+     "assets" ফোল্ডারে আপলোড করুন (নিচে instruction আছে)।
+     ============================================================ -->
 <section id="snk-admission" class="snk-admit">
   <style>
     #snk-admission.snk-admit{
@@ -30,6 +37,7 @@
     #snk-admission.snk-admit *{box-sizing:border-box;}
     #snk-admission .snk-wrap{max-width:760px;margin:0 auto;}
 
+    /* ---- Brand header ---- */
     #snk-admission .snk-brand{display:flex; align-items:center; gap:12px; margin-bottom:22px;}
     #snk-admission .snk-logo-img{
       width:52px; height:52px; border-radius:10px; object-fit:contain; flex-shrink:0;
@@ -132,6 +140,7 @@
     }
     #snk-admission .snk-error-banner.show{display:block;}
 
+    /* ---- Success screen ---- */
     #snk-admission .snk-success{display:none;}
     #snk-admission .snk-success.show{display:block; animation:snkFadeIn .35s ease;}
     #snk-admission .snk-success-card{padding:0; overflow:hidden;}
@@ -179,9 +188,33 @@
       font-size:13px; text-decoration:underline; cursor:pointer; padding:6px;
     }
 
+    /* ---- Status check card ---- */
+    #snk-admission .snk-check-card{margin-top:22px;}
+    #snk-admission .snk-check-card h3{font-size:16px; margin:0 0 6px; font-weight:800; color:var(--snk-black);}
+    #snk-admission .snk-check-card p{font-size:13px; color:#57604f; margin:0 0 14px;}
+    #snk-admission .snk-check-row{display:flex; gap:8px;}
+    #snk-admission .snk-check-row input{flex:1; min-width:0;}
+    #snk-admission .snk-check-row button{
+      border:1.5px solid var(--snk-green); background:#fff; color:var(--snk-green-dark);
+      font-weight:700; padding:0 18px; border-radius:9px; cursor:pointer; font-size:14px;
+      white-space:nowrap;
+    }
+    #snk-admission .snk-check-row button:hover{background:var(--snk-green); color:#fff;}
+    #snk-admission .snk-check-result{margin-top:14px;}
+    #snk-admission .snk-check-item{
+      padding:10px 0; border-bottom:1px solid #ece5d0; font-size:13.5px;
+    }
+    #snk-admission .snk-check-item:last-child{border-bottom:none;}
+    #snk-admission .snk-check-date{color:#7a8073; font-size:12.5px;}
+    @media (max-width:480px){
+      #snk-admission .snk-check-row{flex-direction:column;}
+      #snk-admission .snk-check-row button{padding:12px; width:100%;}
+    }
+
     @keyframes snkFadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
     @keyframes snkSpin{to{transform:rotate(360deg);}}
 
+    /* ---- Mobile tweaks ---- */
     @media (max-width:480px){
       #snk-admission .snk-promo-row{flex-direction:column;}
       #snk-admission .snk-promo-row button{padding:12px; width:100%;}
@@ -189,6 +222,7 @@
       #snk-admission .snk-receipt-row span:last-child{text-align:left;}
     }
 
+    /* ---- Print styles (receipt only) ---- */
     @media print{
       body *{visibility:hidden;}
       #snk-admission .snk-print-area, #snk-admission .snk-print-area *{visibility:visible;}
@@ -358,6 +392,17 @@
       </div>
     </div>
 
+    <!-- ============ STATUS CHECK CARD ============ -->
+    <div class="snk-card snk-check-card">
+      <h3>আপনার Admission Status Check করুন</h3>
+      <p>যে ফোন নম্বর দিয়ে ভর্তি হয়েছিলেন সেটা দিন</p>
+      <div class="snk-check-row">
+        <input type="tel" id="snkCheckPhone" pattern="01[0-9]{9}" maxlength="11" placeholder="01XXXXXXXXX">
+        <button type="button" id="snkCheckBtn">Check করুন</button>
+      </div>
+      <div class="snk-check-result" id="snkCheckResult"></div>
+    </div>
+
   </div>
 
   <script>
@@ -384,6 +429,9 @@
       var printBtn = root.querySelector('#snkPrintBtn');
       var downloadBtn = root.querySelector('#snkDownloadBtn');
       var againBtn = root.querySelector('#snkAgainBtn');
+      var checkPhoneInput = root.querySelector('#snkCheckPhone');
+      var checkBtn = root.querySelector('#snkCheckBtn');
+      var checkResult = root.querySelector('#snkCheckResult');
 
       // ==== এখানে promo code গুলো বদলাতে/যোগ করতে পারবেন ====
       var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbhKPWoNYFZ4ClNXROaU9NvE_pfy3T-8L4DXH9ipfWnQj1zXb9BQxhoR-LkzyVSjvz/exec";
@@ -584,6 +632,37 @@
         appliedCode = '';
         successView.classList.remove('show');
         formView.style.display = '';
+      });
+
+      checkBtn.addEventListener('click', function(){
+        var phone = checkPhoneInput.value.trim();
+        if(!/^01[0-9]{9}$/.test(phone)){
+          checkResult.innerHTML = '<p style="color:var(--snk-red);font-size:13px;margin:0;">সঠিক ১১ ডিজিটের নম্বর দিন (যেমন: 01705633700)।</p>';
+          return;
+        }
+        checkResult.innerHTML = '<p style="color:#7a8073;font-size:13px;margin:0;">খোঁজা হচ্ছে...</p>';
+
+        fetch(APPS_SCRIPT_URL + '?action=check&phone=' + encodeURIComponent(phone))
+          .then(function(res){ return res.json(); })
+          .then(function(data){
+            if(!data.found || !data.results.length){
+              checkResult.innerHTML = '<p style="color:var(--snk-red);font-size:13px;margin:0;">এই নম্বরে কোনো admission পাওয়া যায়নি।</p>';
+              return;
+            }
+            var html = '';
+            data.results.forEach(function(r){
+              var pillCls = r.status === 'Confirmed' ? 'confirmed' : '';
+              html += '<div class="snk-check-item">' +
+                '<b>' + r.course + '</b><br>' +
+                '<span class="snk-check-date">' + r.date + '</span> — ' +
+                '<span class="snk-status-pill ' + pillCls + '">' + r.status + '</span>' +
+                '</div>';
+            });
+            checkResult.innerHTML = html;
+          })
+          .catch(function(){
+            checkResult.innerHTML = '<p style="color:var(--snk-red);font-size:13px;margin:0;">সমস্যা হয়েছে, আবার চেষ্টা করুন।</p>';
+          });
       });
     })();
   </script>
