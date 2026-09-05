@@ -300,8 +300,22 @@
           <input type="text" id="snkThana" name="Thana/Upazila" required placeholder="যেমন: সদর, বিয়ানীবাজার">
 
           <label for="snkCourse">কোর্স নির্বাচন করুন *</label>
-          <select id="snkCourse" name="Course" required disabled>
-            <option value="" disabled selected>লোড হচ্ছে...</option>
+          <select id="snkCourse" name="Course" required>
+            <option value="" disabled selected>-- একটি কোর্স বেছে নিন --</option>
+            <optgroup label="🟢 Free Courses">
+              <option value="Professional Graphic Design" data-type="free">Professional Graphic Design</option>
+              <option value="Professional Web Design" data-type="free">Professional Web Design</option>
+              <option value="Design Thinking Mindset" data-type="free">Design Thinking Mindset</option>
+              <option value="Content Creation with AI" data-type="free">Content Creation with AI</option>
+            </optgroup>
+            <optgroup label="⚫ Paid Courses">
+              <option value="AI Driven UI/UX Career Program" data-type="paid" data-fee="7490">AI Driven UI/UX Career Program — ৳7,490</option>
+              <option value="AI Powered UI/UX Context Engineering" data-type="paid" data-fee="11500">AI Powered UI/UX Context Engineering — ৳11,500</option>
+              <option value="AI Driven Cyber Security and Ethical Hacking" data-type="paid" data-fee="9500">AI Driven Cyber Security and Ethical Hacking — ৳9,500</option>
+              <option value="AI Driven Motion Graphic" data-type="paid" data-fee="8500">AI Driven Motion Graphic — ৳8,500</option>
+              <option value="AI Powered 100 Days Kidz Spoken" data-type="paid" data-fee="6500">AI Powered 100 Days Kidz Spoken — ৳6,500</option>
+              <option value="AI Driven Graphic Design" data-type="paid" data-fee="4500">AI Driven Graphic Design — ৳4,500</option>
+            </optgroup>
           </select>
 
           <div class="snk-fee-box free-box" id="snkFreeBox">
@@ -434,11 +448,15 @@
       var appliedCode = '';
       var lastSubmission = null;
 
+      // ==== Google Sheet থেকে course list load করে (background এ, fail করলে উপরের default list-ই থাকবে) ====
       function loadCourses(){
         fetch(APPS_SCRIPT_URL + '?action=courses')
           .then(function(res){ return res.json(); })
           .then(function(data){
             var courses = data.courses || [];
+            if(!courses.length) return; // খালি হলে পুরনো list-ই রাখো
+
+            var currentValue = courseSel.value;
             var freeOptGroup = document.createElement('optgroup');
             freeOptGroup.label = '🟢 Free Courses';
             var paidOptGroup = document.createElement('optgroup');
@@ -458,20 +476,26 @@
               }
             });
 
-            courseSel.innerHTML = '';
+            if(!freeOptGroup.children.length && !paidOptGroup.children.length) return;
+
+            var newSelect = document.createElement('select');
+            newSelect.id = 'snkCourse';
+            newSelect.name = 'Course';
+            newSelect.required = true;
             var placeholder = document.createElement('option');
             placeholder.value = '';
             placeholder.disabled = true;
             placeholder.selected = true;
             placeholder.textContent = '-- একটি কোর্স বেছে নিন --';
-            courseSel.appendChild(placeholder);
-            if(freeOptGroup.children.length) courseSel.appendChild(freeOptGroup);
-            if(paidOptGroup.children.length) courseSel.appendChild(paidOptGroup);
-            courseSel.disabled = false;
+            newSelect.appendChild(placeholder);
+            if(freeOptGroup.children.length) newSelect.appendChild(freeOptGroup);
+            if(paidOptGroup.children.length) newSelect.appendChild(paidOptGroup);
+
+            courseSel.replaceWith(newSelect);
+            courseSel = newSelect;
+            courseSel.addEventListener('change', onCourseChange);
           })
-          .catch(function(){
-            courseSel.innerHTML = '<option value="" disabled selected>কোর্স লোড করতে সমস্যা হয়েছে, page reload করুন</option>';
-          });
+          .catch(function(){ /* fail korle purono static list e thakbe, kono somossha nai */ });
       }
       loadCourses();
 
@@ -490,7 +514,7 @@
         promoHiddenEl.value = appliedCode;
       }
 
-      courseSel.addEventListener('change', function(){
+      function onCourseChange(){
         var opt = courseSel.options[courseSel.selectedIndex];
         var type = opt.getAttribute('data-type');
         appliedPct = 0;
@@ -512,7 +536,8 @@
           freeBox.classList.remove('show');
           paidBox.classList.remove('show');
         }
-      });
+      }
+      courseSel.addEventListener('change', onCourseChange);
 
       promoBtn.addEventListener('click', function(){
         var code = promoInput.value.trim().toUpperCase();
