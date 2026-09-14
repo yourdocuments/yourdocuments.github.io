@@ -3,228 +3,413 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SNK IT Institute — Admission Form</title>
+<title>SNK IT Institute — Learn To Lead</title>
 <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/yourdocuments/products/main/logo(1).svg">
 <meta name="description" content="SNK IT Institute — Moulvibazar, Sylhet এ অবস্থিত IT প্রশিক্ষণ প্রতিষ্ঠান। AI Driven UI/UX, Cyber Security, Graphic Design সহ Free ও Paid কোর্সে ভর্তি চলছে। Learn To Lead.">
-</head>
-<body style="margin:0;">
+<style>
+  :root{
+    --ink:#14251f;
+    --paper:#f6f8f3;
+    --card:#ffffff;
+    --line:#dbe6d3;
+    --green:#63a416;
+    --green-dark:#406a0e;
+    --green-tint:#eef6e6;
+    --black:#0e0e0e;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:'Segoe UI','Noto Sans Bengali',system-ui,-apple-system,sans-serif;
+    color:var(--ink); background:var(--paper);
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
 
-<!-- ============================================================
-     SNK IT INSTITUTE — ADMISSION & PAYMENT SECTION (BRANDED)
-     এই পুরো ব্লকটা আপনার index.html এর </body> ট্যাগের ঠিক আগে
-     paste করে দিন। এবং assets/snk-logo.png ও
-     assets/receipt-banner.png ফাইল দুটো আপনার repo তে
-     "assets" ফোল্ডারে আপলোড করুন (নিচে instruction আছে)।
-     ============================================================ -->
+  .snkNav{
+    position:sticky; top:0; z-index:50; background:rgba(14,14,14,.92);
+    backdrop-filter:blur(6px); border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .snkNav .wrap{display:flex; align-items:center; justify-content:space-between; padding:12px 20px;}
+  .snkNav .brand{display:flex; align-items:center; gap:10px;}
+  .snkNav .brand img{width:38px; height:38px; border-radius:8px; background:#000;}
+  .snkNav .brand span{color:#fff; font-weight:800; font-size:16px;}
+  .snkNav nav{display:flex; gap:22px;}
+  .snkNav nav a{color:#c9d3c4; text-decoration:none; font-size:14px; font-weight:600; transition:color .15s ease;}
+  .snkNav nav a:hover{color:#fff;}
+  .snkNav .navCta{background:var(--green); color:#fff; padding:9px 18px; border-radius:8px; font-weight:700; font-size:13.5px; text-decoration:none; white-space:nowrap;}
+  .snkNav .navCta:hover{background:var(--green-dark);}
+  @media (max-width:720px){ .snkNav nav{display:none;} }
+
+  .hero{position:relative; background:var(--black); color:#fff; overflow:hidden; padding:76px 0 90px;}
+  .hero::after{
+    content:''; position:absolute; top:-140px; right:-160px; width:480px; height:480px;
+    border-radius:50%; border:56px solid var(--green); opacity:.85;
+    clip-path:polygon(0 0, 100% 0, 100% 100%, 45% 100%);
+  }
+  .hero .wrap{position:relative; z-index:2; display:flex; flex-direction:column; gap:22px; max-width:640px;}
+  .hero .tag{color:var(--green); font-weight:700; font-size:14px; letter-spacing:.02em;}
+  .hero h1{font-size:clamp(34px,6vw,54px); line-height:1.08; font-weight:800; margin:0;}
+  .hero h1 em{color:var(--green); font-style:normal;}
+  .hero p{font-size:16.5px; line-height:1.7; color:#cfd8c9; margin:0; max-width:520px;}
+  .hero .heroBtns{display:flex; gap:14px; flex-wrap:wrap; margin-top:6px;}
+  .btnPrimary{background:var(--green); color:#fff; padding:14px 26px; border-radius:9px; font-weight:800; text-decoration:none; font-size:15px; display:inline-block; transition:background .15s ease;}
+  .btnPrimary:hover{background:var(--green-dark);}
+  .btnGhost{border:1.5px solid rgba(255,255,255,.35); color:#fff; padding:14px 26px; border-radius:9px; font-weight:700; text-decoration:none; font-size:15px; display:inline-block;}
+  .btnGhost:hover{border-color:#fff;}
+  .heroStats{display:flex; gap:34px; margin-top:20px; flex-wrap:wrap;}
+  .heroStats div b{display:block; font-size:24px; font-weight:800; color:#fff;}
+  .heroStats div span{font-size:13px; color:#9fac97;}
+
+  .payCard{
+    margin-top:8px; background:rgba(255,255,255,.06); border:1.5px solid rgba(99,164,22,.4);
+    border-radius:14px; padding:18px 20px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  }
+  .payCard .payIcon{
+    width:46px; height:46px; border-radius:10px; background:var(--green); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;
+  }
+  .payCard .payText{flex:1; min-width:180px;}
+  .payCard .payText b{display:block; color:#fff; font-size:14px; margin-bottom:2px;}
+  .payCard .payText span{color:#9fac97; font-size:12.5px;}
+  .payCard .payNum{
+    background:#fff; color:var(--black); font-weight:800; font-size:17px; letter-spacing:.03em;
+    padding:8px 14px; border-radius:8px; white-space:nowrap;
+  }
+  .payCard .payCopyBtn{
+    background:none; border:1.5px solid rgba(255,255,255,.35); color:#fff; padding:8px 14px;
+    border-radius:8px; font-size:12.5px; font-weight:700; cursor:pointer; white-space:nowrap;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .payCard .payCopyBtn:hover{background:rgba(255,255,255,.1); border-color:#fff;}
+  @media (max-width:480px){
+    .payCard{flex-direction:column; align-items:flex-start;}
+    .payCard .payNum, .payCard .payCopyBtn{width:100%; text-align:center;}
+  }
+
+  .secHead{max-width:560px; margin:0 0 40px;}
+  .secHead h2{font-size:clamp(24px,4vw,32px); font-weight:800; margin:0 0 10px; color:var(--black);}
+  .secHead p{font-size:15px; color:#57604f; line-height:1.7; margin:0;}
+
+  .about{padding:76px 0;}
+  .aboutGrid{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center;}
+  .aboutGrid p{font-size:15.5px; line-height:1.85; color:#3c4a3f; margin:0 0 16px;}
+  .aboutCard{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px; box-shadow:0 3px 14px rgba(20,37,31,.06);}
+  .aboutCard .loc{display:flex; gap:10px; align-items:flex-start; margin-bottom:16px;}
+  .aboutCard .loc:last-child{margin-bottom:0;}
+  .aboutCard .loc b{display:block; font-size:13.5px; color:var(--black);}
+  .aboutCard .loc span{font-size:13.5px; color:#657060;}
+  @media (max-width:800px){ .aboutGrid{grid-template-columns:1fr;} }
+
+  .coursesSec{padding:76px 0; background:var(--green-tint); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .courseGrid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .courseCard{background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px; display:flex; flex-direction:column; gap:10px;}
+  .courseCard .badge{align-self:flex-start; font-size:11px; font-weight:800; padding:4px 10px; border-radius:100px;}
+  .courseCard .badge.free{background:#e7f0f9; color:#2f6fb0;}
+  .courseCard .badge.paid{background:#111; color:#fff;}
+  .courseCard h3{font-size:16px; margin:0; font-weight:700; color:var(--black); line-height:1.4;}
+  .courseCard .fee{font-size:19px; font-weight:800; color:var(--green-dark); margin-top:auto;}
+  .courseCard a{margin-top:6px; font-size:13.5px; font-weight:700; color:var(--green-dark); text-decoration:none;}
+  .courseCard a:hover{text-decoration:underline;}
+  @media (max-width:900px){ .courseGrid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .courseGrid{grid-template-columns:1fr;} }
+
+  .whySec{padding:76px 0;}
+  .whyGrid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .whyCard{padding:4px;}
+  .whyCard .ico{width:46px; height:46px; border-radius:10px; background:var(--black); color:var(--green); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:14px;}
+  .whyCard h4{font-size:15.5px; margin:0 0 8px; font-weight:800; color:var(--black);}
+  .whyCard p{font-size:13.5px; color:#57604f; line-height:1.65; margin:0;}
+  @media (max-width:900px){ .whyGrid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .whyGrid{grid-template-columns:1fr;} }
+
+  .snkFooter{background:var(--black); color:#cfd8c9; padding:50px 0 26px; margin-top:0;}
+  .footGrid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px; margin-bottom:34px;}
+  .footBrand{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .footBrand img{width:36px; height:36px; border-radius:8px; background:#000;}
+  .footBrand span{color:#fff; font-weight:800; font-size:16px;}
+  .footGrid p{font-size:13.5px; line-height:1.7; color:#9fac97; margin:0;}
+  .footGrid h5{color:#fff; font-size:13.5px; margin:0 0 14px; font-weight:700;}
+  .footGrid a{display:block; font-size:13.5px; color:#9fac97; text-decoration:none; margin-bottom:9px;}
+  .footGrid a:hover{color:#fff;}
+  .footBottom{border-top:1px solid rgba(255,255,255,.1); padding-top:20px; text-align:center; font-size:12.5px; color:#7c8878;}
+  @media (max-width:760px){ .footGrid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div class="snkNav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="https://raw.githubusercontent.com/yourdocuments/products/main/logo(1).svg" alt="SNK IT Institute">
+      <span>SNK IT Institute</span>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#courses">Courses</a>
+      <a href="#why">Why Us</a>
+    </nav>
+    <a href="#snk-admission" class="navCta">ভর্তি হোন</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="tag">Moulvibazar, Sylhet</div>
+    <h1>দক্ষতা শিখুন, <em>নেতৃত্ব দিন।</em></h1>
+    <p>SNK IT Institute এ AI Driven UI/UX, Cyber Security, Motion Graphic সহ হাতে-কলমে শেখার প্র্যাকটিক্যাল কোর্স — Free ও Paid দুই ধরনের ব্যাচেই ভর্তি চলছে।</p>
+    <div class="heroBtns">
+      <a href="#snk-admission" class="btnPrimary">এখনই ভর্তি ফর্ম পূরণ করুন</a>
+      <a href="#courses" class="btnGhost">কোর্সসমূহ দেখুন</a>
+    </div>
+    <div class="heroStats">
+      <div><b>১০+</b><span>কোর্স (Free ও Paid)</span></div>
+      <div><b>১০০%</b><span>Practical, Project-based</span></div>
+      <div><b>Sylhet</b><span>ভিত্তিক প্রতিষ্ঠান</span></div>
+    </div>
+    <div class="payCard">
+      <div class="payIcon">💳</div>
+      <div class="payText">
+        <b>bKash / Nagad এ Payment করুন</b>
+        <span>ভর্তি ফর্ম পূরণের সময় এই নম্বরেই "Send Money" করবেন</span>
+      </div>
+      <div class="payNum" id="heroPayNum">01705633700</div>
+      <button type="button" class="payCopyBtn" id="heroCopyBtn">📋 কপি করুন</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function(){
+    var btn = document.getElementById('heroCopyBtn');
+    var num = document.getElementById('heroPayNum');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      var text = num.textContent.trim();
+      function done(){
+        btn.textContent = '✓ কপি হয়েছে!';
+        setTimeout(function(){ btn.textContent = '📋 কপি করুন'; }, 1800);
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(done);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try{ document.execCommand('copy'); }catch(e){}
+        document.body.removeChild(ta);
+        done();
+      }
+    });
+  })();
+</script>
+
+<section class="about" id="about">
+  <div class="wrap aboutGrid">
+    <div>
+      <div class="secHead" style="margin-bottom:18px;">
+        <h2>SNK IT Institute সম্পর্কে</h2>
+      </div>
+      <p>SNK IT Institute মৌলভীবাজার, সিলেটে অবস্থিত একটি IT প্রশিক্ষণ প্রতিষ্ঠান, যেখানে আধুনিক প্রযুক্তি আর AI-নির্ভর দক্ষতাকে সহজ, প্র্যাকটিক্যাল উপায়ে শেখানো হয়।</p>
+      <p>আমাদের লক্ষ্য — শুধু সার্টিফিকেট না, বাস্তব দক্ষতা তৈরি করা, যাতে শিক্ষার্থীরা freelancing, চাকরি বা নিজের উদ্যোগে সফলভাবে দাঁড়াতে পারে। "Learn To Lead" — এটাই আমাদের মূলমন্ত্র।</p>
+    </div>
+    <div class="aboutCard">
+      <div class="loc">
+        <span>📍</span>
+        <div><b>ঠিকানা</b><span>5th Master Para Road, Beside of Syed Shah Mostofa College, Moulvibazar, Sylhet</span></div>
+      </div>
+      <div class="loc">
+        <span>✉️</span>
+        <div><b>ইমেইল</b><span>iamsnkbd@protonmail.com</span></div>
+      </div>
+      <div class="loc">
+        <span>💬</span>
+        <div><b>WhatsApp</b><span>01705633700</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="coursesSec" id="courses">
+  <div class="wrap">
+    <div class="secHead">
+      <h2>আমাদের কোর্সসমূহ</h2>
+      <p>Free ও Paid — দুই ধরনের কোর্স আছে। নিচে ক্লিক করলে সরাসরি ভর্তি ফর্মে চলে যাবেন।</p>
+    </div>
+    <div class="courseGrid">
+      <div class="courseCard">
+        <span class="badge free">Free</span>
+        <h3>Professional Graphic Design</h3>
+        <a href="#snk-admission">ভর্তি ফর্মে যান →</a>
+      </div>
+      <div class="courseCard">
+        <span class="badge free">Free</span>
+        <h3>Professional Web Design</h3>
+        <a href="#snk-admission">ভর্তি ফর্মে যান →</a>
+      </div>
+      <div class="courseCard">
+        <span class="badge free">Free</span>
+        <h3>Design Thinking Mindset</h3>
+        <a href="#snk-admission">ভর্তি ফর্মে যান →</a>
+      </div>
+      <div class="courseCard">
+        <span class="badge paid">Paid</span>
+        <h3>AI Driven UI/UX Career Program</h3>
+        <div class="fee">৳7,490</div>
+        <a href="#snk-admission">ভর্তি ফর্মে যান →</a>
+      </div>
+      <div class="courseCard">
+        <span class="badge paid">Paid</span>
+        <h3>AI Driven Cyber Security and Ethical Hacking</h3>
+        <div class="fee">৳9,500</div>
+        <a href="#snk-admission">ভর্তি ফর্মে যান →</a>
+      </div>
+      <div class="courseCard">
+        <span class="badge paid">Paid</span>
+        <h3>AI Powered UI/UX Context Engineering</h3>
+        <div class="fee">৳11,500</div>
+        <a href="#snk-admission">ভর্তি ফর্মে যান →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="whySec" id="why">
+  <div class="wrap">
+    <div class="secHead">
+      <h2>কেন SNK IT Institute?</h2>
+      <p>শুধু ক্লাস না, একটা সম্পূর্ণ শেখার অভিজ্ঞতা।</p>
+    </div>
+    <div class="whyGrid">
+      <div class="whyCard">
+        <div class="ico">🤖</div>
+        <h4>AI-Driven কারিকুলাম</h4>
+        <p>সময়োপযোগী, বর্তমান industry-standard AI টুলস ও workflow দিয়ে সাজানো কোর্স কনটেন্ট।</p>
+      </div>
+      <div class="whyCard">
+        <div class="ico">🛠️</div>
+        <h4>Practical, Project-Based</h4>
+        <p>শুধু তত্ত্ব না — বাস্তব প্রজেক্ট করে করে শেখা, যাতে সরাসরি কাজে লাগানো যায়।</p>
+      </div>
+      <div class="whyCard">
+        <div class="ico">💳</div>
+        <h4>সহজ Payment</h4>
+        <p>bKash/Nagad দিয়ে সরাসরি payment, কোনো জটিলতা ছাড়াই ভর্তি সম্পন্ন করা যায়।</p>
+      </div>
+      <div class="whyCard">
+        <div class="ico">📍</div>
+        <h4>স্থানীয় সহায়তা</h4>
+        <p>Moulvibazar, Sylhet এ অবস্থিত — সরাসরি এসে বা WhatsApp/ফোনে সহজে যোগাযোগ করা যায়।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="snk-admission" class="snk-admit">
   <style>
     #snk-admission.snk-admit{
-      --snk-ink:#14251f;
-      --snk-paper:#f6f8f3;
-      --snk-card:#ffffff;
-      --snk-line:#dbe6d3;
-      --snk-green:#63a416;
-      --snk-green-dark:#406a0e;
-      --snk-green-tint:#eef6e6;
-      --snk-black:#111111;
-      --snk-red:#a4342a;
-      --snk-radius:14px;
+      --snk-ink:#14251f; --snk-paper:#f6f8f3; --snk-card:#ffffff; --snk-line:#dbe6d3;
+      --snk-green:#63a416; --snk-green-dark:#406a0e; --snk-green-tint:#eef6e6;
+      --snk-black:#111111; --snk-red:#a4342a; --snk-radius:14px;
       font-family: 'Segoe UI', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
-      background:var(--snk-paper);
-      color:var(--snk-ink);
+      background:var(--snk-paper); color:var(--snk-ink);
       padding:clamp(28px,7vw,56px) clamp(14px,4vw,18px);
-      border-top:1px solid var(--snk-line);
-      border-bottom:1px solid var(--snk-line);
+      border-top:1px solid var(--snk-line); border-bottom:1px solid var(--snk-line);
     }
     #snk-admission.snk-admit *{box-sizing:border-box;}
     #snk-admission .snk-wrap{max-width:760px;margin:0 auto;}
-
-    /* ---- Brand header ---- */
     #snk-admission .snk-brand{display:flex; align-items:center; gap:12px; margin-bottom:22px;}
-    #snk-admission .snk-logo-img{
-      width:52px; height:52px; border-radius:10px; object-fit:contain; flex-shrink:0;
-      background:#0a0a0a; box-shadow:0 1px 4px rgba(0,0,0,.18);
-    }
+    #snk-admission .snk-logo-img{width:52px; height:52px; border-radius:10px; object-fit:contain; flex-shrink:0; background:#0a0a0a; box-shadow:0 1px 4px rgba(0,0,0,.18);}
     #snk-admission .snk-brand-name{font-weight:800; font-size:18px; line-height:1.2; color:var(--snk-black);}
     #snk-admission .snk-brand-tag{font-size:12px; color:var(--snk-green-dark); font-weight:700; letter-spacing:.04em;}
-
-    #snk-admission .snk-eyebrow{
-      font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-      color:var(--snk-green-dark); font-weight:700; margin-bottom:8px;
-    }
+    #snk-admission .snk-eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--snk-green-dark); font-weight:700; margin-bottom:8px;}
     #snk-admission h2{font-size:clamp(22px,5vw,34px); margin:0 0 6px; font-weight:800; line-height:1.25; color:var(--snk-black);}
     #snk-admission .snk-sub{color:#57604f; margin:0 0 26px; font-size:clamp(13.5px,3.6vw,15px); line-height:1.6;}
-
-    #snk-admission .snk-card{
-      background:var(--snk-card); border:1px solid var(--snk-line);
-      border-radius:var(--snk-radius); padding:clamp(18px,5vw,28px);
-      box-shadow:0 2px 10px rgba(20,37,31,.07);
-      transition:box-shadow .25s ease;
-    }
-
+    #snk-admission .snk-card{background:var(--snk-card); border:1px solid var(--snk-line); border-radius:var(--snk-radius); padding:clamp(18px,5vw,28px); box-shadow:0 2px 10px rgba(20,37,31,.07); transition:box-shadow .25s ease;}
     #snk-admission label{display:block; font-size:13px; font-weight:700; margin:18px 0 6px; color:var(--snk-ink);}
     #snk-admission label:first-of-type{margin-top:0;}
-    #snk-admission input[type=text],
-    #snk-admission input[type=tel],
-    #snk-admission input[type=email],
-    #snk-admission select{
-      width:100%; padding:12px 13px; border:1.5px solid var(--snk-line);
-      border-radius:9px; font-size:15px; background:#fff; color:var(--snk-ink);
-      font-family:inherit; transition:border-color .15s ease, box-shadow .15s ease;
+    #snk-admission input[type=text], #snk-admission input[type=tel], #snk-admission input[type=email], #snk-admission select{
+      width:100%; padding:12px 13px; border:1.5px solid var(--snk-line); border-radius:9px; font-size:15px; background:#fff; color:var(--snk-ink); font-family:inherit; transition:border-color .15s ease, box-shadow .15s ease;
     }
     #snk-admission input:hover, #snk-admission select:hover{border-color:#b9cca9;}
-    #snk-admission input:focus, #snk-admission select:focus{
-      outline:none; border-color:var(--snk-green);
-      box-shadow:0 0 0 3px rgba(99,164,22,.18);
-    }
+    #snk-admission input:focus, #snk-admission select:focus{outline:none; border-color:var(--snk-green); box-shadow:0 0 0 3px rgba(99,164,22,.18);}
     #snk-admission optgroup{font-weight:700;}
-
-    #snk-admission .snk-fee-box{margin-top:20px; border-radius:11px; padding:16px 18px; display:none;
-      animation:snkFadeIn .25s ease;}
+    #snk-admission .snk-fee-box{margin-top:20px; border-radius:11px; padding:16px 18px; display:none; animation:snkFadeIn .25s ease;}
     #snk-admission .snk-fee-box.show{display:block;}
     #snk-admission .snk-fee-box.free-box{background:var(--snk-green-tint); border:1px solid #cfe6b8;}
     #snk-admission .snk-fee-box.paid-box{background:#f4f4f2; border:1px solid #dedede;}
     #snk-admission .snk-fee-row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px; flex-wrap:wrap; gap:6px;}
     #snk-admission .snk-fee-row .amt{font-size:clamp(19px,5vw,22px); font-weight:800; color:var(--snk-green-dark);}
-    #snk-admission .snk-fee-row .amt.strike{
-      text-decoration:line-through; color:#9a9a8f; font-size:15px; margin-right:6px; font-weight:600;
-    }
+    #snk-admission .snk-fee-row .amt.strike{text-decoration:line-through; color:#9a9a8f; font-size:15px; margin-right:6px; font-weight:600;}
     #snk-admission .snk-pay-steps{margin-top:14px; padding-top:14px; border-top:1px dashed #bdbdbd; font-size:14px; line-height:1.75;}
     #snk-admission .snk-pay-steps b{color:var(--snk-black);}
-    #snk-admission .snk-num{
-      display:inline-block; background:#fff; border:1.5px solid var(--snk-black);
-      padding:2px 10px; border-radius:7px; font-weight:800; letter-spacing:.03em; font-size:15px;
-      color:var(--snk-black);
-    }
-
+    #snk-admission .snk-num{display:inline-block; background:#fff; border:1.5px solid var(--snk-black); padding:2px 10px; border-radius:7px; font-weight:800; letter-spacing:.03em; font-size:15px; color:var(--snk-black);}
     #snk-admission .snk-promo-row{display:flex; gap:8px; margin-top:16px;}
     #snk-admission .snk-promo-row input{flex:1; min-width:0;}
-    #snk-admission .snk-promo-row button{
-      border:1.5px solid var(--snk-green); background:#fff; color:var(--snk-green-dark);
-      font-weight:700; padding:0 16px; border-radius:9px; cursor:pointer; font-size:14px;
-      transition:background .15s ease, color .15s ease; white-space:nowrap;
-    }
+    #snk-admission .snk-promo-row button{border:1.5px solid var(--snk-green); background:#fff; color:var(--snk-green-dark); font-weight:700; padding:0 16px; border-radius:9px; cursor:pointer; font-size:14px; transition:background .15s ease, color .15s ease; white-space:nowrap;}
     #snk-admission .snk-promo-row button:hover{background:var(--snk-green); color:#fff;}
     #snk-admission .snk-promo-msg{font-size:13px; margin-top:6px; min-height:16px; font-weight:600;}
     #snk-admission .snk-promo-msg.ok{color:var(--snk-green-dark);}
     #snk-admission .snk-promo-msg.err{color:var(--snk-red);}
-
-    #snk-admission .snk-submit{
-      width:100%; margin-top:26px; background:var(--snk-green); color:#fff; border:none;
-      padding:15px; font-size:16px; font-weight:800; border-radius:10px; cursor:pointer;
-      letter-spacing:.01em; transition:background .15s ease, transform .1s ease;
-      display:flex; align-items:center; justify-content:center; gap:8px;
-    }
+    #snk-admission .snk-submit{width:100%; margin-top:26px; background:var(--snk-green); color:#fff; border:none; padding:15px; font-size:16px; font-weight:800; border-radius:10px; cursor:pointer; letter-spacing:.01em; transition:background .15s ease, transform .1s ease; display:flex; align-items:center; justify-content:center; gap:8px;}
     #snk-admission .snk-submit:hover{background:var(--snk-green-dark);}
     #snk-admission .snk-submit:active{transform:scale(.99);}
     #snk-admission .snk-submit:disabled{opacity:.7; cursor:not-allowed;}
-
-    #snk-admission .snk-spinner{
-      width:16px; height:16px; border:2.5px solid rgba(255,255,255,.4);
-      border-top-color:#fff; border-radius:50%; display:none;
-      animation:snkSpin .7s linear infinite;
-    }
+    #snk-admission .snk-spinner{width:16px; height:16px; border:2.5px solid rgba(255,255,255,.4); border-top-color:#fff; border-radius:50%; display:none; animation:snkSpin .7s linear infinite;}
     #snk-admission .snk-submit.loading .snk-spinner{display:inline-block;}
-
     #snk-admission .snk-note{font-size:12.5px; color:#7a8073; margin-top:14px; line-height:1.6;}
-    #snk-admission .snk-whatsapp{
-      display:flex; align-items:center; justify-content:center; gap:8px;
-      margin-top:14px; padding:12px; border-radius:10px; border:1.5px solid #25D366;
-      color:#128C7E; font-weight:800; text-decoration:none; font-size:14px;
-      background:#eafaf1; transition:background .15s ease;
-    }
+    #snk-admission .snk-whatsapp{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:14px; padding:12px; border-radius:10px; border:1.5px solid #25D366; color:#128C7E; font-weight:800; text-decoration:none; font-size:14px; background:#eafaf1; transition:background .15s ease;}
     #snk-admission .snk-whatsapp:hover{background:#d7f3e3;}
     #snk-admission .snk-honeypot{position:absolute; left:-9999px; opacity:0;}
     #snk-admission .snk-hide{display:none !important;}
-    #snk-admission .snk-error-banner{
-      display:none; background:#fbeceb; border:1px solid #eec6c2; color:var(--snk-red);
-      padding:12px 14px; border-radius:9px; font-size:13.5px; margin-bottom:16px; font-weight:600;
-    }
+    #snk-admission .snk-error-banner{display:none; background:#fbeceb; border:1px solid #eec6c2; color:var(--snk-red); padding:12px 14px; border-radius:9px; font-size:13.5px; margin-bottom:16px; font-weight:600;}
     #snk-admission .snk-error-banner.show{display:block;}
-
-    /* ---- Success screen ---- */
     #snk-admission .snk-success{display:none;}
     #snk-admission .snk-success.show{display:block; animation:snkFadeIn .35s ease;}
     #snk-admission .snk-success-card{padding:0; overflow:hidden;}
-    #snk-admission .snk-receipt-banner{
-      width:100%; display:block; height:auto;
-    }
+    #snk-admission .snk-receipt-banner{width:100%; display:block; height:auto;}
     #snk-admission .snk-success-body{padding:clamp(18px,5vw,28px);}
-    #snk-admission .snk-success-icon{
-      width:52px; height:52px; border-radius:50%; background:var(--snk-green-tint); color:var(--snk-green-dark);
-      display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 14px;
-    }
+    #snk-admission .snk-success-icon{width:52px; height:52px; border-radius:50%; background:var(--snk-green-tint); color:var(--snk-green-dark); display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 14px;}
     #snk-admission .snk-success h3{text-align:center; font-size:clamp(19px,5vw,23px); margin:0 0 8px; font-weight:800; color:var(--snk-black);}
     #snk-admission .snk-success .snk-success-sub{text-align:center; color:#57604f; font-size:14px; margin:0 0 22px; line-height:1.6;}
-    #snk-admission .snk-receipt{
-      background:#fafaf8; border:1px dashed #c7c7c0; border-radius:11px; padding:18px 20px; margin-bottom:20px;
-    }
-    #snk-admission .snk-receipt-row{
-      display:flex; justify-content:space-between; gap:12px; padding:7px 0;
-      border-bottom:1px solid #ece5d0; font-size:14px; flex-wrap:wrap;
-    }
+    #snk-admission .snk-receipt{background:#fafaf8; border:1px dashed #c7c7c0; border-radius:11px; padding:18px 20px; margin-bottom:20px;}
+    #snk-admission .snk-receipt-row{display:flex; justify-content:space-between; gap:12px; padding:7px 0; border-bottom:1px solid #ece5d0; font-size:14px; flex-wrap:wrap;}
     #snk-admission .snk-receipt-row:last-child{border-bottom:none;}
     #snk-admission .snk-receipt-row span:first-child{color:#7a8073; font-weight:600;}
     #snk-admission .snk-receipt-row span:last-child{font-weight:700; text-align:right;}
-    #snk-admission .snk-status-pill{
-      display:inline-block; font-size:12px; font-weight:800; padding:4px 12px; border-radius:100px;
-      background:#f0f0ee; color:var(--snk-black); border:1px solid #dcdcd6;
-    }
-    #snk-admission .snk-status-pill.confirmed{
-      background:var(--snk-green-tint); color:var(--snk-green-dark); border-color:#cfe6b8;
-    }
-    #snk-admission .snk-verify-note{
-      background:var(--snk-green-tint); border:1px solid #cfe6b8; border-radius:10px; padding:14px 16px;
-      font-size:13.5px; line-height:1.7; color:#2c4d16; margin-bottom:20px;
-    }
+    #snk-admission .snk-status-pill{display:inline-block; font-size:12px; font-weight:800; padding:4px 12px; border-radius:100px; background:#f0f0ee; color:var(--snk-black); border:1px solid #dcdcd6;}
+    #snk-admission .snk-status-pill.confirmed{background:var(--snk-green-tint); color:var(--snk-green-dark); border-color:#cfe6b8;}
+    #snk-admission .snk-verify-note{background:var(--snk-green-tint); border:1px solid #cfe6b8; border-radius:10px; padding:14px 16px; font-size:13.5px; line-height:1.7; color:#2c4d16; margin-bottom:20px;}
     #snk-admission .snk-verify-note b{color:var(--snk-green-dark);}
     #snk-admission .snk-btn-row{display:flex; gap:10px; flex-wrap:wrap;}
-    #snk-admission .snk-btn-row button{
-      flex:1; min-width:140px; padding:13px; border-radius:10px; font-size:14.5px; font-weight:800;
-      cursor:pointer; border:1.5px solid var(--snk-line); background:#fff; color:var(--snk-ink);
-      display:flex; align-items:center; justify-content:center; gap:8px; transition:all .15s ease;
-    }
+    #snk-admission .snk-btn-row button{flex:1; min-width:140px; padding:13px; border-radius:10px; font-size:14.5px; font-weight:800; cursor:pointer; border:1.5px solid var(--snk-line); background:#fff; color:var(--snk-ink); display:flex; align-items:center; justify-content:center; gap:8px; transition:all .15s ease;}
     #snk-admission .snk-btn-row button:hover{border-color:var(--snk-green); color:var(--snk-green-dark);}
-    #snk-admission .snk-btn-again{
-      margin-top:14px; width:100%; background:none; border:none; color:#7a8073;
-      font-size:13px; text-decoration:underline; cursor:pointer; padding:6px;
-    }
-
-    /* ---- Status check card ---- */
+    #snk-admission .snk-btn-again{margin-top:14px; width:100%; background:none; border:none; color:#7a8073; font-size:13px; text-decoration:underline; cursor:pointer; padding:6px;}
     #snk-admission .snk-check-card{margin-top:22px;}
     #snk-admission .snk-check-card h3{font-size:16px; margin:0 0 6px; font-weight:800; color:var(--snk-black);}
     #snk-admission .snk-check-card p{font-size:13px; color:#57604f; margin:0 0 14px;}
     #snk-admission .snk-check-row{display:flex; gap:8px;}
     #snk-admission .snk-check-row input{flex:1; min-width:0;}
-    #snk-admission .snk-check-row button{
-      border:1.5px solid var(--snk-green); background:#fff; color:var(--snk-green-dark);
-      font-weight:700; padding:0 18px; border-radius:9px; cursor:pointer; font-size:14px;
-      white-space:nowrap;
-    }
+    #snk-admission .snk-check-row button{border:1.5px solid var(--snk-green); background:#fff; color:var(--snk-green-dark); font-weight:700; padding:0 18px; border-radius:9px; cursor:pointer; font-size:14px; white-space:nowrap;}
     #snk-admission .snk-check-row button:hover{background:var(--snk-green); color:#fff;}
     #snk-admission .snk-check-result{margin-top:14px;}
-    #snk-admission .snk-check-item{
-      padding:10px 0; border-bottom:1px solid #ece5d0; font-size:13.5px;
-    }
+    #snk-admission .snk-check-item{padding:10px 0; border-bottom:1px solid #ece5d0; font-size:13.5px;}
     #snk-admission .snk-check-item:last-child{border-bottom:none;}
     #snk-admission .snk-check-date{color:#7a8073; font-size:12.5px;}
     @media (max-width:480px){
       #snk-admission .snk-check-row{flex-direction:column;}
       #snk-admission .snk-check-row button{padding:12px; width:100%;}
     }
-
     @keyframes snkFadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
     @keyframes snkSpin{to{transform:rotate(360deg);}}
-
-    /* ---- Mobile tweaks ---- */
     @media (max-width:480px){
       #snk-admission .snk-promo-row{flex-direction:column;}
       #snk-admission .snk-promo-row button{padding:12px; width:100%;}
       #snk-admission .snk-receipt-row{flex-direction:column; gap:2px;}
       #snk-admission .snk-receipt-row span:last-child{text-align:left;}
     }
-
-    /* ---- Print styles (receipt only) ---- */
     @media print{
       body *{visibility:hidden;}
       #snk-admission .snk-print-area, #snk-admission .snk-print-area *{visibility:visible;}
@@ -242,7 +427,6 @@
       </div>
     </div>
 
-    <!-- ============ FORM VIEW ============ -->
     <div id="snkFormView">
       <div class="snk-eyebrow">Admission</div>
       <h2>ভর্তি ফর্ম (Admission Form)</h2>
@@ -260,10 +444,7 @@
           <input type="text" id="snkName" name="Student Name" required placeholder="আপনার নাম লিখুন">
 
           <label for="snkPhone">ফোন নম্বর *</label>
-          <input type="tel" id="snkPhone" name="Phone" required
-                 pattern="01[0-9]{9}" maxlength="11"
-                 placeholder="01XXXXXXXXX"
-                 title="সঠিক ফোন নম্বর দিন — 01 দিয়ে শুরু, মোট ১১ ডিজিট (যেমন: 01705633700)">
+          <input type="tel" id="snkPhone" name="Phone" required pattern="01[0-9]{9}" maxlength="11" placeholder="01XXXXXXXXX" title="সঠিক ফোন নম্বর দিন — 01 দিয়ে শুরু, মোট ১১ ডিজিট (যেমন: 01705633700)">
 
           <label for="snkEmail">ইমেইল (ঐচ্ছিক)</label>
           <input type="email" id="snkEmail" name="Email" placeholder="you@example.com">
@@ -364,7 +545,6 @@
       </div>
     </div>
 
-    <!-- ============ SUCCESS VIEW ============ -->
     <div id="snkSuccessView" class="snk-success">
       <div class="snk-card snk-success-card snk-print-area">
         <img src="https://raw.githubusercontent.com/yourdocuments/products/main/bannermoney%20(1).svg" alt="SNK IT Institute — Money Receipt" class="snk-receipt-banner">
@@ -374,9 +554,7 @@
           <h3>আপনার আবেদন সফলভাবে জমা হয়েছে!</h3>
           <p class="snk-success-sub">নিচের তথ্যগুলো আপনার রেকর্ডের জন্য — চাইলে print/download করে রাখুন।</p>
 
-          <div class="snk-receipt" id="snkReceipt">
-            <!-- JS দিয়ে fill হবে -->
-          </div>
+          <div class="snk-receipt" id="snkReceipt"></div>
 
           <div class="snk-verify-note" id="snkVerifyNote">
             <b>পরবর্তী ধাপ:</b> আপনার payment ইনস্টিটিউট থেকে ম্যানুয়ালি verify করা হবে (সাধারণত কয়েক ঘণ্টার মধ্যে)।
@@ -394,7 +572,6 @@
       </div>
     </div>
 
-    <!-- ============ STATUS CHECK CARD ============ -->
     <div class="snk-card snk-check-card">
       <h3>আপনার Admission Status Check করুন</h3>
       <p>যে ফোন নম্বর দিয়ে ভর্তি হয়েছিলেন সেটা দিন</p>
@@ -435,28 +612,21 @@
       var checkBtn = root.querySelector('#snkCheckBtn');
       var checkResult = root.querySelector('#snkCheckResult');
 
-      // ==== এখানে promo code গুলো বদলাতে/যোগ করতে পারবেন ====
       var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbhKPWoNYFZ4ClNXROaU9NvE_pfy3T-8L4DXH9ipfWnQj1zXb9BQxhoR-LkzyVSjvz/exec";
-      var PROMO_CODES = {
-        "SNK20": 20,
-        "EID10": 10
-      };
-      // =========================================================
+      var PROMO_CODES = { "SNK20": 20, "EID10": 10 };
 
       var baseFee = 0;
       var appliedPct = 0;
       var appliedCode = '';
       var lastSubmission = null;
 
-      // ==== Google Sheet থেকে course list load করে (background এ, fail করলে উপরের default list-ই থাকবে) ====
       function loadCourses(){
         fetch(APPS_SCRIPT_URL + '?action=courses')
           .then(function(res){ return res.json(); })
           .then(function(data){
             var courses = data.courses || [];
-            if(!courses.length) return; // খালি হলে পুরনো list-ই রাখো
+            if(!courses.length) return;
 
-            var currentValue = courseSel.value;
             var freeOptGroup = document.createElement('optgroup');
             freeOptGroup.label = '🟢 Free Courses';
             var paidOptGroup = document.createElement('optgroup');
@@ -495,7 +665,7 @@
             courseSel = newSelect;
             courseSel.addEventListener('change', onCourseChange);
           })
-          .catch(function(){ /* fail korle purono static list e thakbe, kono somossha nai */ });
+          .catch(function(){});
       }
       loadCourses();
 
@@ -622,10 +792,7 @@
         var params = new URLSearchParams();
         for (var pair of fd.entries()) { params.append(pair[0], pair[1]); }
 
-        fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          body: params
-        })
+        fetch(APPS_SCRIPT_URL, { method: 'POST', body: params })
         .then(function(res){ return res.json(); })
         .then(function(){
           var data = buildReceiptData();
@@ -645,9 +812,7 @@
         });
       });
 
-      printBtn.addEventListener('click', function(){
-        window.print();
-      });
+      printBtn.addEventListener('click', function(){ window.print(); });
 
       downloadBtn.addEventListener('click', function(){
         if(!lastSubmission) return;
@@ -721,6 +886,32 @@
     })();
   </script>
 </section>
+
+<footer class="snkFooter">
+  <div class="wrap">
+    <div class="footGrid">
+      <div>
+        <div class="footBrand">
+          <img src="https://raw.githubusercontent.com/yourdocuments/products/main/logo(1).svg" alt="SNK IT Institute">
+          <span>SNK IT Institute</span>
+        </div>
+        <p>Moulvibazar, Sylhet এ অবস্থিত একটি IT প্রশিক্ষণ প্রতিষ্ঠান — Learn To Lead.</p>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <a href="#about">About</a>
+        <a href="#courses">Courses</a>
+        <a href="#snk-admission">Admission</a>
+      </div>
+      <div>
+        <h5>যোগাযোগ</h5>
+        <a href="mailto:iamsnkbd@protonmail.com">iamsnkbd@protonmail.com</a>
+        <a href="https://wa.me/8801705633700" target="_blank" rel="noopener">WhatsApp: 01705633700</a>
+      </div>
+    </div>
+    <div class="footBottom">© SNK IT Institute — সর্বস্বত্ব সংরক্ষিত।</div>
+  </div>
+</footer>
 
 </body>
 </html>
