@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="bn">
-
+<html lang="en">
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -10,11 +8,14 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Admin Login — CakeBuddy</title>
+  <title>Admin Login | CakeBuddy</title>
 
+  <meta
+    name="description"
+    content="CakeBuddy Admin Login"
+  >
 
   <style>
-
     * {
       margin: 0;
       padding: 0;
@@ -22,50 +23,96 @@
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f7f7f7;
-      color: #111;
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
       min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(255, 182, 193, 0.35),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(255, 214, 165, 0.35),
+          transparent 35%
+        ),
+        #fffaf7;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      padding: 20px;
+      padding: 24px;
     }
 
-    .login-container {
+    .page {
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+
+      border: 1px solid rgba(0, 0, 0, 0.06);
+
+      border-radius: 28px;
+
+      padding: 42px 34px;
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.08);
+
+      backdrop-filter: blur(16px);
     }
 
     .brand {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 32px;
     }
 
-    .brand-logo {
-      width: 70px;
-      height: 70px;
+    .logo {
+      width: 72px;
+      height: 72px;
 
-      background: #111;
-      color: white;
+      margin: 0 auto 18px;
 
-      border-radius: 18px;
+      border-radius: 22px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      margin: 0 auto 15px;
+      background: linear-gradient(
+        135deg,
+        #ff6b81,
+        #ff9a76
+      );
 
-      font-size: 20px;
-      font-weight: 900;
+      color: white;
+
+      font-size: 30px;
+      font-weight: 800;
+
+      box-shadow:
+        0 12px 30px rgba(255, 107, 129, 0.25);
     }
 
     .brand h1 {
-      font-size: 27px;
-      margin-bottom: 7px;
+      font-size: 30px;
+      line-height: 1.2;
+
+      color: #1f1f1f;
+
+      margin-bottom: 8px;
     }
 
     .brand p {
@@ -73,83 +120,80 @@
       font-size: 14px;
     }
 
-    .login-card {
-      background: white;
+    .admin-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
 
-      border: 1px solid #e8e8e8;
+      padding: 7px 13px;
 
-      border-radius: 22px;
+      margin-top: 14px;
 
-      padding: 30px;
+      border-radius: 999px;
 
-      box-shadow:
-        0 20px 50px rgba(0, 0, 0, .08);
-    }
+      background: #fff0f2;
+      color: #e94f68;
 
-    .login-card h2 {
-      font-size: 21px;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      color: #777;
-      font-size: 14px;
-
-      margin-bottom: 25px;
-
-      line-height: 1.6;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
-    .form-group label {
+    label {
       display: block;
 
-      font-size: 13px;
+      margin-bottom: 8px;
 
+      font-size: 14px;
       font-weight: 700;
 
-      margin-bottom: 8px;
+      color: #333;
     }
 
-    .input {
+    input {
       width: 100%;
 
-      padding: 14px;
+      height: 54px;
 
-      border: 1px solid #ddd;
+      padding: 0 16px;
 
-      border-radius: 10px;
+      border: 1px solid #e4e4e4;
 
-      outline: none;
+      border-radius: 14px;
+
+      background: #fff;
+
+      color: #222;
 
       font-size: 15px;
 
-      transition: .2s;
+      outline: none;
+
+      transition: 0.2s ease;
     }
 
-    .input:focus {
-      border-color: #111;
+    input:focus {
+      border-color: #ff7185;
 
       box-shadow:
-        0 0 0 3px rgba(0, 0, 0, .05);
+        0 0 0 4px rgba(255, 113, 133, 0.10);
     }
 
     .password-wrapper {
       position: relative;
     }
 
-    .password-wrapper .input {
-      padding-right: 48px;
+    .password-wrapper input {
+      padding-right: 58px;
     }
 
-    .show-password {
+    .toggle-password {
       position: absolute;
 
-      right: 12px;
-
+      right: 14px;
       top: 50%;
 
       transform: translateY(-50%);
@@ -158,70 +202,90 @@
 
       background: transparent;
 
+      color: #777;
+
       cursor: pointer;
 
-      font-size: 18px;
+      font-size: 13px;
+      font-weight: 700;
     }
 
-    .login-submit {
+    .login-button {
       width: 100%;
 
-      padding: 14px;
+      height: 56px;
 
       border: none;
 
-      border-radius: 10px;
+      border-radius: 15px;
 
-      background: #111;
+      background:
+        linear-gradient(
+          135deg,
+          #ff647d,
+          #ff9675
+        );
 
       color: white;
 
       font-size: 15px;
-
-      font-weight: 700;
+      font-weight: 800;
 
       cursor: pointer;
 
-      transition: .2s;
+      transition: 0.2s ease;
+
+      box-shadow:
+        0 12px 25px rgba(255, 100, 125, 0.22);
     }
 
-    .login-submit:hover {
-      background: #222;
+    .login-button:hover {
       transform: translateY(-1px);
+
+      box-shadow:
+        0 15px 30px rgba(255, 100, 125, 0.28);
     }
 
-    .login-submit:disabled {
-      opacity: .6;
+    .login-button:disabled {
+      opacity: 0.65;
+
       cursor: not-allowed;
+
       transform: none;
     }
 
     .message {
       display: none;
 
-      padding: 12px;
+      margin-bottom: 18px;
 
-      border-radius: 9px;
+      padding: 13px 14px;
+
+      border-radius: 12px;
 
       font-size: 13px;
-
-      margin-bottom: 15px;
-
-      text-align: center;
 
       line-height: 1.5;
     }
 
-    .error-message {
-      background: #fff1f1;
-      border: 1px solid #ffd4d4;
-      color: #c00000;
+    .message.error {
+      display: block;
+
+      background: #fff1f2;
+
+      color: #c62842;
+
+      border: 1px solid #ffd4da;
     }
 
-    .success-message {
-      background: #effff4;
-      border: 1px solid #c8f2d4;
-      color: #16803c;
+    .message.success {
+      display: block;
+
+      background: #effbf3;
+
+      color: #18753b;
+
+      border: 1px solid #ccefd8;
     }
 
     .back-link {
@@ -229,135 +293,117 @@
 
       text-align: center;
 
-      margin-top: 20px;
+      margin-top: 24px;
 
-      color: #777;
+      color: #666;
 
       text-decoration: none;
 
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: 600;
     }
 
     .back-link:hover {
-      color: #111;
+      color: #ff647d;
     }
 
-    .security {
-      margin-top: 20px;
-
+    .footer {
       text-align: center;
+
+      margin-top: 20px;
 
       color: #999;
 
       font-size: 12px;
-
-      line-height: 1.6;
     }
 
-    @media (max-width: 500px) {
+    .loading-text {
+      display: none;
 
+      text-align: center;
+
+      margin-top: 12px;
+
+      color: #777;
+
+      font-size: 13px;
+    }
+
+    @media (max-width: 480px) {
       body {
-        padding: 15px;
+        padding: 16px;
       }
 
-      .login-card {
-        padding: 24px 20px;
+      .card {
+        padding: 32px 22px;
+
+        border-radius: 22px;
       }
 
       .brand h1 {
-        font-size: 24px;
+        font-size: 26px;
       }
 
+      .logo {
+        width: 64px;
+        height: 64px;
+
+        font-size: 26px;
+      }
     }
-
   </style>
-
 </head>
-
 
 <body>
 
+  <main class="page">
 
-  <div class="login-container">
+    <section class="card">
 
+      <div class="brand">
 
-    <!-- BRAND -->
+        <div class="logo">
+          C
+        </div>
 
-    <div class="brand">
+        <h1>Admin Panel</h1>
 
-      <div class="brand-logo">
-        SNK
+        <p>
+          Sign in to manage CakeBuddy
+        </p>
+
+        <div class="admin-badge">
+          🔐 Secure Admin Access
+        </div>
+
       </div>
 
-      <h1>
-        Admin Access
-      </h1>
-
-      <p>
-        CakeBuddy Management System
-      </p>
-
-    </div>
-
-
-    <!-- LOGIN CARD -->
-
-    <div class="login-card">
-
-      <h2>
-        Welcome back 👋
-      </h2>
-
-      <p class="subtitle">
-        Sign in with your administrator account
-        to continue.
-      </p>
-
-
-      <!-- ERROR -->
 
       <div
-        id="errorMessage"
-        class="message error-message"
-      >
-      </div>
+        id="message"
+        class="message"
+      ></div>
 
-
-      <!-- SUCCESS -->
-
-      <div
-        id="successMessage"
-        class="message success-message"
-      >
-      </div>
-
-
-      <!-- FORM -->
 
       <form id="loginForm">
-
-
-        <!-- EMAIL -->
 
         <div class="form-group">
 
           <label for="email">
-            Admin Email
+            Email Address
           </label>
 
           <input
-            class="input"
             type="email"
             id="email"
+            name="email"
             placeholder="Enter admin email"
-            autocomplete="username"
+            autocomplete="email"
             required
           >
 
         </div>
 
-
-        <!-- PASSWORD -->
 
         <div class="form-group">
 
@@ -368,20 +414,20 @@
           <div class="password-wrapper">
 
             <input
-              class="input"
               type="password"
               id="password"
-              placeholder="Enter password"
+              name="password"
+              placeholder="Enter your password"
               autocomplete="current-password"
               required
             >
 
             <button
               type="button"
-              class="show-password"
-              id="showPassword"
+              class="toggle-password"
+              id="togglePassword"
             >
-              👁️
+              Show
             </button>
 
           </div>
@@ -389,73 +435,81 @@
         </div>
 
 
-        <!-- LOGIN -->
-
         <button
           type="submit"
-          class="login-submit"
+          class="login-button"
           id="loginButton"
         >
-          Login to Dashboard →
+          Login to Dashboard
         </button>
 
+        <div
+          class="loading-text"
+          id="loadingText"
+        >
+          Signing you in...
+        </div>
 
       </form>
 
 
-      <!-- BACK -->
-
       <a
-        href="developer.html"
+        href="./index.html"
         class="back-link"
       >
-        ← Back to Developer Connect
+        ← Back to CakeBuddy
       </a>
 
+    </section>
 
+
+    <div class="footer">
+      © 2026 CakeBuddy. Admin access only.
     </div>
 
-
-    <!-- SECURITY -->
-
-    <div class="security">
-
-      🔒 Secure Firebase Authentication<br>
-
-      Authorized administrator access only.
-
-    </div>
+  </main>
 
 
-  </div>
-
-
-
-  <!-- FIREBASE -->
+  <!-- Firebase -->
 
   <script type="module">
 
     import {
       initializeApp
     } from
-    "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
     import {
       getAuth,
-      signInWithEmailAndPassword
+      signInWithEmailAndPassword,
+      onAuthStateChanged
     } from
-    "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-    /* =========================
-       FIREBASE CONFIG
-    ========================= */
+    /*
+      =====================================================
+      FIREBASE CONFIG
+      =====================================================
+
+      এখানে আপনার Firebase Web App-এর আসল configuration
+      বসাবেন।
+
+      Firebase Console:
+      Project Settings
+      → General
+      → Your apps
+      → Web app
+      → SDK setup and configuration
+
+      আপনার dashboard.html / add-post.html-এ যে config
+      ব্যবহার করছেন, ঠিক সেই একই config ব্যবহার করুন।
+    */
 
     const firebaseConfig = {
 
-      apiKey:
-        "AIzaSyDlqm0Du94pfQ_LwUJTTi8LjhzK90dN0TQ",
+      apiKey: "YOUR_API_KEY",
 
       authDomain:
         "cakebuddymb.firebaseapp.com",
@@ -467,32 +521,33 @@
         "cakebuddymb.firebasestorage.app",
 
       messagingSenderId:
-        "31596118058",
+        "YOUR_MESSAGING_SENDER_ID",
 
       appId:
-        "1:31596118058:web:ecfe00171d91ee15c64353",
-
-      measurementId:
-        "G-D0ZV3FN1LQ"
+        "YOUR_APP_ID"
 
     };
 
 
-    /* =========================
-       INITIALIZE FIREBASE
-    ========================= */
+    /*
+      Initialize Firebase
+    */
 
     const app =
       initializeApp(firebaseConfig);
 
 
+    /*
+      Initialize Authentication
+    */
+
     const auth =
       getAuth(app);
 
 
-    /* =========================
-       ELEMENTS
-    ========================= */
+    /*
+      Elements
+    */
 
     const loginForm =
       document.getElementById("loginForm");
@@ -506,23 +561,54 @@
     const loginButton =
       document.getElementById("loginButton");
 
-    const showPassword =
-      document.getElementById("showPassword");
+    const togglePassword =
+      document.getElementById("togglePassword");
 
-    const errorMessage =
-      document.getElementById("errorMessage");
+    const message =
+      document.getElementById("message");
 
-    const successMessage =
-      document.getElementById("successMessage");
+    const loadingText =
+      document.getElementById("loadingText");
 
 
-    /* =========================
-       SHOW PASSWORD
-    ========================= */
+    /*
+      Show Message
+    */
 
-    showPassword.addEventListener(
+    function showMessage(
+      text,
+      type = "error"
+    ) {
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    /*
+      Clear Message
+    */
+
+    function clearMessage() {
+
+      message.textContent = "";
+
+      message.className =
+        "message";
+
+    }
+
+
+    /*
+      Password Show / Hide
+    */
+
+    togglePassword.addEventListener(
       "click",
-      function () {
+      () => {
 
         if (
           passwordInput.type === "password"
@@ -530,13 +616,16 @@
 
           passwordInput.type = "text";
 
-          showPassword.textContent = "🙈";
+          togglePassword.textContent =
+            "Hide";
 
         } else {
 
-          passwordInput.type = "password";
+          passwordInput.type =
+            "password";
 
-          showPassword.textContent = "👁️";
+          togglePassword.textContent =
+            "Show";
 
         }
 
@@ -544,33 +633,39 @@
     );
 
 
-    /* =========================
-       SHOW ERROR
-    ========================= */
+    /*
+      Check Existing Login
 
-    function showError(message) {
+      যদি admin আগে থেকেই login করা থাকে,
+      তাহলে সরাসরি dashboard-এ যাবে।
+    */
 
-      errorMessage.textContent =
-        "❌ " + message;
+    onAuthStateChanged(
+      auth,
+      (user) => {
 
-      errorMessage.style.display =
-        "block";
+        if (user) {
 
-      successMessage.style.display =
-        "none";
+          window.location.href =
+            "./admin/dashboard.html";
 
-    }
+        }
+
+      }
+    );
 
 
-    /* =========================
-       LOGIN
-    ========================= */
+    /*
+      Login
+    */
 
     loginForm.addEventListener(
       "submit",
-      async function (event) {
+      async (event) => {
 
         event.preventDefault();
+
+        clearMessage();
 
 
         const email =
@@ -582,8 +677,8 @@
 
         if (!email || !password) {
 
-          showError(
-            "Email এবং password দিন।"
+          showMessage(
+            "Please enter your email and password."
           );
 
           return;
@@ -591,17 +686,24 @@
         }
 
 
+        /*
+          Loading State
+        */
+
         loginButton.disabled = true;
 
         loginButton.textContent =
-          "Signing in...";
+          "Signing In...";
 
-
-        errorMessage.style.display =
-          "none";
+        loadingText.style.display =
+          "block";
 
 
         try {
+
+          /*
+            Firebase Email/Password Login
+          */
 
           await signInWithEmailAndPassword(
             auth,
@@ -610,40 +712,64 @@
           );
 
 
-          successMessage.textContent =
-            "✅ Login successful! Dashboard খুলছে...";
+          /*
+            Success
+          */
 
-          successMessage.style.display =
-            "block";
+          showMessage(
+            "Login successful. Redirecting to dashboard...",
+            "success"
+          );
 
+
+          /*
+            Dashboard
+          */
 
           setTimeout(
-            function () {
+            () => {
 
               window.location.href =
-                "dashboard.html";
+                "./admin/dashboard.html";
 
             },
-            800
+            500
           );
 
 
         } catch (error) {
 
-          console.error(error);
+          console.error(
+            "Login Error:",
+            error
+          );
 
 
-          let message =
-            "Login failed. Email অথবা password check করুন।";
+          let errorMessage =
+            "Login failed. Please check your email and password.";
 
+
+          /*
+            Firebase Error Messages
+          */
 
           if (
             error.code ===
             "auth/invalid-credential"
           ) {
 
-            message =
-              "Email অথবা password সঠিক নয়।";
+            errorMessage =
+              "Incorrect email or password.";
+
+          }
+
+          else if (
+            error.code ===
+            "auth/invalid-email"
+          ) {
+
+            errorMessage =
+              "Please enter a valid email address.";
 
           }
 
@@ -652,8 +778,8 @@
             "auth/user-not-found"
           ) {
 
-            message =
-              "এই email দিয়ে কোনো admin account পাওয়া যায়নি।";
+            errorMessage =
+              "No admin account was found with this email.";
 
           }
 
@@ -662,8 +788,8 @@
             "auth/wrong-password"
           ) {
 
-            message =
-              "Password সঠিক নয়।";
+            errorMessage =
+              "Incorrect password.";
 
           }
 
@@ -672,19 +798,39 @@
             "auth/too-many-requests"
           ) {
 
-            message =
-              "অনেকবার চেষ্টা করা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।";
+            errorMessage =
+              "Too many login attempts. Please try again later.";
+
+          }
+
+          else if (
+            error.code ===
+            "auth/network-request-failed"
+          ) {
+
+            errorMessage =
+              "Network error. Please check your internet connection.";
 
           }
 
 
-          showError(message);
+          showMessage(
+            errorMessage
+          );
 
 
-          loginButton.disabled = false;
+          /*
+            Reset Loading State
+          */
+
+          loginButton.disabled =
+            false;
 
           loginButton.textContent =
-            "Login to Dashboard →";
+            "Login to Dashboard";
+
+          loadingText.style.display =
+            "none";
 
         }
 
@@ -693,8 +839,5 @@
 
   </script>
 
-
 </body>
-
 </html>
-```
