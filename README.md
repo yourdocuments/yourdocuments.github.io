@@ -1,2 +1,2 @@
 admission or Documents @snkdocuments.com
-url: https://yourdocuments.github.io/
+url: https://admission.snkitinstitute.com
