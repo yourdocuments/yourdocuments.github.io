@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080909"
+  >
+
+  <meta
+    name="description"
+    content="SNK OnePay — Payment failed"
+  >
+
+  <title>Payment Failed | SNK OnePay</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    :root {
+      --bg: #080909;
+      --card: #111313;
+      --card-soft: #151818;
+      --border: rgba(255,255,255,.09);
+
+      --text: #f5f7f5;
+      --muted: #929a95;
+
+      --lime: #b7ff00;
+      --danger: #ff6868;
+
+      --shadow:
+        0 30px 100px rgba(0,0,0,.55);
+
+      --radius: 26px;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(255,104,104,.07),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(183,255,0,.035),
+          transparent 28%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      font-family: Inter, sans-serif;
+
+      line-height: 1.6;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+
+    /* =====================================
+       HEADER
+    ===================================== */
+
+    header {
+      height: 76px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      background:
+        rgba(8,9,9,.82);
+
+      backdrop-filter:
+        blur(20px);
+
+      display: flex;
+      align-items: center;
+    }
+
+
+    .nav {
+      width:
+        min(1100px, calc(100% - 32px));
+
+      height: 100%;
+
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-weight: 700;
+
+      font-size: 19px;
+    }
+
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+
+      border-radius: 11px;
+
+      background: var(--lime);
+
+      color: #080909;
+
+      display: grid;
+      place-items: center;
+
+      font-weight: 900;
+
+      box-shadow:
+        0 0 28px
+        rgba(183,255,0,.18);
+    }
+
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--danger);
+
+      box-shadow:
+        0 0 12px
+        rgba(255,104,104,.65);
+    }
+
+
+    /* =====================================
+       MAIN
+    ===================================== */
+
+    main {
+      width:
+        min(780px, calc(100% - 32px));
+
+      margin: auto;
+
+      padding:
+        75px 0 90px;
+    }
+
+
+    .card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.012)
+        ),
+        var(--card);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius);
+
+      box-shadow:
+        var(--shadow);
+
+      overflow: hidden;
+    }
+
+
+    /* =====================================
+       TOP
+    ===================================== */
+
+    .top {
+      padding:
+        48px 30px 38px;
+
+      text-align: center;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+
+    /* =====================================
+       ERROR ICON
+    ===================================== */
+
+    .error-icon {
+      width: 86px;
+      height: 86px;
+
+      margin:
+        0 auto 25px;
+
+      border-radius: 50%;
+
+      display: grid;
+      place-items: center;
+
+      background:
+        rgba(255,104,104,.08);
+
+      border:
+        1px solid
+        rgba(255,104,104,.25);
+
+      color:
+        var(--danger);
+
+      font-size: 38px;
+
+      font-weight: 700;
+
+      box-shadow:
+        0 0 0 10px
+        rgba(255,104,104,.035),
+
+        0 0 50px
+        rgba(255,104,104,.08);
+
+      animation:
+        shake .45s ease;
+    }
+
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-5px);
+      }
+
+      50% {
+        transform: translateX(5px);
+      }
+
+      75% {
+        transform: translateX(-3px);
+      }
+
+    }
+
+
+    .eyebrow {
+      color:
+        var(--danger);
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      letter-spacing:
+        .17em;
+
+      text-transform:
+        uppercase;
+
+      margin-bottom: 9px;
+    }
+
+
+    h1 {
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-size:
+        clamp(31px, 6vw, 47px);
+
+      line-height: 1.04;
+
+      letter-spacing:
+        -.045em;
+
+      margin-bottom: 14px;
+    }
+
+
+    .intro {
+      max-width: 530px;
+
+      margin: auto;
+
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+
+    /* =====================================
+       BODY
+    ===================================== */
+
+    .body {
+      padding: 30px;
+    }
+
+
+    .section-title {
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-size: 18px;
+
+      margin-bottom: 17px;
+    }
+
+
+    /* =====================================
+       REASON BOX
+    ===================================== */
+
+    .reason {
+      padding: 18px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,104,104,.045);
+
+      border:
+        1px solid
+        rgba(255,104,104,.12);
+
+      margin-bottom: 22px;
+    }
+
+
+    .reason-label {
+      color: var(--danger);
+
+      font-size: 10px;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .12em;
+
+      font-weight: 800;
+
+      margin-bottom: 4px;
+    }
+
+
+    .reason-text {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+
+    /* =====================================
+       ORDER
+    ===================================== */
+
+    .order-box {
+      border:
+        1px solid var(--border);
+
+      border-radius: 17px;
+
+      overflow: hidden;
+    }
+
+
+    .order-row {
+      min-height: 56px;
+
+      padding:
+        13px 17px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      font-size: 13px;
+    }
+
+
+    .order-row:last-child {
+      border-bottom: 0;
+    }
+
+
+    .label {
+      color: var(--muted);
+    }
+
+
+    .value {
+      font-weight: 700;
+
+      text-align: right;
+
+      max-width: 65%;
+
+      overflow-wrap:
+        anywhere;
+    }
+
+
+    .amount {
+      color: var(--lime);
+
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-size: 20px;
+    }
+
+
+    .order-number {
+      font-family: monospace;
+
+      font-size: 12px;
+    }
+
+
+    /* =====================================
+       ACTIONS
+    ===================================== */
+
+    .actions {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 11px;
+
+      margin-top: 25px;
+    }
+
+
+    .button {
+      min-height: 53px;
+
+      border-radius: 14px;
+
+      display: grid;
+
+      place-items: center;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      transition: .2s ease;
+    }
+
+
+    .primary {
+      border: 0;
+
+      background:
+        var(--lime);
+
+      color:
+        #080909;
+    }
+
+
+    .primary:hover {
+      background:
+        #c6ff33;
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 15px 30px
+        rgba(183,255,0,.12);
+    }
+
+
+    .secondary {
+      border:
+        1px solid var(--border);
+
+      background:
+        var(--card-soft);
+
+      color:
+        var(--text);
+    }
+
+
+    .secondary:hover {
+      border-color:
+        rgba(183,255,0,.3);
+
+      transform:
+        translateY(-1px);
+    }
+
+
+    /* =====================================
+       HELP
+    ===================================== */
+
+    .help {
+      margin-top: 23px;
+
+      padding-top: 22px;
+
+      border-top:
+        1px solid var(--border);
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    .help strong {
+      color: var(--text);
+    }
+
+
+    .help-link {
+      display: inline-block;
+
+      margin-top: 7px;
+
+      color: var(--lime);
+
+      font-weight: 700;
+    }
+
+
+    /* =====================================
+       FOOTER
+    ===================================== */
+
+    footer {
+      padding:
+        27px 20px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+
+    footer strong {
+      color: var(--text);
+    }
+
+
+    /* =====================================
+       RESPONSIVE
+    ===================================== */
+
+    @media (max-width: 600px) {
+
+      header {
+        height: 68px;
+      }
+
+
+      .status {
+        display: none;
+      }
+
+
+      main {
+        padding-top: 35px;
+      }
+
+
+      .top {
+        padding:
+          38px 20px 30px;
+      }
+
+
+      .body {
+        padding: 20px;
+      }
+
+
+      .order-row {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+        gap: 4px;
+      }
+
+
+      .value {
+        max-width: 100%;
+
+        text-align:
+          left;
+      }
+
+
+      .actions {
+        grid-template-columns:
+          1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =====================================
+       HEADER
+  ===================================== -->
+
+  <header>
+
+    <nav class="nav">
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <span class="brand-mark">
+          S
+        </span>
+
+        <span>
+          SNK OnePay
+        </span>
+
+      </a>
+
+
+      <div class="status">
+
+        <span class="status-dot"></span>
+
+        Payment Not Completed
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+
+  <!-- =====================================
+       MAIN
+  ===================================== -->
+
+  <main>
+
+    <section class="card">
+
+
+      <!-- TOP -->
+
+      <div class="top">
+
+        <div class="error-icon">
+          !
+        </div>
+
+
+        <div class="eyebrow">
+          Payment Unsuccessful
+        </div>
+
+
+        <h1>
+          Payment Wasn't Completed
+        </h1>
+
+
+        <p class="intro">
+          Your payment could not be completed at this time.
+          Your order has not been marked as paid.
+        </p>
+
+      </div>
+
+
+
+      <!-- BODY -->
+
+      <div class="body">
+
+        <h2 class="section-title">
+          What happened?
+        </h2>
+
+
+        <div class="reason">
+
+          <div class="reason-label">
+            Payment Status
+          </div>
+
+          <div class="reason-text" id="reasonText">
+            The payment was cancelled or could not be completed.
+            You can safely try again.
+          </div>
+
+        </div>
+
+
+
+        <!-- ORDER DETAILS -->
+
+        <h2 class="section-title">
+          Order Details
+        </h2>
+
+
+        <div class="order-box">
+
+
+          <div class="order-row">
+
+            <span class="label">
+              Product
+            </span>
+
+            <strong
+              class="value"
+              id="productName"
+            >
+              Premium Website Package
+            </strong>
+
+          </div>
+
+
+          <div class="order-row">
+
+            <span class="label">
+              Website
+            </span>
+
+            <strong
+              class="value"
+              id="siteName"
+            >
+              Website Deals
+            </strong>
+
+          </div>
+
+
+          <div class="order-row">
+
+            <span class="label">
+              Order ID
+            </span>
+
+            <strong
+              class="value order-number"
+              id="orderId"
+            >
+              WD-10291
+            </strong>
+
+          </div>
+
+
+          <div class="order-row">
+
+            <span class="label">
+              Amount
+            </span>
+
+            <strong
+              class="value amount"
+              id="amount"
+            >
+              ৳2,999
+            </strong>
+
+          </div>
+
+
+          <div class="order-row">
+
+            <span class="label">
+              Payment Method
+            </span>
+
+            <strong
+              class="value"
+              id="method"
+            >
+              bKash
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+          <a
+            href="#"
+            class="button primary"
+            id="retryButton"
+          >
+            Try Payment Again
+          </a>
+
+
+          <a
+            href="index.html"
+            class="button secondary"
+          >
+            Back to SNK OnePay
+          </a>
+
+        </div>
+
+
+
+        <!-- HELP -->
+
+        <div class="help">
+
+          Need help with this payment?
+
+          <br>
+
+          <strong>
+            Keep your Order ID when contacting support.
+          </strong>
+
+          <br>
+
+          <a
+            href="mailto:support@snkbd.com"
+            class="help-link"
+          >
+            Contact Support
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================
+       FOOTER
+  ===================================== -->
+
+  <footer>
+
+    © 2026
+    <strong>SNK OnePay</strong>
+    · One Pay. Every Website.
+
+  </footer>
+
+
+
+  <script>
+
+    /*
+      ==========================================
+      SNK ONEPAY FAILED PAGE
+      FRONTEND DEMO
+      ==========================================
+    */
+
+
+    // ------------------------------------------
+    // READ URL PARAMETERS
+    // ------------------------------------------
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const product =
+      params.get("product") ||
+      "Premium Website Package";
+
+
+    const site =
+      params.get("site") ||
+      "Website Deals";
+
+
+    const order =
+      params.get("order") ||
+      "WD-10291";
+
+
+    const method =
+      params.get("method") ||
+      "bKash";
+
+
+    const amountParam =
+      params.get("amount");
+
+
+    const amount =
+      amountParam &&
+      !isNaN(Number(amountParam))
+        ? Number(amountParam)
+        : 2999;
+
+
+    const reason =
+      params.get("reason") ||
+      "The payment was cancelled or could not be completed. You can safely try again.";
+
+
+
+    // ------------------------------------------
+    // MONEY FORMAT
+    // ------------------------------------------
+
+    function money(value) {
+
+      return "৳" +
+        Number(value)
+          .toLocaleString("en-BD");
+
+    }
+
+
+
+    // ------------------------------------------
+    // UPDATE PAGE
+    // ------------------------------------------
+
+    document.getElementById(
+      "productName"
+    ).textContent =
+      product;
+
+
+    document.getElementById(
+      "siteName"
+    ).textContent =
+      site;
+
+
+    document.getElementById(
+      "orderId"
+    ).textContent =
+      order;
+
+
+    document.getElementById(
+      "amount"
+    ).textContent =
+      money(amount);
+
+
+    document.getElementById(
+      "method"
+    ).textContent =
+      method;
+
+
+    document.getElementById(
+      "reasonText"
+    ).textContent =
+      reason;
+
+
+
+    // ------------------------------------------
+    // RETRY PAYMENT
+    // ------------------------------------------
+
+    const retryButton =
+      document.getElementById(
+        "retryButton"
+      );
+
+
+    const retryParams =
+      new URLSearchParams({
+
+        amount: amount,
+
+        product: product,
+
+        site: site,
+
+        order: order
+
+      });
+
+
+    retryButton.href =
+      "checkout.html?" +
+      retryParams.toString();
+
+  </script>
+
+</body>
+</html>
