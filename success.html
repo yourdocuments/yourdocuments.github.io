@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080909"
+  >
+
+  <meta
+    name="description"
+    content="SNK OnePay — Payment successful"
+  >
+
+  <title>Payment Successful | SNK OnePay</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    :root {
+      --bg: #080909;
+      --card: #111313;
+      --card-soft: #151818;
+      --border: rgba(255,255,255,.09);
+
+      --text: #f5f7f5;
+      --muted: #929a95;
+
+      --lime: #b7ff00;
+      --green: #69ff9b;
+
+      --shadow:
+        0 30px 100px rgba(0,0,0,.55);
+
+      --radius: 26px;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(183,255,0,.10),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 10% 90%,
+          rgba(105,255,155,.04),
+          transparent 28%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      font-family: Inter, sans-serif;
+
+      line-height: 1.6;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+
+    /* =====================================
+       HEADER
+    ===================================== */
+
+    header {
+      height: 76px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      background:
+        rgba(8,9,9,.82);
+
+      backdrop-filter:
+        blur(20px);
+
+      display: flex;
+      align-items: center;
+    }
+
+
+    .nav {
+      width:
+        min(1100px, calc(100% - 32px));
+
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-weight: 700;
+
+      font-size: 19px;
+    }
+
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+
+      border-radius: 11px;
+
+      background: var(--lime);
+
+      color: #080909;
+
+      display: grid;
+      place-items: center;
+
+      font-weight: 900;
+
+      box-shadow:
+        0 0 28px
+        rgba(183,255,0,.18);
+    }
+
+
+    .secure-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 12px
+        rgba(105,255,155,.7);
+    }
+
+
+    /* =====================================
+       MAIN
+    ===================================== */
+
+    main {
+      width:
+        min(780px, calc(100% - 32px));
+
+      margin: auto;
+
+      padding:
+        75px 0 90px;
+    }
+
+
+    .success-card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.012)
+        ),
+        var(--card);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius);
+
+      box-shadow:
+        var(--shadow);
+
+      overflow: hidden;
+    }
+
+
+    .success-top {
+      padding:
+        48px 30px 38px;
+
+      text-align: center;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+
+    /* =====================================
+       SUCCESS ICON
+    ===================================== */
+
+    .success-icon {
+      width: 86px;
+      height: 86px;
+
+      margin:
+        0 auto 25px;
+
+      border-radius: 50%;
+
+      display: grid;
+      place-items: center;
+
+      color: #080909;
+
+      background: var(--lime);
+
+      font-size: 38px;
+
+      font-weight: 900;
+
+      box-shadow:
+        0 0 0 10px
+        rgba(183,255,0,.055),
+
+        0 0 55px
+        rgba(183,255,0,.16);
+
+      animation:
+        pop .5s cubic-bezier(.2,.8,.2,1);
+    }
+
+
+    @keyframes pop {
+
+      0% {
+        opacity: 0;
+        transform: scale(.65);
+      }
+
+      70% {
+        transform: scale(1.08);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+    }
+
+
+    .eyebrow {
+      color: var(--lime);
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      letter-spacing:
+        .17em;
+
+      text-transform:
+        uppercase;
+
+      margin-bottom: 9px;
+    }
+
+
+    h1 {
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-size:
+        clamp(32px, 6vw, 49px);
+
+      line-height: 1.04;
+
+      letter-spacing:
+        -.045em;
+
+      margin-bottom: 14px;
+    }
+
+
+    .intro {
+      max-width: 540px;
+
+      margin: auto;
+
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+
+    /* =====================================
+       RECEIPT
+    ===================================== */
+
+    .receipt {
+      padding: 30px;
+    }
+
+
+    .receipt-heading {
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-size: 18px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .product-box {
+      padding: 19px;
+
+      border-radius: 17px;
+
+      background:
+        var(--card-soft);
+
+      border:
+        1px solid var(--border);
+
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap: 20px;
+    }
+
+
+    .product-label {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .12em;
+
+      font-weight: 800;
+
+      margin-bottom: 4px;
+    }
+
+
+    .product-name {
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-size: 18px;
+
+      font-weight: 700;
+    }
+
+
+    .product-site {
+      color: var(--muted);
+
+      font-size: 12px;
+
+      margin-top: 2px;
+    }
+
+
+    .product-price {
+      color: var(--lime);
+
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-size: 22px;
+
+      font-weight: 700;
+
+      white-space: nowrap;
+    }
+
+
+    .details {
+      margin-top: 22px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 17px;
+
+      overflow: hidden;
+    }
+
+
+    .detail-row {
+      min-height: 54px;
+
+      padding:
+        13px 17px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content:
+        space-between;
+
+      gap: 20px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      font-size: 13px;
+    }
+
+
+    .detail-row:last-child {
+      border-bottom: 0;
+    }
+
+
+    .detail-label {
+      color: var(--muted);
+    }
+
+
+    .detail-value {
+      text-align: right;
+
+      font-weight: 700;
+
+      max-width: 60%;
+
+      overflow-wrap: anywhere;
+    }
+
+
+    .transaction-id {
+      color: var(--lime);
+
+      font-family: monospace;
+
+      font-size: 12px;
+    }
+
+
+    .paid-status {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      padding:
+        5px 9px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(105,255,155,.08);
+
+      border:
+        1px solid
+        rgba(105,255,155,.18);
+
+      color: var(--green);
+
+      font-size: 11px;
+    }
+
+
+    .paid-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+    }
+
+
+    /* =====================================
+       CUSTOMER MESSAGE
+    ===================================== */
+
+    .message {
+      margin-top: 22px;
+
+      padding: 17px;
+
+      border-radius: 15px;
+
+      background:
+        rgba(183,255,0,.045);
+
+      border:
+        1px solid
+        rgba(183,255,0,.12);
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    .message strong {
+      color: var(--text);
+    }
+
+
+    /* =====================================
+       ACTIONS
+    ===================================== */
+
+    .actions {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 11px;
+
+      margin-top: 25px;
+    }
+
+
+    .button {
+      min-height: 52px;
+
+      border-radius: 14px;
+
+      display: grid;
+
+      place-items: center;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      transition: .2s ease;
+    }
+
+
+    .button-primary {
+      border: 0;
+
+      background:
+        var(--lime);
+
+      color:
+        #080909;
+    }
+
+
+    .button-primary:hover {
+      background:
+        #c6ff33;
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 15px 30px
+        rgba(183,255,0,.12);
+    }
+
+
+    .button-secondary {
+      border:
+        1px solid var(--border);
+
+      background:
+        var(--card-soft);
+
+      color:
+        var(--text);
+    }
+
+
+    .button-secondary:hover {
+      border-color:
+        rgba(183,255,0,.3);
+
+      transform:
+        translateY(-1px);
+    }
+
+
+    /* =====================================
+       FOOTER NOTE
+    ===================================== */
+
+    .footer-note {
+      text-align: center;
+
+      margin-top: 23px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+
+    .footer-note strong {
+      color: var(--text);
+    }
+
+
+    /* =====================================
+       FOOTER
+    ===================================== */
+
+    footer {
+      padding:
+        27px 20px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+
+    footer strong {
+      color: var(--text);
+    }
+
+
+    /* =====================================
+       RESPONSIVE
+    ===================================== */
+
+    @media (max-width: 600px) {
+
+      header {
+        height: 68px;
+      }
+
+
+      .secure-status {
+        display: none;
+      }
+
+
+      main {
+        padding-top: 35px;
+      }
+
+
+      .success-top {
+        padding:
+          38px 20px 30px;
+      }
+
+
+      .receipt {
+        padding: 20px;
+      }
+
+
+      .product-box {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+        gap: 10px;
+      }
+
+
+      .product-price {
+        font-size: 20px;
+      }
+
+
+      .detail-row {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+        gap: 3px;
+      }
+
+
+      .detail-value {
+        max-width: 100%;
+
+        text-align:
+          left;
+      }
+
+
+      .actions {
+        grid-template-columns:
+          1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =====================================
+       HEADER
+  ===================================== -->
+
+  <header>
+
+    <nav class="nav">
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <span class="brand-mark">
+          S
+        </span>
+
+        <span>
+          SNK OnePay
+        </span>
+
+      </a>
+
+
+      <div class="secure-status">
+
+        <span class="status-dot"></span>
+
+        Payment Completed
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+
+  <!-- =====================================
+       MAIN
+  ===================================== -->
+
+  <main>
+
+    <section class="success-card">
+
+
+      <!-- SUCCESS HEADER -->
+
+      <div class="success-top">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+
+        <div class="eyebrow">
+          Payment Successful
+        </div>
+
+
+        <h1>
+          Thank You!
+        </h1>
+
+
+        <p class="intro">
+          Your payment request has been successfully created.
+          Keep your transaction ID for future reference.
+        </p>
+
+      </div>
+
+
+
+      <!-- RECEIPT -->
+
+      <div class="receipt">
+
+        <h2 class="receipt-heading">
+          Payment Receipt
+        </h2>
+
+
+        <!-- PRODUCT -->
+
+        <div class="product-box">
+
+          <div>
+
+            <div class="product-label">
+              Paid For
+            </div>
+
+            <div
+              class="product-name"
+              id="productName"
+            >
+              Premium Website Package
+            </div>
+
+            <div
+              class="product-site"
+              id="productSite"
+            >
+              Website Deals
+            </div>
+
+          </div>
+
+
+          <div
+            class="product-price"
+            id="productPrice"
+          >
+            ৳2,999
+          </div>
+
+        </div>
+
+
+
+        <!-- DETAILS -->
+
+        <div class="details">
+
+
+          <div class="detail-row">
+
+            <span class="detail-label">
+              Payment Status
+            </span>
+
+            <span class="paid-status">
+
+              <span class="paid-dot"></span>
+
+              Successful
+
+            </span>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span class="detail-label">
+              Order ID
+            </span>
+
+            <strong
+              class="detail-value"
+              id="orderId"
+            >
+              WD-10291
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span class="detail-label">
+              Transaction ID
+            </span>
+
+            <strong
+              class="detail-value transaction-id"
+              id="transactionId"
+            >
+              SNK-ONEPAY-000001
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span class="detail-label">
+              Payment Method
+            </span>
+
+            <strong
+              class="detail-value"
+              id="paymentMethod"
+            >
+              bKash
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span class="detail-label">
+              Amount Paid
+            </span>
+
+            <strong
+              class="detail-value"
+              id="amountPaid"
+            >
+              ৳2,999
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span class="detail-label">
+              Date & Time
+            </span>
+
+            <strong
+              class="detail-value"
+              id="paymentDate"
+            >
+              —
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- MESSAGE -->
+
+        <div class="message">
+
+          <strong>
+            What's next?
+          </strong>
+
+          Your order information can now be sent back
+          to the connected website. In the production version,
+          SNK OnePay will verify the payment through the backend
+          before marking the original order as paid.
+
+        </div>
+
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+          <button
+            class="button button-primary"
+            onclick="printReceipt()"
+          >
+            Print Receipt
+          </button>
+
+
+          <a
+            href="index.html"
+            class="button button-secondary"
+          >
+            Back to SNK OnePay
+          </a>
+
+        </div>
+
+
+        <div class="footer-note">
+
+          Powered by
+          <strong>SNK OnePay</strong>
+          · One Pay. Every Website.
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================
+       FOOTER
+  ===================================== -->
+
+  <footer>
+
+    © 2026
+    <strong>SNK OnePay</strong>
+    · Secure branded payment experience
+
+  </footer>
+
+
+
+  <script>
+
+    /*
+      ==========================================
+      SNK ONEPAY SUCCESS PAGE
+      FRONTEND DEMO
+      ==========================================
+    */
+
+
+    // ------------------------------------------
+    // READ URL PARAMETERS
+    // ------------------------------------------
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const amountParam =
+      params.get("amount");
+
+
+    const product =
+      params.get("product") ||
+      "Premium Website Package";
+
+
+    const site =
+      params.get("site") ||
+      "Website Deals";
+
+
+    const order =
+      params.get("order") ||
+      "WD-10291";
+
+
+    const method =
+      params.get("method") ||
+      "bKash";
+
+
+    const amount =
+      amountParam &&
+      !isNaN(Number(amountParam))
+        ? Number(amountParam)
+        : 2999;
+
+
+
+    // ------------------------------------------
+    // MONEY FORMAT
+    // ------------------------------------------
+
+    function money(value) {
+
+      return "৳" +
+        Number(value)
+          .toLocaleString("en-BD");
+
+    }
+
+
+
+    // ------------------------------------------
+    // TRANSACTION ID
+    // ------------------------------------------
+
+    function createTransactionId() {
+
+      const random =
+        Math.floor(
+          100000 +
+          Math.random() * 900000
+        );
+
+
+      return "SNK-ONEPAY-" + random;
+
+    }
+
+
+
+    // ------------------------------------------
+    // CURRENT DATE
+    // ------------------------------------------
+
+    function getCurrentDate() {
+
+      const now =
+        new Date();
+
+
+      return now.toLocaleString(
+        "en-BD",
+        {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      );
+
+    }
+
+
+
+    // ------------------------------------------
+    // UPDATE PAGE
+    // ------------------------------------------
+
+    document.getElementById(
+      "productName"
+    ).textContent =
+      product;
+
+
+    document.getElementById(
+      "productSite"
+    ).textContent =
+      site;
+
+
+    document.getElementById(
+      "productPrice"
+    ).textContent =
+      money(amount);
+
+
+    document.getElementById(
+      "amountPaid"
+    ).textContent =
+      money(amount);
+
+
+    document.getElementById(
+      "orderId"
+    ).textContent =
+      order;
+
+
+    document.getElementById(
+      "paymentMethod"
+    ).textContent =
+      method;
+
+
+    document.getElementById(
+      "transactionId"
+    ).textContent =
+      createTransactionId();
+
+
+    document.getElementById(
+      "paymentDate"
+    ).textContent =
+      getCurrentDate();
+
+
+
+    // ------------------------------------------
+    // PRINT RECEIPT
+    // ------------------------------------------
+
+    function printReceipt() {
+
+      window.print();
+
+    }
+
+  </script>
+
+
+  <style>
+
+    /* =====================================
+       PRINT MODE
+    ===================================== */
+
+    @media print {
+
+      body {
+        background: white;
+        color: black;
+      }
+
+
+      header,
+      footer,
+      .actions,
+      .footer-note {
+        display: none !important;
+      }
+
+
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+
+      .success-card {
+        border: 0;
+        box-shadow: none;
+        background: white;
+      }
+
+
+      .success-top {
+        border-bottom:
+          1px solid #ddd;
+      }
+
+
+      .success-icon {
+        background: #111;
+        color: white;
+        box-shadow: none;
+      }
+
+
+      .eyebrow,
+      .product-price,
+      .transaction-id {
+        color: #111;
+      }
+
+
+      .intro,
+      .product-site,
+      .detail-label,
+      .message {
+        color: #555;
+      }
+
+
+      .product-box,
+      .details,
+      .message {
+        border-color: #ddd;
+        background: white;
+      }
+
+    }
+
+  </style>
+
+</body>
+</html>
