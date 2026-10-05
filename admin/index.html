@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080909"
+  >
+
+  <meta
+    name="description"
+    content="SNK OnePay Admin — Secure payment management dashboard"
+  >
+
+  <title>Admin Login | SNK OnePay</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    :root {
+      --bg: #080909;
+      --bg-2: #0c0e0e;
+      --card: #111313;
+      --card-2: #151818;
+
+      --border: rgba(255,255,255,.09);
+
+      --text: #f5f7f5;
+      --muted: #929a95;
+
+      --lime: #b7ff00;
+      --lime-hover: #c7ff39;
+
+      --danger: #ff6868;
+      --success: #69ff9b;
+
+      --shadow:
+        0 35px 100px rgba(0,0,0,.6);
+
+      --radius: 25px;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(183,255,0,.075),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(183,255,0,.035),
+          transparent 30%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      font-family: Inter, sans-serif;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    button,
+    input {
+      font: inherit;
+    }
+
+
+    button {
+      cursor: pointer;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* =====================================
+       HEADER
+    ===================================== */
+
+    header {
+      width: 100%;
+      height: 76px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      background:
+        rgba(8,9,9,.78);
+
+      backdrop-filter:
+        blur(20px);
+    }
+
+
+    .nav {
+      width:
+        min(1160px, calc(100% - 32px));
+
+      height: 100%;
+
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-weight: 700;
+
+      font-size: 19px;
+    }
+
+
+    .brand-mark {
+      width: 37px;
+      height: 37px;
+
+      border-radius: 11px;
+
+      background:
+        var(--lime);
+
+      color:
+        #080909;
+
+      display: grid;
+      place-items: center;
+
+      font-weight: 900;
+
+      box-shadow:
+        0 0 30px
+        rgba(183,255,0,.16);
+    }
+
+
+    .admin-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      color:
+        var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    .admin-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background:
+        var(--lime);
+    }
+
+
+    /* =====================================
+       MAIN
+    ===================================== */
+
+    main {
+      flex: 1;
+
+      width:
+        min(1080px, calc(100% - 32px));
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 430px;
+
+      gap: 70px;
+
+      align-items: center;
+
+      padding:
+        65px 0;
+    }
+
+
+    /* =====================================
+       LEFT SIDE
+    ===================================== */
+
+    .intro {
+      max-width: 510px;
+    }
+
+
+    .eyebrow {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding:
+        7px 11px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(183,255,0,.055);
+
+      border:
+        1px solid
+        rgba(183,255,0,.13);
+
+      color:
+        var(--lime);
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      letter-spacing:
+        .12em;
+
+      text-transform:
+        uppercase;
+
+      margin-bottom: 20px;
+    }
+
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background:
+        var(--lime);
+
+      box-shadow:
+        0 0 10px
+        rgba(183,255,0,.7);
+    }
+
+
+    h1 {
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-size:
+        clamp(42px, 6vw, 68px);
+
+      line-height:
+        .98;
+
+      letter-spacing:
+        -.055em;
+
+      margin-bottom: 22px;
+    }
+
+
+    h1 span {
+      color:
+        var(--lime);
+    }
+
+
+    .intro-text {
+      color:
+        var(--muted);
+
+      font-size:
+        15px;
+
+      line-height:
+        1.8;
+
+      max-width:
+        480px;
+    }
+
+
+    /* =====================================
+       FEATURES
+    ===================================== */
+
+    .features {
+      margin-top: 34px;
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 12px;
+    }
+
+
+    .feature {
+      padding: 16px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        16px;
+
+      background:
+        rgba(255,255,255,.018);
+    }
+
+
+    .feature-icon {
+      color:
+        var(--lime);
+
+      font-size: 18px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .feature-title {
+      font-size: 12px;
+
+      font-weight:
+        800;
+
+      margin-bottom: 3px;
+    }
+
+
+    .feature-text {
+      color:
+        var(--muted);
+
+      font-size: 10px;
+
+      line-height:
+        1.5;
+    }
+
+
+    /* =====================================
+       LOGIN CARD
+    ===================================== */
+
+    .login-card {
+      padding: 31px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.045),
+          rgba(255,255,255,.012)
+        ),
+        var(--card);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+
+    .login-top {
+      margin-bottom: 27px;
+    }
+
+
+    .login-icon {
+      width: 50px;
+      height: 50px;
+
+      border-radius: 15px;
+
+      display: grid;
+      place-items: center;
+
+      background:
+        rgba(183,255,0,.08);
+
+      border:
+        1px solid
+        rgba(183,255,0,.15);
+
+      color:
+        var(--lime);
+
+      font-size: 22px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .login-title {
+      font-family:
+        "Space Grotesk", sans-serif;
+
+      font-size: 25px;
+
+      margin-bottom: 6px;
+    }
+
+
+    .login-subtitle {
+      color:
+        var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    /* =====================================
+       FORM
+    ===================================== */
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+
+    .field-header {
+      display: flex;
+
+      align-items: center;
+
+      justify-content:
+        space-between;
+
+      margin-bottom: 8px;
+    }
+
+
+    .field-label {
+      font-size: 12px;
+
+      font-weight:
+        800;
+    }
+
+
+    .forgot {
+      color:
+        var(--lime);
+
+      font-size:
+        10px;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+    }
+
+
+    .input-wrap {
+      position: relative;
+    }
+
+
+    .input-icon {
+      position: absolute;
+
+      left: 15px;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      color:
+        #69716c;
+
+      font-size: 14px;
+
+      pointer-events: none;
+    }
+
+
+    input {
+      width: 100%;
+
+      height: 51px;
+
+      padding:
+        0 14px 0 43px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        13px;
+
+      outline: none;
+
+      background:
+        var(--card-2);
+
+      color:
+        var(--text);
+
+      transition:
+        .2s ease;
+    }
+
+
+    input::placeholder {
+      color:
+        #626964;
+    }
+
+
+    input:focus {
+      border-color:
+        rgba(183,255,0,.55);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(183,255,0,.055);
+    }
+
+
+    .password-toggle {
+      position: absolute;
+
+      right: 13px;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      border: 0;
+
+      background: transparent;
+
+      color:
+        #747c77;
+
+      font-size: 11px;
+
+      cursor: pointer;
+    }
+
+
+    /* =====================================
+       REMEMBER
+    ===================================== */
+
+    .remember {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      color:
+        var(--muted);
+
+      font-size: 11px;
+
+      margin:
+        2px 0 21px;
+    }
+
+
+    .remember input {
+      width: auto;
+      height: auto;
+
+      padding: 0;
+
+      accent-color:
+        var(--lime);
+    }
+
+
+    /* =====================================
+       LOGIN BUTTON
+    ===================================== */
+
+    .login-button {
+      width: 100%;
+
+      min-height: 53px;
+
+      border: 0;
+
+      border-radius:
+        14px;
+
+      background:
+        var(--lime);
+
+      color:
+        #080909;
+
+      font-size:
+        13px;
+
+      font-weight:
+        900;
+
+      transition:
+        .2s ease;
+    }
+
+
+    .login-button:hover {
+      background:
+        var(--lime-hover);
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 15px 35px
+        rgba(183,255,0,.14);
+    }
+
+
+    .login-button:disabled {
+      opacity: .6;
+
+      cursor:
+        not-allowed;
+
+      transform:
+        none;
+
+      box-shadow:
+        none;
+    }
+
+
+    /* =====================================
+       MESSAGE
+    ===================================== */
+
+    .message {
+      display: none;
+
+      margin-top: 15px;
+
+      padding: 12px 13px;
+
+      border-radius:
+        12px;
+
+      font-size:
+        11px;
+
+      line-height:
+        1.5;
+    }
+
+
+    .message.show {
+      display: block;
+    }
+
+
+    .message.error {
+      color:
+        #ff9a9a;
+
+      background:
+        rgba(255,104,104,.06);
+
+      border:
+        1px solid
+        rgba(255,104,104,.14);
+    }
+
+
+    .message.success {
+      color:
+        var(--success);
+
+      background:
+        rgba(105,255,155,.055);
+
+      border:
+        1px solid
+        rgba(105,255,155,.13);
+    }
+
+
+    /* =====================================
+       SECURITY
+    ===================================== */
+
+    .security {
+      display: flex;
+
+      align-items:
+        flex-start;
+
+      gap: 9px;
+
+      margin-top: 20px;
+
+      padding-top: 19px;
+
+      border-top:
+        1px solid var(--border);
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+      line-height:
+        1.5;
+    }
+
+
+    .security-icon {
+      color:
+        var(--lime);
+
+      font-size:
+        14px;
+    }
+
+
+    /* =====================================
+       DEMO NOTICE
+    ===================================== */
+
+    .demo-notice {
+      margin-top: 18px;
+
+      padding:
+        12px 13px;
+
+      border-radius:
+        12px;
+
+      background:
+        rgba(183,255,0,.035);
+
+      border:
+        1px dashed
+        rgba(183,255,0,.18);
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+      line-height:
+        1.5;
+    }
+
+
+    .demo-notice strong {
+      color:
+        var(--lime);
+    }
+
+
+    /* =====================================
+       FOOTER
+    ===================================== */
+
+    footer {
+      padding:
+        24px 20px;
+
+      text-align:
+        center;
+
+      border-top:
+        1px solid var(--border);
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+    }
+
+
+    footer strong {
+      color:
+        var(--text);
+    }
+
+
+    /* =====================================
+       RESPONSIVE
+    ===================================== */
+
+    @media (max-width: 900px) {
+
+      main {
+        grid-template-columns:
+          1fr;
+
+        max-width:
+          500px;
+
+        gap:
+          40px;
+      }
+
+
+      .intro {
+        text-align:
+          center;
+
+        max-width:
+          100%;
+      }
+
+
+      .eyebrow {
+        margin-left:
+          auto;
+
+        margin-right:
+          auto;
+      }
+
+
+      .intro-text {
+        margin:
+          auto;
+      }
+
+
+      .features {
+        text-align:
+          left;
+      }
+
+    }
+
+
+    @media (max-width: 520px) {
+
+      header {
+        height:
+          68px;
+      }
+
+
+      .admin-label {
+        display:
+          none;
+      }
+
+
+      main {
+        width:
+          min(100% - 24px, 500px);
+
+        padding:
+          35px 0 45px;
+      }
+
+
+      h1 {
+        font-size:
+          45px;
+      }
+
+
+      .features {
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .login-card {
+        padding:
+          22px;
+
+        border-radius:
+          21px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =====================================
+       HEADER
+  ===================================== -->
+
+  <header>
+
+    <nav class="nav">
+
+      <a
+        href="../index.html"
+        class="brand"
+      >
+
+        <span class="brand-mark">
+          S
+        </span>
+
+        <span>
+          SNK OnePay
+        </span>
+
+      </a>
+
+
+      <div class="admin-label">
+
+        <span class="admin-dot"></span>
+
+        Admin Portal
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+
+  <!-- =====================================
+       MAIN
+  ===================================== -->
+
+  <main>
+
+
+    <!-- ===================================
+         INTRO
+    =================================== -->
+
+    <section class="intro">
+
+      <div class="eyebrow">
+
+        <span class="eyebrow-dot"></span>
+
+        SNK OnePay Control Center
+
+      </div>
+
+
+      <h1>
+        One place to
+        <span>control</span>
+        every payment.
+      </h1>
+
+
+      <p class="intro-text">
+        Manage transactions, connected websites,
+        payment links, customers and revenue from
+        one centralized SNK OnePay dashboard.
+      </p>
+
+
+      <div class="features">
+
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            ◈
+          </div>
+
+          <div class="feature-title">
+            Unified Payments
+          </div>
+
+          <div class="feature-text">
+            Monitor payments from every connected website.
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            ↗
+          </div>
+
+          <div class="feature-title">
+            Live Transactions
+          </div>
+
+          <div class="feature-text">
+            Track payment status and transaction activity.
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            ⌁
+          </div>
+
+          <div class="feature-title">
+            Payment Links
+          </div>
+
+          <div class="feature-text">
+            Create branded payment links for customers.
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            ◎
+          </div>
+
+          <div class="feature-title">
+            Website Control
+          </div>
+
+          <div class="feature-text">
+            Connect and manage multiple websites centrally.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================
+         LOGIN
+    =================================== -->
+
+    <section class="login-card">
+
+
+      <div class="login-top">
+
+        <div class="login-icon">
+          ◉
+        </div>
+
+
+        <h2 class="login-title">
+          Welcome back
+        </h2>
+
+
+        <p class="login-subtitle">
+          Sign in to your SNK OnePay admin account.
+        </p>
+
+      </div>
+
+
+
+      <form id="loginForm">
+
+
+        <!-- EMAIL -->
+
+        <div class="field">
+
+          <div class="field-header">
+
+            <label
+              class="field-label"
+              for="email"
+            >
+              Admin Email
+            </label>
+
+          </div>
+
+
+          <div class="input-wrap">
+
+            <span class="input-icon">
+              @
+            </span>
+
+            <input
+              id="email"
+              type="email"
+              placeholder="admin@example.com"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PASSWORD -->
+
+        <div class="field">
+
+          <div class="field-header">
+
+            <label
+              class="field-label"
+              for="password"
+            >
+              Password
+            </label>
+
+
+            <span
+              class="forgot"
+              id="forgotPassword"
+            >
+              Forgot password?
+            </span>
+
+          </div>
+
+
+          <div class="input-wrap">
+
+            <span class="input-icon">
+              •
+            </span>
+
+
+            <input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+
+            <button
+              type="button"
+              class="password-toggle"
+              id="togglePassword"
+            >
+              Show
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- REMEMBER -->
+
+        <label class="remember">
+
+          <input
+            type="checkbox"
+            id="remember"
+          >
+
+          <span>
+            Keep me signed in on this device
+          </span>
+
+        </label>
+
+
+
+        <!-- LOGIN -->
+
+        <button
+          type="submit"
+          class="login-button"
+          id="loginButton"
+        >
+          Sign In to Admin
+        </button>
+
+
+        <!-- MESSAGE -->
+
+        <div
+          class="message"
+          id="message"
+        ></div>
+
+
+        <!-- SECURITY -->
+
+        <div class="security">
+
+          <span class="security-icon">
+            🔒
+          </span>
+
+          <span>
+            Your admin credentials should be processed
+            through a secure backend authentication system
+            in the production version.
+          </span>
+
+        </div>
+
+
+        <!-- DEMO -->
+
+        <div class="demo-notice">
+
+          <strong>Frontend Demo:</strong>
+
+          This login currently uses demo authentication.
+          Real Firebase/backend authentication will be
+          connected in the next stage.
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================
+       FOOTER
+  ===================================== -->
+
+  <footer>
+
+    © 2026
+    <strong>SNK OnePay</strong>
+    · Admin Control Center
+
+  </footer>
+
+
+
+  <script>
+
+    /*
+      ==========================================
+      SNK ONEPAY ADMIN LOGIN
+      FRONTEND DEMO
+      ==========================================
+    */
+
+
+    // ------------------------------------------
+    // ELEMENTS
+    // ------------------------------------------
+
+    const form =
+      document.getElementById(
+        "loginForm"
+      );
+
+
+    const emailInput =
+      document.getElementById(
+        "email"
+      );
+
+
+    const passwordInput =
+      document.getElementById(
+        "password"
+      );
+
+
+    const loginButton =
+      document.getElementById(
+        "loginButton"
+      );
+
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+    const togglePassword =
+      document.getElementById(
+        "togglePassword"
+      );
+
+
+    const forgotPassword =
+      document.getElementById(
+        "forgotPassword"
+      );
+
+
+    const remember =
+      document.getElementById(
+        "remember"
+      );
+
+
+
+    // ------------------------------------------
+    // DEMO ADMIN
+    // ------------------------------------------
+
+    /*
+      IMPORTANT:
+
+      These credentials are ONLY for frontend
+      testing.
+
+      NEVER use frontend credentials
+      for a real production admin system.
+    */
+
+    const DEMO_EMAIL =
+      "admin@snkonepay.com";
+
+
+    const DEMO_PASSWORD =
+      "SNKOnePay@2026";
+
+
+
+    // ------------------------------------------
+    // SHOW MESSAGE
+    // ------------------------------------------
+
+    function showMessage(
+      text,
+      type = "error"
+    ) {
+
+      message.textContent =
+        text;
+
+      message.className =
+        "message show " + type;
+
+    }
+
+
+
+    // ------------------------------------------
+    // HIDE MESSAGE
+    // ------------------------------------------
+
+    function hideMessage() {
+
+      message.className =
+        "message";
+
+      message.textContent =
+        "";
+
+    }
+
+
+
+    // ------------------------------------------
+    // PASSWORD TOGGLE
+    // ------------------------------------------
+
+    togglePassword.addEventListener(
+      "click",
+      () => {
+
+        const isPassword =
+          passwordInput.type ===
+          "password";
+
+
+        passwordInput.type =
+          isPassword
+            ? "text"
+            : "password";
+
+
+        togglePassword.textContent =
+          isPassword
+            ? "Hide"
+            : "Show";
+
+      }
+    );
+
+
+
+    // ------------------------------------------
+    // FORGOT PASSWORD DEMO
+    // ------------------------------------------
+
+    forgotPassword.addEventListener(
+      "click",
+      () => {
+
+        const email =
+          emailInput.value.trim();
+
+
+        if (!email) {
+
+          showMessage(
+            "Enter your admin email first.",
+            "error"
+          );
+
+          emailInput.focus();
+
+          return;
+
+        }
+
+
+        showMessage(
+          "Password reset will be connected to the backend authentication system.",
+          "success"
+        );
+
+      }
+    );
+
+
+
+    // ------------------------------------------
+    // LOGIN
+    // ------------------------------------------
+
+    form.addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+        hideMessage();
+
+
+        const email =
+          emailInput.value.trim();
+
+
+        const password =
+          passwordInput.value;
+
+
+        if (!email || !password) {
+
+          showMessage(
+            "Please enter your email and password."
+          );
+
+          return;
+
+        }
+
+
+        loginButton.disabled =
+          true;
+
+
+        loginButton.textContent =
+          "Signing In...";
+
+
+        setTimeout(() => {
+
+
+          if (
+            email === DEMO_EMAIL &&
+            password === DEMO_PASSWORD
+          ) {
+
+
+            // --------------------------------
+            // SAVE DEMO SESSION
+            // --------------------------------
+
+            const session = {
+
+              loggedIn: true,
+
+              email: email,
+
+              loginTime:
+                new Date().toISOString()
+
+            };
+
+
+            if (
+              remember.checked
+            ) {
+
+              localStorage.setItem(
+                "snkOnePayAdmin",
+                JSON.stringify(session)
+              );
+
+            } else {
+
+              sessionStorage.setItem(
+                "snkOnePayAdmin",
+                JSON.stringify(session)
+              );
+
+            }
+
+
+            showMessage(
+              "Login successful. Opening dashboard...",
+              "success"
+            );
+
+
+            loginButton.textContent =
+              "Login Successful";
+
+
+            setTimeout(() => {
+
+              window.location.href =
+                "dashboard.html";
+
+            }, 700);
+
+
+          } else {
+
+
+            showMessage(
+              "Invalid demo credentials. Use admin@snkonepay.com / SNKOnePay@2026",
+              "error"
+            );
+
+
+            loginButton.disabled =
+              false;
+
+
+            loginButton.textContent =
+              "Sign In to Admin";
+
+          }
+
+        }, 700);
+
+      }
+    );
+
+
+
+    // ------------------------------------------
+    // EXISTING SESSION
+    // ------------------------------------------
+
+    const localSession =
+      localStorage.getItem(
+        "snkOnePayAdmin"
+      );
+
+
+    const sessionSession =
+      sessionStorage.getItem(
+        "snkOnePayAdmin"
+      );
+
+
+    if (
+      localSession ||
+      sessionSession
+    ) {
+
+      showMessage(
+        "You already have an active demo session.",
+        "success"
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
