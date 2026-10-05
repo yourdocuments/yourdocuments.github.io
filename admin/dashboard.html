@@ -1,0 +1,2504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#090a0a"
+  >
+
+  <meta
+    name="description"
+    content="SNK OnePay Admin Dashboard — Manage payments, transactions, websites and revenue."
+  >
+
+  <title>Dashboard | SNK OnePay Admin</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --bg: #080909;
+      --bg-soft: #0d0f0f;
+      --panel: #101313;
+      --panel-2: #141717;
+      --panel-3: #181c1c;
+
+      --border: rgba(255,255,255,.08);
+      --border-strong: rgba(255,255,255,.13);
+
+      --text: #f5f7f6;
+      --muted: #929a98;
+      --muted-2: #68706e;
+
+      --lime: #b7ff00;
+      --lime-dark: #8fc900;
+
+      --green: #42e695;
+      --orange: #ffb84d;
+      --red: #ff6673;
+      --blue: #63a9ff;
+
+      --sidebar: 260px;
+      --topbar: 76px;
+
+      --radius: 20px;
+      --radius-sm: 14px;
+
+      --shadow:
+        0 20px 60px rgba(0,0,0,.28);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 85% 5%,
+          rgba(183,255,0,.055),
+          transparent 28%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       APP
+    ========================= */
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
+    .sidebar {
+      width: var(--sidebar);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 100;
+      background:
+        linear-gradient(
+          180deg,
+          #0d0f0f 0%,
+          #090a0a 100%
+        );
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 22px 16px;
+      transition: transform .3s ease;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 8px 26px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--lime);
+      color: #070807;
+      display: grid;
+      place-items: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      box-shadow:
+        0 0 0 6px rgba(183,255,0,.055),
+        0 10px 28px rgba(183,255,0,.12);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 16px;
+      letter-spacing: -.4px;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    .nav-label {
+      padding: 0 10px;
+      margin: 7px 0 10px;
+      color: var(--muted-2);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      min-height: 46px;
+      padding: 0 12px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      color: #aeb5b3;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--text);
+      background: rgba(255,255,255,.035);
+    }
+
+    .nav-item.active {
+      color: var(--lime);
+      background: rgba(183,255,0,.075);
+      border-color: rgba(183,255,0,.11);
+    }
+
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 20px;
+      font-size: 15px;
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      padding: 3px 7px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+    }
+
+    .system-card {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .system-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 9px;
+    }
+
+    .system-title {
+      color: #dce1df;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .online-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(66,230,149,.7);
+    }
+
+    .system-text {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .logout-btn {
+      width: 100%;
+      margin-top: 10px;
+      min-height: 43px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      background: transparent;
+      color: #a9b0ae;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 12px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .logout-btn:hover {
+      color: var(--red);
+      border-color: rgba(255,102,115,.15);
+      background: rgba(255,102,115,.04);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main {
+      width: calc(100% - var(--sidebar));
+      margin-left: var(--sidebar);
+      min-height: 100vh;
+    }
+
+    /* =========================
+       TOPBAR
+    ========================= */
+
+    .topbar {
+      height: var(--topbar);
+      padding: 0 30px;
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: rgba(8,9,9,.84);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mobile-menu {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--panel);
+      color: var(--text);
+      display: none;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .page-heading h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 21px;
+      letter-spacing: -.7px;
+    }
+
+    .page-heading p {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .demo-pill {
+      padding: 7px 11px;
+      border: 1px solid rgba(183,255,0,.13);
+      border-radius: 30px;
+      color: var(--lime);
+      background: rgba(183,255,0,.045);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+
+    .notification {
+      width: 39px;
+      height: 39px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--panel);
+      color: #bfc6c4;
+      display: grid;
+      place-items: center;
+      position: relative;
+      font-size: 15px;
+    }
+
+    .notification-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--lime);
+    }
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 4px;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #d6ff63, var(--lime));
+      color: #0b0d0b;
+      display: grid;
+      place-items: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .admin-info strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .admin-info span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content {
+      padding: 30px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .welcome h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 28px;
+      letter-spacing: -1px;
+    }
+
+    .welcome p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* =========================
+       KPI
+    ========================= */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      min-height: 160px;
+      padding: 19px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.012)
+        );
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      right: -40px;
+      bottom: -45px;
+      border-radius: 50%;
+      background: rgba(183,255,0,.055);
+      filter: blur(2px);
+    }
+
+    .stat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .stat-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.045);
+      display: grid;
+      place-items: center;
+      color: var(--lime);
+      font-size: 14px;
+    }
+
+    .stat-value {
+      margin-top: 20px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 27px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .stat-bottom {
+      margin-top: 9px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+    }
+
+    .growth {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .growth.neutral {
+      color: var(--muted);
+    }
+
+    .stat-note {
+      color: var(--muted-2);
+    }
+
+    /* =========================
+       MAIN GRID
+    ========================= */
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(300px, .85fr);
+      gap: 20px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.03),
+          rgba(255,255,255,.012)
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .panel-header {
+      padding: 20px 20px 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .panel-title h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 15px;
+      letter-spacing: -.4px;
+    }
+
+    .panel-title p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .period-select {
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--panel-2);
+      color: #aeb6b4;
+      font-size: 10px;
+      outline: none;
+    }
+
+    /* =========================
+       CHART
+    ========================= */
+
+    .chart-panel {
+      min-height: 380px;
+    }
+
+    .chart-wrap {
+      padding: 20px;
+    }
+
+    .chart-value {
+      margin-bottom: 17px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .chart-value strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 25px;
+    }
+
+    .chart-value span {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .chart {
+      width: 100%;
+      height: 220px;
+      position: relative;
+    }
+
+    .chart-grid {
+      position: absolute;
+      inset: 0 0 26px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .grid-line {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,.055);
+    }
+
+    .chart-svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: calc(100% - 26px);
+      overflow: visible;
+    }
+
+    .chart-fill {
+      fill: url(#chartGradient);
+    }
+
+    .chart-line {
+      fill: none;
+      stroke: var(--lime);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(
+        0 0 7px rgba(183,255,0,.24)
+      );
+    }
+
+    .chart-point {
+      fill: var(--lime);
+      stroke: #0c0e0d;
+      stroke-width: 3;
+    }
+
+    .chart-labels {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 22px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .chart-labels span {
+      color: var(--muted-2);
+      font-size: 9px;
+    }
+
+    /* =========================
+       QUICK ACTIONS
+    ========================= */
+
+    .quick-panel {
+      padding-bottom: 18px;
+    }
+
+    .quick-list {
+      padding: 18px 20px 0;
+      display: grid;
+      gap: 9px;
+    }
+
+    .quick-action {
+      min-height: 55px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(255,255,255,.018);
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      transition: .2s ease;
+    }
+
+    .quick-action:hover {
+      border-color: rgba(183,255,0,.16);
+      background: rgba(183,255,0,.035);
+      transform: translateY(-1px);
+    }
+
+    .quick-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(183,255,0,.08);
+      color: var(--lime);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+    }
+
+    .quick-copy {
+      flex: 1;
+    }
+
+    .quick-copy strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .quick-copy span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .quick-arrow {
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+
+    /* =========================
+       LOWER GRID
+    ========================= */
+
+    .lower-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(320px, .85fr);
+      gap: 20px;
+    }
+
+    /* =========================
+       TRANSACTIONS
+    ========================= */
+
+    .table-panel {
+      overflow: hidden;
+    }
+
+    .view-all {
+      color: var(--lime);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 17px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+    }
+
+    th {
+      padding: 11px 20px;
+      text-align: left;
+      background: rgba(255,255,255,.018);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      color: var(--muted-2);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    td {
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.045);
+      color: #cbd0ce;
+      font-size: 10px;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .order-cell strong {
+      display: block;
+      color: #edf0ee;
+      font-size: 10px;
+    }
+
+    .order-cell span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted-2);
+      font-size: 8px;
+    }
+
+    .customer-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mini-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--panel-3);
+      display: grid;
+      place-items: center;
+      color: #b9c0be;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .customer-name {
+      color: #dfe4e2;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .customer-email {
+      margin-top: 2px;
+      color: var(--muted-2);
+      font-size: 8px;
+    }
+
+    .amount {
+      color: #f1f4f2;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 8px;
+      border-radius: 20px;
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .status::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .status.success {
+      color: var(--green);
+      background: rgba(66,230,149,.07);
+    }
+
+    .status.success::before {
+      background: var(--green);
+    }
+
+    .status.pending {
+      color: var(--orange);
+      background: rgba(255,184,77,.07);
+    }
+
+    .status.pending::before {
+      background: var(--orange);
+    }
+
+    .status.failed {
+      color: var(--red);
+      background: rgba(255,102,115,.07);
+    }
+
+    .status.failed::before {
+      background: var(--red);
+    }
+
+    /* =========================
+       WEBSITES
+    ========================= */
+
+    .website-list {
+      padding: 18px 20px 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .website-card {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(255,255,255,.018);
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .site-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: var(--panel-3);
+      border: 1px solid var(--border);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .site-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .site-info strong {
+      display: block;
+      color: #e5e9e7;
+      font-size: 11px;
+    }
+
+    .site-info span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .site-status {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 9px rgba(66,230,149,.45);
+    }
+
+    .website-footer {
+      padding: 0 20px 20px;
+    }
+
+    .website-footer a {
+      width: 100%;
+      min-height: 40px;
+      border: 1px dashed rgba(255,255,255,.1);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .website-footer a:hover {
+      color: var(--lime);
+      border-color: rgba(183,255,0,.2);
+    }
+
+    /* =========================
+       DEMO NOTICE
+    ========================= */
+
+    .demo-notice {
+      margin-top: 20px;
+      padding: 14px 16px;
+      border: 1px solid rgba(183,255,0,.11);
+      border-radius: 15px;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(183,255,0,.05),
+          rgba(183,255,0,.015)
+        );
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .demo-notice-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(183,255,0,.09);
+      color: var(--lime);
+      display: grid;
+      place-items: center;
+      flex: 0 0 34px;
+      font-size: 13px;
+    }
+
+    .demo-notice strong {
+      display: block;
+      color: #dfe5e2;
+      font-size: 10px;
+    }
+
+    .demo-notice span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       MOBILE OVERLAY
+    ========================= */
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(3px);
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 300;
+      min-width: 250px;
+      max-width: 360px;
+      padding: 13px 15px;
+      border: 1px solid var(--border-strong);
+      border-radius: 13px;
+      background: #151818;
+      box-shadow: 0 20px 50px rgba(0,0,0,.45);
+      transform: translateY(30px);
+      opacity: 0;
+      pointer-events: none;
+      transition: .3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast strong {
+      display: block;
+      color: var(--lime);
+      font-size: 11px;
+    }
+
+    .toast span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1200px) {
+      .stats-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .dashboard-grid,
+      .lower-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --sidebar: 260px;
+      }
+
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .sidebar-overlay.show {
+        display: block;
+      }
+
+      .main {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .mobile-menu {
+        display: grid;
+      }
+
+      .content {
+        padding: 24px 20px;
+      }
+
+      .topbar {
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        height: 68px;
+      }
+
+      .page-heading h1 {
+        font-size: 17px;
+      }
+
+      .page-heading p {
+        display: none;
+      }
+
+      .demo-pill {
+        display: none;
+      }
+
+      .admin-info {
+        display: none;
+      }
+
+      .welcome h2 {
+        font-size: 24px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card {
+        min-height: 145px;
+      }
+
+      .content {
+        padding: 20px 14px 30px;
+      }
+
+      .chart-panel {
+        min-height: 350px;
+      }
+
+      .panel-header {
+        padding: 17px 16px 0;
+      }
+
+      .chart-wrap {
+        padding: 17px 16px;
+      }
+
+      .quick-list,
+      .website-list {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .website-footer {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .toast {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       APP
+  ========================== -->
+
+  <div class="app">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+      <div class="brand">
+        <div class="brand-mark">OP</div>
+
+        <div class="brand-text">
+          <strong>SNK OnePay</strong>
+          <span>Admin Console</span>
+        </div>
+      </div>
+
+      <div class="nav-label">Workspace</div>
+
+      <nav class="nav">
+
+        <a
+          href="dashboard.html"
+          class="nav-item active"
+        >
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
+        </a>
+
+        <a
+          href="transactions.html"
+          class="nav-item"
+        >
+          <span class="nav-icon">↔</span>
+          <span>Transactions</span>
+          <span class="nav-badge">24</span>
+        </a>
+
+        <a
+          href="websites.html"
+          class="nav-item"
+        >
+          <span class="nav-icon">◈</span>
+          <span>Websites</span>
+        </a>
+
+        <a
+          href="payment-links.html"
+          class="nav-item"
+        >
+          <span class="nav-icon">⌁</span>
+          <span>Payment Links</span>
+        </a>
+
+        <a
+          href="#"
+          class="nav-item"
+          onclick="showDemo('Customers module is coming next.')"
+        >
+          <span class="nav-icon">♙</span>
+          <span>Customers</span>
+        </a>
+
+        <a
+          href="#"
+          class="nav-item"
+          onclick="showDemo('Revenue analytics module is coming next.')"
+        >
+          <span class="nav-icon">↗</span>
+          <span>Revenue</span>
+        </a>
+
+      </nav>
+
+      <div class="nav-label">System</div>
+
+      <nav class="nav">
+
+        <a
+          href="settings.html"
+          class="nav-item"
+        >
+          <span class="nav-icon">⚙</span>
+          <span>Settings</span>
+        </a>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+
+        <div class="system-card">
+
+          <div class="system-top">
+            <span class="system-title">System Status</span>
+            <span class="online-dot"></span>
+          </div>
+
+          <p class="system-text">
+            SNK OnePay demo environment is online.
+          </p>
+
+        </div>
+
+        <button
+          class="logout-btn"
+          onclick="logout()"
+        >
+          <span>↪</span>
+          <span>Sign out</span>
+        </button>
+
+      </div>
+
+    </aside>
+
+    <div
+      class="sidebar-overlay"
+      id="sidebarOverlay"
+      onclick="closeSidebar()"
+    ></div>
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div class="topbar-left">
+
+          <button
+            class="mobile-menu"
+            id="mobileMenu"
+            onclick="toggleSidebar()"
+            aria-label="Open menu"
+          >
+            ☰
+          </button>
+
+          <div class="page-heading">
+            <h1>Dashboard</h1>
+            <p>SNK OnePay payment management</p>
+          </div>
+
+        </div>
+
+        <div class="topbar-right">
+
+          <span class="demo-pill">
+            DEMO MODE
+          </span>
+
+          <button
+            class="notification"
+            onclick="showDemo('You have 3 demo notifications.')"
+            aria-label="Notifications"
+          >
+            ♢
+            <span class="notification-dot"></span>
+          </button>
+
+          <div class="admin-profile">
+
+            <div class="avatar">
+              SNK
+            </div>
+
+            <div class="admin-info">
+              <strong id="adminName">Administrator</strong>
+              <span>Super Admin</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </header>
+
+      <!-- CONTENT -->
+
+      <section class="content">
+
+        <div class="welcome">
+
+          <h2>
+            Good morning, Admin.
+          </h2>
+
+          <p>
+            Here's what's happening across your SNK OnePay ecosystem today.
+          </p>
+
+        </div>
+
+        <!-- =========================
+             KPI CARDS
+        ========================== -->
+
+        <section class="stats-grid">
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+              <span class="stat-label">
+                Total Revenue
+              </span>
+
+              <span class="stat-icon">
+                ৳
+              </span>
+            </div>
+
+            <div class="stat-value">
+              ৳84,590
+            </div>
+
+            <div class="stat-bottom">
+              <span class="growth">
+                +18.4%
+              </span>
+
+              <span class="stat-note">
+                vs last month
+              </span>
+            </div>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+              <span class="stat-label">
+                Successful Payments
+              </span>
+
+              <span class="stat-icon">
+                ✓
+              </span>
+            </div>
+
+            <div class="stat-value">
+              126
+            </div>
+
+            <div class="stat-bottom">
+              <span class="growth">
+                +12.7%
+              </span>
+
+              <span class="stat-note">
+                completed orders
+              </span>
+            </div>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+              <span class="stat-label">
+                Pending Payments
+              </span>
+
+              <span class="stat-icon">
+                ◷
+              </span>
+            </div>
+
+            <div class="stat-value">
+              08
+            </div>
+
+            <div class="stat-bottom">
+              <span class="growth neutral">
+                Monitoring
+              </span>
+
+              <span class="stat-note">
+                awaiting confirmation
+              </span>
+            </div>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+              <span class="stat-label">
+                Failed Payments
+              </span>
+
+              <span class="stat-icon">
+                ×
+              </span>
+            </div>
+
+            <div class="stat-value">
+              05
+            </div>
+
+            <div class="stat-bottom">
+              <span class="growth">
+                -4.2%
+              </span>
+
+              <span class="stat-note">
+                lower than last month
+              </span>
+            </div>
+
+          </article>
+
+        </section>
+
+
+        <!-- =========================
+             CHART + QUICK ACTIONS
+        ========================== -->
+
+        <section class="dashboard-grid">
+
+          <!-- REVENUE CHART -->
+
+          <article class="panel chart-panel">
+
+            <div class="panel-header">
+
+              <div class="panel-title">
+                <h3>Revenue Overview</h3>
+
+                <p>
+                  Payment volume across connected websites
+                </p>
+              </div>
+
+              <select
+                class="period-select"
+                id="chartPeriod"
+                onchange="changePeriod(this.value)"
+              >
+                <option value="7">Last 7 days</option>
+                <option value="30" selected>Last 30 days</option>
+                <option value="90">Last 90 days</option>
+              </select>
+
+            </div>
+
+            <div class="chart-wrap">
+
+              <div class="chart-value">
+                <strong id="chartTotal">
+                  ৳84.6K
+                </strong>
+
+                <span>
+                  +18.4%
+                </span>
+              </div>
+
+              <div class="chart">
+
+                <div class="chart-grid">
+                  <span class="grid-line"></span>
+                  <span class="grid-line"></span>
+                  <span class="grid-line"></span>
+                  <span class="grid-line"></span>
+                  <span class="grid-line"></span>
+                </div>
+
+                <svg
+                  class="chart-svg"
+                  viewBox="0 0 800 210"
+                  preserveAspectRatio="none"
+                  aria-label="Revenue chart"
+                >
+
+                  <defs>
+
+                    <linearGradient
+                      id="chartGradient"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#b7ff00"
+                        stop-opacity=".18"
+                      />
+
+                      <stop
+                        offset="100%"
+                        stop-color="#b7ff00"
+                        stop-opacity="0"
+                      />
+                    </linearGradient>
+
+                  </defs>
+
+                  <path
+                    id="chartFill"
+                    class="chart-fill"
+                    d="
+                      M 0 174
+                      L 100 160
+                      L 200 145
+                      L 300 152
+                      L 400 112
+                      L 500 124
+                      L 600 76
+                      L 700 91
+                      L 800 48
+                      L 800 210
+                      L 0 210
+                      Z
+                    "
+                  ></path>
+
+                  <path
+                    id="chartLine"
+                    class="chart-line"
+                    d="
+                      M 0 174
+                      L 100 160
+                      L 200 145
+                      L 300 152
+                      L 400 112
+                      L 500 124
+                      L 600 76
+                      L 700 91
+                      L 800 48
+                    "
+                  ></path>
+
+                  <circle
+                    class="chart-point"
+                    cx="800"
+                    cy="48"
+                    r="5"
+                  ></circle>
+
+                </svg>
+
+                <div class="chart-labels">
+                  <span>01</span>
+                  <span>05</span>
+                  <span>10</span>
+                  <span>15</span>
+                  <span>20</span>
+                  <span>25</span>
+                  <span>30</span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- QUICK ACTIONS -->
+
+          <article class="panel quick-panel">
+
+            <div class="panel-header">
+
+              <div class="panel-title">
+                <h3>Quick Actions</h3>
+
+                <p>
+                  Manage your payment workspace
+                </p>
+              </div>
+
+            </div>
+
+            <div class="quick-list">
+
+              <a
+                class="quick-action"
+                href="payment-links.html"
+              >
+
+                <div class="quick-icon">
+                  +
+                </div>
+
+                <div class="quick-copy">
+                  <strong>Create Payment Link</strong>
+                  <span>
+                    Generate a branded payment URL
+                  </span>
+                </div>
+
+                <span class="quick-arrow">
+                  →
+                </span>
+
+              </a>
+
+
+              <a
+                class="quick-action"
+                href="websites.html"
+              >
+
+                <div class="quick-icon">
+                  ◈
+                </div>
+
+                <div class="quick-copy">
+                  <strong>Add Website</strong>
+                  <span>
+                    Connect another SNK project
+                  </span>
+                </div>
+
+                <span class="quick-arrow">
+                  →
+                </span>
+
+              </a>
+
+
+              <a
+                class="quick-action"
+                href="transactions.html"
+              >
+
+                <div class="quick-icon">
+                  ↔
+                </div>
+
+                <div class="quick-copy">
+                  <strong>View Transactions</strong>
+                  <span>
+                    Review payment activity
+                  </span>
+                </div>
+
+                <span class="quick-arrow">
+                  →
+                </span>
+
+              </a>
+
+
+              <a
+                class="quick-action"
+                href="settings.html"
+              >
+
+                <div class="quick-icon">
+                  ⚙
+                </div>
+
+                <div class="quick-copy">
+                  <strong>System Settings</strong>
+                  <span>
+                    Configure your OnePay environment
+                  </span>
+                </div>
+
+                <span class="quick-arrow">
+                  →
+                </span>
+
+              </a>
+
+            </div>
+
+          </article>
+
+        </section>
+
+
+        <!-- =========================
+             LOWER GRID
+        ========================== -->
+
+        <section class="lower-grid">
+
+          <!-- RECENT TRANSACTIONS -->
+
+          <article class="panel table-panel">
+
+            <div class="panel-header">
+
+              <div class="panel-title">
+                <h3>Recent Transactions</h3>
+
+                <p>
+                  Latest payment activity
+                </p>
+              </div>
+
+              <a
+                class="view-all"
+                href="transactions.html"
+              >
+                View all →
+              </a>
+
+            </div>
+
+            <div class="table-wrap">
+
+              <table>
+
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Customer</th>
+                    <th>Website</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr>
+
+                    <td>
+                      <div class="order-cell">
+                        <strong>WD-10291</strong>
+                        <span>06 Oct 2026</span>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="customer-cell">
+
+                        <div class="mini-avatar">
+                          AR
+                        </div>
+
+                        <div>
+                          <div class="customer-name">
+                            Arif Rahman
+                          </div>
+
+                          <div class="customer-email">
+                            arif@example.com
+                          </div>
+                        </div>
+
+                      </div>
+                    </td>
+
+                    <td>
+                      Website Deals
+                    </td>
+
+                    <td>
+                      <span class="amount">
+                        ৳2,999
+                      </span>
+                    </td>
+
+                    <td>
+                      <span class="status success">
+                        Paid
+                      </span>
+                    </td>
+
+                  </tr>
+
+
+                  <tr>
+
+                    <td>
+                      <div class="order-cell">
+                        <strong>CB-84021</strong>
+                        <span>06 Oct 2026</span>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="customer-cell">
+
+                        <div class="mini-avatar">
+                          NS
+                        </div>
+
+                        <div>
+                          <div class="customer-name">
+                            Nusrat S.
+                          </div>
+
+                          <div class="customer-email">
+                            nusrat@example.com
+                          </div>
+                        </div>
+
+                      </div>
+                    </td>
+
+                    <td>
+                      CakeBuddy
+                    </td>
+
+                    <td>
+                      <span class="amount">
+                        ৳1,450
+                      </span>
+                    </td>
+
+                    <td>
+                      <span class="status success">
+                        Paid
+                      </span>
+                    </td>
+
+                  </tr>
+
+
+                  <tr>
+
+                    <td>
+                      <div class="order-cell">
+                        <strong>SNK-3108</strong>
+                        <span>05 Oct 2026</span>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="customer-cell">
+
+                        <div class="mini-avatar">
+                          HM
+                        </div>
+
+                        <div>
+                          <div class="customer-name">
+                            Hasan Mahmud
+                          </div>
+
+                          <div class="customer-email">
+                            hasan@example.com
+                          </div>
+                        </div>
+
+                      </div>
+                    </td>
+
+                    <td>
+                      SNK Institute
+                    </td>
+
+                    <td>
+                      <span class="amount">
+                        ৳6,500
+                      </span>
+                    </td>
+
+                    <td>
+                      <span class="status pending">
+                        Pending
+                      </span>
+                    </td>
+
+                  </tr>
+
+
+                  <tr>
+
+                    <td>
+                      <div class="order-cell">
+                        <strong>DG-22901</strong>
+                        <span>05 Oct 2026</span>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="customer-cell">
+
+                        <div class="mini-avatar">
+                          TM
+                        </div>
+
+                        <div>
+                          <div class="customer-name">
+                            Tanvir M.
+                          </div>
+
+                          <div class="customer-email">
+                            tanvir@example.com
+                          </div>
+                        </div>
+
+                      </div>
+                    </td>
+
+                    <td>
+                      DigiSER BD
+                    </td>
+
+                    <td>
+                      <span class="amount">
+                        ৳3,200
+                      </span>
+                    </td>
+
+                    <td>
+                      <span class="status success">
+                        Paid
+                      </span>
+                    </td>
+
+                  </tr>
+
+
+                  <tr>
+
+                    <td>
+                      <div class="order-cell">
+                        <strong>WD-10286</strong>
+                        <span>04 Oct 2026</span>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="customer-cell">
+
+                        <div class="mini-avatar">
+                          RJ
+                        </div>
+
+                        <div>
+                          <div class="customer-name">
+                            Rafiul J.
+                          </div>
+
+                          <div class="customer-email">
+                            rafiul@example.com
+                          </div>
+                        </div>
+
+                      </div>
+                    </td>
+
+                    <td>
+                      Website Deals
+                    </td>
+
+                    <td>
+                      <span class="amount">
+                        ৳999
+                      </span>
+                    </td>
+
+                    <td>
+                      <span class="status failed">
+                        Failed
+                      </span>
+                    </td>
+
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          </article>
+
+
+          <!-- CONNECTED WEBSITES -->
+
+          <article class="panel">
+
+            <div class="panel-header">
+
+              <div class="panel-title">
+                <h3>Connected Websites</h3>
+
+                <p>
+                  Your OnePay ecosystem
+                </p>
+              </div>
+
+              <a
+                class="view-all"
+                href="websites.html"
+              >
+                Manage
+              </a>
+
+            </div>
+
+
+            <div class="website-list">
+
+              <div class="website-card">
+
+                <div class="site-logo">
+                  WD
+                </div>
+
+                <div class="site-info">
+                  <strong>Website Deals</strong>
+                  <span>
+                    yourdocuments.github.io/websitedeals
+                  </span>
+                </div>
+
+                <span class="site-status"></span>
+
+              </div>
+
+
+              <div class="website-card">
+
+                <div class="site-logo">
+                  CB
+                </div>
+
+                <div class="site-info">
+                  <strong>CakeBuddy</strong>
+                  <span>
+                    cakebuddy.github.io
+                  </span>
+                </div>
+
+                <span class="site-status"></span>
+
+              </div>
+
+
+              <div class="website-card">
+
+                <div class="site-logo">
+                  SN
+                </div>
+
+                <div class="site-info">
+                  <strong>SNK IT Institute</strong>
+                  <span>
+                    snkitinstitute.github.io
+                  </span>
+                </div>
+
+                <span class="site-status"></span>
+
+              </div>
+
+
+              <div class="website-card">
+
+                <div class="site-logo">
+                  DG
+                </div>
+
+                <div class="site-info">
+                  <strong>DigiSER BD</strong>
+                  <span>
+                    digiserbd.com
+                  </span>
+                </div>
+
+                <span class="site-status"></span>
+
+              </div>
+
+            </div>
+
+
+            <div class="website-footer">
+
+              <a
+                href="websites.html"
+              >
+                + Connect another website
+              </a>
+
+            </div>
+
+          </article>
+
+        </section>
+
+
+        <!-- =========================
+             DEMO NOTICE
+        ========================== -->
+
+        <div class="demo-notice">
+
+          <div class="demo-notice-icon">
+            !
+          </div>
+
+          <div>
+            <strong>
+              SNK OnePay Demo Environment
+            </strong>
+
+            <span>
+              The dashboard currently uses demo data and frontend-only interactions.
+              Real payments, transaction verification, webhooks, authentication and
+              revenue data will be connected through a secure backend in the production phase.
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+
+  <div
+    class="toast"
+    id="toast"
+  >
+    <strong id="toastTitle">
+      SNK OnePay
+    </strong>
+
+    <span id="toastMessage">
+      Demo action completed.
+    </span>
+  </div>
+
+
+  <script>
+    /* =========================================
+       SNK ONEPAY ADMIN DASHBOARD
+       Frontend Demo Only
+    ========================================= */
+
+    const DEMO_EMAIL = "admin@snkonepay.com";
+
+    /* =========================================
+       SESSION CHECK
+    ========================================= */
+
+    function checkSession() {
+
+      const localSession =
+        localStorage.getItem("snkOnePayAdmin");
+
+      const sessionSession =
+        sessionStorage.getItem("snkOnePayAdmin");
+
+      if (!localSession && !sessionSession) {
+
+        window.location.href = "index.html";
+
+        return false;
+      }
+
+      return true;
+    }
+
+    /* =========================================
+       ADMIN NAME
+    ========================================= */
+
+    function loadAdmin() {
+
+      const storedEmail =
+        localStorage.getItem("snkOnePayAdminEmail") ||
+        sessionStorage.getItem("snkOnePayAdminEmail") ||
+        DEMO_EMAIL;
+
+      const adminName =
+        document.getElementById("adminName");
+
+      if (!adminName) return;
+
+      if (storedEmail === DEMO_EMAIL) {
+        adminName.textContent = "Administrator";
+      } else {
+        adminName.textContent =
+          storedEmail.split("@")[0];
+      }
+    }
+
+    /* =========================================
+       LOGOUT
+    ========================================= */
+
+    function logout() {
+
+      localStorage.removeItem("snkOnePayAdmin");
+      localStorage.removeItem("snkOnePayAdminEmail");
+
+      sessionStorage.removeItem("snkOnePayAdmin");
+      sessionStorage.removeItem("snkOnePayAdminEmail");
+
+      window.location.href = "index.html";
+    }
+
+    /* =========================================
+       SIDEBAR
+    ========================================= */
+
+    function toggleSidebar() {
+
+      const sidebar =
+        document.getElementById("sidebar");
+
+      const overlay =
+        document.getElementById("sidebarOverlay");
+
+      sidebar.classList.toggle("open");
+      overlay.classList.toggle("show");
+    }
+
+    function closeSidebar() {
+
+      const sidebar =
+        document.getElementById("sidebar");
+
+      const overlay =
+        document.getElementById("sidebarOverlay");
+
+      sidebar.classList.remove("open");
+      overlay.classList.remove("show");
+    }
+
+    /* =========================================
+       DEMO TOAST
+    ========================================= */
+
+    let toastTimer;
+
+    function showDemo(message) {
+
+      const toast =
+        document.getElementById("toast");
+
+      const toastTitle =
+        document.getElementById("toastTitle");
+
+      const toastMessage =
+        document.getElementById("toastMessage");
+
+      toastTitle.textContent =
+        "SNK OnePay Demo";
+
+      toastMessage.textContent =
+        message;
+
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer =
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2800);
+    }
+
+    /* =========================================
+       CHART PERIOD
+    ========================================= */
+
+    function changePeriod(value) {
+
+      const chartTotal =
+        document.getElementById("chartTotal");
+
+      const line =
+        document.getElementById("chartLine");
+
+      const fill =
+        document.getElementById("chartFill");
+
+      if (value === "7") {
+
+        chartTotal.textContent =
+          "৳21.8K";
+
+        const path =
+          "M 0 176 L 100 151 L 200 164 L 300 128 L 400 139 L 500 99 L 600 108 L 700 71 L 800 56";
+
+        line.setAttribute("d", path);
+
+        fill.setAttribute(
+          "d",
+          path +
+          " L 800 210 L 0 210 Z"
+        );
+
+      } else if (value === "90") {
+
+        chartTotal.textContent =
+          "৳241.9K";
+
+        const path =
+          "M 0 182 L 100 171 L 200 157 L 300 161 L 400 137 L 500 145 L 600 112 L 700 87 L 800 43";
+
+        line.setAttribute("d", path);
+
+        fill.setAttribute(
+          "d",
+          path +
+          " L 800 210 L 0 210 Z"
+        );
+
+      } else {
+
+        chartTotal.textContent =
+          "৳84.6K";
+
+        const path =
+          "M 0 174 L 100 160 L 200 145 L 300 152 L 400 112 L 500 124 L 600 76 L 700 91 L 800 48";
+
+        line.setAttribute("d", path);
+
+        fill.setAttribute(
+          "d",
+          path +
+          " L 800 210 L 0 210 Z"
+        );
+      }
+
+      showDemo(
+        "Revenue chart updated for the selected period."
+      );
+    }
+
+    /* =========================================
+       CLOSE SIDEBAR ON NAVIGATION
+    ========================================= */
+
+    document
+      .querySelectorAll(".nav-item")
+      .forEach(item => {
+
+        item.addEventListener(
+          "click",
+          () => {
+
+            if (
+              window.innerWidth <= 900
+            ) {
+              closeSidebar();
+            }
+
+          }
+        );
+
+      });
+
+
+    /* =========================================
+       INIT
+    ========================================= */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        if (!checkSession()) {
+          return;
+        }
+
+        loadAdmin();
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
