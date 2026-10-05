@@ -1,0 +1,3292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080909"
+  >
+
+  <meta
+    name="description"
+    content="SNK OnePay Admin — Transactions Management"
+  >
+
+  <title>Transactions | SNK OnePay Admin</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --bg: #080909;
+      --bg-soft: #0d0f0f;
+      --panel: #101313;
+      --panel-2: #141717;
+      --panel-3: #181c1c;
+
+      --border: rgba(255,255,255,.08);
+      --border-strong: rgba(255,255,255,.13);
+
+      --text: #f5f7f6;
+      --muted: #929a98;
+      --muted-2: #68706e;
+
+      --lime: #b7ff00;
+      --green: #42e695;
+      --orange: #ffb84d;
+      --red: #ff6673;
+      --blue: #63a9ff;
+
+      --sidebar: 260px;
+      --topbar: 76px;
+
+      --radius: 20px;
+      --shadow: 0 20px 60px rgba(0,0,0,.28);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 85% 0%,
+          rgba(183,255,0,.045),
+          transparent 28%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       APP
+    ========================== */
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* =========================
+       SIDEBAR
+    ========================== */
+
+    .sidebar {
+      width: var(--sidebar);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 100;
+      padding: 22px 16px;
+      background:
+        linear-gradient(
+          180deg,
+          #0d0f0f,
+          #090a0a
+        );
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: transform .3s ease;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 8px 26px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--lime);
+      color: #080908;
+      display: grid;
+      place-items: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      box-shadow:
+        0 0 0 6px rgba(183,255,0,.05),
+        0 10px 28px rgba(183,255,0,.1);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 16px;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .nav-label {
+      margin: 7px 0 10px;
+      padding: 0 10px;
+      color: var(--muted-2);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      min-height: 46px;
+      padding: 0 12px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      color: #aeb5b3;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--text);
+      background: rgba(255,255,255,.035);
+    }
+
+    .nav-item.active {
+      color: var(--lime);
+      background: rgba(183,255,0,.075);
+      border-color: rgba(183,255,0,.11);
+    }
+
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 20px;
+      font-size: 15px;
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      padding: 3px 7px;
+      border-radius: 20px;
+      color: var(--muted);
+      background: rgba(255,255,255,.06);
+      font-size: 9px;
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+    }
+
+    .system-card {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .system-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 9px;
+    }
+
+    .system-title {
+      color: #dce1df;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .online-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(66,230,149,.7);
+    }
+
+    .system-text {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .logout-btn {
+      width: 100%;
+      min-height: 43px;
+      margin-top: 10px;
+      padding: 0 12px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      background: transparent;
+      color: #a9b0ae;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .logout-btn:hover {
+      color: var(--red);
+      background: rgba(255,102,115,.04);
+      border-color: rgba(255,102,115,.15);
+    }
+
+    /* =========================
+       MAIN
+    ========================== */
+
+    .main {
+      width: calc(100% - var(--sidebar));
+      margin-left: var(--sidebar);
+      min-height: 100vh;
+    }
+
+    /* =========================
+       TOPBAR
+    ========================== */
+
+    .topbar {
+      height: var(--topbar);
+      padding: 0 30px;
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: rgba(8,9,9,.84);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mobile-menu {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--panel);
+      color: var(--text);
+      display: none;
+      place-items: center;
+    }
+
+    .page-heading h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 21px;
+      letter-spacing: -.7px;
+    }
+
+    .page-heading p {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .demo-pill {
+      padding: 7px 11px;
+      border: 1px solid rgba(183,255,0,.13);
+      border-radius: 30px;
+      color: var(--lime);
+      background: rgba(183,255,0,.045);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .notification {
+      width: 39px;
+      height: 39px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--panel);
+      color: #bfc6c4;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .notification-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--lime);
+    }
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--lime);
+      color: #080908;
+      display: grid;
+      place-items: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .admin-info strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .admin-info span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* =========================
+       CONTENT
+    ========================== */
+
+    .content {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .page-intro {
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .page-intro h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 29px;
+      letter-spacing: -1px;
+    }
+
+    .page-intro p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .export-btn {
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      color: #c8cecc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .export-btn:hover {
+      color: var(--lime);
+      border-color: rgba(183,255,0,.18);
+      background: rgba(183,255,0,.035);
+    }
+
+    /* =========================
+       SUMMARY
+    ========================== */
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .summary-card {
+      padding: 18px;
+      min-height: 135px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.012)
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .summary-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .summary-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .summary-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.045);
+      display: grid;
+      place-items: center;
+      color: var(--lime);
+      font-size: 13px;
+    }
+
+    .summary-value {
+      margin-top: 17px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -.7px;
+    }
+
+    .summary-note {
+      margin-top: 6px;
+      color: var(--muted-2);
+      font-size: 9px;
+    }
+
+    /* =========================
+       FILTER PANEL
+    ========================== */
+
+    .filter-panel {
+      padding: 18px;
+      margin-bottom: 15px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.03),
+          rgba(255,255,255,.012)
+        );
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns:
+        minmax(220px, 1.6fr)
+        minmax(150px, .7fr)
+        minmax(150px, .7fr)
+        minmax(150px, .7fr)
+        auto;
+      gap: 10px;
+    }
+
+    .search-box {
+      min-height: 43px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--panel-2);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .search-icon {
+      color: var(--muted-2);
+      font-size: 14px;
+    }
+
+    .search-box input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 11px;
+    }
+
+    .search-box input::placeholder {
+      color: var(--muted-2);
+    }
+
+    .filter-select {
+      width: 100%;
+      min-height: 43px;
+      padding: 0 11px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      outline: none;
+      background: var(--panel-2);
+      color: #aeb6b4;
+      font-size: 10px;
+    }
+
+    .reset-btn {
+      min-height: 43px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .reset-btn:hover {
+      color: var(--text);
+      background: rgba(255,255,255,.04);
+    }
+
+    /* =========================
+       TABLE PANEL
+    ========================== */
+
+    .table-panel {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.03),
+          rgba(255,255,255,.012)
+        );
+      box-shadow: var(--shadow);
+    }
+
+    .table-top {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .results-count {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .results-count strong {
+      color: #dce1df;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1000px;
+      border-collapse: collapse;
+    }
+
+    th {
+      padding: 12px 18px;
+      text-align: left;
+      color: var(--muted-2);
+      background: rgba(255,255,255,.018);
+      border-bottom: 1px solid var(--border);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.045);
+      color: #cbd0ce;
+      font-size: 10px;
+    }
+
+    tbody tr {
+      transition: .18s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(255,255,255,.018);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .order strong {
+      display: block;
+      color: #edf0ee;
+      font-size: 10px;
+    }
+
+    .order span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted-2);
+      font-size: 8px;
+    }
+
+    .customer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .customer-avatar {
+      width: 29px;
+      height: 29px;
+      border-radius: 9px;
+      background: var(--panel-3);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: #c1c7c5;
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .customer-info strong {
+      display: block;
+      color: #e0e5e3;
+      font-size: 10px;
+    }
+
+    .customer-info span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted-2);
+      font-size: 8px;
+    }
+
+    .website {
+      color: #aeb7b4;
+      font-size: 9px;
+    }
+
+    .method {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #bfc6c4;
+      font-size: 9px;
+    }
+
+    .method-icon {
+      width: 23px;
+      height: 23px;
+      border-radius: 7px;
+      background: rgba(255,255,255,.045);
+      display: grid;
+      place-items: center;
+      color: var(--lime);
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .amount {
+      color: #f1f4f2;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 8px;
+      border-radius: 20px;
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .status::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .status.success {
+      color: var(--green);
+      background: rgba(66,230,149,.07);
+    }
+
+    .status.success::before {
+      background: var(--green);
+    }
+
+    .status.pending {
+      color: var(--orange);
+      background: rgba(255,184,77,.07);
+    }
+
+    .status.pending::before {
+      background: var(--orange);
+    }
+
+    .status.failed {
+      color: var(--red);
+      background: rgba(255,102,115,.07);
+    }
+
+    .status.failed::before {
+      background: var(--red);
+    }
+
+    .action-btn {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      transition: .2s ease;
+    }
+
+    .action-btn:hover {
+      color: var(--lime);
+      border-color: rgba(183,255,0,.18);
+      background: rgba(183,255,0,.04);
+    }
+
+    /* =========================
+       PAGINATION
+    ========================== */
+
+    .pagination {
+      padding: 15px 18px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .pagination-info {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .pagination-buttons {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .page-btn {
+      min-width: 31px;
+      height: 31px;
+      padding: 0 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .page-btn.active {
+      color: #090a09;
+      background: var(--lime);
+      border-color: var(--lime);
+    }
+
+    .page-btn:hover:not(.active) {
+      color: var(--text);
+      background: rgba(255,255,255,.04);
+    }
+
+    /* =========================
+       DEMO NOTICE
+    ========================== */
+
+    .demo-notice {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid rgba(183,255,0,.11);
+      border-radius: 15px;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(183,255,0,.05),
+          rgba(183,255,0,.015)
+        );
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .notice-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(183,255,0,.09);
+      color: var(--lime);
+      display: grid;
+      place-items: center;
+      flex: 0 0 34px;
+      font-weight: 800;
+    }
+
+    .demo-notice strong {
+      display: block;
+      font-size: 10px;
+    }
+
+    .demo-notice span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       MODAL
+    ========================== */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 250;
+      padding: 20px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(8px);
+      display: none;
+      place-items: center;
+    }
+
+    .modal.show {
+      display: grid;
+    }
+
+    .modal-card {
+      width: min(520px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid var(--border-strong);
+      border-radius: 22px;
+      background:
+        linear-gradient(
+          145deg,
+          #151818,
+          #0d0f0f
+        );
+      box-shadow: 0 30px 100px rgba(0,0,0,.55);
+      animation: modalIn .22s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 16px;
+    }
+
+    .close-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .close-btn:hover {
+      color: var(--red);
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-status {
+      padding: 15px;
+      border: 1px solid rgba(66,230,149,.12);
+      border-radius: 14px;
+      background: rgba(66,230,149,.045);
+      margin-bottom: 16px;
+    }
+
+    .modal-status strong {
+      display: block;
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    .modal-status span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .detail-item {
+      padding: 13px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-item:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .detail-item:nth-last-child(-n+2) {
+      border-bottom: 0;
+    }
+
+    .detail-item span {
+      display: block;
+      color: var(--muted-2);
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .detail-item strong {
+      display: block;
+      margin-top: 5px;
+      color: #e5e9e7;
+      font-size: 10px;
+      word-break: break-word;
+    }
+
+    .modal-footer {
+      padding: 15px 20px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .modal-action {
+      min-height: 38px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel-2);
+      color: #c7cdcb;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .modal-action.primary {
+      background: var(--lime);
+      border-color: var(--lime);
+      color: #080908;
+    }
+
+    /* =========================
+       TOAST
+    ========================== */
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 300;
+      min-width: 250px;
+      padding: 13px 15px;
+      border: 1px solid var(--border-strong);
+      border-radius: 13px;
+      background: #151818;
+      box-shadow: 0 20px 50px rgba(0,0,0,.45);
+      transform: translateY(30px);
+      opacity: 0;
+      pointer-events: none;
+      transition: .3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast strong {
+      display: block;
+      color: var(--lime);
+      font-size: 11px;
+    }
+
+    .toast span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* =========================
+       MOBILE OVERLAY
+    ========================== */
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(0,0,0,.65);
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 1200px) {
+      .summary-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .filters {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .search-box {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .sidebar-overlay.show {
+        display: block;
+      }
+
+      .main {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .mobile-menu {
+        display: grid;
+      }
+
+      .content {
+        padding: 24px 20px;
+      }
+
+      .topbar {
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        height: 68px;
+      }
+
+      .page-heading h1 {
+        font-size: 17px;
+      }
+
+      .page-heading p,
+      .demo-pill,
+      .admin-info {
+        display: none;
+      }
+
+      .content {
+        padding: 20px 14px 30px;
+      }
+
+      .page-intro {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .page-intro h2 {
+        font-size: 24px;
+      }
+
+      .export-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        grid-column: auto;
+      }
+
+      .filter-panel {
+        padding: 14px;
+      }
+
+      .table-top {
+        padding: 16px;
+      }
+
+      .pagination {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .pagination-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .demo-notice {
+        align-items: flex-start;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-item,
+      .detail-item:nth-child(2n) {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .detail-item:last-child {
+        border-bottom: 0;
+      }
+
+      .toast {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+      <div class="brand">
+        <div class="brand-mark">OP</div>
+
+        <div class="brand-text">
+          <strong>SNK OnePay</strong>
+          <span>Admin Console</span>
+        </div>
+      </div>
+
+      <div class="nav-label">Workspace</div>
+
+      <nav class="nav">
+
+        <a
+          href="dashboard.html"
+          class="nav-item"
+        >
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
+        </a>
+
+        <a
+          href="transactions.html"
+          class="nav-item active"
+        >
+          <span class="nav-icon">↔</span>
+          <span>Transactions</span>
+          <span class="nav-badge">24</span>
+        </a>
+
+        <a
+          href="websites.html"
+          class="nav-item"
+        >
+          <span class="nav-icon">◈</span>
+          <span>Websites</span>
+        </a>
+
+        <a
+          href="payment-links.html"
+          class="nav-item"
+        >
+          <span class="nav-icon">⌁</span>
+          <span>Payment Links</span>
+        </a>
+
+        <a
+          href="#"
+          class="nav-item"
+          onclick="showToast('Customers module is coming next.')"
+        >
+          <span class="nav-icon">♙</span>
+          <span>Customers</span>
+        </a>
+
+        <a
+          href="#"
+          class="nav-item"
+          onclick="showToast('Revenue analytics module is coming next.')"
+        >
+          <span class="nav-icon">↗</span>
+          <span>Revenue</span>
+        </a>
+
+      </nav>
+
+      <div class="nav-label">System</div>
+
+      <nav class="nav">
+
+        <a
+          href="settings.html"
+          class="nav-item"
+        >
+          <span class="nav-icon">⚙</span>
+          <span>Settings</span>
+        </a>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+
+        <div class="system-card">
+
+          <div class="system-top">
+            <span class="system-title">
+              System Status
+            </span>
+
+            <span class="online-dot"></span>
+          </div>
+
+          <p class="system-text">
+            SNK OnePay demo environment is online.
+          </p>
+
+        </div>
+
+        <button
+          class="logout-btn"
+          onclick="logout()"
+        >
+          <span>↪</span>
+          <span>Sign out</span>
+        </button>
+
+      </div>
+
+    </aside>
+
+    <div
+      class="sidebar-overlay"
+      id="sidebarOverlay"
+      onclick="closeSidebar()"
+    ></div>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div class="topbar-left">
+
+          <button
+            class="mobile-menu"
+            onclick="toggleSidebar()"
+            aria-label="Open menu"
+          >
+            ☰
+          </button>
+
+          <div class="page-heading">
+
+            <h1>
+              Transactions
+            </h1>
+
+            <p>
+              Payment activity and transaction management
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+          <span class="demo-pill">
+            DEMO MODE
+          </span>
+
+          <button
+            class="notification"
+            onclick="showToast('You have 3 demo notifications.')"
+          >
+            ♢
+            <span class="notification-dot"></span>
+          </button>
+
+          <div class="admin-profile">
+
+            <div class="avatar">
+              SNK
+            </div>
+
+            <div class="admin-info">
+              <strong id="adminName">
+                Administrator
+              </strong>
+
+              <span>
+                Super Admin
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- CONTENT -->
+
+      <section class="content">
+
+        <!-- INTRO -->
+
+        <div class="page-intro">
+
+          <div>
+
+            <h2>
+              All Transactions
+            </h2>
+
+            <p>
+              Monitor, search and review every payment flowing through SNK OnePay.
+            </p>
+
+          </div>
+
+          <button
+            class="export-btn"
+            onclick="exportTransactions()"
+          >
+            ↓
+            Export CSV
+          </button>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <section class="summary-grid">
+
+          <article class="summary-card">
+
+            <div class="summary-top">
+
+              <span class="summary-label">
+                Total Transactions
+              </span>
+
+              <span class="summary-icon">
+                ↔
+              </span>
+
+            </div>
+
+            <div class="summary-value">
+              139
+            </div>
+
+            <div class="summary-note">
+              Across all connected websites
+            </div>
+
+          </article>
+
+
+          <article class="summary-card">
+
+            <div class="summary-top">
+
+              <span class="summary-label">
+                Successful
+              </span>
+
+              <span class="summary-icon">
+                ✓
+              </span>
+
+            </div>
+
+            <div class="summary-value">
+              126
+            </div>
+
+            <div class="summary-note">
+              90.6% success rate
+            </div>
+
+          </article>
+
+
+          <article class="summary-card">
+
+            <div class="summary-top">
+
+              <span class="summary-label">
+                Pending
+              </span>
+
+              <span class="summary-icon">
+                ◷
+              </span>
+
+            </div>
+
+            <div class="summary-value">
+              08
+            </div>
+
+            <div class="summary-note">
+              Awaiting confirmation
+            </div>
+
+          </article>
+
+
+          <article class="summary-card">
+
+            <div class="summary-top">
+
+              <span class="summary-label">
+                Failed
+              </span>
+
+              <span class="summary-icon">
+                ×
+              </span>
+
+            </div>
+
+            <div class="summary-value">
+              05
+            </div>
+
+            <div class="summary-note">
+              3.6% of total transactions
+            </div>
+
+          </article>
+
+        </section>
+
+
+        <!-- FILTERS -->
+
+        <section class="filter-panel">
+
+          <div class="filters">
+
+            <div class="search-box">
+
+              <span class="search-icon">
+                ⌕
+              </span>
+
+              <input
+                type="search"
+                id="searchInput"
+                placeholder="Search order ID, customer, email..."
+                autocomplete="off"
+              >
+
+            </div>
+
+
+            <select
+              class="filter-select"
+              id="statusFilter"
+            >
+
+              <option value="all">
+                All Status
+              </option>
+
+              <option value="success">
+                Paid
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="failed">
+                Failed
+              </option>
+
+            </select>
+
+
+            <select
+              class="filter-select"
+              id="websiteFilter"
+            >
+
+              <option value="all">
+                All Websites
+              </option>
+
+              <option value="Website Deals">
+                Website Deals
+              </option>
+
+              <option value="CakeBuddy">
+                CakeBuddy
+              </option>
+
+              <option value="SNK Institute">
+                SNK Institute
+              </option>
+
+              <option value="DigiSER BD">
+                DigiSER BD
+              </option>
+
+            </select>
+
+
+            <select
+              class="filter-select"
+              id="methodFilter"
+            >
+
+              <option value="all">
+                All Methods
+              </option>
+
+              <option value="bKash">
+                bKash
+              </option>
+
+              <option value="Nagad">
+                Nagad
+              </option>
+
+              <option value="Card">
+                Card
+              </option>
+
+            </select>
+
+
+            <button
+              class="reset-btn"
+              onclick="resetFilters()"
+            >
+              Reset
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- TABLE -->
+
+        <section class="table-panel">
+
+          <div class="table-top">
+
+            <div class="results-count">
+              Showing
+              <strong id="resultCount">
+                8
+              </strong>
+              transactions
+            </div>
+
+            <div class="results-count">
+              Latest activity
+            </div>
+
+          </div>
+
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Website</th>
+                  <th>Method</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th></th>
+                </tr>
+
+              </thead>
+
+              <tbody id="transactionBody">
+
+                <tr
+                  data-status="success"
+                  data-website="Website Deals"
+                  data-method="bKash"
+                >
+
+                  <td>
+                    <div class="order">
+                      <strong>WD-10291</strong>
+                      <span>SNK-ONEPAY-842913</span>
+                    </div>
+                  </td>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        AR
+                      </div>
+
+                      <div class="customer-info">
+                        <strong>Arif Rahman</strong>
+                        <span>arif@example.com</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="website">
+                      Website Deals
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <span class="method">
+
+                      <span class="method-icon">
+                        BK
+                      </span>
+
+                      bKash
+
+                    </span>
+
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ৳2,999
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="status success">
+                      Paid
+                    </span>
+                  </td>
+
+                  <td>
+                    06 Oct 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="action-btn"
+                      onclick="openDetails(
+                        'WD-10291',
+                        'Arif Rahman',
+                        'arif@example.com',
+                        'Website Deals',
+                        'bKash',
+                        '৳2,999',
+                        'Paid',
+                        '06 Oct 2026',
+                        'SNK-ONEPAY-842913'
+                      )"
+                    >
+                      →
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr
+                  data-status="success"
+                  data-website="CakeBuddy"
+                  data-method="Nagad"
+                >
+
+                  <td>
+                    <div class="order">
+                      <strong>CB-84021</strong>
+                      <span>SNK-ONEPAY-741520</span>
+                    </div>
+                  </td>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        NS
+                      </div>
+
+                      <div class="customer-info">
+                        <strong>Nusrat S.</strong>
+                        <span>nusrat@example.com</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="website">
+                      CakeBuddy
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <span class="method">
+
+                      <span class="method-icon">
+                        NG
+                      </span>
+
+                      Nagad
+
+                    </span>
+
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ৳1,450
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="status success">
+                      Paid
+                    </span>
+                  </td>
+
+                  <td>
+                    06 Oct 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="action-btn"
+                      onclick="openDetails(
+                        'CB-84021',
+                        'Nusrat S.',
+                        'nusrat@example.com',
+                        'CakeBuddy',
+                        'Nagad',
+                        '৳1,450',
+                        'Paid',
+                        '06 Oct 2026',
+                        'SNK-ONEPAY-741520'
+                      )"
+                    >
+                      →
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr
+                  data-status="pending"
+                  data-website="SNK Institute"
+                  data-method="bKash"
+                >
+
+                  <td>
+                    <div class="order">
+                      <strong>SNK-3108</strong>
+                      <span>SNK-ONEPAY-613842</span>
+                    </div>
+                  </td>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        HM
+                      </div>
+
+                      <div class="customer-info">
+                        <strong>Hasan Mahmud</strong>
+                        <span>hasan@example.com</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="website">
+                      SNK Institute
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <span class="method">
+
+                      <span class="method-icon">
+                        BK
+                      </span>
+
+                      bKash
+
+                    </span>
+
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ৳6,500
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="status pending">
+                      Pending
+                    </span>
+                  </td>
+
+                  <td>
+                    05 Oct 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="action-btn"
+                      onclick="openDetails(
+                        'SNK-3108',
+                        'Hasan Mahmud',
+                        'hasan@example.com',
+                        'SNK Institute',
+                        'bKash',
+                        '৳6,500',
+                        'Pending',
+                        '05 Oct 2026',
+                        'SNK-ONEPAY-613842'
+                      )"
+                    >
+                      →
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr
+                  data-status="success"
+                  data-website="DigiSER BD"
+                  data-method="Card"
+                >
+
+                  <td>
+                    <div class="order">
+                      <strong>DG-22901</strong>
+                      <span>SNK-ONEPAY-291064</span>
+                    </div>
+                  </td>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        TM
+                      </div>
+
+                      <div class="customer-info">
+                        <strong>Tanvir M.</strong>
+                        <span>tanvir@example.com</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="website">
+                      DigiSER BD
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <span class="method">
+
+                      <span class="method-icon">
+                        CC
+                      </span>
+
+                      Card
+
+                    </span>
+
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ৳3,200
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="status success">
+                      Paid
+                    </span>
+                  </td>
+
+                  <td>
+                    05 Oct 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="action-btn"
+                      onclick="openDetails(
+                        'DG-22901',
+                        'Tanvir M.',
+                        'tanvir@example.com',
+                        'DigiSER BD',
+                        'Card',
+                        '৳3,200',
+                        'Paid',
+                        '05 Oct 2026',
+                        'SNK-ONEPAY-291064'
+                      )"
+                    >
+                      →
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr
+                  data-status="failed"
+                  data-website="Website Deals"
+                  data-method="Card"
+                >
+
+                  <td>
+                    <div class="order">
+                      <strong>WD-10286</strong>
+                      <span>SNK-ONEPAY-170422</span>
+                    </div>
+                  </td>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        RJ
+                      </div>
+
+                      <div class="customer-info">
+                        <strong>Rafiul J.</strong>
+                        <span>rafiul@example.com</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="website">
+                      Website Deals
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <span class="method">
+
+                      <span class="method-icon">
+                        CC
+                      </span>
+
+                      Card
+
+                    </span>
+
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ৳999
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="status failed">
+                      Failed
+                    </span>
+                  </td>
+
+                  <td>
+                    04 Oct 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="action-btn"
+                      onclick="openDetails(
+                        'WD-10286',
+                        'Rafiul J.',
+                        'rafiul@example.com',
+                        'Website Deals',
+                        'Card',
+                        '৳999',
+                        'Failed',
+                        '04 Oct 2026',
+                        'SNK-ONEPAY-170422'
+                      )"
+                    >
+                      →
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr
+                  data-status="success"
+                  data-website="SNK Institute"
+                  data-method="bKash"
+                >
+
+                  <td>
+                    <div class="order">
+                      <strong>SNK-3098</strong>
+                      <span>SNK-ONEPAY-902114</span>
+                    </div>
+                  </td>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        SA
+                      </div>
+
+                      <div class="customer-info">
+                        <strong>Saiful Ahmed</strong>
+                        <span>saiful@example.com</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="website">
+                      SNK Institute
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <span class="method">
+
+                      <span class="method-icon">
+                        BK
+                      </span>
+
+                      bKash
+
+                    </span>
+
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ৳6,500
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="status success">
+                      Paid
+                    </span>
+                  </td>
+
+                  <td>
+                    03 Oct 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="action-btn"
+                      onclick="openDetails(
+                        'SNK-3098',
+                        'Saiful Ahmed',
+                        'saiful@example.com',
+                        'SNK Institute',
+                        'bKash',
+                        '৳6,500',
+                        'Paid',
+                        '03 Oct 2026',
+                        'SNK-ONEPAY-902114'
+                      )"
+                    >
+                      →
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr
+                  data-status="success"
+                  data-website="CakeBuddy"
+                  data-method="bKash"
+                >
+
+                  <td>
+                    <div class="order">
+                      <strong>CB-83997</strong>
+                      <span>SNK-ONEPAY-511820</span>
+                    </div>
+                  </td>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        FK
+                      </div>
+
+                      <div class="customer-info">
+                        <strong>Fahim Khan</strong>
+                        <span>fahim@example.com</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="website">
+                      CakeBuddy
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <span class="method">
+
+                      <span class="method-icon">
+                        BK
+                      </span>
+
+                      bKash
+
+                    </span>
+
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ৳2,250
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="status success">
+                      Paid
+                    </span>
+                  </td>
+
+                  <td>
+                    02 Oct 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="action-btn"
+                      onclick="openDetails(
+                        'CB-83997',
+                        'Fahim Khan',
+                        'fahim@example.com',
+                        'CakeBuddy',
+                        'bKash',
+                        '৳2,250',
+                        'Paid',
+                        '02 Oct 2026',
+                        'SNK-ONEPAY-511820'
+                      )"
+                    >
+                      →
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr
+                  data-status="pending"
+                  data-website="DigiSER BD"
+                  data-method="Nagad"
+                >
+
+                  <td>
+                    <div class="order">
+                      <strong>DG-22873</strong>
+                      <span>SNK-ONEPAY-344701</span>
+                    </div>
+                  </td>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        MR
+                      </div>
+
+                      <div class="customer-info">
+                        <strong>Mahin R.</strong>
+                        <span>mahin@example.com</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="website">
+                      DigiSER BD
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <span class="method">
+
+                      <span class="method-icon">
+                        NG
+                      </span>
+
+                      Nagad
+
+                    </span>
+
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ৳4,800
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="status pending">
+                      Pending
+                    </span>
+                  </td>
+
+                  <td>
+                    01 Oct 2026
+                  </td>
+
+                  <td>
+                    <button
+                      class="action-btn"
+                      onclick="openDetails(
+                        'DG-22873',
+                        'Mahin R.',
+                        'mahin@example.com',
+                        'DigiSER BD',
+                        'Nagad',
+                        '৳4,800',
+                        'Pending',
+                        '01 Oct 2026',
+                        'SNK-ONEPAY-344701'
+                      )"
+                    >
+                      →
+                    </button>
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+
+          <!-- PAGINATION -->
+
+          <div class="pagination">
+
+            <div class="pagination-info">
+              Showing 1–8 of 139 transactions
+            </div>
+
+            <div class="pagination-buttons">
+
+              <button
+                class="page-btn"
+                onclick="showToast('Previous page is demo-only.')"
+              >
+                ←
+              </button>
+
+              <button class="page-btn active">
+                1
+              </button>
+
+              <button
+                class="page-btn"
+                onclick="showToast('Page 2 is demo-only.')"
+              >
+                2
+              </button>
+
+              <button
+                class="page-btn"
+                onclick="showToast('Page 3 is demo-only.')"
+              >
+                3
+              </button>
+
+              <button
+                class="page-btn"
+                onclick="showToast('Next page is demo-only.')"
+              >
+                →
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- DEMO NOTICE -->
+
+        <div class="demo-notice">
+
+          <div class="notice-icon">
+            !
+          </div>
+
+          <div>
+
+            <strong>
+              SNK OnePay Demo Environment
+            </strong>
+
+            <span>
+              Transaction records shown here are sample data.
+              In production, transactions will come from the secure backend,
+              payment provider verification and webhook events.
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================
+       TRANSACTION MODAL
+  ========================== -->
+
+  <div
+    class="modal"
+    id="detailsModal"
+    onclick="closeModal(event)"
+  >
+
+    <div
+      class="modal-card"
+      onclick="event.stopPropagation()"
+    >
+
+      <div class="modal-header">
+
+        <h3>
+          Transaction Details
+        </h3>
+
+        <button
+          class="close-btn"
+          onclick="closeDetails()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="modal-status">
+
+          <strong id="modalStatus">
+            Payment Successful
+          </strong>
+
+          <span>
+            SNK OnePay transaction record
+          </span>
+
+        </div>
+
+
+        <div class="detail-grid">
+
+          <div class="detail-item">
+            <span>Order ID</span>
+            <strong id="modalOrder">—</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Transaction ID</span>
+            <strong id="modalTransaction">—</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Customer</span>
+            <strong id="modalCustomer">—</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Email</span>
+            <strong id="modalEmail">—</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Website</span>
+            <strong id="modalWebsite">—</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Payment Method</span>
+            <strong id="modalMethod">—</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Amount</span>
+            <strong id="modalAmount">—</strong>
+          </div>
+
+          <div class="detail-item">
+            <span>Date</span>
+            <strong id="modalDate">—</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          class="modal-action"
+          onclick="closeDetails()"
+        >
+          Close
+        </button>
+
+        <button
+          class="modal-action primary"
+          onclick="showToast('Receipt download will be connected in production.')"
+        >
+          Download Receipt
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+
+  <div
+    class="toast"
+    id="toast"
+  >
+
+    <strong>
+      SNK OnePay Demo
+    </strong>
+
+    <span id="toastMessage">
+      Demo action completed.
+    </span>
+
+  </div>
+
+
+  <script>
+    /* =========================================
+       SNK ONEPAY TRANSACTIONS
+       Frontend Demo Only
+    ========================================= */
+
+    const DEMO_EMAIL =
+      "admin@snkonepay.com";
+
+
+    /* =========================================
+       SESSION CHECK
+    ========================================= */
+
+    function checkSession() {
+
+      const localSession =
+        localStorage.getItem("snkOnePayAdmin");
+
+      const sessionSession =
+        sessionStorage.getItem("snkOnePayAdmin");
+
+      if (!localSession && !sessionSession) {
+
+        window.location.href =
+          "index.html";
+
+        return false;
+      }
+
+      return true;
+    }
+
+
+    /* =========================================
+       ADMIN
+    ========================================= */
+
+    function loadAdmin() {
+
+      const storedEmail =
+        localStorage.getItem("snkOnePayAdminEmail") ||
+        sessionStorage.getItem("snkOnePayAdminEmail") ||
+        DEMO_EMAIL;
+
+      const adminName =
+        document.getElementById("adminName");
+
+      if (!adminName) return;
+
+      if (storedEmail === DEMO_EMAIL) {
+
+        adminName.textContent =
+          "Administrator";
+
+      } else {
+
+        adminName.textContent =
+          storedEmail.split("@")[0];
+
+      }
+
+    }
+
+
+    /* =========================================
+       LOGOUT
+    ========================================= */
+
+    function logout() {
+
+      localStorage.removeItem(
+        "snkOnePayAdmin"
+      );
+
+      localStorage.removeItem(
+        "snkOnePayAdminEmail"
+      );
+
+      sessionStorage.removeItem(
+        "snkOnePayAdmin"
+      );
+
+      sessionStorage.removeItem(
+        "snkOnePayAdminEmail"
+      );
+
+      window.location.href =
+        "index.html";
+    }
+
+
+    /* =========================================
+       SIDEBAR
+    ========================================= */
+
+    function toggleSidebar() {
+
+      document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+      document
+        .getElementById("sidebarOverlay")
+        .classList.toggle("show");
+    }
+
+
+    function closeSidebar() {
+
+      document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+      document
+        .getElementById("sidebarOverlay")
+        .classList.remove("show");
+    }
+
+
+    /* =========================================
+       TOAST
+    ========================================= */
+
+    let toastTimer;
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById("toast");
+
+      const messageBox =
+        document.getElementById("toastMessage");
+
+      messageBox.textContent =
+        message;
+
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast.classList.remove("show");
+
+        }, 2800);
+    }
+
+
+    /* =========================================
+       FILTER SYSTEM
+    ========================================= */
+
+    const searchInput =
+      document.getElementById(
+        "searchInput"
+      );
+
+    const statusFilter =
+      document.getElementById(
+        "statusFilter"
+      );
+
+    const websiteFilter =
+      document.getElementById(
+        "websiteFilter"
+      );
+
+    const methodFilter =
+      document.getElementById(
+        "methodFilter"
+      );
+
+
+    function filterTransactions() {
+
+      const search =
+        searchInput.value
+          .trim()
+          .toLowerCase();
+
+      const status =
+        statusFilter.value;
+
+      const website =
+        websiteFilter.value;
+
+      const method =
+        methodFilter.value;
+
+      const rows =
+        document.querySelectorAll(
+          "#transactionBody tr"
+        );
+
+      let visible = 0;
+
+
+      rows.forEach(row => {
+
+        const rowText =
+          row.textContent
+            .toLowerCase();
+
+        const rowStatus =
+          row.dataset.status;
+
+        const rowWebsite =
+          row.dataset.website;
+
+        const rowMethod =
+          row.dataset.method;
+
+
+        const searchMatch =
+          !search ||
+          rowText.includes(search);
+
+        const statusMatch =
+          status === "all" ||
+          rowStatus === status;
+
+        const websiteMatch =
+          website === "all" ||
+          rowWebsite === website;
+
+        const methodMatch =
+          method === "all" ||
+          rowMethod === method;
+
+
+        if (
+          searchMatch &&
+          statusMatch &&
+          websiteMatch &&
+          methodMatch
+        ) {
+
+          row.style.display = "";
+          visible++;
+
+        } else {
+
+          row.style.display = "none";
+
+        }
+
+      });
+
+
+      document.getElementById(
+        "resultCount"
+      ).textContent = visible;
+
+    }
+
+
+    searchInput.addEventListener(
+      "input",
+      filterTransactions
+    );
+
+    statusFilter.addEventListener(
+      "change",
+      filterTransactions
+    );
+
+    websiteFilter.addEventListener(
+      "change",
+      filterTransactions
+    );
+
+    methodFilter.addEventListener(
+      "change",
+      filterTransactions
+    );
+
+
+    /* =========================================
+       RESET
+    ========================================= */
+
+    function resetFilters() {
+
+      searchInput.value = "";
+
+      statusFilter.value =
+        "all";
+
+      websiteFilter.value =
+        "all";
+
+      methodFilter.value =
+        "all";
+
+      filterTransactions();
+
+      showToast(
+        "All transaction filters have been reset."
+      );
+    }
+
+
+    /* =========================================
+       TRANSACTION DETAILS
+    ========================================= */
+
+    function openDetails(
+      order,
+      customer,
+      email,
+      website,
+      method,
+      amount,
+      status,
+      date,
+      transaction
+    ) {
+
+      document.getElementById(
+        "modalOrder"
+      ).textContent = order;
+
+      document.getElementById(
+        "modalTransaction"
+      ).textContent = transaction;
+
+      document.getElementById(
+        "modalCustomer"
+      ).textContent = customer;
+
+      document.getElementById(
+        "modalEmail"
+      ).textContent = email;
+
+      document.getElementById(
+        "modalWebsite"
+      ).textContent = website;
+
+      document.getElementById(
+        "modalMethod"
+      ).textContent = method;
+
+      document.getElementById(
+        "modalAmount"
+      ).textContent = amount;
+
+      document.getElementById(
+        "modalDate"
+      ).textContent = date;
+
+
+      const statusBox =
+        document.getElementById(
+          "modalStatus"
+        );
+
+
+      statusBox.textContent =
+        status === "Paid"
+          ? "Payment Successful"
+          : status === "Pending"
+            ? "Payment Pending"
+            : "Payment Failed";
+
+
+      statusBox.style.color =
+        status === "Paid"
+          ? "var(--green)"
+          : status === "Pending"
+            ? "var(--orange)"
+            : "var(--red)";
+
+
+      document
+        .getElementById("detailsModal")
+        .classList.add("show");
+
+    }
+
+
+    function closeDetails() {
+
+      document
+        .getElementById("detailsModal")
+        .classList.remove("show");
+
+    }
+
+
+    function closeModal(event) {
+
+      if (
+        event.target.id ===
+        "detailsModal"
+      ) {
+
+        closeDetails();
+
+      }
+
+    }
+
+
+    /* =========================================
+       EXPORT CSV
+    ========================================= */
+
+    function exportTransactions() {
+
+      const rows =
+        document.querySelectorAll(
+          "#transactionBody tr"
+        );
+
+      const data = [
+        [
+          "Order ID",
+          "Customer",
+          "Email",
+          "Website",
+          "Method",
+          "Amount",
+          "Status",
+          "Date"
+        ]
+      ];
+
+
+      rows.forEach(row => {
+
+        if (
+          row.style.display === "none"
+        ) {
+          return;
+        }
+
+
+        const cells =
+          row.querySelectorAll("td");
+
+
+        if (cells.length < 7) {
+          return;
+        }
+
+
+        const order =
+          cells[0]
+            .innerText
+            .split("\n")[0]
+            .trim();
+
+        const customer =
+          cells[1]
+            .querySelector(
+              ".customer-info strong"
+            )
+            ?.textContent
+            .trim() || "";
+
+        const email =
+          cells[1]
+            .querySelector(
+              ".customer-info span"
+            )
+            ?.textContent
+            .trim() || "";
+
+        const website =
+          cells[2]
+            .innerText
+            .trim();
+
+        const method =
+          cells[3]
+            .innerText
+            .trim();
+
+        const amount =
+          cells[4]
+            .innerText
+            .trim();
+
+        const status =
+          cells[5]
+            .innerText
+            .trim();
+
+        const date =
+          cells[6]
+            .innerText
+            .trim();
+
+
+        data.push([
+          order,
+          customer,
+          email,
+          website,
+          method,
+          amount,
+          status,
+          date
+        ]);
+
+      });
+
+
+      const csv =
+        data
+          .map(row =>
+            row
+              .map(value =>
+                `"${String(value)
+                  .replace(/"/g, '""')}"`
+              )
+              .join(",")
+          )
+          .join("\n");
+
+
+      const blob =
+        new Blob(
+          [csv],
+          {
+            type: "text/csv;charset=utf-8;"
+          }
+        );
+
+
+      const url =
+        URL.createObjectURL(blob);
+
+      const link =
+        document.createElement("a");
+
+      link.href = url;
+
+      link.download =
+        "snk-onepay-transactions.csv";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      URL.revokeObjectURL(url);
+
+
+      showToast(
+        "CSV export generated successfully."
+      );
+
+    }
+
+
+    /* =========================================
+       ESCAPE KEY
+    ========================================= */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeDetails();
+          closeSidebar();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       INIT
+    ========================================= */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        if (!checkSession()) {
+          return;
+        }
+
+        loadAdmin();
+
+        filterTransactions();
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
