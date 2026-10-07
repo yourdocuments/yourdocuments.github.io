@@ -1,0 +1,3454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="theme-color"
+    content="#0a0d0b"
+  />
+
+  <meta
+    name="description"
+    content="SNK OnePay Admin Settings"
+  />
+
+  <title>Settings | SNK OnePay Admin</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #080a09;
+      --bg-soft: #0d100e;
+      --panel: #111512;
+      --panel-2: #151a16;
+      --panel-3: #1a201b;
+      --border: rgba(255,255,255,.08);
+      --border-strong: rgba(255,255,255,.13);
+      --text: #f5f7f5;
+      --muted: #8f9992;
+      --muted-2: #667069;
+      --lime: #b7ff00;
+      --lime-dark: #91c900;
+      --danger: #ff5f67;
+      --danger-bg: rgba(255,95,103,.08);
+      --warning: #ffbd4a;
+      --success: #52df89;
+      --blue: #5da9ff;
+      --sidebar: 268px;
+      --radius: 18px;
+      --shadow: 0 20px 60px rgba(0,0,0,.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 80% 0%,
+          rgba(183,255,0,.055),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 10% 90%,
+          rgba(183,255,0,.025),
+          transparent 25%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       LAYOUT
+    ========================= */
+
+    .app {
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--sidebar);
+      background: rgba(10,13,11,.94);
+      border-right: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      transition: transform .3s ease;
+    }
+
+    .brand {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 0 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--lime);
+      color: #091000;
+      display: grid;
+      place-items: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      box-shadow: 0 0 30px rgba(183,255,0,.12);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 17px;
+      letter-spacing: -.3px;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 2px;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .nav-wrap {
+      flex: 1;
+      padding: 22px 13px;
+      overflow-y: auto;
+    }
+
+    .nav-label {
+      padding: 0 11px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted-2);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav a {
+      min-height: 46px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #9aa39d;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .2s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,.035);
+    }
+
+    .nav a.active {
+      color: var(--lime);
+      background: rgba(183,255,0,.075);
+      border-color: rgba(183,255,0,.12);
+    }
+
+    .nav-icon {
+      width: 19px;
+      text-align: center;
+      font-size: 15px;
+      opacity: .95;
+    }
+
+    .sidebar-bottom {
+      padding: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    .admin-mini {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.025);
+      border: 1px solid var(--border);
+    }
+
+    .avatar {
+      width: 35px;
+      height: 35px;
+      flex: 0 0 35px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #dfff8a, var(--lime));
+      color: #101600;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .admin-mini-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .admin-mini-info strong {
+      display: block;
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .admin-mini-info span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .logout-mini {
+      width: 31px;
+      height: 31px;
+      border-radius: 9px;
+      color: var(--muted);
+      background: transparent;
+      transition: .2s;
+    }
+
+    .logout-mini:hover {
+      color: var(--danger);
+      background: var(--danger-bg);
+    }
+
+    .main {
+      min-height: 100vh;
+      margin-left: var(--sidebar);
+    }
+
+    /* =========================
+       TOPBAR
+    ========================= */
+
+    .topbar {
+      height: 82px;
+      position: sticky;
+      top: 0;
+      z-index: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0 34px;
+      background: rgba(8,10,9,.84);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .mobile-menu {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 18px;
+    }
+
+    .page-heading h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      letter-spacing: -.5px;
+    }
+
+    .page-heading p {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .demo-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(183,255,0,.07);
+      border: 1px solid rgba(183,255,0,.13);
+      color: var(--lime);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+    }
+
+    .demo-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 10px rgba(183,255,0,.8);
+    }
+
+    .top-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: var(--lime);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 30px 34px 70px;
+    }
+
+    .settings-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .intro-copy h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 28px;
+      letter-spacing: -.8px;
+    }
+
+    .intro-copy p {
+      max-width: 690px;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .intro-actions {
+      display: flex;
+      gap: 9px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      min-height: 42px;
+      padding: 0 15px;
+      border-radius: 11px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .btn-primary {
+      color: #0b1000;
+      background: var(--lime);
+      box-shadow: 0 8px 24px rgba(183,255,0,.12);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      background: #c5ff38;
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-strong);
+      background: var(--panel-2);
+    }
+
+    .btn-danger {
+      color: var(--danger);
+      background: var(--danger-bg);
+      border: 1px solid rgba(255,95,103,.16);
+    }
+
+    .btn-danger:hover {
+      background: rgba(255,95,103,.13);
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .settings-main {
+      min-width: 0;
+    }
+
+    .settings-side {
+      position: sticky;
+      top: 105px;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.025),
+          rgba(255,255,255,.012)
+        ),
+        var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .setting-card {
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 37px;
+      height: 37px;
+      border-radius: 11px;
+      background: rgba(183,255,0,.08);
+      color: var(--lime);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      border: 1px solid rgba(183,255,0,.1);
+    }
+
+    .card-title h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 15px;
+      letter-spacing: -.2px;
+    }
+
+    .card-title p {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .card-body {
+      padding: 22px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: #c6ccc8;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .field label small {
+      color: var(--muted-2);
+      font-weight: 500;
+    }
+
+    .input,
+    .select,
+    .textarea {
+      width: 100%;
+      min-height: 45px;
+      padding: 0 13px;
+      border-radius: 11px;
+      outline: none;
+      color: var(--text);
+      background: #0b0e0c;
+      border: 1px solid var(--border);
+      transition: .2s;
+      font-size: 12px;
+    }
+
+    .textarea {
+      min-height: 90px;
+      padding: 12px 13px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus {
+      border-color: rgba(183,255,0,.42);
+      box-shadow: 0 0 0 3px rgba(183,255,0,.055);
+    }
+
+    .input::placeholder,
+    .textarea::placeholder {
+      color: #566059;
+    }
+
+    .select {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .field-note {
+      margin-top: 7px;
+      color: var(--muted-2);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       LOGO PREVIEW
+    ========================= */
+
+    .brand-preview {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      margin-bottom: 18px;
+      background: #0b0e0c;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .preview-logo {
+      width: 55px;
+      height: 55px;
+      flex: 0 0 55px;
+      border-radius: 15px;
+      background: var(--lime);
+      color: #0b1000;
+      display: grid;
+      place-items: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 800;
+      font-size: 19px;
+    }
+
+    .brand-preview-info strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 15px;
+    }
+
+    .brand-preview-info span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* =========================
+       TOGGLES
+    ========================= */
+
+    .toggle-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .toggle-row {
+      min-height: 66px;
+      padding: 13px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toggle-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .toggle-row:first-child {
+      padding-top: 0;
+    }
+
+    .toggle-info {
+      min-width: 0;
+    }
+
+    .toggle-info strong {
+      display: block;
+      color: #dfe4e0;
+      font-size: 12px;
+    }
+
+    .toggle-info span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .switch {
+      width: 44px;
+      height: 24px;
+      flex: 0 0 44px;
+      position: relative;
+      border-radius: 999px;
+      background: #252b27;
+      border: 1px solid rgba(255,255,255,.08);
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      top: 2px;
+      left: 2px;
+      border-radius: 50%;
+      background: #89918b;
+      transition: .2s;
+    }
+
+    .switch.on {
+      background: rgba(183,255,0,.25);
+      border-color: rgba(183,255,0,.38);
+    }
+
+    .switch.on::after {
+      left: 22px;
+      background: var(--lime);
+      box-shadow: 0 0 12px rgba(183,255,0,.35);
+    }
+
+    /* =========================
+       PAYMENT METHODS
+    ========================= */
+
+    .payment-method-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .payment-method {
+      padding: 16px;
+      border-radius: 13px;
+      background: #0b0e0c;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .payment-method-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .method-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: #151a16;
+      color: var(--lime);
+      font-weight: 800;
+      font-size: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .payment-method-info strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .payment-method-info span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* =========================
+       SECRET ROW
+    ========================= */
+
+    .secret-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .secret-box .input {
+      flex: 1;
+      letter-spacing: 1px;
+    }
+
+    .icon-btn {
+      width: 43px;
+      height: 43px;
+      flex: 0 0 43px;
+      border-radius: 11px;
+      background: #0b0e0c;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      transition: .2s;
+    }
+
+    .icon-btn:hover {
+      color: var(--lime);
+      border-color: rgba(183,255,0,.2);
+    }
+
+    .security-alert {
+      display: flex;
+      gap: 12px;
+      padding: 14px;
+      margin-top: 18px;
+      border-radius: 12px;
+      background: rgba(255,189,74,.055);
+      border: 1px solid rgba(255,189,74,.12);
+    }
+
+    .security-alert-icon {
+      color: var(--warning);
+      font-size: 15px;
+      flex: 0 0 auto;
+    }
+
+    .security-alert strong {
+      display: block;
+      color: #e9d4a8;
+      font-size: 11px;
+    }
+
+    .security-alert p {
+      margin-top: 4px;
+      color: #958a73;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    /* =========================
+       SIDE PANEL
+    ========================= */
+
+    .side-card {
+      margin-bottom: 18px;
+      padding: 19px;
+    }
+
+    .side-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+    }
+
+    .side-card > p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .settings-nav {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .settings-nav a {
+      min-height: 38px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 11px;
+      transition: .2s;
+    }
+
+    .settings-nav a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,.035);
+    }
+
+    .settings-nav a.active {
+      color: var(--lime);
+      background: rgba(183,255,0,.06);
+    }
+
+    .status-list {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .status-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .status-item span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .status-value {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--success);
+    }
+
+    .status-value::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .status-value.demo {
+      color: var(--warning);
+    }
+
+    .danger-zone {
+      border-color: rgba(255,95,103,.13);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,95,103,.035),
+          transparent
+        ),
+        var(--panel);
+    }
+
+    .danger-zone h3 {
+      color: #ff9ca1;
+    }
+
+    .danger-zone p {
+      color: #987c7f;
+    }
+
+    .danger-btn {
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    /* =========================
+       BOTTOM SAVE BAR
+    ========================= */
+
+    .save-bar {
+      position: sticky;
+      bottom: 15px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 6px;
+      padding: 12px 14px;
+      background: rgba(17,21,18,.92);
+      border: 1px solid var(--border-strong);
+      border-radius: 14px;
+      box-shadow: 0 15px 45px rgba(0,0,0,.3);
+      backdrop-filter: blur(16px);
+    }
+
+    .save-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .save-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast-container {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 5000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      min-width: 280px;
+      max-width: 390px;
+      padding: 13px 15px;
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      border-radius: 13px;
+      background: #151a16;
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      animation: toastIn .25s ease;
+    }
+
+    .toast-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #091000;
+      background: var(--lime);
+      font-size: 12px;
+      flex: 0 0 28px;
+    }
+
+    .toast.error .toast-icon {
+      background: var(--danger);
+    }
+
+    .toast-text strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .toast-text span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(7px);
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(480px, 100%);
+      background: #111512;
+      border: 1px solid var(--border-strong);
+      border-radius: 18px;
+      box-shadow: 0 30px 100px rgba(0,0,0,.55);
+      overflow: hidden;
+      animation: modalIn .2s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(.97) translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-head {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-head h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 15px;
+    }
+
+    .modal-close {
+      width: 33px;
+      height: 33px;
+      border-radius: 9px;
+      background: #0b0e0c;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-body p {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .modal-actions {
+      padding: 15px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1120px) {
+      :root {
+        --sidebar: 230px;
+      }
+
+      .settings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .settings-side {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .settings-side .side-card {
+        margin-bottom: 0;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        transform: translateX(-100%);
+        box-shadow: 30px 0 70px rgba(0,0,0,.35);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      .mobile-menu {
+        display: grid;
+        place-items: center;
+      }
+
+      .content {
+        padding: 25px 20px 60px;
+      }
+
+      .topbar {
+        padding: 0 20px;
+      }
+
+      .settings-intro {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .intro-actions {
+        width: 100%;
+      }
+
+      .intro-actions .btn {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        height: 72px;
+      }
+
+      .page-heading p {
+        display: none;
+      }
+
+      .demo-pill {
+        display: none;
+      }
+
+      .content {
+        padding: 20px 14px 50px;
+      }
+
+      .intro-copy h2 {
+        font-size: 24px;
+      }
+
+      .card-head,
+      .card-body {
+        padding: 17px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .payment-method-list {
+        grid-template-columns: 1fr;
+      }
+
+      .settings-side {
+        grid-template-columns: 1fr;
+      }
+
+      .save-bar {
+        bottom: 10px;
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .save-bar .btn {
+        width: 100%;
+      }
+
+      .toast-container {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .toast {
+        min-width: 0;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .top-avatar {
+        display: none;
+      }
+
+      .intro-actions {
+        flex-direction: column;
+      }
+
+      .card-title p {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+      <div class="brand">
+        <div class="brand-mark">OP</div>
+
+        <div class="brand-text">
+          <strong>SNK OnePay</strong>
+          <span>Admin Console</span>
+        </div>
+      </div>
+
+      <div class="nav-wrap">
+
+        <div class="nav-label">Workspace</div>
+
+        <nav class="nav">
+
+          <a href="dashboard.html">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="transactions.html">
+            <span class="nav-icon">↔</span>
+            <span>Transactions</span>
+          </a>
+
+          <a href="websites.html">
+            <span class="nav-icon">◫</span>
+            <span>Websites</span>
+          </a>
+
+          <a href="payment-links.html">
+            <span class="nav-icon">⌁</span>
+            <span>Payment Links</span>
+          </a>
+
+          <a href="customers.html">
+            <span class="nav-icon">♙</span>
+            <span>Customers</span>
+          </a>
+
+          <a href="revenue.html">
+            <span class="nav-icon">◒</span>
+            <span>Revenue</span>
+          </a>
+
+          <div class="nav-label" style="margin-top:20px;">
+            System
+          </div>
+
+          <a href="settings.html" class="active">
+            <span class="nav-icon">⚙</span>
+            <span>Settings</span>
+          </a>
+
+        </nav>
+
+      </div>
+
+      <div class="sidebar-bottom">
+
+        <div class="admin-mini">
+
+          <div class="avatar">SA</div>
+
+          <div class="admin-mini-info">
+            <strong id="sidebarAdminName">Super Admin</strong>
+            <span id="sidebarAdminEmail">admin@snkonepay.com</span>
+          </div>
+
+          <button
+            class="logout-mini"
+            id="logoutBtn"
+            title="Logout"
+          >
+            ↪
+          </button>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div class="top-left">
+
+          <button
+            class="mobile-menu"
+            id="mobileMenu"
+            aria-label="Open menu"
+          >
+            ☰
+          </button>
+
+          <div class="page-heading">
+            <h1>Settings</h1>
+            <p>Configure your SNK OnePay workspace</p>
+          </div>
+
+        </div>
+
+        <div class="top-right">
+
+          <div class="demo-pill">
+            <span class="demo-dot"></span>
+            Demo Mode
+          </div>
+
+          <div class="top-avatar">
+            SA
+          </div>
+
+        </div>
+
+      </header>
+
+      <!-- CONTENT -->
+
+      <section class="content">
+
+        <div class="settings-intro">
+
+          <div class="intro-copy">
+            <h2>Workspace Settings</h2>
+
+            <p>
+              Manage your OnePay brand, checkout experience,
+              payment methods, notifications and integration settings.
+              Changes are saved locally in this demo version.
+            </p>
+          </div>
+
+          <div class="intro-actions">
+
+            <button
+              class="btn btn-secondary"
+              id="resetBtn"
+            >
+              ↻ Reset Demo
+            </button>
+
+            <button
+              class="btn btn-primary"
+              id="topSaveBtn"
+            >
+              ✓ Save Settings
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="settings-grid">
+
+          <!-- =========================
+               MAIN SETTINGS
+          ========================== -->
+
+          <div class="settings-main">
+
+            <!-- GENERAL -->
+
+            <section
+              class="card setting-card"
+              id="general"
+            >
+
+              <div class="card-head">
+
+                <div class="card-title">
+
+                  <div class="card-icon">◆</div>
+
+                  <div>
+                    <h3>General & Branding</h3>
+                    <p>Control how your payment platform is presented.</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="card-body">
+
+                <div class="brand-preview">
+
+                  <div
+                    class="preview-logo"
+                    id="previewLogo"
+                  >
+                    OP
+                  </div>
+
+                  <div class="brand-preview-info">
+                    <strong id="previewBrandName">
+                      SNK OnePay
+                    </strong>
+
+                    <span>
+                      One Pay. Every Website.
+                    </span>
+                  </div>
+
+                </div>
+
+                <div class="form-grid">
+
+                  <div class="field">
+
+                    <label>
+                      Business / Brand Name
+                    </label>
+
+                    <input
+                      class="input"
+                      id="brandName"
+                      type="text"
+                      value="SNK OnePay"
+                      placeholder="Your brand name"
+                    />
+
+                  </div>
+
+                  <div class="field">
+
+                    <label>
+                      Support Email
+                    </label>
+
+                    <input
+                      class="input"
+                      id="supportEmail"
+                      type="email"
+                      value="support@snkbd.com"
+                      placeholder="support@example.com"
+                    />
+
+                  </div>
+
+                  <div class="field">
+
+                    <label>
+                      Support Phone
+                    </label>
+
+                    <input
+                      class="input"
+                      id="supportPhone"
+                      type="text"
+                      value="+880 1XXX-XXXXXX"
+                      placeholder="+880..."
+                    />
+
+                  </div>
+
+                  <div class="field">
+
+                    <label>
+                      Default Currency
+                    </label>
+
+                    <select
+                      class="select"
+                      id="currency"
+                    >
+                      <option value="BDT">BDT — Bangladeshi Taka</option>
+                      <option value="USD">USD — US Dollar</option>
+                      <option value="EUR">EUR — Euro</option>
+                      <option value="GBP">GBP — British Pound</option>
+                    </select>
+
+                  </div>
+
+                  <div class="field">
+
+                    <label>
+                      Timezone
+                    </label>
+
+                    <select
+                      class="select"
+                      id="timezone"
+                    >
+                      <option value="Asia/Dhaka">
+                        Asia/Dhaka — GMT+6
+                      </option>
+
+                      <option value="Asia/Kolkata">
+                        Asia/Kolkata — GMT+5:30
+                      </option>
+
+                      <option value="UTC">
+                        UTC
+                      </option>
+                    </select>
+
+                  </div>
+
+                  <div class="field">
+
+                    <label>
+                      Logo Text / Initials
+                    </label>
+
+                    <input
+                      class="input"
+                      id="logoText"
+                      type="text"
+                      maxlength="4"
+                      value="OP"
+                      placeholder="OP"
+                    />
+
+                  </div>
+
+                  <div class="field full">
+
+                    <label>
+                      Logo URL
+                      <small>Optional</small>
+                    </label>
+
+                    <input
+                      class="input"
+                      id="logoUrl"
+                      type="url"
+                      placeholder="https://..."
+                    />
+
+                    <div class="field-note">
+                      In production, use a secure hosted brand asset.
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- ADMIN PROFILE -->
+
+            <section
+              class="card setting-card"
+              id="profile"
+            >
+
+              <div class="card-head">
+
+                <div class="card-title">
+
+                  <div class="card-icon">♙</div>
+
+                  <div>
+                    <h3>Admin Profile</h3>
+                    <p>Manage the administrator identity shown in the console.</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="card-body">
+
+                <div class="form-grid">
+
+                  <div class="field">
+
+                    <label>
+                      Admin Name
+                    </label>
+
+                    <input
+                      class="input"
+                      id="adminName"
+                      type="text"
+                      value="Super Admin"
+                    />
+
+                  </div>
+
+                  <div class="field">
+
+                    <label>
+                      Admin Email
+                    </label>
+
+                    <input
+                      class="input"
+                      id="adminEmail"
+                      type="email"
+                      value="admin@snkonepay.com"
+                    />
+
+                  </div>
+
+                  <div class="field">
+
+                    <label>
+                      Role
+                    </label>
+
+                    <select class="select" id="adminRole">
+                      <option>Super Admin</option>
+                      <option>Finance Admin</option>
+                      <option>Support Admin</option>
+                      <option>Viewer</option>
+                    </select>
+
+                  </div>
+
+                  <div class="field">
+
+                    <label>
+                      Two-Factor Authentication
+                    </label>
+
+                    <select class="select" id="twoFactor">
+                      <option value="enabled">Enabled</option>
+                      <option value="disabled">Disabled</option>
+                    </select>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- PAYMENT METHODS -->
+
+            <section
+              class="card setting-card"
+              id="payments"
+            >
+
+              <div class="card-head">
+
+                <div class="card-title">
+
+                  <div class="card-icon">৳</div>
+
+                  <div>
+                    <h3>Payment Methods</h3>
+                    <p>Choose the payment methods shown during checkout.</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="card-body">
+
+                <div class="payment-method-list">
+
+                  <div class="payment-method">
+
+                    <div class="payment-method-info">
+
+                      <div class="method-icon">
+                        BK
+                      </div>
+
+                      <div>
+                        <strong>bKash</strong>
+                        <span>Mobile payment</span>
+                      </div>
+
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="bkash"
+                      role="switch"
+                      aria-checked="true"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="payment-method">
+
+                    <div class="payment-method-info">
+
+                      <div class="method-icon">
+                        NG
+                      </div>
+
+                      <div>
+                        <strong>Nagad</strong>
+                        <span>Mobile payment</span>
+                      </div>
+
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="nagad"
+                      role="switch"
+                      aria-checked="true"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="payment-method">
+
+                    <div class="payment-method-info">
+
+                      <div class="method-icon">
+                        CC
+                      </div>
+
+                      <div>
+                        <strong>Card</strong>
+                        <span>Visa / Mastercard</span>
+                      </div>
+
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="card"
+                      role="switch"
+                      aria-checked="true"
+                    ></div>
+
+                  </div>
+
+                </div>
+
+                <div class="security-alert">
+
+                  <div class="security-alert-icon">
+                    ⚠
+                  </div>
+
+                  <div>
+                    <strong>
+                      Production payment credentials are not stored here.
+                    </strong>
+
+                    <p>
+                      Real bKash, Nagad or card gateway credentials
+                      must be handled by your secure backend/API.
+                      Never place secret credentials inside GitHub Pages
+                      frontend code.
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- CHECKOUT -->
+
+            <section
+              class="card setting-card"
+              id="checkout"
+            >
+
+              <div class="card-head">
+
+                <div class="card-title">
+
+                  <div class="card-icon">▣</div>
+
+                  <div>
+                    <h3>Checkout Settings</h3>
+                    <p>Configure customer payment and receipt behavior.</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="card-body">
+
+                <div class="toggle-list">
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Automatic Receipt</strong>
+                      <span>
+                        Generate a payment receipt after successful payment.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="autoReceipt"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Customer Name Required</strong>
+                      <span>
+                        Ask customers for their name before payment.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="customerNameRequired"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Customer Phone Required</strong>
+                      <span>
+                        Require a phone number during checkout.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="phoneRequired"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Success Redirect</strong>
+                      <span>
+                        Redirect customers to the connected website after payment.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="successRedirect"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Failure Redirect</strong>
+                      <span>
+                        Send failed or cancelled payments to the failure page.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="failureRedirect"
+                    ></div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- NOTIFICATIONS -->
+
+            <section
+              class="card setting-card"
+              id="notifications"
+            >
+
+              <div class="card-head">
+
+                <div class="card-title">
+
+                  <div class="card-icon">◉</div>
+
+                  <div>
+                    <h3>Notifications</h3>
+                    <p>Control transaction and system alerts.</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="card-body">
+
+                <div class="toggle-list">
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Payment Success Email</strong>
+                      <span>
+                        Send a confirmation when a payment is verified.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="successEmail"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Payment Failed Email</strong>
+                      <span>
+                        Notify the admin when a payment fails.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="failedEmail"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Pending Payment Alerts</strong>
+                      <span>
+                        Receive alerts for payments requiring verification.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="pendingAlerts"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Daily Revenue Summary</strong>
+                      <span>
+                        Receive a daily summary of successful payments.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch"
+                      data-toggle="dailySummary"
+                    ></div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- WEBHOOKS -->
+
+            <section
+              class="card setting-card"
+              id="webhooks"
+            >
+
+              <div class="card-head">
+
+                <div class="card-title">
+
+                  <div class="card-icon">⌁</div>
+
+                  <div>
+                    <h3>Webhooks</h3>
+                    <p>Connect OnePay with external websites and services.</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="card-body">
+
+                <div class="form-grid">
+
+                  <div class="field full">
+
+                    <label>
+                      Default Webhook URL
+                    </label>
+
+                    <input
+                      class="input"
+                      id="webhookUrl"
+                      type="url"
+                      placeholder="https://api.example.com/webhooks/snk-onepay"
+                    />
+
+                    <div class="field-note">
+                      Example only. Each connected website can have its own webhook endpoint.
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="toggle-list" style="margin-top:20px;">
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Enable Webhook Delivery</strong>
+                      <span>
+                        Send verified payment events to connected systems.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="webhookEnabled"
+                    ></div>
+
+                  </div>
+
+
+                  <div class="toggle-row">
+
+                    <div class="toggle-info">
+                      <strong>Automatic Retry</strong>
+                      <span>
+                        Retry failed webhook requests automatically.
+                      </span>
+                    </div>
+
+                    <div
+                      class="switch on"
+                      data-toggle="webhookRetry"
+                    ></div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- API SECURITY -->
+
+            <section
+              class="card setting-card"
+              id="security"
+            >
+
+              <div class="card-head">
+
+                <div class="card-title">
+
+                  <div class="card-icon">⌘</div>
+
+                  <div>
+                    <h3>API & Security</h3>
+                    <p>Demo integration credentials and security controls.</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="card-body">
+
+                <div class="field">
+
+                  <label>
+                    API Key
+                    <small>Demo only</small>
+                  </label>
+
+                  <div class="secret-box">
+
+                    <input
+                      class="input"
+                      id="apiKey"
+                      type="password"
+                      value="snk_live_demo_9F82KX7P31"
+                      readonly
+                    />
+
+                    <button
+                      class="icon-btn"
+                      id="toggleApi"
+                      title="Show / Hide"
+                    >
+                      ◉
+                    </button>
+
+                    <button
+                      class="icon-btn"
+                      id="copyApi"
+                      title="Copy"
+                    >
+                      ⧉
+                    </button>
+
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="field"
+                  style="margin-top:18px;"
+                >
+
+                  <label>
+                    Webhook Secret
+                    <small>Demo only</small>
+                  </label>
+
+                  <div class="secret-box">
+
+                    <input
+                      class="input"
+                      id="webhookSecret"
+                      type="password"
+                      value="whsec_demo_snk_onepay_2026"
+                      readonly
+                    />
+
+                    <button
+                      class="icon-btn"
+                      id="toggleWebhookSecret"
+                      title="Show / Hide"
+                    >
+                      ◉
+                    </button>
+
+                    <button
+                      class="icon-btn"
+                      id="copyWebhookSecret"
+                      title="Copy"
+                    >
+                      ⧉
+                    </button>
+
+                  </div>
+
+                </div>
+
+
+                <div class="security-alert">
+
+                  <div class="security-alert-icon">
+                    🔐
+                  </div>
+
+                  <div>
+                    <strong>
+                      Security reminder
+                    </strong>
+
+                    <p>
+                      These values are placeholders for the frontend demo.
+                      Real API keys, gateway secrets and webhook signing secrets
+                      must be generated and stored server-side.
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- DANGER -->
+
+            <section class="card setting-card danger-zone">
+
+              <div class="card-head">
+
+                <div class="card-title">
+
+                  <div
+                    class="card-icon"
+                    style="
+                      color:var(--danger);
+                      background:rgba(255,95,103,.07);
+                      border-color:rgba(255,95,103,.1);
+                    "
+                  >
+                    !
+                  </div>
+
+                  <div>
+                    <h3>Danger Zone</h3>
+                    <p>Actions that may affect your demo configuration.</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="card-body">
+
+                <div class="toggle-info">
+
+                  <strong>
+                    Reset all demo settings
+                  </strong>
+
+                  <span>
+                    This will remove your saved local settings and restore
+                    the original demo configuration.
+                  </span>
+
+                </div>
+
+                <button
+                  class="btn btn-danger"
+                  style="margin-top:15px;"
+                  id="dangerResetBtn"
+                >
+                  Reset Demo Configuration
+                </button>
+
+              </div>
+
+            </section>
+
+
+            <!-- SAVE BAR -->
+
+            <div class="save-bar">
+
+              <div class="save-status">
+
+                <span class="save-status-dot"></span>
+
+                <span id="saveStatus">
+                  Changes are stored locally in this demo.
+                </span>
+
+              </div>
+
+              <button
+                class="btn btn-primary"
+                id="bottomSaveBtn"
+              >
+                ✓ Save Settings
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- =========================
+               SIDE
+          ========================== -->
+
+          <aside class="settings-side">
+
+            <div class="card side-card">
+
+              <h3>Settings Navigation</h3>
+
+              <p>
+                Jump directly to a specific configuration section.
+              </p>
+
+              <nav class="settings-nav">
+
+                <a href="#general" class="active">
+                  ◆ General & Branding
+                </a>
+
+                <a href="#profile">
+                  ♙ Admin Profile
+                </a>
+
+                <a href="#payments">
+                  ৳ Payment Methods
+                </a>
+
+                <a href="#checkout">
+                  ▣ Checkout
+                </a>
+
+                <a href="#notifications">
+                  ◉ Notifications
+                </a>
+
+                <a href="#webhooks">
+                  ⌁ Webhooks
+                </a>
+
+                <a href="#security">
+                  ⌘ API & Security
+                </a>
+
+              </nav>
+
+            </div>
+
+
+            <div class="card side-card">
+
+              <h3>System Status</h3>
+
+              <p>
+                Current environment and service state.
+              </p>
+
+              <div class="status-list">
+
+                <div class="status-item">
+                  <span>Dashboard</span>
+                  <strong class="status-value">
+                    Online
+                  </strong>
+                </div>
+
+                <div class="status-item">
+                  <span>Frontend</span>
+                  <strong class="status-value">
+                    Online
+                  </strong>
+                </div>
+
+                <div class="status-item">
+                  <span>Database</span>
+                  <strong class="status-value demo">
+                    Demo
+                  </strong>
+                </div>
+
+                <div class="status-item">
+                  <span>Payments</span>
+                  <strong class="status-value demo">
+                    Demo
+                  </strong>
+                </div>
+
+                <div class="status-item">
+                  <span>Webhooks</span>
+                  <strong class="status-value demo">
+                    Demo
+                  </strong>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="card side-card">
+
+              <h3>Production Checklist</h3>
+
+              <p>
+                Before launching real payments, complete these backend tasks.
+              </p>
+
+              <div class="status-list">
+
+                <div class="status-item">
+                  <span>Secure Auth</span>
+                  <strong class="status-value demo">
+                    Pending
+                  </strong>
+                </div>
+
+                <div class="status-item">
+                  <span>Firebase / DB</span>
+                  <strong class="status-value demo">
+                    Pending
+                  </strong>
+                </div>
+
+                <div class="status-item">
+                  <span>Payment API</span>
+                  <strong class="status-value demo">
+                    Pending
+                  </strong>
+                </div>
+
+                <div class="status-item">
+                  <span>Webhook Verify</span>
+                  <strong class="status-value demo">
+                    Pending
+                  </strong>
+                </div>
+
+                <div class="status-item">
+                  <span>HTTPS Domain</span>
+                  <strong class="status-value demo">
+                    Pending
+                  </strong>
+                </div>
+
+              </div>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================
+       CONFIRM MODAL
+  ========================== -->
+
+  <div
+    class="modal-backdrop"
+    id="confirmModal"
+  >
+
+    <div class="modal">
+
+      <div class="modal-head">
+
+        <h3>Reset Demo Settings?</h3>
+
+        <button
+          class="modal-close"
+          id="closeModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <p>
+          This will remove the locally saved SNK OnePay demo settings
+          and restore the default configuration. No real payment data
+          or production credentials will be affected.
+        </p>
+
+      </div>
+
+      <div class="modal-actions">
+
+        <button
+          class="btn btn-secondary"
+          id="cancelReset"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="btn btn-danger"
+          id="confirmReset"
+        >
+          Reset Settings
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div
+    class="toast-container"
+    id="toastContainer"
+  ></div>
+
+
+  <script>
+    /* =========================================================
+       SNK ONEPAY — SETTINGS
+       Frontend Demo / LocalStorage Version
+    ========================================================= */
+
+    const SETTINGS_KEY = "snkOnePaySettings";
+
+    const defaultSettings = {
+      brandName: "SNK OnePay",
+      supportEmail: "support@snkbd.com",
+      supportPhone: "+880 1XXX-XXXXXX",
+      currency: "BDT",
+      timezone: "Asia/Dhaka",
+      logoText: "OP",
+      logoUrl: "",
+
+      adminName: "Super Admin",
+      adminEmail: "admin@snkonepay.com",
+      adminRole: "Super Admin",
+      twoFactor: "enabled",
+
+      toggles: {
+        bkash: true,
+        nagad: true,
+        card: true,
+
+        autoReceipt: true,
+        customerNameRequired: true,
+        phoneRequired: true,
+        successRedirect: true,
+        failureRedirect: true,
+
+        successEmail: true,
+        failedEmail: true,
+        pendingAlerts: true,
+        dailySummary: false,
+
+        webhookEnabled: true,
+        webhookRetry: true
+      },
+
+      webhookUrl: ""
+    };
+
+
+    /* =========================================================
+       AUTH CHECK
+    ========================================================= */
+
+    const adminSession =
+      localStorage.getItem("snkOnePayAdmin") ||
+      sessionStorage.getItem("snkOnePayAdmin");
+
+    const adminEmail =
+      localStorage.getItem("snkOnePayAdminEmail") ||
+      sessionStorage.getItem("snkOnePayAdminEmail");
+
+    /*
+      Demo mode:
+      If this page is opened directly without the login session,
+      create a demo session automatically.
+
+      This keeps the GitHub Pages demo easy to test.
+      Replace with secure backend authentication in production.
+    */
+
+    if (!adminSession) {
+      localStorage.setItem("snkOnePayAdmin", "true");
+      localStorage.setItem(
+        "snkOnePayAdminEmail",
+        "admin@snkonepay.com"
+      );
+    }
+
+
+    /* =========================================================
+       HELPERS
+    ========================================================= */
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+
+    function getSettings() {
+      try {
+        const saved = localStorage.getItem(SETTINGS_KEY);
+
+        if (!saved) {
+          return structuredClone(defaultSettings);
+        }
+
+        const parsed = JSON.parse(saved);
+
+        return {
+          ...structuredClone(defaultSettings),
+          ...parsed,
+          toggles: {
+            ...structuredClone(defaultSettings.toggles),
+            ...(parsed.toggles || {})
+          }
+        };
+
+      } catch (error) {
+        return structuredClone(defaultSettings);
+      }
+    }
+
+
+    function saveSettings(settings) {
+      localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(settings)
+      );
+    }
+
+
+    function showToast(
+      title,
+      message,
+      type = "success"
+    ) {
+
+      const container = $("toastContainer");
+
+      const toast = document.createElement("div");
+
+      toast.className =
+        "toast" +
+        (type === "error" ? " error" : "");
+
+      toast.innerHTML = `
+        <div class="toast-icon">
+          ${type === "error" ? "!" : "✓"}
+        </div>
+
+        <div class="toast-text">
+          <strong>${escapeHtml(title)}</strong>
+          <span>${escapeHtml(message)}</span>
+        </div>
+      `;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(8px)";
+
+        setTimeout(() => {
+          toast.remove();
+        }, 220);
+
+      }, 3200);
+    }
+
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    /* =========================================================
+       LOAD SETTINGS
+    ========================================================= */
+
+    function loadSettings() {
+
+      const settings = getSettings();
+
+      $("brandName").value =
+        settings.brandName;
+
+      $("supportEmail").value =
+        settings.supportEmail;
+
+      $("supportPhone").value =
+        settings.supportPhone;
+
+      $("currency").value =
+        settings.currency;
+
+      $("timezone").value =
+        settings.timezone;
+
+      $("logoText").value =
+        settings.logoText;
+
+      $("logoUrl").value =
+        settings.logoUrl;
+
+      $("adminName").value =
+        settings.adminName;
+
+      $("adminEmail").value =
+        settings.adminEmail;
+
+      $("adminRole").value =
+        settings.adminRole;
+
+      $("twoFactor").value =
+        settings.twoFactor;
+
+      $("webhookUrl").value =
+        settings.webhookUrl;
+
+      Object.entries(settings.toggles)
+        .forEach(([key, value]) => {
+
+          const switchEl =
+            document.querySelector(
+              `[data-toggle="${key}"]`
+            );
+
+          if (!switchEl) return;
+
+          setSwitchState(
+            switchEl,
+            value
+          );
+
+        });
+
+      updateBrandPreview(settings);
+
+      updateAdminPreview(settings);
+
+      $("saveStatus").textContent =
+        "Settings loaded from local demo storage.";
+    }
+
+
+    /* =========================================================
+       BRAND PREVIEW
+    ========================================================= */
+
+    function updateBrandPreview(settings) {
+
+      const name =
+        settings.brandName ||
+        "SNK OnePay";
+
+      const initials =
+        (
+          settings.logoText ||
+          "OP"
+        )
+        .trim()
+        .slice(0, 4)
+        .toUpperCase();
+
+      $("previewBrandName").textContent =
+        name;
+
+      $("previewLogo").textContent =
+        initials;
+    }
+
+
+    /* =========================================================
+       ADMIN PREVIEW
+    ========================================================= */
+
+    function updateAdminPreview(settings) {
+
+      $("sidebarAdminName").textContent =
+        settings.adminName ||
+        "Super Admin";
+
+      $("sidebarAdminEmail").textContent =
+        settings.adminEmail ||
+        "admin@snkonepay.com";
+    }
+
+
+    /* =========================================================
+       SWITCHES
+    ========================================================= */
+
+    function setSwitchState(element, active) {
+
+      element.classList.toggle(
+        "on",
+        Boolean(active)
+      );
+
+      element.setAttribute(
+        "aria-checked",
+        Boolean(active)
+      );
+    }
+
+
+    function getSwitchState(key) {
+
+      const element =
+        document.querySelector(
+          `[data-toggle="${key}"]`
+        );
+
+      if (!element) {
+        return false;
+      }
+
+      return element.classList.contains("on");
+    }
+
+
+    document
+      .querySelectorAll(".switch")
+      .forEach((switchElement) => {
+
+        switchElement.addEventListener(
+          "click",
+          () => {
+
+            const active =
+              switchElement.classList.contains("on");
+
+            setSwitchState(
+              switchElement,
+              !active
+            );
+
+            $("saveStatus").textContent =
+              "Unsaved changes...";
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       COLLECT FORM
+    ========================================================= */
+
+    function collectSettings() {
+
+      const settings = getSettings();
+
+      settings.brandName =
+        $("brandName").value.trim();
+
+      settings.supportEmail =
+        $("supportEmail").value.trim();
+
+      settings.supportPhone =
+        $("supportPhone").value.trim();
+
+      settings.currency =
+        $("currency").value;
+
+      settings.timezone =
+        $("timezone").value;
+
+      settings.logoText =
+        $("logoText").value.trim()
+          .slice(0, 4)
+          .toUpperCase();
+
+      settings.logoUrl =
+        $("logoUrl").value.trim();
+
+      settings.adminName =
+        $("adminName").value.trim();
+
+      settings.adminEmail =
+        $("adminEmail").value.trim();
+
+      settings.adminRole =
+        $("adminRole").value;
+
+      settings.twoFactor =
+        $("twoFactor").value;
+
+      settings.webhookUrl =
+        $("webhookUrl").value.trim();
+
+
+      Object.keys(settings.toggles)
+        .forEach((key) => {
+
+          settings.toggles[key] =
+            getSwitchState(key);
+
+        });
+
+
+      return settings;
+    }
+
+
+    /* =========================================================
+       SAVE
+    ========================================================= */
+
+    function handleSave() {
+
+      const settings =
+        collectSettings();
+
+      if (!settings.brandName) {
+
+        showToast(
+          "Brand name required",
+          "Please enter your business or brand name.",
+          "error"
+        );
+
+        $("brandName").focus();
+
+        return;
+      }
+
+
+      saveSettings(settings);
+
+      updateBrandPreview(settings);
+
+      updateAdminPreview(settings);
+
+      $("saveStatus").textContent =
+        "Saved just now.";
+
+      showToast(
+        "Settings saved",
+        "Your demo settings have been saved successfully."
+      );
+    }
+
+
+    $("topSaveBtn")
+      .addEventListener(
+        "click",
+        handleSave
+      );
+
+    $("bottomSaveBtn")
+      .addEventListener(
+        "click",
+        handleSave
+      );
+
+
+    /* =========================================================
+       LIVE BRAND PREVIEW
+    ========================================================= */
+
+    $("brandName")
+      .addEventListener(
+        "input",
+        () => {
+
+          $("previewBrandName").textContent =
+            $("brandName").value ||
+            "SNK OnePay";
+
+        }
+      );
+
+
+    $("logoText")
+      .addEventListener(
+        "input",
+        () => {
+
+          $("previewLogo").textContent =
+            (
+              $("logoText").value ||
+              "OP"
+            )
+            .slice(0, 4)
+            .toUpperCase();
+
+        }
+      );
+
+
+    /* =========================================================
+       COPY SECRET
+    ========================================================= */
+
+    async function copyText(value, label) {
+
+      try {
+
+        await navigator.clipboard.writeText(value);
+
+        showToast(
+          "Copied",
+          `${label} copied to clipboard.`
+        );
+
+      } catch (error) {
+
+        showToast(
+          "Copy unavailable",
+          "Your browser did not allow clipboard access.",
+          "error"
+        );
+
+      }
+
+    }
+
+
+    $("copyApi")
+      .addEventListener(
+        "click",
+        () => {
+
+          copyText(
+            $("apiKey").value,
+            "API key"
+          );
+
+        }
+      );
+
+
+    $("copyWebhookSecret")
+      .addEventListener(
+        "click",
+        () => {
+
+          copyText(
+            $("webhookSecret").value,
+            "Webhook secret"
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       SHOW / HIDE SECRET
+    ========================================================= */
+
+    $("toggleApi")
+      .addEventListener(
+        "click",
+        () => {
+
+          const input =
+            $("apiKey");
+
+          input.type =
+            input.type === "password"
+              ? "text"
+              : "password";
+
+        }
+      );
+
+
+    $("toggleWebhookSecret")
+      .addEventListener(
+        "click",
+        () => {
+
+          const input =
+            $("webhookSecret");
+
+          input.type =
+            input.type === "password"
+              ? "text"
+              : "password";
+
+        }
+      );
+
+
+    /* =========================================================
+       RESET MODAL
+    ========================================================= */
+
+    function openResetModal() {
+
+      $("confirmModal")
+        .classList.add("show");
+
+    }
+
+
+    function closeResetModal() {
+
+      $("confirmModal")
+        .classList.remove("show");
+
+    }
+
+
+    $("resetBtn")
+      .addEventListener(
+        "click",
+        openResetModal
+      );
+
+
+    $("dangerResetBtn")
+      .addEventListener(
+        "click",
+        openResetModal
+      );
+
+
+    $("closeModal")
+      .addEventListener(
+        "click",
+        closeResetModal
+      );
+
+
+    $("cancelReset")
+      .addEventListener(
+        "click",
+        closeResetModal
+      );
+
+
+    $("confirmModal")
+      .addEventListener(
+        "click",
+        (event) => {
+
+          if (
+            event.target ===
+            $("confirmModal")
+          ) {
+            closeResetModal();
+          }
+
+        }
+      );
+
+
+    $("confirmReset")
+      .addEventListener(
+        "click",
+        () => {
+
+          localStorage.removeItem(
+            SETTINGS_KEY
+          );
+
+          loadSettings();
+
+          closeResetModal();
+
+          $("saveStatus").textContent =
+            "Demo settings restored.";
+
+          showToast(
+            "Demo reset complete",
+            "All settings were restored to their original values."
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       LOGOUT
+    ========================================================= */
+
+    function logout() {
+
+      localStorage.removeItem(
+        "snkOnePayAdmin"
+      );
+
+      localStorage.removeItem(
+        "snkOnePayAdminEmail"
+      );
+
+      sessionStorage.removeItem(
+        "snkOnePayAdmin"
+      );
+
+      sessionStorage.removeItem(
+        "snkOnePayAdminEmail"
+      );
+
+      window.location.href =
+        "index.html";
+
+    }
+
+
+    $("logoutBtn")
+      .addEventListener(
+        "click",
+        logout
+      );
+
+
+    /* =========================================================
+       MOBILE SIDEBAR
+    ========================================================= */
+
+    const sidebar =
+      $("sidebar");
+
+    $("mobileMenu")
+      .addEventListener(
+        "click",
+        () => {
+
+          sidebar.classList.toggle(
+            "open"
+          );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(".nav a")
+      .forEach((link) => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            if (
+              window.innerWidth <= 900
+            ) {
+
+              sidebar.classList.remove(
+                "open"
+              );
+
+            }
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       SETTINGS NAV ACTIVE STATE
+    ========================================================= */
+
+    document
+      .querySelectorAll(".settings-nav a")
+      .forEach((link) => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            document
+              .querySelectorAll(".settings-nav a")
+              .forEach((item) => {
+                item.classList.remove("active");
+              });
+
+            link.classList.add("active");
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       UNSAVED CHANGE DETECTION
+    ========================================================= */
+
+    document
+      .querySelectorAll(
+        ".input, .select, .textarea"
+      )
+      .forEach((field) => {
+
+        field.addEventListener(
+          "input",
+          () => {
+
+            $("saveStatus").textContent =
+              "Unsaved changes...";
+
+          }
+        );
+
+        field.addEventListener(
+          "change",
+          () => {
+
+            $("saveStatus").textContent =
+              "Unsaved changes...";
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       KEYBOARD SHORTCUT
+       Ctrl + S
+    ========================================================= */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          (event.ctrlKey ||
+            event.metaKey) &&
+          event.key.toLowerCase() === "s"
+        ) {
+
+          event.preventDefault();
+
+          handleSave();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       INITIALIZE
+    ========================================================= */
+
+    loadSettings();
+
+  </script>
+
+</body>
+</html>
