@@ -1,0 +1,24 @@
+/* Website Deals — animation layer. Add after your existing <style>: <link rel="stylesheet" href="fx.css"> */
+.fx-bar{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#18a957,#2dd4bf,#2563eb);transform-origin:0 50%;transform:scaleX(0);z-index:99999}
+.fx-glow{position:fixed;left:-160px;top:-160px;width:320px;height:320px;border-radius:50%;background:radial-gradient(#18a95730,transparent 65%);pointer-events:none;z-index:1;transition:transform .18s ease-out}
+.fx{opacity:0;translate:0 38px;scale:.96;transition:opacity .75s cubic-bezier(.2,.8,.2,1),translate .75s cubic-bezier(.2,.8,.2,1),scale .75s cubic-bezier(.2,.8,.2,1),transform .2s ease,box-shadow .3s,border-color .3s}
+.fx.in{opacity:1;translate:0 0;scale:1}
+.tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));will-change:transform}
+.tilt:hover{transform:perspective(900px) translateY(-7px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.hero h1 span{background:linear-gradient(100deg,#18a957,#2dd4bf,#18a957);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:fxFlow 5s linear infinite}
+@keyframes fxFlow{to{background-position:200% center}}
+.floating-card{animation:fxFloat 5s ease-in-out infinite}.floating-price{animation-delay:-2s}
+@keyframes fxFloat{50%{translate:0 -10px}}
+.browser{animation:fxBrowser 7s ease-in-out infinite}
+@keyframes fxBrowser{50%{transform:rotate(-.6deg) translateY(-8px)}}
+.eyebrow-dot{animation:fxPulse 2s infinite}
+@keyframes fxPulse{50%{box-shadow:0 0 0 9px #18a95700}}
+.btn-primary{position:relative;overflow:hidden}
+.btn-primary::after{content:"";position:absolute;top:0;left:-120%;width:55%;height:100%;background:linear-gradient(100deg,transparent,#ffffff66,transparent);transition:left .6s}
+.btn-primary:hover::after{left:140%}
+.btn:active,.icon-btn:active{scale:.96}
+.category-icon,.feature-icon{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.category-card:hover .category-icon,.feature-card:hover .feature-icon{transform:rotate(-8deg) scale(1.15)}
+.step{transition:transform .3s}.step:hover{transform:translateY(-6px)}
+.step-number{background:linear-gradient(135deg,#78dda0,#2dd4bf);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(prefers-reduced-motion:reduce){.fx{opacity:1;translate:none;scale:1;transition:none}.hero h1 span,.floating-card,.browser,.eyebrow-dot{animation:none}.fx-glow{display:none}}
