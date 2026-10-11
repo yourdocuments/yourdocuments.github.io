@@ -1,10 +1,121 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090b0a"><link rel="manifest" href="manifest.json"><title>Checkout | SNK OnePay</title>
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Checkout | Website Deals</title><link rel="icon" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}body{margin:0;background:#070908;color:#f4f7f2;font-family:Inter,Arial}.wrap{max-width:900px;margin:auto;padding:25px}.top{display:flex;justify-content:space-between;align-items:center}.mark{display:inline-grid;place-items:center;width:42px;height:42px;background:#b7ff00;color:#071000;border-radius:12px;font-weight:900}.brand{display:flex;align-items:center;gap:10px;font-weight:800}.box{margin:50px auto;max-width:620px;background:#0e120f;border:1px solid #ffffff12;border-radius:25px;padding:30px}h1{font-size:34px}.muted{color:#89928b;line-height:1.7}.summary{background:#090c0a;border:1px solid #ffffff0c;border-radius:16px;padding:18px;margin:20px 0}.amount{font-size:38px;font-weight:800;color:#b7ff00}.row{display:flex;justify-content:space-between;margin:9px 0;color:#aab2ab;font-size:13px}.field{margin:14px 0}.field label{display:block;font-size:11px;font-weight:700;margin-bottom:7px}.input{width:100%;height:48px;border-radius:12px;border:1px solid #ffffff12;background:#080a09;color:#fff;padding:0 14px;outline:none}.input:focus{border-color:#b7ff00}.methods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.method{padding:15px;border:1px solid #ffffff12;border-radius:13px;background:#090c0a;color:#aaa;cursor:pointer}.method.active{border-color:#b7ff00;color:#b7ff00}.pay{width:100%;height:52px;border:0;border-radius:13px;background:#b7ff00;color:#071000;font-weight:900;cursor:pointer}.check{display:flex;gap:8px;font-size:11px;color:#89928b;margin:18px 0}.check input{accent-color:#b7ff00}@media(max-width:550px){.methods{grid-template-columns:1fr}.box{padding:20px;margin-top:30px}}
-</style></head><body><div class="wrap"><div class="top"><a class="brand" href="index.html"><span class="mark">SP</span>SNK OnePay</a><a href="index.html">← Back</a></div><div class="box"><h1>Secure Checkout</h1><p class="muted">Complete your payment through SNK OnePay.</p><div class="summary"><div class="amount" id="amount">৳2,999</div><div class="row"><span>Product</span><b id="product">Premium Website Package</b></div><div class="row"><span>Website</span><b id="site">Website Deals</b></div><div class="row"><span>Order</span><b id="order">WD-10291</b></div></div><div class="field"><label>Name</label><input class="input" id="name" required placeholder="Your full name"></div><div class="field"><label>Email</label><input class="input" id="email" type="email" required placeholder="you@example.com"></div><div class="field"><label>Phone</label><input class="input" id="phone" required placeholder="01XXXXXXXXX"></div><div class="field"><label>Payment Method</label><div class="methods"><div class="method active" data-method="bKash">bKash</div><div class="method" data-method="Nagad">Nagad</div><div class="method" data-method="Card">Card</div></div></div><label class="check"><input type="checkbox" id="terms"> I agree to the payment terms and confirm the information is correct.</label><button class="pay" id="pay">Continue to Payment</button></div></div>
+:root{--g:#18a957;--gd:#108345;--ink:#07110b;--mu:#738079;--bd:#e3eae6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"DM Sans",sans-serif;color:#142019;min-height:100vh;background:#f4f8f5;overflow-x:hidden}
+button,input,textarea{font:inherit}button{border:0;cursor:pointer}
+.aurora{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.aurora i{position:absolute;width:420px;height:420px;border-radius:50%;filter:blur(90px);animation:dr 14s ease-in-out infinite alternate}
+.aurora i:nth-child(1){background:#18a95750;top:-100px;left:-80px}.aurora i:nth-child(2){background:#2563eb2b;right:-100px;top:30%;animation-delay:-6s}.aurora i:nth-child(3){background:#2dd4bf40;bottom:-140px;left:35%;animation-delay:-3s}
+@keyframes dr{to{transform:translate(120px,80px) scale(1.25)}}
+header{max-width:1100px;margin:auto;padding:22px 20px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;gap:10px;align-items:center;font:800 18px Manrope;text-decoration:none;color:inherit}.brand img{width:40px;height:40px;object-fit:contain}.brand b{color:var(--g)}
+.secure{font-size:12px;font-weight:700;color:var(--gd);background:#fff;border:1px solid var(--bd);padding:7px 12px;border-radius:30px}
+.steps{max-width:1100px;margin:0 auto 22px;padding:0 20px;display:flex;align-items:center;gap:10px}
+.st{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--mu)}
+.st span{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid var(--bd);transition:.4s}
+.st.on{color:var(--ink)}.st.on span{background:var(--g);color:#fff;border-color:var(--g);box-shadow:0 0 0 6px #18a95722}
+.ln{flex:1;height:3px;background:#dfe8e2;border-radius:9px;overflow:hidden;max-width:120px}.ln i{display:block;height:100%;width:0;background:var(--g);transition:width .6s}
+.wrap{max-width:1100px;margin:0 auto 60px;padding:0 20px;display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:start}
+.card{background:#fff;border:1px solid var(--bd);border-radius:22px;padding:26px;box-shadow:0 20px 50px #07110b0f;animation:up .7s both}
+.card:nth-child(2){animation-delay:.12s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+h1{font:800 26px Manrope;letter-spacing:-.04em}h2{font:800 17px Manrope;margin:24px 0 12px}
+.sub{color:var(--mu);font-size:14px;margin:4px 0 20px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f{position:relative;margin-bottom:12px}.f.full{grid-column:1/-1}
+.f input,.f textarea{width:100%;border:1px solid var(--bd);border-radius:13px;padding:22px 14px 8px;background:#fbfcfb;outline:0;transition:.2s}
+.f textarea{min-height:76px;resize:vertical}
+.f label{position:absolute;left:14px;top:15px;font-size:14px;color:var(--mu);pointer-events:none;transition:.2s;transform-origin:left}
+.f input:focus,.f textarea:focus{border-color:var(--g);background:#fff;box-shadow:0 0 0 4px #18a9571a}
+.f input:focus+label,.f input:not(:placeholder-shown)+label,.f textarea:focus+label,.f textarea:not(:placeholder-shown)+label{top:6px;font-size:11px;color:var(--gd);font-weight:700}
+.f.err input{border-color:#dc3545;animation:sh .35s}@keyframes sh{25%{translate:-6px}75%{translate:6px}}
+.methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.m{position:relative;border:1.5px solid var(--bd);border-radius:16px;padding:16px 10px;text-align:center;cursor:pointer;transition:.25s;background:#fff}
+.m:hover{transform:translateY(-3px);box-shadow:0 12px 26px #07110b14}
+.m input{position:absolute;opacity:0}
+.m .lg{width:46px;height:46px;border-radius:14px;margin:0 auto 8px;display:grid;place-items:center;color:#fff;font:800 15px Manrope}
+.m b{font-size:13px;display:block}.m small{color:var(--mu);font-size:11px}
+.m.sel{border-color:var(--g);background:#f1fbf5;box-shadow:0 0 0 4px #18a9571c}
+.m.sel::after{content:"✓";position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:var(--g);color:#fff;font-size:11px;display:grid;place-items:center;animation:pop .35s cubic-bezier(.3,1.8,.5,1)}
+@keyframes pop{from{scale:0}}
+.pay{margin-top:14px;border-radius:18px;padding:18px;color:#fff;background:linear-gradient(135deg,#0b1a12,#173a27);animation:up .5s both;overflow:hidden;position:relative}
+.pay::before{content:"";position:absolute;width:200px;height:200px;border-radius:50%;background:#18a95740;right:-60px;top:-80px;filter:blur(40px)}
+.pay p{font-size:13px;color:#b9cdc0;position:relative}.pay .acc{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0;position:relative}
+.pay .num{font:800 24px Manrope;letter-spacing:.04em}.pay .amt{color:#7ff0ad;font-weight:800}
+.cp{background:#ffffff1f;color:#fff;padding:8px 13px;border-radius:10px;font-size:12px;font-weight:700}.cp:hover{background:#ffffff33}
+.up{display:flex;align-items:center;gap:10px;border:1.5px dashed #c9d8cf;border-radius:14px;padding:12px 14px;font-size:13px;color:var(--mu);cursor:pointer;margin-bottom:12px}
+.up:hover{border-color:var(--g);background:#f6fcf8}.up input{display:none}.up img{width:44px;height:44px;border-radius:9px;object-fit:cover}
+.go{width:100%;height:56px;margin-top:8px;border-radius:15px;background:linear-gradient(135deg,#18a957,#0fd18a);color:#fff;font:800 16px Manrope;box-shadow:0 14px 30px #18a95745;position:relative;overflow:hidden;transition:.25s}
+.go:hover{transform:translateY(-2px);box-shadow:0 20px 38px #18a95760}.go::after{content:"";position:absolute;top:0;left:-120%;width:50%;height:100%;background:linear-gradient(100deg,transparent,#fff6,transparent);animation:sh2 2.8s infinite}
+@keyframes sh2{to{left:140%}}
+.sum{position:sticky;top:20px}.it{display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;background:linear-gradient(135deg,#eaf8f0,#f6fbf8);margin:16px 0}
+.it .th{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#18a957,#2dd4bf);display:grid;place-items:center;color:#fff;font:800 20px Manrope;flex:none}
+.ln2{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;color:#5c6a62}.tot{border-top:1px dashed var(--bd);margin-top:6px;padding-top:14px;font:800 20px Manrope;color:var(--ink)}
+.tr{display:grid;gap:9px;margin-top:18px;font-size:12px;color:var(--mu)}.tr div{display:flex;gap:9px;align-items:center}.tr i{width:22px;height:22px;border-radius:50%;background:#eaf8f0;color:var(--g);display:grid;place-items:center;font-style:normal;font-size:11px}
+.ov{position:fixed;inset:0;background:#07110bee;display:none;place-items:center;z-index:99;color:#fff;text-align:center}.ov.show{display:grid}
+.ring{width:74px;height:74px;border:5px solid #ffffff22;border-top-color:#2ee58d;border-radius:50%;animation:rot .8s linear infinite;margin:0 auto 18px}@keyframes rot{to{rotate:360deg}}
+@media(max-width:860px){.wrap{grid-template-columns:1fr}.sum{position:static;order:-1}.row{grid-template-columns:1fr}.st em{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="aurora"><i></i><i></i><i></i></div>
+<header><a class="brand" href="index.html"><img src="logo.png" alt="" onerror="this.style.display='none'">Website <b>Deals</b></a><span class="secure">🔒 Secure checkout</span></header>
+<div class="steps"><div class="st on"><span>1</span><em>Your details</em></div><div class="ln"><i id="l1" style="width:100%"></i></div><div class="st on" id="s2"><span>2</span><em>Payment</em></div><div class="ln"><i id="l2"></i></div><div class="st" id="s3"><span>3</span><em>Confirmed</em></div></div>
+<div class="wrap">
+<form class="card" id="f" novalidate>
+<h1>Complete your order</h1><p class="sub">Fill in your details, pay, and send us the transaction ID.</p>
+<div class="row">
+<div class="f"><input id="name" placeholder=" " required><label>Full name</label></div>
+<div class="f"><input id="phone" type="tel" placeholder=" " required><label>Phone / WhatsApp</label></div>
+<div class="f full"><input id="email" type="email" placeholder=" " required><label>Email address</label></div>
+<div class="f full"><textarea id="note" placeholder=" "></textarea><label>Note (business name, domain, requests)</label></div></div>
+<h2>Choose payment method</h2><div class="methods" id="methods"></div><div id="payBox"></div>
+<div class="row" style="margin-top:14px"><div class="f"><input id="sender" placeholder=" "><label>Your sender number</label></div><div class="f"><input id="trx" placeholder=" "><label>Transaction ID</label></div></div>
+<label class="up" id="upL"><span id="upT">📎 Upload payment screenshot (optional)</span><input type="file" id="shot" accept="image/*"></label>
+<button class="go" type="submit" id="go">Place order</button></form>
+<aside class="card sum"><h1 style="font-size:20px">Order summary</h1>
+<div class="it"><div class="th" id="th">W</div><div><b id="sn">Website</b><div style="font-size:12px;color:var(--mu)" id="sc">Ready-made website</div></div></div>
+<div class="ln2"><span>Price</span><span id="pr"></span></div><div class="ln2"><span>Setup &amp; support</span><span style="color:var(--g);font-weight:700">Included</span></div>
+<div class="ln2 tot"><span>Total</span><span id="tt"></span></div>
+<div class="tr"><div><i>✓</i>Ready-made, responsive design</div><div><i>✓</i>We confirm on WhatsApp after verifying payment</div><div><i>✓</i>Fast delivery &amp; support</div></div></aside></div>
+<div class="ov" id="ov"><div><div class="ring"></div><b style="font:800 20px Manrope">Placing your order…</b></div></div>
 <script>
-const q=new URLSearchParams(location.search);const val=(k,d)=>q.get(k)||d;
-amount.textContent="৳"+Number(val("amount","2999")).toLocaleString("en-BD");product.textContent=val("product","Premium Website Package");site.textContent=val("site","Website Deals");order.textContent=val("order","WD-10291");
-let method="bKash";document.querySelectorAll(".method").forEach(x=>x.onclick=()=>{document.querySelectorAll(".method").forEach(y=>y.classList.remove("active"));x.classList.add("active");method=x.dataset.method});
-pay.onclick=()=>{if(!name.value.trim()||!email.value.trim()||!phone.value.trim()||!terms.checked){alert("Please complete all required fields.");return}location.href="success.html?amount="+encodeURIComponent(val("amount","2999"))+"&product="+encodeURIComponent(val("product","Premium Website Package"))+"&site="+encodeURIComponent(val("site","Website Deals"))+"&order="+encodeURIComponent(val("order","WD-10291"))+"&method="+encodeURIComponent(method)};
+(()=>{"use strict";
+const $=i=>document.getElementById(i),P=new URLSearchParams(location.search);
+const rd=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch{return d}};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const S=Object.assign({orderPrefix:"WD-"},rd("websiteDealsSettings",{}));
+const ws=rd("websiteDealsAdminWebsites",[]);const w=(Array.isArray(ws)?ws:[]).find(x=>String(x.id)===P.get("id"));
+const site={id:P.get("id")||"",name:w?.name||P.get("n")||"Website",category:w?.category||"Website",price:Number(w?.offerPrice||w?.price||P.get("p")||0)};
+const tk=n=>"৳"+Number(n).toLocaleString("en-BD");
+$("sn").textContent=site.name;$("sc").textContent=site.category;$("th").textContent=site.name[0].toUpperCase();$("pr").textContent=$("tt").textContent=tk(site.price);
+$("go").textContent="Place order · "+tk(site.price);
+const DEF=[{id:"b",name:"bKash",type:"Mobile Banking",account:"01XXXXXXXXX",label:"Send Money",active:true},{id:"n",name:"Nagad",type:"Mobile Banking",account:"01XXXXXXXXX",label:"Send Money",active:true},{id:"k",name:"Bank Transfer",type:"Bank Transfer",account:"Account details on WhatsApp",label:"Bank",active:true}];
+const COL={bkash:"#e2136e",nagad:"#f6921e",rocket:"#8c3494"};
+let ms=rd("websiteDealsPaymentMethods",null);ms=(Array.isArray(ms)&&ms.length?ms:DEF).filter(m=>m.active!==false);
+let cur=null,img="";
+$("methods").innerHTML=ms.map((m,i)=>`<label class="m" data-i="${i}"><input type="radio" name="pm"><div class="lg" style="background:${COL[String(m.name).toLowerCase()]||"#18a957"}">${esc(m.name.slice(0,2))}</div><b>${esc(m.name)}</b><small>${esc(m.label||m.type)}</small></label>`).join("");
+$("methods").addEventListener("click",e=>{const l=e.target.closest(".m");if(!l)return;
+ document.querySelectorAll(".m").forEach(x=>x.classList.remove("sel"));l.classList.add("sel");cur=ms[l.dataset.i];
+ $("payBox").innerHTML=`<div class="pay"><p>Send <span class="amt">${tk(site.price)}</span> via ${esc(cur.name)} · ${esc(cur.label||"")}</p><div class="acc"><span class="num">${esc(cur.account||"")}</span><button type="button" class="cp" id="cp">Copy</button></div><p>${esc(cur.instructions||"Then enter your sender number and the transaction ID below.")}</p></div>`;
+ $("cp").onclick=()=>{navigator.clipboard?.writeText(cur.account||"");$("cp").textContent="Copied ✓"};});
+$("shot").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,800/im.width),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);img=c.toDataURL("image/jpeg",.6);$("upL").innerHTML=`<img src="${img}"><span>Screenshot added ✓</span>`};im.src=r.result};r.readAsDataURL(f)};
+const bad=(i,v)=>{$(i).parentElement.classList.toggle("err",v);return v};
+$("f").onsubmit=e=>{e.preventDefault();
+ const nm=$("name").value.trim(),ph=$("phone").value.trim(),em=$("email").value.trim(),tx=$("trx").value.trim();
+ let b=bad("name",!nm);b=bad("phone",ph.replace(/\D/g,"").length<10)||b;b=bad("email",!/^\S+@\S+\.\S+$/.test(em))||b;
+ if(!cur){alert("Please choose a payment method.");return}
+ b=bad("trx",!tx)||b;if(b)return;
+ const od=rd("websiteDealsOrders",[]),orders=Array.isArray(od)?od:[];
+ const id=(S.orderPrefix||"WD-")+(1000+orders.length+1);
+ const o={id,customer:nm,email:em,phone:ph,website:site.name,websiteId:site.id,category:site.category,amount:site.price,paymentStatus:"pending",orderStatus:"new",paymentMethod:cur.name,paymentId:tx,senderNumber:$("sender").value.trim(),screenshot:img,note:$("note").value.trim(),date:new Date().toISOString()};
+ orders.push(o);
+ try{localStorage.setItem("websiteDealsOrders",JSON.stringify(orders))}catch{o.screenshot="";try{localStorage.setItem("websiteDealsOrders",JSON.stringify(orders))}catch{}}
+ try{sessionStorage.setItem("wdLastOrder",JSON.stringify(Object.assign({},o,{screenshot:""})))}catch{}
+ $("ov").classList.add("show");$("l2").style.width="100%";$("s3").classList.add("on");
+ setTimeout(()=>location.href="confirm.html?id="+encodeURIComponent(id),1500)};
+})();
 </script></body></html>
