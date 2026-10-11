@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Order confirmed | Website Deals</title><link rel="icon" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#18a957;--gd:#108345;--ink:#07110b;--mu:#738079;--bd:#e3eae6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"DM Sans",sans-serif;color:#142019;min-height:100vh;background:#f4f8f5;overflow-x:hidden;display:grid;place-items:center;padding:30px 16px}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(700px 400px at 50% 0,#18a95738,transparent 60%),radial-gradient(500px 400px at 100% 100%,#2563eb22,transparent 60%)}
+.card{width:min(560px,100%);background:#fff;border:1px solid var(--bd);border-radius:28px;padding:36px 28px;box-shadow:0 30px 80px #07110b1a;text-align:center;animation:up .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes up{from{opacity:0;transform:translateY(40px) scale(.97)}}
+.ck{width:110px;height:110px;margin:0 auto 18px;filter:drop-shadow(0 14px 24px #18a95755)}
+.ck circle{fill:none;stroke:var(--g);stroke-width:6;stroke-dasharray:314;stroke-dashoffset:314;animation:dr .9s .2s ease forwards;transform-origin:center;rotate:-90deg}
+.ck path{fill:none;stroke:var(--g);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:dr .5s 1s ease forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+h1{font:800 30px Manrope;letter-spacing:-.04em}.sub{color:var(--mu);font-size:14px;margin:8px auto 22px;max-width:400px;line-height:1.6}
+.oid{display:inline-flex;gap:10px;align-items:center;background:#eaf8f0;color:var(--gd);font:800 15px Manrope;padding:10px 16px;border-radius:30px;cursor:pointer}
+.box{margin:22px 0;border:1px solid var(--bd);border-radius:18px;text-align:left;overflow:hidden}
+.box div{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;font-size:14px;border-bottom:1px solid #eef3ef;opacity:0;animation:up .5s both}
+.box div:nth-child(1){animation-delay:1.2s}.box div:nth-child(2){animation-delay:1.3s}.box div:nth-child(3){animation-delay:1.4s}.box div:nth-child(4){animation-delay:1.5s}
+.box div:last-child{border:0;background:#fbfcfb;font-weight:800}.box span{color:var(--mu)}.box b{text-align:right;word-break:break-word}
+.tl{display:grid;gap:0;text-align:left;margin:6px 0 24px}.tl div{display:flex;gap:14px;align-items:flex-start;position:relative;padding-bottom:18px;font-size:14px}
+.tl div::before{content:"";position:absolute;left:11px;top:26px;bottom:0;width:2px;background:#dfe8e2}.tl div:last-child::before{display:none}
+.tl i{width:24px;height:24px;border-radius:50%;background:#e6eee9;display:grid;place-items:center;font-style:normal;font-size:11px;flex:none;color:#fff}
+.tl .d i{background:var(--g)}.tl .n i{background:#f4b740;animation:pl 1.6s infinite}@keyframes pl{50%{box-shadow:0 0 0 8px #f4b74022}}
+.tl small{display:block;color:var(--mu);font-size:12px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;height:54px;border-radius:15px;font:800 15px Manrope;text-decoration:none;border:0;cursor:pointer;width:100%;margin-top:10px;transition:.25s}
+.wa{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;box-shadow:0 14px 30px #25d36655;position:relative}.wa::before{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid #25d366;animation:pg 2s infinite}@keyframes pg{to{transform:scale(1.07,1.25);opacity:0}}
+.wa:hover{transform:translateY(-2px)}.gw{background:var(--ink);color:#fff}.lt{background:#fff;color:#142019;border:1px solid var(--bd)}
+.cf{position:fixed;top:-12px;width:10px;height:16px;border-radius:2px;animation:fl linear forwards;z-index:9;pointer-events:none}
+@keyframes fl{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+@media print{.btn,.cf{display:none}}@media(prefers-reduced-motion:reduce){*{animation:none!important}.ck circle,.ck path{stroke-dashoffset:0}.box div{opacity:1}}
+</style></head><body><div class="bg"></div>
+<main class="card">
+<svg class="ck" viewBox="0 0 110 110"><circle cx="55" cy="55" r="50"/><path d="M34 57l15 15 28-31"/></svg>
+<h1>Order received!</h1><p class="sub" id="sub">Thank you. Send the order to us on WhatsApp so we can verify your payment and start your website.</p>
+<span class="oid" id="oid" title="Copy order ID">—</span>
+<div class="box"><div><span>Website</span><b id="w">—</b></div><div><span>Payment</span><b id="m">—</b></div><div><span>Transaction ID</span><b id="t">—</b></div><div><span>Total</span><b id="a">—</b></div></div>
+<div class="tl"><div class="d"><i>✓</i><p><b>Order placed</b><small>Your order is saved</small></p></div><div class="n"><i>2</i><p><b>Payment verification</b><small>We check your transaction ID</small></p></div><div><i>3</i><p><b>Website delivery</b><small>We contact you on WhatsApp</small></p></div></div>
+<a class="btn wa" id="wa" target="_blank" rel="noopener">Send order on WhatsApp</a>
+<a class="btn gw" id="gw" target="_blank" rel="noopener" style="display:none">Pay online</a>
+<button class="btn lt" onclick="print()">Print receipt</button><a class="btn lt" href="index.html">Back to marketplace</a>
+</main>
+<script>
+(()=>{"use strict";
+const $=i=>document.getElementById(i),rd=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
+const S=Object.assign({whatsappNumber:"8801705633700",paymentGatewayLink:""},rd("websiteDealsSettings",{}));
+const id=new URLSearchParams(location.search).get("id");
+let o=(rd("websiteDealsOrders",[])||[]).find(x=>x.id===id);
+if(!o){try{const l=JSON.parse(sessionStorage.getItem("wdLastOrder"));if(l&&l.id===id)o=l}catch{}}
+if(!o)o={id:id||"—",website:"—",paymentMethod:"—",paymentId:"—",amount:0};
+$("oid").textContent=o.id+"  ⧉";$("w").textContent=o.website;$("m").textContent=o.paymentMethod;$("t").textContent=o.paymentId||"—";$("a").textContent="৳"+Number(o.amount||0).toLocaleString("en-BD");
+$("oid").onclick=()=>{navigator.clipboard?.writeText(o.id);$("oid").textContent="Copied ✓"};
+const gl=String(S.paymentGatewayLink||"").trim();
+if(/^https?:\/\//i.test(gl)){$("gw").style.display="flex";$("gw").href=gl;$("gw").textContent="Pay online (card / gateway)"}
+const msg=["Hello Website Deals! 👋","Order ID: "+o.id,"Website: "+o.website,"Amount: ৳"+Number(o.amount||0).toLocaleString("en-BD"),"Payment: "+o.paymentMethod+" · TrxID: "+(o.paymentId||"—"),"Name: "+(o.customer||"—"),"Phone: "+(o.phone||"—")].join("\n")+(/^https?:\/\//i.test(gl)?"\nPayment link: "+gl:"");
+$("wa").href="https://wa.me/"+String(S.whatsappNumber).replace(/\D/g,"")+"?text="+encodeURIComponent(msg);
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches)for(let i=0;i<60;i++){const c=document.createElement("i");c.className="cf";c.style.left=Math.random()*100+"vw";c.style.background=["#18a957","#2dd4bf","#f4b740","#2563eb","#ec4899"][i%5];c.style.animationDuration=2.2+Math.random()*2.4+"s";c.style.animationDelay=1+Math.random()*1.2+"s";document.body.append(c);setTimeout(()=>c.remove(),7000)}
+})();
+</script></body></html>
